@@ -1,19 +1,14 @@
 import { cn } from "@/lib/utils";
 
-interface ContainerProps {
+type TContainerProps = {
   children: React.ReactNode;
   className?: string;
-  as?: keyof React.JSX.IntrinsicElements;
-}
+};
 
-export function Container({
-  children,
-  className,
-  as: Component = "div",
-}: ContainerProps) {
+export function Container({ children, className }: TContainerProps) {
   return (
-    <Component className={cn("mx-auto max-w-3xl px-6 lg:px-8", className)}>
+    <div className={cn("mx-auto max-w-3xl px-6 lg:px-8", className)}>
       {children}
-    </Component>
+    </div>
   );
 }
