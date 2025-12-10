@@ -8,7 +8,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export function Projects() {
   return (
-    <section id="projects" className="py-20 lg:py-32">
+    <section className="min-h-[calc(100vh-4rem)] py-20 lg:py-32">
       <Container>
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export function About() {
   return (
-    <section id="about" className="py-20 lg:py-32">
+    <section className="min-h-[calc(100vh-4rem)] flex items-center py-20 lg:py-32">
       <Container>
         <motion.div
           initial={{ opacity: 0, y: 20 }}

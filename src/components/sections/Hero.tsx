@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 export function Hero() {
   return (
-    <section id="home" className="min-h-screen flex items-center pt-32 pb-20 lg:pt-40 lg:pb-32">
+    <section className="min-h-[calc(100vh-4rem)] flex items-center py-20 lg:py-32">
       <Container>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
