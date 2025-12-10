@@ -20,12 +20,12 @@ export const ANIMATION_CONFIG = {
       "60% 40% 30% 70% / 60% 30% 70% 40%",
       "30% 60% 70% 40% / 50% 60% 30% 60%",
       "60% 40% 30% 70% / 60% 30% 70% 40%",
-    ],
-    rotate: [0, 180, 360],
+    ] as string[],
+    rotate: [0, 180, 360] as number[],
     duration: 20,
   },
   floatingImage: {
-    y: [0, -12, 0],
+    y: [0, -12, 0] as number[],
     duration: 5,
   },
   fadeIn: {
@@ -39,4 +39,4 @@ export const ANIMATION_CONFIG = {
     duration: 0.5,
     delay: 0.2,
   },
-} as const;
+};
