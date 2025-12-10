@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ORBITING_ICONS } from "../constants";
+import { ORBITING_ICONS } from "../../constants";
 
 export function OrbitingElements() {
   return (

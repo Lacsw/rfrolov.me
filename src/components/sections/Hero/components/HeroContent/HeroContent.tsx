@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { SocialLink } from "@/components/ui/SocialLink";
 import { socialLinks } from "@/data/social-links";
-import { HERO_CONTENT, ANIMATION_CONFIG } from "../constants";
+import { HERO_CONTENT, ANIMATION_CONFIG } from "../../constants";
 
 export function HeroContent() {
   const { fadeIn } = ANIMATION_CONFIG;

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ANIMATION_CONFIG } from "../constants";
+import { ANIMATION_CONFIG } from "../../constants";
 
 export function FloatingImage() {
   const { floatingImage } = ANIMATION_CONFIG;

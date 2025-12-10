@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ANIMATION_CONFIG } from "../constants";
+import { ANIMATION_CONFIG } from "../../constants";
 import { MorphingBlob } from "./MorphingBlob";
 import { OrbitingElements } from "./OrbitingElements";
 import { OrbitRings } from "./OrbitRings";
