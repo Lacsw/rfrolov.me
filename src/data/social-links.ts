@@ -1,7 +1,7 @@
 import { Github, Linkedin } from "lucide-react";
-import { SocialLink } from "@/types";
+import { TSocialLink } from "@/types";
 
-export const socialLinks: SocialLink[] = [
+export const socialLinks: TSocialLink[] = [
   {
     name: "GitHub",
     href: "https://github.com/romanfrolov",

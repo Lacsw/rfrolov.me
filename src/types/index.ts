@@ -1,4 +1,4 @@
-export interface Project {
+export type TProject = {
   id: string;
   title: string;
   description: string;
@@ -6,10 +6,10 @@ export interface Project {
   href?: string;
   github?: string;
   featured?: boolean;
-}
+};
 
-export interface SocialLink {
+export type TSocialLink = {
   name: string;
   href: string;
   icon: React.ComponentType<{ className?: string }>;
-}
+};

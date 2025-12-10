@@ -1,16 +1,16 @@
 import { cn } from "@/lib/utils";
-import { SocialLink as SocialLinkType } from "@/types";
+import { TSocialLink } from "@/types";
 
-interface SocialLinkProps extends SocialLinkType {
+type TSocialLinkProps = TSocialLink & {
   className?: string;
-}
+};
 
 export function SocialLink({
   name,
   href,
   icon: Icon,
   className,
-}: SocialLinkProps) {
+}: TSocialLinkProps) {
   return (
     <a
       href={href}
