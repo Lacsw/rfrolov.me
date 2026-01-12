@@ -7,7 +7,7 @@ type TContainerProps = {
 
 export function Container({ children, className }: TContainerProps) {
   return (
-    <div className={cn("mx-auto max-w-3xl px-6 lg:px-8", className)}>
+    <div className={cn("mx-auto max-w-5xl px-6 lg:px-8", className)}>
       {children}
     </div>
   );

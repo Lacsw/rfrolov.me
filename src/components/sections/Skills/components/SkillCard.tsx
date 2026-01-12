@@ -13,16 +13,15 @@ export function SkillCard({ skill }: TSkillCardProps) {
   return (
     <motion.div
       variants={SKILLS_ANIMATION.item}
-      className="flex flex-col items-center gap-2 p-4 rounded-lg
-                 border border-transparent hover:border-muted
+      className="flex flex-col items-center gap-1.5 p-2 rounded-md
                  hover:bg-muted/50 transition-all duration-300
                  group cursor-default"
     >
       <TechIcon
         slug={skill.icon}
-        className="h-8 w-8 text-muted-foreground group-hover:text-foreground transition-colors"
+        className="h-6 w-6 text-muted-foreground group-hover:text-foreground transition-colors"
       />
-      <span className="text-xs text-muted-foreground group-hover:text-foreground transition-colors text-center">
+      <span className="text-[10px] text-muted-foreground group-hover:text-foreground transition-colors text-center leading-tight">
         {skill.name}
       </span>
     </motion.div>

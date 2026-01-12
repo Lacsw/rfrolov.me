@@ -3,7 +3,7 @@ import { SkillsGrid } from "./components";
 
 export function Skills() {
   return (
-    <section className="py-12 lg:py-16">
+    <section className="py-6 lg:py-8">
       <Container>
         <SkillsGrid />
       </Container>

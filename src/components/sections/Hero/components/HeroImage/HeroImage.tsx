@@ -17,7 +17,7 @@ export function HeroImage() {
       transition={{ duration: scaleIn.duration, delay: scaleIn.delay }}
       className="relative shrink-0 mx-auto lg:mx-0"
     >
-      <div className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
+      <div className="relative w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64">
         <MorphingBlob />
         <OrbitingElements />
         <OrbitRings />

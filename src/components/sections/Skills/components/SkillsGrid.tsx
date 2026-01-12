@@ -10,20 +10,20 @@ export function SkillsGrid() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="space-y-8"
+      className="space-y-4"
     >
-      <div className="space-y-2">
-        <h2 className="text-2xl font-semibold tracking-tight">
+      <div className="space-y-1">
+        <h2 className="text-xl font-semibold tracking-tight">
           {SKILLS_CONTENT.title}
         </h2>
-        <p className="text-muted-foreground">{SKILLS_CONTENT.subtitle}</p>
+        <p className="text-sm text-muted-foreground">{SKILLS_CONTENT.subtitle}</p>
       </div>
 
       <motion.div
         variants={SKILLS_ANIMATION.container}
         initial="hidden"
         animate="show"
-        className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4"
+        className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-8 gap-2"
       >
         {SKILLS.map((skill) => (
           <SkillCard key={skill.name} skill={skill} />
