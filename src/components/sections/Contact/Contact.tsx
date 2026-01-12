@@ -1,0 +1,36 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { Container } from "@/components/ui/Container";
+import { SocialLink } from "@/components/ui/SocialLink";
+import { socialLinks } from "@/data/social-links";
+
+export function Contact() {
+  return (
+    <section className="py-8 lg:py-12 border-t border-muted">
+      <Container>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="flex items-center justify-between"
+        >
+          <a
+            href="https://www.linkedin.com/in/r-frolov"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-lg font-semibold tracking-tight hover:text-muted-foreground transition-colors"
+          >
+            Get in touch
+          </a>
+
+          <div className="flex items-center gap-4">
+            {socialLinks.map((link) => (
+              <SocialLink key={link.name} {...link} />
+            ))}
+          </div>
+        </motion.div>
+      </Container>
+    </section>
+  );
+}
