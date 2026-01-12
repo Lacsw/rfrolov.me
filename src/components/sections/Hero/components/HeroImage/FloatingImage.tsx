@@ -15,16 +15,23 @@ export function FloatingImage() {
         repeat: Infinity,
         ease: "easeInOut",
       }}
-      className="absolute inset-12 sm:inset-14 lg:inset-16"
+      className="absolute inset-8 sm:inset-10 lg:inset-12"
     >
       <div className="relative w-full h-full rounded-full overflow-hidden shadow-2xl ring-4 ring-background">
-        <Image
-          src="/images/hero.png"
-          alt="Roman Frolov"
-          fill
-          priority
-          className="object-cover grayscale hover:grayscale-0 transition-all duration-700 hover:scale-105"
-        />
+        <motion.div
+          initial={{ filter: "grayscale(100%)" }}
+          animate={{ filter: "grayscale(0%)" }}
+          transition={{ duration: 0.7, delay: 1 }}
+          className="w-full h-full"
+        >
+          <Image
+            src="/images/hero.png"
+            alt="Roman Frolov"
+            fill
+            priority
+            className="object-cover"
+          />
+        </motion.div>
       </div>
     </motion.div>
   );

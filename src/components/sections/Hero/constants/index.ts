@@ -6,14 +6,6 @@ export const HERO_CONTENT = {
     "I build exceptional digital experiences with modern web technologies. Focused on creating clean, performant, and accessible interfaces.",
 } as const;
 
-export const ORBITING_ICONS = [
-  { icon: "⚛️", size: 32, duration: 12, delay: 0, radius: 160 },
-  { icon: "📱", size: 28, duration: 15, delay: 2, radius: 180 },
-  { icon: "🎨", size: 26, duration: 18, delay: 4, radius: 150 },
-  { icon: "⚡", size: 30, duration: 14, delay: 1, radius: 170 },
-  { icon: "🚀", size: 24, duration: 16, delay: 3, radius: 165 },
-] as const;
-
 export const ANIMATION_CONFIG = {
   morphingBlob: {
     borderRadius: [
