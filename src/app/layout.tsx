@@ -39,8 +39,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={jetbrainsMono.variable}>
-      <body className="min-h-screen bg-background font-mono antialiased">
+    <html lang="en" className={jetbrainsMono.variable} suppressHydrationWarning>
+      <body className="min-h-screen bg-background font-mono antialiased" suppressHydrationWarning>
         <Navbar />
         {children}
       </body>
