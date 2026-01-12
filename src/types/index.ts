@@ -13,3 +13,8 @@ export type TSocialLink = {
   href: string;
   icon: React.ComponentType<{ className?: string }>;
 };
+
+export type TSkill = {
+  name: string;
+  icon: string;
+};
