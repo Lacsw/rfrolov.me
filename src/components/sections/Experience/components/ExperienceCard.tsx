@@ -9,9 +9,18 @@ type ExperienceCardProps = {
 };
 
 export function ExperienceCard({ experience }: ExperienceCardProps) {
+  const isCurrentPosition = experience.endDate === "Present";
+
   return (
     <motion.div variants={EXPERIENCE_ANIMATION.item} className="relative pl-6 pb-8 last:pb-0">
-      <div className="absolute left-0 top-1.5 w-2 h-2 rounded-full bg-muted-foreground" />
+      {isCurrentPosition ? (
+        <span className="absolute left-0 top-1.5 flex h-2 w-2">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
+        </span>
+      ) : (
+        <div className="absolute left-0 top-1.5 w-2 h-2 rounded-full bg-muted-foreground" />
+      )}
       <div className="absolute left-[3px] top-4 bottom-0 w-px bg-muted last:hidden" />
 
       <div className="space-y-1">
