@@ -29,12 +29,19 @@ export const SKILLS_ANIMATION = {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.05,
+        staggerChildren: 0.04,
       },
     },
   },
   item: {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 },
+    hidden: { opacity: 0, y: 10 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.3,
+        ease: "easeOut",
+      },
+    },
   },
 } as const;
