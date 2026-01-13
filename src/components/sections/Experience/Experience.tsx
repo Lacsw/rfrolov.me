@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { Container } from "@/components/ui/Container";
@@ -69,7 +70,7 @@ export function Experience() {
             >
               <span>{isExpanded ? "Show less" : `Show ${hiddenExperiences.length} more`}</span>
               <ChevronDown
-                className={`h-4 w-4 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
+                className={cn("h-4 w-4 transition-transform duration-200", isExpanded && "rotate-180")}
               />
             </button>
           )}

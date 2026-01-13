@@ -1,6 +1,7 @@
 "use client";
 
 import { Container } from "@/components/ui/Container";
+import { cn } from "@/lib/utils";
 import { projects } from "@/data/projects";
 import { TProjectCategory } from "@/types";
 import { motion } from "framer-motion";
@@ -59,7 +60,7 @@ export function FeaturedProjects() {
                   <div className="flex items-start justify-between gap-2">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <span className={`text-xs px-1.5 py-0.5 rounded ${CATEGORY_COLORS[project.category]}`}>
+                        <span className={cn("text-xs px-1.5 py-0.5 rounded", CATEGORY_COLORS[project.category])}>
                           {CATEGORY_LABELS[project.category]}
                         </span>
                         <span className="text-xs text-muted-foreground">{project.year}</span>

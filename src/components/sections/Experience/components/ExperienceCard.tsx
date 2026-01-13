@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { TExperience } from "@/types";
 import { EXPERIENCE_ANIMATION } from "../constants";
@@ -13,7 +14,7 @@ export function ExperienceCard({ experience, isLast }: ExperienceCardProps) {
   const isCurrentPosition = experience.endDate === "Present";
 
   return (
-    <motion.div variants={EXPERIENCE_ANIMATION.item} className={`relative pl-6 ${isLast ? "pb-0" : "pb-8"}`}>
+    <motion.div variants={EXPERIENCE_ANIMATION.item} className={cn("relative pl-6", isLast ? "pb-0" : "pb-8")}>
       {isCurrentPosition ? (
         <span className="absolute left-0 top-1.5 flex h-2 w-2">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75" />
