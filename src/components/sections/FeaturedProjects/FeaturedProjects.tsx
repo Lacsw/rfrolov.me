@@ -15,6 +15,12 @@ const CATEGORY_LABELS: Record<TProjectCategory, string> = {
   opensource: "Open Source",
 };
 
+const CATEGORY_COLORS: Record<TProjectCategory, string> = {
+  personal: "bg-emerald-500/10 text-emerald-600",
+  work: "bg-blue-500/10 text-blue-600",
+  opensource: "bg-purple-500/10 text-purple-600",
+};
+
 export function FeaturedProjects() {
   return (
     <section className="py-12 lg:py-16">
@@ -53,7 +59,7 @@ export function FeaturedProjects() {
                   <div className="flex items-start justify-between gap-2">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <span className="text-xs text-muted-foreground bg-muted px-1.5 py-0.5 rounded">
+                        <span className={`text-xs px-1.5 py-0.5 rounded ${CATEGORY_COLORS[project.category]}`}>
                           {CATEGORY_LABELS[project.category]}
                         </span>
                         <span className="text-xs text-muted-foreground">{project.year}</span>
