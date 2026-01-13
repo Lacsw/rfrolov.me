@@ -37,6 +37,7 @@ export default function NotFound() {
   const [inputValue, setInputValue] = useState("");
   const [suggestion, setSuggestion] = useState("");
   const [showCursor, setShowCursor] = useState(true);
+  const [commandResult, setCommandResult] = useState<TerminalLine | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
@@ -157,9 +158,6 @@ export default function NotFound() {
 
       if (!cmd) return;
 
-      // Add the command to terminal
-      setLines((prev) => [...prev, { type: "command", text: `${PROMPT}${cmd}` }]);
-
       // Parse command - expect "cd /path" format
       const cdMatch = cmd.match(/^cd\s+(.+)$/);
       if (cdMatch) {
@@ -167,22 +165,13 @@ export default function NotFound() {
         const matchedRoute = ROUTES.find((r) => r.path === path);
 
         if (matchedRoute) {
-          setLines((prev) => [
-            ...prev,
-            { type: "success", text: `Navigating to ${matchedRoute.path}...` },
-          ]);
+          setCommandResult({ type: "success", text: `Navigating to ${matchedRoute.path}...` });
           setTimeout(() => router.push(matchedRoute.path), 500);
         } else {
-          setLines((prev) => [
-            ...prev,
-            { type: "error", text: `bash: cd: ${path}: No such file or directory` },
-          ]);
+          setCommandResult({ type: "error", text: `bash: cd: ${path}: No such file or directory` });
         }
       } else {
-        setLines((prev) => [
-          ...prev,
-          { type: "error", text: `bash: ${cmd.split(" ")[0]}: command not found` },
-        ]);
+        setCommandResult({ type: "error", text: `bash: ${cmd.split(" ")[0]}: command not found` });
       }
     },
     [router]
@@ -290,7 +279,10 @@ export default function NotFound() {
                       ref={inputRef}
                       type="text"
                       value={inputValue}
-                      onChange={(e) => setInputValue(e.target.value)}
+                      onChange={(e) => {
+                        setInputValue(e.target.value);
+                        setCommandResult(null);
+                      }}
                       onKeyDown={handleKeyDown}
                       placeholder="cd /"
                       className="bg-transparent outline-none text-foreground w-full caret-transparent placeholder:text-muted-foreground/30"
@@ -305,6 +297,13 @@ export default function NotFound() {
                     </div>
                   </div>
                 </div>
+
+                {/* Command result */}
+                {commandResult && (
+                  <div className={`${getLineColor(commandResult.type)} leading-relaxed`}>
+                    {commandResult.text}
+                  </div>
+                )}
               </motion.div>
             )}
           </div>
