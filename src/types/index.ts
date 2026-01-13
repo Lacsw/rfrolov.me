@@ -18,3 +18,14 @@ export type TSkill = {
   name: string;
   icon: string;
 };
+
+export type TExperience = {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate: string;
+  location: string;
+  description: string;
+  technologies: string[];
+};
