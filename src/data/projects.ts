@@ -2,13 +2,16 @@ import { TProject } from "@/types";
 
 export const projects: TProject[] = [
   {
-    id: "project-1",
-    title: "Project One",
+    id: "portfolio",
+    title: "Personal Portfolio",
     description:
-      "A brief description of your first project. Explain what problem it solves and what technologies you used.",
-    technologies: ["React", "TypeScript", "Tailwind CSS"],
-    href: "https://project-one.com",
-    github: "https://github.com/romanfrolov/project-one",
+      "Modern developer portfolio built with Next.js 15 and Tailwind CSS v4. Features smooth animations, dark mode, and a creative 404 page with terminal emulation.",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    year: 2025,
+    category: "personal",
+    highlight: "You're looking at it",
+    href: "https://rfrolov.me",
+    github: "https://github.com/Lacsw/rfrolov.me",
     featured: true,
   },
   {
@@ -17,6 +20,9 @@ export const projects: TProject[] = [
     description:
       "Description of your second project. Highlight the key features and your role in building it.",
     technologies: ["Next.js", "Node.js", "PostgreSQL"],
+    year: 2024,
+    category: "work",
+    highlight: "Replace with your project",
     href: "https://project-two.com",
     github: "https://github.com/romanfrolov/project-two",
     featured: true,
@@ -27,6 +33,8 @@ export const projects: TProject[] = [
     description:
       "Another project showcasing your skills. Focus on the impact and technical challenges overcome.",
     technologies: ["Vue.js", "GraphQL", "AWS"],
+    year: 2023,
+    category: "opensource",
     github: "https://github.com/romanfrolov/project-three",
     featured: false,
   },

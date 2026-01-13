@@ -1,8 +1,13 @@
+export type TProjectCategory = "personal" | "work" | "opensource";
+
 export type TProject = {
   id: string;
   title: string;
   description: string;
   technologies: string[];
+  year: number;
+  category: TProjectCategory;
+  highlight?: string;
   href?: string;
   github?: string;
   featured?: boolean;

@@ -2,11 +2,18 @@
 
 import { Container } from "@/components/ui/Container";
 import { projects } from "@/data/projects";
+import { TProjectCategory } from "@/types";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Github } from "lucide-react";
 import Link from "next/link";
 
 const featuredProjects = projects.filter((p) => p.featured);
+
+const CATEGORY_LABELS: Record<TProjectCategory, string> = {
+  personal: "Personal",
+  work: "Work",
+  opensource: "Open Source",
+};
 
 export function FeaturedProjects() {
   return (
@@ -43,9 +50,17 @@ export function FeaturedProjects() {
                 className="group block h-full rounded-lg border border-muted bg-background p-6 cursor-pointer transition-all duration-300 hover:border-muted-foreground/20 hover:shadow-sm"
               >
                 <div className="space-y-2">
-                  <div className="flex items-start justify-between">
-                    <h3 className="font-medium text-sm">{project.title}</h3>
-                    <div className="flex items-center gap-2">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs text-muted-foreground bg-muted px-1.5 py-0.5 rounded">
+                          {CATEGORY_LABELS[project.category]}
+                        </span>
+                        <span className="text-xs text-muted-foreground">{project.year}</span>
+                      </div>
+                      <h3 className="font-medium text-sm">{project.title}</h3>
+                    </div>
+                    <div className="flex items-center gap-2 shrink-0">
                       {project.github && (
                         <Github className="h-4 w-4 text-muted-foreground" />
                       )}
@@ -55,6 +70,11 @@ export function FeaturedProjects() {
                   <p className="text-muted-foreground text-xs line-clamp-2">
                     {project.description}
                   </p>
+                  {project.highlight && (
+                    <p className="text-xs text-foreground/80 font-medium">
+                      ✦ {project.highlight}
+                    </p>
+                  )}
                   <div className="flex flex-wrap gap-1.5 pt-1">
                     {project.technologies.slice(0, 3).map((tech) => (
                       <span
