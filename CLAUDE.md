@@ -42,6 +42,8 @@ src/
 - **Components**: One component per file, use named exports with barrel files (`index.ts`)
 - **Styling**: Tailwind CSS with CSS variables for theming (light theme only)
 - **Font**: JetBrains Mono (monospace throughout)
+- **Comments**: Only for complex logic, not obvious code
+- **Clickable elements**: Always include `cursor-pointer` and `hover:opacity-*` transitions
 
 ## CSS Variables (globals.css)
 
