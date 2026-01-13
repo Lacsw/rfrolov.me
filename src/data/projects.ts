@@ -10,7 +10,6 @@ export const projects: TProject[] = [
     year: 2025,
     category: "personal",
     highlight: "You're looking at it",
-    href: "https://rfrolov.me",
     github: "https://github.com/Lacsw/rfrolov.me",
     featured: true,
   },
