@@ -118,7 +118,7 @@ export function Projects() {
   const [firstProject, ...restProjects] = filteredProjects;
 
   return (
-    <section className="min-h-[calc(100vh-4rem)] py-20 lg:py-32">
+    <section className="min-h-[calc(100vh-4rem)] py-12 lg:py-16">
       <Container>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
