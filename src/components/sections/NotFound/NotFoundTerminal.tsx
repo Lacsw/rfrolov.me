@@ -50,12 +50,10 @@ export function NotFoundTerminal() {
     <div className="w-full max-w-2xl">
       <TerminalWindow>
         <div ref={terminalRef}>
-          {/* Rendered lines */}
           {lines.map((line, index) => (
             <TerminalLine key={index} type={line.type} text={line.text} />
           ))}
 
-          {/* Current typing line with cursor (during animation) */}
           {!isTypingComplete && currentLineIndex < INITIAL_LINES.length && (
             <div className="text-foreground leading-relaxed">
               {lines.length === currentLineIndex && INITIAL_LINES[currentLineIndex].type === "command" && (
@@ -67,7 +65,6 @@ export function NotFoundTerminal() {
             </div>
           )}
 
-          {/* Interactive section after animation */}
           {isTypingComplete && (
             <motion.div
               initial={{ opacity: 0 }}
@@ -87,7 +84,6 @@ export function NotFoundTerminal() {
                 onTabComplete={handleTabComplete}
               />
 
-              {/* Command result */}
               {commandResult && (
                 <TerminalLine type={commandResult.type} text={commandResult.text} />
               )}
@@ -96,7 +92,6 @@ export function NotFoundTerminal() {
         </div>
       </TerminalWindow>
 
-      {/* Hints */}
       <p className="text-center text-xs text-muted-foreground mt-4">
         Press any link above or use keyboard navigation
       </p>
