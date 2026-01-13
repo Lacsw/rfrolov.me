@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
+import { ThemeProvider } from "@/components/providers";
 import "./globals.css";
 
 const jetbrainsMono = JetBrains_Mono({
@@ -41,8 +42,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={jetbrainsMono.variable} suppressHydrationWarning>
       <body className="min-h-screen bg-background font-mono antialiased" suppressHydrationWarning>
-        <Navbar />
-        {children}
+        <ThemeProvider>
+          <Navbar />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

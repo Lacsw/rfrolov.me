@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Container } from "@/components/ui/Container";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
 
@@ -39,23 +40,26 @@ export function Navbar() {
             RF
           </Link>
 
-          <ul className="flex items-center gap-8">
-            {navLinks.map((link) => (
-              <li key={link.name}>
-                <Link
-                  href={link.href}
-                  className={cn(
-                    "text-sm transition-colors duration-300",
-                    pathname === link.href
-                      ? "text-foreground"
-                      : "text-muted-foreground hover:text-foreground"
-                  )}
-                >
-                  {link.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <div className="flex items-center gap-6">
+            <ul className="flex items-center gap-8">
+              {navLinks.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className={cn(
+                      "text-sm transition-colors duration-300",
+                      pathname === link.href
+                        ? "text-foreground"
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <ThemeToggle />
+          </div>
         </nav>
       </Container>
     </header>
