@@ -9,7 +9,7 @@ export const experiences: TExperience[] = [
     endDate: "Present",
     location: "Berlin, Germany",
     description:
-      "Building sustainable technology solutions as part of the frontend team.",
+      "Building the Green+ portal and interactive tools for real estate ESG management. Developing energy assessment calculators and portfolio dashboards that help property owners reduce refurbishment costs by up to 35%.",
     technologies: ["React", "TypeScript", "Next.js"],
   },
   {
@@ -20,7 +20,7 @@ export const experiences: TExperience[] = [
     endDate: "Jun 2025",
     location: "Remote",
     description:
-      "Developed interactive educational math games for children. Designed new game mechanics and logic, enabling designers and educators to create engaging learning experiences. Maintained codebase, wrote unit tests, and onboarded new team members.",
+      "Built interactive math learning experiences for a platform serving 2M+ students. Designed game mechanics enabling educators to create personalized adaptive content. Maintained codebase, wrote tests, and onboarded team members.",
     technologies: ["JavaScript", "TypeScript", "React", "Figma"],
   },
   {
@@ -31,7 +31,7 @@ export const experiences: TExperience[] = [
     endDate: "Oct 2023",
     location: "Remote",
     description:
-      "Built a web application serving as an article database for designers from scratch. Developed UI components, planned frontend architecture using Feature-Sliced Design, and configured build tools.",
+      "Built a design knowledge base web app from scratch. Architected frontend using Feature-Sliced Design methodology, implemented state management, and configured build tooling.",
     technologies: ["React", "TypeScript", "SCSS", "React Query", "Redux", "Vite"],
   },
   {
@@ -42,7 +42,7 @@ export const experiences: TExperience[] = [
     endDate: "Oct 2022",
     location: "St Petersburg, Russia",
     description:
-      "Administered security systems including DLP, firewalls, and cryptographic protection. Developed internal web application for certificate management using Python/Django stack.",
+      "Managed enterprise security infrastructure: DLP systems, firewalls (Cisco ASA), and cryptographic gateways. Built an internal certificate management web app with Django that streamlined digital signature workflows.",
     technologies: ["Python", "Django", "PostgreSQL", "Docker", "Nginx"],
   },
   {
@@ -53,7 +53,7 @@ export const experiences: TExperience[] = [
     endDate: "Mar 2021",
     location: "St Petersburg, Russia",
     description:
-      "Provided technical support for key business clients. Diagnosed network issues, configured equipment, and monitored L2-L3 VPN networks. Trained new specialists and initiated a unified knowledge base.",
+      "Supported enterprise clients at Russia's second-largest broadband provider. Diagnosed complex network issues across L2-L3 VPN infrastructure, configured routing protocols, and built a knowledge base that became the team's training standard.",
     technologies: ["Networking", "OSPF", "BGP", "MPLS", "Bash"],
   },
 ];
