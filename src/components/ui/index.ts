@@ -3,6 +3,7 @@ export { Badge } from "./Badge";
 export { Card } from "./Card";
 export { Container } from "./Container";
 export { ExternalLink } from "./ExternalLink";
+export { ReadingProgress } from "./ReadingProgress";
 export { SectionHeader } from "./SectionHeader";
 export { SocialLink } from "./SocialLink";
 export { TechIcon } from "./TechIcon";

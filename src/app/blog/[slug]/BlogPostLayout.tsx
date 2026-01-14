@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Clock } from "lucide-react";
 
 import { getTagColor } from "@/components/sections/Blog/constants";
-import { Container } from "@/components/ui";
+import { Container, ReadingProgress } from "@/components/ui";
 import { formatDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";
@@ -25,8 +25,10 @@ export function BlogPostLayout({ post, children }: TBlogPostLayoutProps) {
   const formattedDate = formatDate(post.date, { month: "long" });
 
   return (
-    <section className="py-12 lg:py-16">
-      <Container>
+    <>
+      <ReadingProgress />
+      <section className="py-12 lg:py-16">
+        <Container>
         <motion.article
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -75,5 +77,6 @@ export function BlogPostLayout({ post, children }: TBlogPostLayoutProps) {
         </motion.article>
       </Container>
     </section>
+    </>
   );
 }
