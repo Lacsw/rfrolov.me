@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { BlogPostCard, BlogPostListItem } from "@/components/sections/Blog";
 import { Container, SectionHeader, ViewToggle } from "@/components/ui";
 import { type TViewMode } from "@/components/ui/ViewToggle";
-import { FADE_IN, FADE_IN_TRANSITION } from "@/constants/animations";
+import { FADE_IN, FADE_IN_TRANSITION } from "@/constants";
 import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";
 

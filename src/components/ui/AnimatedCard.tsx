@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 
 import { motion } from "framer-motion";
 
-import { FADE_IN, getFadeInTransition } from "@/constants/animations";
+import { FADE_IN, getFadeInTransition } from "@/constants";
 import { cn } from "@/lib/utils";
 
 type TAnimatedCardProps = {

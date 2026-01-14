@@ -1,4 +1,4 @@
-import { CATEGORY_COLORS, CATEGORY_LABELS } from "@/constants/categories";
+import { CATEGORY_COLORS, CATEGORY_LABELS } from "@/constants";
 import { cn } from "@/lib/utils";
 import { TProjectCategory } from "@/types";
 

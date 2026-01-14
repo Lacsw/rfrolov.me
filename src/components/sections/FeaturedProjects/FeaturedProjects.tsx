@@ -11,7 +11,7 @@ import {
   SectionHeader,
   TechTags,
 } from "@/components/ui";
-import { FADE_IN, FADE_IN_TRANSITION } from "@/constants/animations";
+import { FADE_IN, FADE_IN_TRANSITION } from "@/constants";
 import { projects } from "@/data/projects";
 
 const featuredProjects = projects.filter((p) => p.featured);
