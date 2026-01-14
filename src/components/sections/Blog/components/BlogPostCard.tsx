@@ -1,5 +1,6 @@
 "use client";
 
+import { formatDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";
 import { motion } from "framer-motion";
@@ -13,11 +14,7 @@ type TBlogPostCardProps = {
 };
 
 export function BlogPostCard({ post, index }: TBlogPostCardProps) {
-  const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
+  const formattedDate = formatDate(post.date);
 
   return (
     <motion.div

@@ -2,6 +2,7 @@
 
 import { Container } from "@/components/ui/Container";
 import { getTagColor } from "@/components/sections/Blog/constants";
+import { formatDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";
 import { motion } from "framer-motion";
@@ -15,11 +16,7 @@ type TBlogPostLayoutProps = {
 };
 
 export function BlogPostLayout({ post, children }: TBlogPostLayoutProps) {
-  const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const formattedDate = formatDate(post.date, { month: "long" });
 
   return (
     <section className="py-12 lg:py-16">
