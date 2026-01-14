@@ -1,10 +1,5 @@
 import { TSkill } from "@/types";
 
-export const SKILLS_CONTENT = {
-  title: "Tech Stack",
-  subtitle: "Technologies I work with",
-} as const;
-
 export const SKILLS: TSkill[] = [
   { name: "React", icon: "react" },
   { name: "TypeScript", icon: "typescript" },
