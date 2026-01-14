@@ -1,12 +1,11 @@
 "use client";
 
-import { useState } from "react";
-
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
 import { Container } from "@/components/ui";
 import { experiences } from "@/data/experience";
+import { useToggle } from "@/hooks";
 import { cn } from "@/lib/utils";
 
 import { ExperienceCard } from "./components";
@@ -17,7 +16,7 @@ const initialExperiences = experiences.slice(0, VISIBLE_COUNT);
 const hiddenExperiences = experiences.slice(VISIBLE_COUNT);
 
 export function Experience() {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, { toggle }] = useToggle();
   const hasMore = experiences.length > VISIBLE_COUNT;
 
   return (
@@ -68,7 +67,7 @@ export function Experience() {
 
           {hasMore && (
             <button
-              onClick={() => setIsExpanded(!isExpanded)}
+              onClick={toggle}
               className="flex items-center gap-1 text-sm text-muted-foreground hover:opacity-70 transition-opacity cursor-pointer"
             >
               <span>{isExpanded ? "Show less" : `Show ${hiddenExperiences.length} more`}</span>

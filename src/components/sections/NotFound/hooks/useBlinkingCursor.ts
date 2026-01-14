@@ -1,15 +1,17 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+
+import { useToggle } from "@/hooks";
 
 import { CURSOR_BLINK_INTERVAL } from "../constants";
 
 export function useBlinkingCursor() {
-  const [showCursor, setShowCursor] = useState(true);
+  const [showCursor, { toggle }] = useToggle(true);
 
   useEffect(() => {
-    const interval = setInterval(() => setShowCursor((prev) => !prev), CURSOR_BLINK_INTERVAL);
+    const interval = setInterval(toggle, CURSOR_BLINK_INTERVAL);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [toggle]);
 
   return showCursor;
 }
