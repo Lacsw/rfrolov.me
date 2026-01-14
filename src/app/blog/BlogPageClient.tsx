@@ -7,12 +7,12 @@ import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";
 import { motion } from "framer-motion";
 
-type BlogPageClientProps = {
+type TBlogPageClientProps = {
   posts: TBlogPostMeta[];
   tags: string[];
 };
 
-export function BlogPageClient({ posts, tags }: BlogPageClientProps) {
+export function BlogPageClient({ posts, tags }: TBlogPageClientProps) {
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
 
   const filteredPosts = selectedTag

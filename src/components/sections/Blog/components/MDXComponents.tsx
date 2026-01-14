@@ -2,47 +2,47 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ComponentPropsWithoutRef } from "react";
 
-type HeadingProps = ComponentPropsWithoutRef<"h1">;
-type ParagraphProps = ComponentPropsWithoutRef<"p">;
-type LinkProps = ComponentPropsWithoutRef<"a">;
-type ListProps = ComponentPropsWithoutRef<"ul">;
-type ListItemProps = ComponentPropsWithoutRef<"li">;
-type BlockquoteProps = ComponentPropsWithoutRef<"blockquote">;
-type CodeProps = ComponentPropsWithoutRef<"code">;
-type PreProps = ComponentPropsWithoutRef<"pre">;
+type THeadingProps = ComponentPropsWithoutRef<"h1">;
+type TParagraphProps = ComponentPropsWithoutRef<"p">;
+type TLinkProps = ComponentPropsWithoutRef<"a">;
+type TListProps = ComponentPropsWithoutRef<"ul">;
+type TListItemProps = ComponentPropsWithoutRef<"li">;
+type TBlockquoteProps = ComponentPropsWithoutRef<"blockquote">;
+type TCodeProps = ComponentPropsWithoutRef<"code">;
+type TPreProps = ComponentPropsWithoutRef<"pre">;
 
 export const mdxComponents = {
-  h1: ({ className, ...props }: HeadingProps) => (
+  h1: ({ className, ...props }: THeadingProps) => (
     <h1
       className={cn("text-2xl font-semibold tracking-tight mt-8 mb-4", className)}
       {...props}
     />
   ),
-  h2: ({ className, ...props }: HeadingProps) => (
+  h2: ({ className, ...props }: THeadingProps) => (
     <h2
       className={cn("text-xl font-semibold tracking-tight mt-8 mb-4", className)}
       {...props}
     />
   ),
-  h3: ({ className, ...props }: HeadingProps) => (
+  h3: ({ className, ...props }: THeadingProps) => (
     <h3
       className={cn("text-lg font-semibold tracking-tight mt-6 mb-3", className)}
       {...props}
     />
   ),
-  h4: ({ className, ...props }: HeadingProps) => (
+  h4: ({ className, ...props }: THeadingProps) => (
     <h4
       className={cn("text-base font-semibold tracking-tight mt-6 mb-3", className)}
       {...props}
     />
   ),
-  p: ({ className, ...props }: ParagraphProps) => (
+  p: ({ className, ...props }: TParagraphProps) => (
     <p
       className={cn("text-muted-foreground leading-relaxed mb-4", className)}
       {...props}
     />
   ),
-  a: ({ href, className, ...props }: LinkProps) => {
+  a: ({ href, className, ...props }: TLinkProps) => {
     const isExternal = href?.startsWith("http");
 
     if (isExternal) {
@@ -71,22 +71,22 @@ export const mdxComponents = {
       />
     );
   },
-  ul: ({ className, ...props }: ListProps) => (
+  ul: ({ className, ...props }: TListProps) => (
     <ul
       className={cn("list-disc list-inside mb-4 text-muted-foreground space-y-1", className)}
       {...props}
     />
   ),
-  ol: ({ className, ...props }: ListProps) => (
+  ol: ({ className, ...props }: TListProps) => (
     <ol
       className={cn("list-decimal list-inside mb-4 text-muted-foreground space-y-1", className)}
       {...props}
     />
   ),
-  li: ({ className, ...props }: ListItemProps) => (
+  li: ({ className, ...props }: TListItemProps) => (
     <li className={cn("leading-relaxed", className)} {...props} />
   ),
-  blockquote: ({ className, ...props }: BlockquoteProps) => (
+  blockquote: ({ className, ...props }: TBlockquoteProps) => (
     <blockquote
       className={cn(
         "border-l-2 border-muted-foreground/30 pl-4 italic text-muted-foreground my-4",
@@ -95,7 +95,7 @@ export const mdxComponents = {
       {...props}
     />
   ),
-  code: ({ className, ...props }: CodeProps) => {
+  code: ({ className, ...props }: TCodeProps) => {
     const isInlineCode = !className?.includes("language-");
     if (isInlineCode) {
       return (
@@ -107,7 +107,7 @@ export const mdxComponents = {
     }
     return <code className={className} {...props} />;
   },
-  pre: ({ className, ...props }: PreProps) => (
+  pre: ({ className, ...props }: TPreProps) => (
     <pre
       className={cn(
         "rounded-lg p-4 overflow-x-auto my-4 text-sm",

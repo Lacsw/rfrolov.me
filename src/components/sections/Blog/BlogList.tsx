@@ -6,11 +6,11 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { BlogPostCard } from "./components";
 
-type BlogListProps = {
+type TBlogListProps = {
   posts: TBlogPostMeta[];
 };
 
-export function BlogList({ posts }: BlogListProps) {
+export function BlogList({ posts }: TBlogListProps) {
   if (posts.length === 0) {
     return null;
   }

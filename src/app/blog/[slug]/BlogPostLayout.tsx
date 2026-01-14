@@ -1,6 +1,7 @@
 "use client";
 
 import { Container } from "@/components/ui/Container";
+import { getTagColor } from "@/components/sections/Blog/constants";
 import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";
 import { motion } from "framer-motion";
@@ -8,26 +9,12 @@ import { ArrowLeft, Clock } from "lucide-react";
 import Link from "next/link";
 import { ReactNode } from "react";
 
-const TAG_COLORS: Record<string, string> = {
-  nextjs: "bg-blue-500/10 text-blue-600",
-  typescript: "bg-blue-500/10 text-blue-600",
-  react: "bg-cyan-500/10 text-cyan-600",
-  tailwind: "bg-teal-500/10 text-teal-600",
-  "framer-motion": "bg-purple-500/10 text-purple-600",
-  ui: "bg-pink-500/10 text-pink-600",
-  portfolio: "bg-emerald-500/10 text-emerald-600",
-};
-
-function getTagColor(tag: string): string {
-  return TAG_COLORS[tag.toLowerCase()] || "bg-muted text-muted-foreground";
-}
-
-type BlogPostLayoutProps = {
+type TBlogPostLayoutProps = {
   post: TBlogPostMeta;
   children: ReactNode;
 };
 
-export function BlogPostLayout({ post, children }: BlogPostLayoutProps) {
+export function BlogPostLayout({ post, children }: TBlogPostLayoutProps) {
   const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
