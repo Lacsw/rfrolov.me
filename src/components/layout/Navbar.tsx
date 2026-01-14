@@ -1,11 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { Container, ThemeToggle } from "@/components/ui";
+import { useScrolled } from "@/hooks";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -16,17 +15,7 @@ const navLinks = [
 
 export function Navbar() {
   const pathname = usePathname();
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const scrolled = useScrolled(50);
 
   return (
     <header
