@@ -1,26 +1,14 @@
 "use client";
 
 import { Container } from "@/components/ui/Container";
-import { cn } from "@/lib/utils";
+import { CATEGORY_COLORS, CATEGORY_LABELS } from "@/constants/categories";
 import { projects } from "@/data/projects";
-import { TProjectCategory } from "@/types";
+import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Github } from "lucide-react";
 import Link from "next/link";
 
 const featuredProjects = projects.filter((p) => p.featured);
-
-const CATEGORY_LABELS: Record<TProjectCategory, string> = {
-  personal: "Personal",
-  work: "Work",
-  opensource: "Open Source",
-};
-
-const CATEGORY_COLORS: Record<TProjectCategory, string> = {
-  personal: "bg-emerald-500/10 text-emerald-600",
-  work: "bg-blue-500/10 text-blue-600",
-  opensource: "bg-purple-500/10 text-purple-600",
-};
 
 export function FeaturedProjects() {
   return (

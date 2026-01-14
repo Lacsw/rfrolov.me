@@ -1,24 +1,13 @@
 "use client";
 
 import { Container } from "@/components/ui/Container";
-import { cn } from "@/lib/utils";
+import { CATEGORY_COLORS, CATEGORY_LABELS } from "@/constants/categories";
 import { projects } from "@/data/projects";
+import { cn } from "@/lib/utils";
 import { TProject, TProjectCategory } from "@/types";
 import { motion } from "framer-motion";
-import { useState } from "react";
 import { ArrowUpRight, Github } from "lucide-react";
-
-const CATEGORY_LABELS: Record<TProjectCategory, string> = {
-  personal: "Personal",
-  work: "Work",
-  opensource: "Open Source",
-};
-
-const CATEGORY_COLORS: Record<TProjectCategory, string> = {
-  personal: "bg-emerald-500/10 text-emerald-600",
-  work: "bg-blue-500/10 text-blue-600",
-  opensource: "bg-purple-500/10 text-purple-600",
-};
+import { useState } from "react";
 
 const FILTER_OPTIONS: { value: TProjectCategory | "all"; label: string }[] = [
   { value: "all", label: "All" },
