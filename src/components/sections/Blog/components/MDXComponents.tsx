@@ -95,19 +95,22 @@ export const mdxComponents = {
       {...props}
     />
   ),
-  code: ({ className, ...props }: CodeProps) => (
-    <code
-      className={cn(
-        "bg-muted px-1.5 py-0.5 rounded text-sm font-mono",
-        className
-      )}
-      {...props}
-    />
-  ),
+  code: ({ className, ...props }: CodeProps) => {
+    const isInlineCode = !className?.includes("language-");
+    if (isInlineCode) {
+      return (
+        <code
+          className={cn("bg-muted px-1.5 py-0.5 rounded text-sm", className)}
+          {...props}
+        />
+      );
+    }
+    return <code className={className} {...props} />;
+  },
   pre: ({ className, ...props }: PreProps) => (
     <pre
       className={cn(
-        "bg-[#0a0a0a] text-[#e5e5e5] rounded-lg p-4 overflow-x-auto my-4 text-sm",
+        "rounded-lg p-4 overflow-x-auto my-4 text-sm",
         className
       )}
       {...props}
