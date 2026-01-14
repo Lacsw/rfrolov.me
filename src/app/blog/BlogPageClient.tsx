@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Container } from "@/components/ui/Container";
+import { Container } from "@/components/ui";
 import { BlogPostCard } from "@/components/sections/Blog";
 import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";

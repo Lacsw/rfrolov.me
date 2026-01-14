@@ -4,7 +4,7 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { Container } from "@/components/ui/Container";
+import { Container } from "@/components/ui";
 import { experiences } from "@/data/experience";
 import { ExperienceCard } from "./components";
 import { EXPERIENCE_ANIMATION } from "./constants";

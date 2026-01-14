@@ -1,5 +1,5 @@
 import { ArrowUpRight, Github } from "lucide-react";
-import { ExternalLink } from "./ExternalLink";
+import { ExternalLink } from "../ExternalLink";
 
 type TProjectLinksProps = {
   href?: string;

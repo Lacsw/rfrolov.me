@@ -1,6 +1,6 @@
 "use client";
 
-import { Container } from "@/components/ui/Container";
+import { Container } from "@/components/ui";
 import { TBlogPostMeta } from "@/types";
 import { motion } from "framer-motion";
 import Link from "next/link";

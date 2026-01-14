@@ -1,7 +1,6 @@
 "use client";
 
-import { Container } from "@/components/ui/Container";
-import { SectionHeader } from "@/components/ui/SectionHeader";
+import { Container, SectionHeader } from "@/components/ui";
 import { FADE_IN, FADE_IN_TRANSITION } from "@/constants/animations";
 import { CATEGORY_FILTER_OPTIONS } from "@/constants/categories";
 import { projects } from "@/data/projects";

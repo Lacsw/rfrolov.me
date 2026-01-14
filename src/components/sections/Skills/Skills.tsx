@@ -1,4 +1,4 @@
-import { Container } from "@/components/ui/Container";
+import { Container } from "@/components/ui";
 import { SkillsGrid } from "./components";
 
 export function Skills() {

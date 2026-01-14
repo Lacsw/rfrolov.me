@@ -1,6 +1,6 @@
 "use client";
 
-import { TechIcon } from "@/components/ui/TechIcon";
+import { TechIcon } from "@/components/ui";
 import { SKILLS } from "../constants";
 
 export function SkillsGrid() {

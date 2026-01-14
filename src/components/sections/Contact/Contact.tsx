@@ -1,8 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Container } from "@/components/ui/Container";
-import { SocialLink } from "@/components/ui/SocialLink";
+import { Container, SocialLink } from "@/components/ui";
 import { socialLinks } from "@/data/social-links";
 
 export function Contact() {

@@ -1,6 +1,6 @@
 "use client";
 
-import { Container } from "@/components/ui/Container";
+import { Container } from "@/components/ui";
 import { getTagColor } from "@/components/sections/Blog/constants";
 import { formatDate } from "@/lib/date";
 import { cn } from "@/lib/utils";

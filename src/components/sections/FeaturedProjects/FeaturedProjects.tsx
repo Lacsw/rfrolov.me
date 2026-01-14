@@ -1,11 +1,13 @@
 "use client";
 
-import { AnimatedCard } from "@/components/ui/AnimatedCard";
-import { Container } from "@/components/ui/Container";
-import { ProjectHighlight } from "@/components/ui/ProjectHighlight";
-import { CategoryWithYear } from "@/components/ui/CategoryWithYear";
-import { SectionHeader } from "@/components/ui/SectionHeader";
-import { TechTags } from "@/components/ui/TechTags";
+import {
+  AnimatedCard,
+  CategoryWithYear,
+  Container,
+  ProjectHighlight,
+  SectionHeader,
+  TechTags,
+} from "@/components/ui";
 import { FADE_IN, FADE_IN_TRANSITION } from "@/constants/animations";
 import { projects } from "@/data/projects";
 import { motion } from "framer-motion";

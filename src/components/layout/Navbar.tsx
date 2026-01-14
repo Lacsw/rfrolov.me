@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Container } from "@/components/ui/Container";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { Container, ThemeToggle } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
 

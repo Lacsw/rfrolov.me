@@ -1,11 +1,13 @@
 "use client";
 
-import { AnimatedCard } from "@/components/ui/AnimatedCard";
-import { Badge } from "@/components/ui/Badge";
-import { CategoryWithYear } from "@/components/ui/CategoryWithYear";
-import { ProjectHighlight } from "@/components/ui/ProjectHighlight";
-import { ProjectLinks } from "@/components/ui/ProjectLinks";
-import { TechTags } from "@/components/ui/TechTags";
+import {
+  AnimatedCard,
+  Badge,
+  CategoryWithYear,
+  ProjectHighlight,
+  ProjectLinks,
+  TechTags,
+} from "@/components/ui";
 import { cn } from "@/lib/utils";
 import { TProject } from "@/types";
 
