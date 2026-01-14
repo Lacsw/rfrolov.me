@@ -3,14 +3,14 @@
 import Link from "next/link";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, Clock } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 import { formatDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";
 
-
-import { getTagColor } from "../constants";
+import { BlogTags } from "./BlogTags";
+import { ReadingTime } from "./ReadingTime";
 
 type TBlogPostCardProps = {
   post: TBlogPostMeta;
@@ -42,10 +42,7 @@ export function BlogPostCard({ post, index }: TBlogPostCardProps) {
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
               <span>{formattedDate}</span>
               <span>·</span>
-              <span className="inline-flex items-center gap-1">
-                <Clock className="h-3 w-3" />
-                {post.readingTime} min read
-              </span>
+              <ReadingTime minutes={post.readingTime} showLabel />
             </div>
             <h3 className="font-medium">{post.title}</h3>
           </div>
@@ -56,15 +53,8 @@ export function BlogPostCard({ post, index }: TBlogPostCardProps) {
           {post.description}
         </p>
 
-        <div className="flex flex-wrap gap-1.5 mt-4">
-          {post.tags.slice(0, 3).map((tag) => (
-            <span
-              key={tag}
-              className={cn("text-xs px-2 py-0.5 rounded", getTagColor(tag))}
-            >
-              {tag}
-            </span>
-          ))}
+        <div className="mt-4">
+          <BlogTags tags={post.tags} limit={3} wrap />
         </div>
       </Link>
     </motion.div>
