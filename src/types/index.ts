@@ -34,3 +34,16 @@ export type TExperience = {
   description: string;
   technologies: string[];
 };
+
+export type TBlogPost = {
+  slug: string;
+  title: string;
+  description: string;
+  date: string;
+  tags: string[];
+  featured?: boolean;
+  readingTime: number;
+  content: string;
+};
+
+export type TBlogPostMeta = Omit<TBlogPost, "content">;

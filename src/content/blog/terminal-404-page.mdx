@@ -1,0 +1,104 @@
+---
+title: "Creating a Terminal-Style 404 Page"
+description: "How I built an interactive terminal emulator for handling 404 errors with style."
+date: "2025-01-10"
+tags: ["react", "typescript", "framer-motion", "ui"]
+featured: true
+---
+
+Error pages don't have to be boring. Instead of a simple "Page not found" message, I created an interactive terminal emulator that makes getting lost on my site a bit more fun.
+
+## The Concept
+
+The idea was simple: if developers spend their days in the terminal, why not make the 404 page feel like home? The terminal accepts commands and provides helpful responses.
+
+## Key Features
+
+### Command Processing
+
+The terminal recognizes several commands:
+
+- `help` - Shows available commands
+- `home` - Navigates back to the home page
+- `ls` - Lists available pages
+- `clear` - Clears the terminal
+- `whoami` - A fun Easter egg
+
+### Typing Animation
+
+Each response is animated character by character using a custom hook:
+
+```typescript
+function useTypingEffect(text: string, speed = 30) {
+  const [displayedText, setDisplayedText] = useState("");
+
+  useEffect(() => {
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index < text.length) {
+        setDisplayedText(text.slice(0, index + 1));
+        index++;
+      } else {
+        clearInterval(timer);
+      }
+    }, speed);
+
+    return () => clearInterval(timer);
+  }, [text, speed]);
+
+  return displayedText;
+}
+```
+
+### Auto-scroll
+
+The terminal automatically scrolls to show the latest output, just like a real terminal:
+
+```typescript
+useEffect(() => {
+  if (terminalRef.current) {
+    terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
+  }
+}, [history]);
+```
+
+## Styling
+
+The terminal uses a dark theme with a subtle glow effect:
+
+```css
+.terminal {
+  background: #0a0a0a;
+  border: 1px solid #333;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+}
+```
+
+The blinking cursor is achieved with CSS animation:
+
+```css
+.cursor {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+```
+
+## User Experience Considerations
+
+1. **Keyboard focus** - The input is auto-focused when the page loads
+2. **Mobile support** - Works on touch devices too
+3. **Accessibility** - Proper ARIA labels and keyboard navigation
+4. **Helpful defaults** - Typing `help` is suggested immediately
+
+## Try It Out
+
+Navigate to a non-existent page like [/this-page-does-not-exist](/this-page-does-not-exist) to see it in action!
+
+## Conclusion
+
+Small details like a creative 404 page can make a portfolio memorable. It shows personality and attention to detail while demonstrating technical skills.
+
+What creative ideas have you implemented in your projects? I'd love to hear about them!
