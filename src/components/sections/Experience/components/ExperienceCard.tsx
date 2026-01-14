@@ -1,8 +1,10 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+
+import { cn } from "@/lib/utils";
 import { TExperience } from "@/types";
+
 import { EXPERIENCE_ANIMATION } from "../constants";
 
 type ExperienceCardProps = {

@@ -1,10 +1,12 @@
 "use client";
 
+import { useState, useEffect } from "react";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
 import { Container, ThemeToggle } from "@/components/ui";
 import { cn } from "@/lib/utils";
-import { useState, useEffect } from "react";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -22,6 +24,7 @@ export function Navbar() {
     };
 
     window.addEventListener("scroll", handleScroll);
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 

@@ -1,9 +1,12 @@
 "use client";
 
+import Link from "next/link";
+
+import { motion } from "framer-motion";
+
 import { Container } from "@/components/ui";
 import { TBlogPostMeta } from "@/types";
-import { motion } from "framer-motion";
-import Link from "next/link";
+
 import { BlogPostCard } from "./components";
 
 type TBlogListProps = {

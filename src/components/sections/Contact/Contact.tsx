@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+
 import { Container, SocialLink } from "@/components/ui";
 import { socialLinks } from "@/data/social-links";
 

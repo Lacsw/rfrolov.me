@@ -1,9 +1,10 @@
 "use client";
 
-import { useTheme } from "next-themes";
-import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
+
 import { motion, AnimatePresence } from "framer-motion";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 
 export function ThemeToggle() {
   const { setTheme, resolvedTheme } = useTheme();

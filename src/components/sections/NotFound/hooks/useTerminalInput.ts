@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
+
 import { useRouter } from "next/navigation";
+
 import { ROUTES, type TerminalLine } from "../constants";
 
 export function useTerminalInput() {
@@ -12,6 +14,7 @@ export function useTerminalInput() {
   useEffect(() => {
     if (!inputValue) {
       setSuggestion("");
+
       return;
     }
 
@@ -20,16 +23,20 @@ export function useTerminalInput() {
     // Suggest "cd" command
     if ("cd".startsWith(input) && input !== "cd") {
       setSuggestion("cd".slice(input.length) + " /");
+
       return;
     }
 
     // If typing "cd " or "cd /...", suggest paths
     const cdMatch = input.match(/^cd\s+(.*)$/);
+
     if (cdMatch) {
       const pathInput = cdMatch[1];
+
       for (const route of ROUTES) {
         if (route.path.startsWith(pathInput) && route.path !== pathInput) {
           setSuggestion(route.path.slice(pathInput.length));
+
           return;
         }
       }
@@ -42,10 +49,11 @@ export function useTerminalInput() {
     (command: string) => {
       const cmd = command.trim();
 
-      if (!cmd) return;
+      if (!cmd) {return;}
 
       // Parse command - expect "cd /path" format
       const cdMatch = cmd.match(/^cd\s+(.+)$/);
+
       if (cdMatch) {
         const path = cdMatch[1];
         const matchedRoute = ROUTES.find((r) => r.path === path);

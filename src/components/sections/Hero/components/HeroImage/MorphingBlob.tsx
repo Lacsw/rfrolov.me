@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+
 import { ANIMATION_CONFIG } from "../../constants";
 
 export function MorphingBlob() {

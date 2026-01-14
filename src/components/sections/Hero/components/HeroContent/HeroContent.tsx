@@ -1,8 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
+
 import { SocialLink } from "@/components/ui";
 import { socialLinks } from "@/data/social-links";
+
 import { HERO_CONTENT, ANIMATION_CONFIG } from "../../constants";
 
 export function HeroContent() {

@@ -1,7 +1,9 @@
 import fs from "fs";
 import path from "path";
+
 import matter from "gray-matter";
 import readingTime from "reading-time";
+
 import { TBlogPost, TBlogPostMeta } from "@/types";
 
 const BLOG_DIR = path.join(process.cwd(), "src/content/blog");
@@ -66,6 +68,7 @@ export function getFeaturedPosts(limit = 3): TBlogPostMeta[] {
   }
 
   const remaining = posts.filter((post) => !post.featured);
+
   return [...featured, ...remaining].slice(0, limit);
 }
 

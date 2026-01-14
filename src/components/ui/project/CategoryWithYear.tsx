@@ -1,4 +1,5 @@
 import { TProjectCategory } from "@/types";
+
 import { CategoryBadge } from "./CategoryBadge";
 
 type TCategoryWithYearProps = {

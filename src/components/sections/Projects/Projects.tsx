@@ -1,13 +1,16 @@
 "use client";
 
+import { useState } from "react";
+
+import { motion } from "framer-motion";
+
 import { Container, SectionHeader } from "@/components/ui";
 import { FADE_IN, FADE_IN_TRANSITION } from "@/constants/animations";
 import { CATEGORY_FILTER_OPTIONS } from "@/constants/categories";
 import { projects } from "@/data/projects";
 import { cn } from "@/lib/utils";
 import { TProjectCategory } from "@/types";
-import { motion } from "framer-motion";
-import { useState } from "react";
+
 import { ProjectCard } from "./ProjectCard";
 
 export function Projects() {

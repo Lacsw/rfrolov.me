@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+
 import { JetBrains_Mono } from "next/font/google";
+
 import { Navbar } from "@/components/layout/Navbar";
 import { ThemeProvider } from "@/components/providers";
 import "./globals.css";

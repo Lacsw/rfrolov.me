@@ -1,11 +1,14 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+
 import { useRouter } from "next/navigation";
+
 import { motion } from "framer-motion";
+
+import { TerminalLine, TerminalInput, NavigationLinks, TerminalWindow } from "./components";
 import { INITIAL_LINES, PROMPT } from "./constants";
 import { useBlinkingCursor, useTerminalTyping, useTerminalInput } from "./hooks";
-import { TerminalLine, TerminalInput, NavigationLinks, TerminalWindow } from "./components";
 
 export function NotFoundTerminal() {
   const router = useRouter();
@@ -31,9 +34,10 @@ export function NotFoundTerminal() {
   // Keyboard shortcuts (1 and 2) when not focused on input
   useEffect(() => {
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
-      if (!isTypingComplete) return;
+      if (!isTypingComplete) {return;}
       const activeElement = document.activeElement;
-      if (activeElement?.tagName === "INPUT") return;
+
+      if (activeElement?.tagName === "INPUT") {return;}
 
       if (e.key === "1") {
         router.push("/");
@@ -43,6 +47,7 @@ export function NotFoundTerminal() {
     };
 
     window.addEventListener("keydown", handleGlobalKeyDown);
+
     return () => window.removeEventListener("keydown", handleGlobalKeyDown);
   }, [isTypingComplete, router]);
 

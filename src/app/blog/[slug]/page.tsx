@@ -1,9 +1,13 @@
 import { notFound } from "next/navigation";
-import { getAllPosts, getPostBySlug } from "@/lib/blog";
-import { BlogPostLayout } from "./BlogPostLayout";
+
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { mdxComponents } from "@/components/sections/Blog";
 import rehypePrettyCode from "rehype-pretty-code";
+
+import { mdxComponents } from "@/components/sections/Blog";
+import { getAllPosts, getPostBySlug } from "@/lib/blog";
+
+import { BlogPostLayout } from "./BlogPostLayout";
+
 
 type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
@@ -11,6 +15,7 @@ type BlogPostPageProps = {
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
+
   return posts.map((post) => ({
     slug: post.slug,
   }));

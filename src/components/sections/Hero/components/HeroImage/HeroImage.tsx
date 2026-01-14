@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ANIMATION_CONFIG } from "../../constants";
-import { MorphingBlob } from "./MorphingBlob";
+
 import { FloatingImage } from "./FloatingImage";
+import { MorphingBlob } from "./MorphingBlob";
+import { ANIMATION_CONFIG } from "../../constants";
 
 export function HeroImage() {
   const { scaleIn } = ANIMATION_CONFIG;

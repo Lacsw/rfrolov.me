@@ -1,8 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { TSkill } from "@/types";
+
 import { TechIcon } from "@/components/ui";
+import { TSkill } from "@/types";
+
 import { SKILLS_ANIMATION } from "../constants";
 
 type TSkillCardProps = {

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
 import { CURSOR_BLINK_INTERVAL } from "../constants";
 
 export function useBlinkingCursor() {
@@ -6,6 +7,7 @@ export function useBlinkingCursor() {
 
   useEffect(() => {
     const interval = setInterval(() => setShowCursor((prev) => !prev), CURSOR_BLINK_INTERVAL);
+
     return () => clearInterval(interval);
   }, []);
 

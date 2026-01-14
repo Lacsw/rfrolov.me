@@ -1,6 +1,8 @@
-import { cn } from "@/lib/utils";
-import Link from "next/link";
 import { ComponentPropsWithoutRef } from "react";
+
+import Link from "next/link";
+
+import { cn } from "@/lib/utils";
 
 type THeadingProps = ComponentPropsWithoutRef<"h1">;
 type TParagraphProps = ComponentPropsWithoutRef<"p">;
@@ -97,6 +99,7 @@ export const mdxComponents = {
   ),
   code: ({ className, ...props }: TCodeProps) => {
     const isInlineCode = !className?.includes("language-");
+
     if (isInlineCode) {
       return (
         <code
@@ -105,6 +108,7 @@ export const mdxComponents = {
         />
       );
     }
+
     return <code className={className} {...props} />;
   },
   pre: ({ className, ...props }: TPreProps) => (

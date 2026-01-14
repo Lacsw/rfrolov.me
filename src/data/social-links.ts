@@ -1,4 +1,5 @@
 import { Github, Linkedin } from "lucide-react";
+
 import { TSocialLink } from "@/types";
 
 export const socialLinks: TSocialLink[] = [

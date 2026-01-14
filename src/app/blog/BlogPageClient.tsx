@@ -1,11 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Container } from "@/components/ui";
+
+import { motion } from "framer-motion";
+
 import { BlogPostCard } from "@/components/sections/Blog";
+import { Container } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";
-import { motion } from "framer-motion";
+
 
 type TBlogPageClientProps = {
   posts: TBlogPostMeta[];

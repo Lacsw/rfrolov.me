@@ -1,11 +1,15 @@
 "use client";
 
+import Link from "next/link";
+
+import { motion } from "framer-motion";
+import { ArrowUpRight, Clock } from "lucide-react";
+
 import { formatDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";
-import { motion } from "framer-motion";
-import { ArrowUpRight, Clock } from "lucide-react";
-import Link from "next/link";
+
+
 import { getTagColor } from "../constants";
 
 type TBlogPostCardProps = {

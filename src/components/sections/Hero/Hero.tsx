@@ -1,4 +1,5 @@
 import { Container } from "@/components/ui";
+
 import { HeroContent, HeroImage } from "./components";
 
 export function Hero() {

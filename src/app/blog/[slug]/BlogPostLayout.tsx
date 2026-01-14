@@ -1,14 +1,20 @@
 "use client";
 
-import { Container } from "@/components/ui";
+import { ReactNode } from "react";
+
+import Link from "next/link";
+
+import { motion } from "framer-motion";
+import { ArrowLeft, Clock } from "lucide-react";
+
 import { getTagColor } from "@/components/sections/Blog/constants";
+import { Container } from "@/components/ui";
 import { formatDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";
-import { motion } from "framer-motion";
-import { ArrowLeft, Clock } from "lucide-react";
-import Link from "next/link";
-import { ReactNode } from "react";
+
+
+
 
 type TBlogPostLayoutProps = {
   post: TBlogPostMeta;

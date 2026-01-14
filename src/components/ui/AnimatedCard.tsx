@@ -1,9 +1,11 @@
 "use client";
 
+import { ReactNode } from "react";
+
+import { motion } from "framer-motion";
+
 import { FADE_IN, getFadeInTransition } from "@/constants/animations";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
-import { ReactNode } from "react";
 
 type TAnimatedCardProps = {
   children: ReactNode;

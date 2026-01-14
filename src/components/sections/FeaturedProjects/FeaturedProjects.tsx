@@ -1,5 +1,8 @@
 "use client";
 
+import { motion } from "framer-motion";
+import { ArrowUpRight, Github } from "lucide-react";
+
 import {
   AnimatedCard,
   CategoryWithYear,
@@ -10,8 +13,6 @@ import {
 } from "@/components/ui";
 import { FADE_IN, FADE_IN_TRANSITION } from "@/constants/animations";
 import { projects } from "@/data/projects";
-import { motion } from "framer-motion";
-import { ArrowUpRight, Github } from "lucide-react";
 
 const featuredProjects = projects.filter((p) => p.featured);
 

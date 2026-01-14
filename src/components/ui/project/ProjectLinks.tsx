@@ -1,4 +1,5 @@
 import { ArrowUpRight, Github } from "lucide-react";
+
 import { ExternalLink } from "../ExternalLink";
 
 type TProjectLinksProps = {
@@ -7,7 +8,7 @@ type TProjectLinksProps = {
 };
 
 export function ProjectLinks({ href, github }: TProjectLinksProps) {
-  if (!href && !github) return null;
+  if (!href && !github) {return null;}
 
   return (
     <div className="flex items-center gap-2 pt-2">
