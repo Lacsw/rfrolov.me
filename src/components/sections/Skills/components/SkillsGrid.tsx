@@ -1,20 +1,20 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { SKILLS, SKILLS_ANIMATION } from "../constants";
-import { SkillCard } from "./SkillCard";
+import { TechIcon } from "@/components/ui/TechIcon";
+import { SKILLS } from "../constants";
 
 export function SkillsGrid() {
   return (
-    <motion.div
-      variants={SKILLS_ANIMATION.container}
-      initial="hidden"
-      animate="show"
-      className="flex flex-wrap justify-center gap-3"
-    >
+    <div className="flex flex-wrap justify-center gap-x-5 gap-y-2">
       {SKILLS.map((skill) => (
-        <SkillCard key={skill.name} skill={skill} />
+        <div
+          key={skill.name}
+          className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors cursor-default"
+        >
+          <TechIcon slug={skill.icon} className="h-3.5 w-3.5" />
+          <span className="text-xs">{skill.name}</span>
+        </div>
       ))}
-    </motion.div>
+    </div>
   );
 }
