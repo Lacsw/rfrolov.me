@@ -2,7 +2,7 @@
 title: "Creating a Terminal-Style 404 Page"
 description: "How I built an interactive terminal emulator for handling 404 errors with style."
 date: "2025-01-10"
-tags: ["react", "typescript", "framer-motion", "ui"]
+tags: ["react", "typescript", "nextjs", "hooks"]
 featured: true
 ---
 
@@ -10,95 +10,74 @@ Error pages don't have to be boring. Instead of a simple "Page not found" messag
 
 ## The Concept
 
-The idea was simple: if developers spend their days in the terminal, why not make the 404 page feel like home? The terminal accepts commands and provides helpful responses.
+The idea was simple: if developers spend their days in the terminal, why not make the 404 page feel like home? The terminal plays a startup sequence and then accepts `cd` commands with tab completion.
 
 ## Key Features
 
-### Command Processing
+- **Typing animation** with realistic timing and random variance
+- **Blinking cursor** using a reusable `useToggle` hook
+- **Tab completion** for the `cd` command
+- **Keyboard shortcuts** (press 1 or 2 to navigate)
+- **Command execution** with success/error feedback
 
-The terminal recognizes several commands:
+## Architecture
 
-- `help` - Shows available commands
-- `home` - Navigates back to the home page
-- `ls` - Lists available pages
-- `clear` - Clears the terminal
-- `whoami` - A fun Easter egg
+The terminal is built with a clean separation of concerns:
 
-### Typing Animation
+```
+NotFound/
+├── NotFoundTerminal.tsx    # Main component
+├── components/
+│   ├── TerminalWindow.tsx  # Visual wrapper
+│   ├── TerminalLine.tsx    # Line renderer
+│   ├── TerminalInput.tsx   # Input with suggestions
+│   └── NavigationLinks.tsx # Quick navigation
+├── hooks/
+│   ├── useTerminalTyping.ts   # Typing animation
+│   ├── useBlinkingCursor.ts   # Cursor blink
+│   └── useTerminalInput.ts    # Command handling
+└── constants/
+    └── index.ts            # Configuration
+```
 
-Each response is animated character by character using a custom hook:
+Each hook handles a single responsibility, making the code maintainable and testable.
+
+## Blinking Cursor
+
+The cursor blink uses a reusable `useToggle` hook:
 
 ```typescript
-function useTypingEffect(text: string, speed = 30) {
-  const [displayedText, setDisplayedText] = useState("");
+export function useBlinkingCursor() {
+  const [showCursor, { toggle }] = useToggle(true);
 
   useEffect(() => {
-    let index = 0;
-    const timer = setInterval(() => {
-      if (index < text.length) {
-        setDisplayedText(text.slice(0, index + 1));
-        index++;
-      } else {
-        clearInterval(timer);
-      }
-    }, speed);
+    const interval = setInterval(toggle, CURSOR_BLINK_INTERVAL);
+    return () => clearInterval(interval);
+  }, [toggle]);
 
-    return () => clearInterval(timer);
-  }, [text, speed]);
-
-  return displayedText;
+  return showCursor;
 }
 ```
 
-### Auto-scroll
+## Configuration
 
-The terminal automatically scrolls to show the latest output, just like a real terminal:
+All timing is configurable through constants:
 
 ```typescript
-useEffect(() => {
-  if (terminalRef.current) {
-    terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
-  }
-}, [history]);
+export const TYPING_SPEED = {
+  character: { min: 30, variance: 20 },
+  lineDelay: 300,
+  outputDelay: 150,
+  emptyLineDelay: 100,
+};
+
+export const CURSOR_BLINK_INTERVAL = 530;
 ```
-
-## Styling
-
-The terminal uses a dark theme with a subtle glow effect:
-
-```css
-.terminal {
-  background: #0a0a0a;
-  border: 1px solid #333;
-  box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
-}
-```
-
-The blinking cursor is achieved with CSS animation:
-
-```css
-.cursor {
-  animation: blink 1s step-end infinite;
-}
-
-@keyframes blink {
-  50% { opacity: 0; }
-}
-```
-
-## User Experience Considerations
-
-1. **Keyboard focus** - The input is auto-focused when the page loads
-2. **Mobile support** - Works on touch devices too
-3. **Accessibility** - Proper ARIA labels and keyboard navigation
-4. **Helpful defaults** - Typing `help` is suggested immediately
 
 ## Try It Out
 
-Navigate to a non-existent page like [/this-page-does-not-exist](/this-page-does-not-exist) to see it in action!
+Navigate to [/this-page-does-not-exist](/this-page-does-not-exist) to see it in action. Try typing `cd` and pressing Tab to autocomplete!
 
 ## Conclusion
 
-Small details like a creative 404 page can make a portfolio memorable. It shows personality and attention to detail while demonstrating technical skills.
-
-What creative ideas have you implemented in your projects? I'd love to hear about them!
+Small details like a creative 404 page can make a portfolio memorable. The modular architecture with custom hooks keeps the code clean and each piece focused on doing one thing well.
