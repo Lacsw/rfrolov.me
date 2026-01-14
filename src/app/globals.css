@@ -60,3 +60,20 @@ body {
 .animate-spin-reverse {
   animation: spin-reverse 25s linear infinite;
 }
+
+/* Code block theme switching */
+[data-rehype-pretty-code-figure] pre {
+  background-color: var(--shiki-light-bg) !important;
+}
+
+[data-rehype-pretty-code-figure] code span {
+  color: var(--shiki-light) !important;
+}
+
+.dark [data-rehype-pretty-code-figure] pre {
+  background-color: var(--shiki-dark-bg) !important;
+}
+
+.dark [data-rehype-pretty-code-figure] code span {
+  color: var(--shiki-dark) !important;
+}

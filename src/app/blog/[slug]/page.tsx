@@ -17,8 +17,11 @@ export async function generateStaticParams() {
 }
 
 const rehypePrettyCodeOptions = {
-  theme: "github-dark",
-  keepBackground: true,
+  theme: {
+    dark: "github-dark",
+    light: "github-light",
+  },
+  keepBackground: false,
 };
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
