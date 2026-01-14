@@ -4,6 +4,8 @@ import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 
+import { CodeBlock } from "./CodeBlock";
+
 type THeadingProps = ComponentPropsWithoutRef<"h1">;
 type TParagraphProps = ComponentPropsWithoutRef<"p">;
 type TLinkProps = ComponentPropsWithoutRef<"a">;
@@ -111,14 +113,8 @@ export const mdxComponents = {
 
     return <code className={className} {...props} />;
   },
-  pre: ({ className, ...props }: TPreProps) => (
-    <pre
-      className={cn(
-        "rounded-lg p-4 overflow-x-auto my-4 text-sm",
-        className
-      )}
-      {...props}
-    />
+  pre: ({ className, children }: TPreProps) => (
+    <CodeBlock className={className}>{children}</CodeBlock>
   ),
   hr: () => <hr className="border-muted my-8" />,
   strong: ({ className, ...props }: ComponentPropsWithoutRef<"strong">) => (
