@@ -1,6 +1,8 @@
 "use client";
 
 import { Container } from "@/components/ui/Container";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { FADE_IN, FADE_IN_TRANSITION } from "@/constants/animations";
 import { CATEGORY_FILTER_OPTIONS } from "@/constants/categories";
 import { projects } from "@/data/projects";
 import { cn } from "@/lib/utils";
@@ -22,18 +24,16 @@ export function Projects() {
     <section className="min-h-[calc(100vh-4rem)] py-12 lg:py-16">
       <Container>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          {...FADE_IN}
+          transition={FADE_IN_TRANSITION}
           className="space-y-12"
         >
           <div className="space-y-6">
-            <div>
-              <h1 className="text-2xl font-semibold tracking-tight">Projects</h1>
-              <p className="text-muted-foreground text-sm mt-2">
-                A collection of things I&apos;ve built
-              </p>
-            </div>
+            <SectionHeader
+              title="Projects"
+              description="A collection of things I've built"
+              as="h1"
+            />
 
             <div className="flex flex-wrap gap-2">
               {CATEGORY_FILTER_OPTIONS.map((option) => (

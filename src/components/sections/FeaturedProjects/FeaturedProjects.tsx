@@ -1,13 +1,15 @@
 "use client";
 
-import { CategoryBadge } from "@/components/ui/CategoryBadge";
+import { AnimatedCard } from "@/components/ui/AnimatedCard";
 import { Container } from "@/components/ui/Container";
 import { ProjectHighlight } from "@/components/ui/ProjectHighlight";
+import { CategoryWithYear } from "@/components/ui/CategoryWithYear";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { TechTags } from "@/components/ui/TechTags";
+import { FADE_IN, FADE_IN_TRANSITION } from "@/constants/animations";
 import { projects } from "@/data/projects";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Github } from "lucide-react";
-import Link from "next/link";
 
 const featuredProjects = projects.filter((p) => p.featured);
 
@@ -16,42 +18,30 @@ export function FeaturedProjects() {
     <section className="py-12 lg:py-16">
       <Container>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          {...FADE_IN}
+          transition={FADE_IN_TRANSITION}
           className="space-y-6"
         >
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold tracking-tight">
-              Featured Projects
-            </h2>
-            <Link
-              href="/projects"
-              className="text-sm text-muted-foreground hover:opacity-70 transition-opacity cursor-pointer"
-            >
-              View all
-            </Link>
-          </div>
+          <SectionHeader
+            title="Featured Projects"
+            link={{ href: "/projects", label: "View all" }}
+          />
 
           <div className="grid gap-4 sm:grid-cols-2">
             {featuredProjects.map((project, index) => (
-              <motion.a
+              <AnimatedCard
                 key={project.id}
+                index={index}
                 href={project.href || project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="group block h-full rounded-lg border border-muted bg-background p-6 cursor-pointer transition-all duration-300 hover:border-muted-foreground/20 hover:shadow-sm"
               >
                 <div className="space-y-2">
                   <div className="flex items-start justify-between gap-2">
                     <div className="space-y-1">
-                      <div className="flex items-center gap-2">
-                        <CategoryBadge category={project.category} size="sm" />
-                        <span className="text-xs text-muted-foreground">{project.year}</span>
-                      </div>
+                      <CategoryWithYear
+                        category={project.category}
+                        year={project.year}
+                        size="sm"
+                      />
                       <h3 className="font-medium text-sm">{project.title}</h3>
                     </div>
                     <div className="flex items-center gap-2 shrink-0">
@@ -74,7 +64,7 @@ export function FeaturedProjects() {
                     className="pt-1"
                   />
                 </div>
-              </motion.a>
+              </AnimatedCard>
             ))}
           </div>
         </motion.div>

@@ -1,12 +1,14 @@
 "use client";
 
-import { CategoryBadge } from "@/components/ui/CategoryBadge";
+import { Badge } from "@/components/ui/Badge";
 import { ProjectHighlight } from "@/components/ui/ProjectHighlight";
+import { ProjectLinks } from "@/components/ui/ProjectLinks";
+import { CategoryWithYear } from "@/components/ui/CategoryWithYear";
 import { TechTags } from "@/components/ui/TechTags";
+import { FADE_IN, getFadeInTransition } from "@/constants/animations";
 import { cn } from "@/lib/utils";
 import { TProject } from "@/types";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Github } from "lucide-react";
 
 type TProjectCardProps = {
   project: TProject;
@@ -17,9 +19,8 @@ type TProjectCardProps = {
 export function ProjectCard({ project, index, large = false }: TProjectCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1, duration: 0.5 }}
+      {...FADE_IN}
+      transition={getFadeInTransition(index)}
       className={cn(
         "group rounded-lg border bg-background p-6 transition-all duration-300 hover:shadow-sm hover:scale-[1.01]",
         large && "md:col-span-2",
@@ -33,13 +34,8 @@ export function ProjectCard({ project, index, large = false }: TProjectCardProps
           <div className="flex items-start justify-between gap-4">
             <div className="space-y-1.5">
               <div className="flex items-center gap-2 flex-wrap">
-                {project.featured && (
-                  <span className="text-xs text-foreground bg-foreground/10 px-2 py-0.5 rounded font-medium">
-                    Featured
-                  </span>
-                )}
-                <CategoryBadge category={project.category} />
-                <span className="text-xs text-muted-foreground">{project.year}</span>
+                {project.featured && <Badge>Featured</Badge>}
+                <CategoryWithYear category={project.category} year={project.year} />
               </div>
               <h3 className={cn("font-medium", large && "text-lg")}>{project.title}</h3>
             </div>
@@ -59,31 +55,7 @@ export function ProjectCard({ project, index, large = false }: TProjectCardProps
             technologies={project.technologies}
             className={cn("gap-2", large && "md:flex-col md:items-end md:gap-1.5")}
           />
-
-          <div className="flex items-center gap-2 pt-2">
-            {project.href && (
-              <a
-                href={project.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-md bg-foreground text-background cursor-pointer hover:opacity-80 transition-opacity"
-              >
-                Live
-                <ArrowUpRight className="h-3 w-3" />
-              </a>
-            )}
-            {project.github && (
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-md border border-muted-foreground/30 text-foreground cursor-pointer hover:opacity-80 transition-opacity"
-              >
-                <Github className="h-3 w-3" />
-                GitHub
-              </a>
-            )}
-          </div>
+          <ProjectLinks href={project.href} github={project.github} />
         </div>
       </div>
     </motion.div>
