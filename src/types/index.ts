@@ -47,3 +47,9 @@ export type TBlogPost = {
 };
 
 export type TBlogPostMeta = Omit<TBlogPost, "content">;
+
+export type THeading = {
+  id: string;
+  text: string;
+  level: 2 | 3;
+};

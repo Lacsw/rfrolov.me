@@ -4,7 +4,7 @@ import path from "path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 
-import { TBlogPost, TBlogPostMeta } from "@/types";
+import { TBlogPost, TBlogPostMeta, THeading } from "@/types";
 
 const BLOG_DIR = path.join(process.cwd(), "src/content/blog");
 
@@ -87,4 +87,27 @@ export function getPostsByTag(tag: string): TBlogPostMeta[] {
   return getAllPosts().filter((post) =>
     post.tags.map((t) => t.toLowerCase()).includes(tag.toLowerCase())
   );
+}
+
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-");
+}
+
+export function extractHeadings(content: string): THeading[] {
+  const headingRegex = /^(#{2,3})\s+(.+)$/gm;
+  const headings: THeading[] = [];
+  let match;
+
+  while ((match = headingRegex.exec(content)) !== null) {
+    const level = match[1].length as 2 | 3;
+    const text = match[2].trim();
+    const id = slugify(text);
+
+    headings.push({ id, text, level });
+  }
+
+  return headings;
 }

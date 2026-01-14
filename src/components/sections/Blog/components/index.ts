@@ -4,3 +4,4 @@ export { BlogTag } from "./BlogTag";
 export { BlogTags } from "./BlogTags";
 export { mdxComponents } from "./MDXComponents";
 export { ReadingTime } from "./ReadingTime";
+export { TableOfContents } from "./TableOfContents";
