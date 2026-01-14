@@ -11,3 +11,10 @@ export const CATEGORY_COLORS: Record<TProjectCategory, string> = {
   work: "bg-blue-500/10 text-blue-600",
   opensource: "bg-purple-500/10 text-purple-600",
 };
+
+export const CATEGORY_FILTER_OPTIONS: { value: TProjectCategory | "all"; label: string }[] = [
+  { value: "all", label: "All" },
+  { value: "personal", label: "Personal" },
+  { value: "work", label: "Work" },
+  { value: "opensource", label: "Open Source" },
+];

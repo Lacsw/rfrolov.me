@@ -1,19 +1,13 @@
 "use client";
 
 import { Container } from "@/components/ui/Container";
+import { CATEGORY_FILTER_OPTIONS } from "@/constants/categories";
 import { projects } from "@/data/projects";
 import { cn } from "@/lib/utils";
 import { TProjectCategory } from "@/types";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { ProjectCard } from "./ProjectCard";
-
-const FILTER_OPTIONS: { value: TProjectCategory | "all"; label: string }[] = [
-  { value: "all", label: "All" },
-  { value: "personal", label: "Personal" },
-  { value: "work", label: "Work" },
-  { value: "opensource", label: "Open Source" },
-];
 
 export function Projects() {
   const [filter, setFilter] = useState<TProjectCategory | "all">("all");
@@ -42,7 +36,7 @@ export function Projects() {
             </div>
 
             <div className="flex flex-wrap gap-2">
-              {FILTER_OPTIONS.map((option) => (
+              {CATEGORY_FILTER_OPTIONS.map((option) => (
                 <button
                   key={option.value}
                   onClick={() => setFilter(option.value)}
