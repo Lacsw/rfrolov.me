@@ -4,11 +4,12 @@ import { useState } from "react";
 
 import { motion } from "framer-motion";
 
-import { BlogPostCard } from "@/components/sections/Blog";
-import { Container } from "@/components/ui";
+import { BlogPostCard, BlogPostListItem } from "@/components/sections/Blog";
+import { Container, SectionHeader, ViewToggle } from "@/components/ui";
+import { type TViewMode } from "@/components/ui/ViewToggle";
+import { FADE_IN, FADE_IN_TRANSITION } from "@/constants/animations";
 import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";
-
 
 type TBlogPageClientProps = {
   posts: TBlogPostMeta[];
@@ -17,6 +18,7 @@ type TBlogPageClientProps = {
 
 export function BlogPageClient({ posts, tags }: TBlogPageClientProps) {
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [view, setView] = useState<TViewMode>("grid");
 
   const filteredPosts = selectedTag
     ? posts.filter((post) =>
@@ -28,17 +30,18 @@ export function BlogPageClient({ posts, tags }: TBlogPageClientProps) {
     <section className="min-h-[calc(100vh-4rem)] py-12 lg:py-16">
       <Container>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          {...FADE_IN}
+          transition={FADE_IN_TRANSITION}
           className="space-y-12"
         >
           <div className="space-y-6">
-            <div>
-              <h1 className="text-2xl font-semibold tracking-tight">Blog</h1>
-              <p className="text-muted-foreground text-sm mt-2">
-                Thoughts on development, design, and technology
-              </p>
+            <div className="flex items-start justify-between gap-4">
+              <SectionHeader
+                as="h1"
+                description="Thoughts on development, design, and technology"
+                title="Blog"
+              />
+              <ViewToggle view={view} onViewChange={setView} />
             </div>
 
             {tags.length > 0 && (
@@ -73,11 +76,19 @@ export function BlogPageClient({ posts, tags }: TBlogPageClientProps) {
           </div>
 
           {filteredPosts.length > 0 ? (
-            <div className="grid gap-4 md:grid-cols-2">
-              {filteredPosts.map((post, index) => (
-                <BlogPostCard key={post.slug} post={post} index={index} />
-              ))}
-            </div>
+            view === "grid" ? (
+              <div className="grid gap-4 md:grid-cols-2">
+                {filteredPosts.map((post, index) => (
+                  <BlogPostCard key={post.slug} index={index} post={post} />
+                ))}
+              </div>
+            ) : (
+              <div className="divide-y divide-muted -my-4">
+                {filteredPosts.map((post, index) => (
+                  <BlogPostListItem key={post.slug} index={index} post={post} />
+                ))}
+              </div>
+            )
           ) : (
             <p className="text-muted-foreground text-center py-12">
               No posts found.

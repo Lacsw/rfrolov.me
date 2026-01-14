@@ -7,6 +7,7 @@ export { SectionHeader } from "./SectionHeader";
 export { SocialLink } from "./SocialLink";
 export { TechIcon } from "./TechIcon";
 export { ThemeToggle } from "./ThemeToggle";
+export { ViewToggle } from "./ViewToggle";
 
 export {
   CategoryBadge,
