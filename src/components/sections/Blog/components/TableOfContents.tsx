@@ -15,13 +15,14 @@ export function TableOfContents({ headings }: TTableOfContentsProps) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
+        for (const entry of entries) {
           if (entry.isIntersecting) {
             setActiveId(entry.target.id);
+            break;
           }
-        });
+        }
       },
-      { rootMargin: "-80px 0px -80% 0px" }
+      { rootMargin: "-96px 0px -66% 0px" }
     );
 
     headings.forEach(({ id }) => {
@@ -40,25 +41,31 @@ export function TableOfContents({ headings }: TTableOfContentsProps) {
   }
 
   return (
-    <nav className="space-y-2">
-      <p className="text-sm font-medium text-foreground">On this page</p>
-      <ul className="space-y-1">
-        {headings.map(({ id, text, level }) => (
-          <li key={id}>
-            <a
-              href={`#${id}`}
-              className={cn(
-                "block text-sm transition-colors hover:text-foreground cursor-pointer",
-                level === 3 && "pl-3",
-                activeId === id
-                  ? "text-foreground"
-                  : "text-muted-foreground"
-              )}
-            >
-              {text}
-            </a>
-          </li>
-        ))}
+    <nav aria-label="Table of contents">
+      <p className="mb-3 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+        On this page
+      </p>
+      <ul className="border-l border-muted">
+        {headings.map(({ id, text, level }) => {
+          const isActive = activeId === id;
+
+          return (
+            <li key={id}>
+              <a
+                href={`#${id}`}
+                className={cn(
+                  "block -ml-px border-l-2 py-1.5 text-sm transition-colors duration-150 cursor-pointer",
+                  level === 2 ? "pl-4" : "pl-7",
+                  isActive
+                    ? "border-foreground text-foreground font-medium"
+                    : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted-foreground/50"
+                )}
+              >
+                {text}
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );

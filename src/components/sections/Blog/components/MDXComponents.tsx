@@ -22,13 +22,13 @@ export const mdxComponents = {
   ),
   h2: ({ className, ...props }: THeadingProps) => (
     <h2
-      className={cn("text-xl font-semibold tracking-tight mt-8 mb-4", className)}
+      className={cn("text-xl font-semibold tracking-tight mt-8 mb-4 scroll-mt-24", className)}
       {...props}
     />
   ),
   h3: ({ className, ...props }: THeadingProps) => (
     <h3
-      className={cn("text-lg font-semibold tracking-tight mt-6 mb-3", className)}
+      className={cn("text-lg font-semibold tracking-tight mt-6 mb-3 scroll-mt-24", className)}
       {...props}
     />
   ),
