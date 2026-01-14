@@ -1,9 +1,10 @@
 "use client";
 
+import { CategoryBadge } from "@/components/ui/CategoryBadge";
 import { Container } from "@/components/ui/Container";
-import { CATEGORY_COLORS, CATEGORY_LABELS } from "@/constants/categories";
+import { ProjectHighlight } from "@/components/ui/ProjectHighlight";
+import { TechTags } from "@/components/ui/TechTags";
 import { projects } from "@/data/projects";
-import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Github } from "lucide-react";
 import Link from "next/link";
@@ -48,9 +49,7 @@ export function FeaturedProjects() {
                   <div className="flex items-start justify-between gap-2">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <span className={cn("text-xs px-1.5 py-0.5 rounded", CATEGORY_COLORS[project.category])}>
-                          {CATEGORY_LABELS[project.category]}
-                        </span>
+                        <CategoryBadge category={project.category} size="sm" />
                         <span className="text-xs text-muted-foreground">{project.year}</span>
                       </div>
                       <h3 className="font-medium text-sm">{project.title}</h3>
@@ -66,20 +65,14 @@ export function FeaturedProjects() {
                     {project.description}
                   </p>
                   {project.highlight && (
-                    <p className="text-xs text-foreground/80 font-medium">
-                      ✦ {project.highlight}
-                    </p>
+                    <ProjectHighlight highlight={project.highlight} />
                   )}
-                  <div className="flex flex-wrap gap-1.5 pt-1">
-                    {project.technologies.slice(0, 3).map((tech) => (
-                      <span
-                        key={tech}
-                        className="text-xs text-muted-foreground bg-muted px-1.5 py-0.5 rounded"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+                  <TechTags
+                    technologies={project.technologies}
+                    limit={3}
+                    size="sm"
+                    className="pt-1"
+                  />
                 </div>
               </motion.a>
             ))}

@@ -1,6 +1,8 @@
 "use client";
 
-import { CATEGORY_COLORS, CATEGORY_LABELS } from "@/constants/categories";
+import { CategoryBadge } from "@/components/ui/CategoryBadge";
+import { ProjectHighlight } from "@/components/ui/ProjectHighlight";
+import { TechTags } from "@/components/ui/TechTags";
 import { cn } from "@/lib/utils";
 import { TProject } from "@/types";
 import { motion } from "framer-motion";
@@ -36,9 +38,7 @@ export function ProjectCard({ project, index, large = false }: TProjectCardProps
                     Featured
                   </span>
                 )}
-                <span className={cn("text-xs px-2 py-0.5 rounded", CATEGORY_COLORS[project.category])}>
-                  {CATEGORY_LABELS[project.category]}
-                </span>
+                <CategoryBadge category={project.category} />
                 <span className="text-xs text-muted-foreground">{project.year}</span>
               </div>
               <h3 className={cn("font-medium", large && "text-lg")}>{project.title}</h3>
@@ -50,23 +50,15 @@ export function ProjectCard({ project, index, large = false }: TProjectCardProps
           </p>
 
           {project.highlight && (
-            <p className="text-xs text-foreground/80 font-medium">
-              ✦ {project.highlight}
-            </p>
+            <ProjectHighlight highlight={project.highlight} />
           )}
         </div>
 
         <div className={cn("flex flex-col gap-3", large && "md:items-end md:justify-between")}>
-          <div className={cn("flex flex-wrap gap-2", large && "md:flex-col md:items-end md:gap-1.5")}>
-            {project.technologies.map((tech) => (
-              <span
-                key={tech}
-                className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
+          <TechTags
+            technologies={project.technologies}
+            className={cn("gap-2", large && "md:flex-col md:items-end md:gap-1.5")}
+          />
 
           <div className="flex items-center gap-2 pt-2">
             {project.href && (
