@@ -1,14 +1,13 @@
 "use client";
 
+import { AnimatedCard } from "@/components/ui/AnimatedCard";
 import { Badge } from "@/components/ui/Badge";
+import { CategoryWithYear } from "@/components/ui/CategoryWithYear";
 import { ProjectHighlight } from "@/components/ui/ProjectHighlight";
 import { ProjectLinks } from "@/components/ui/ProjectLinks";
-import { CategoryWithYear } from "@/components/ui/CategoryWithYear";
 import { TechTags } from "@/components/ui/TechTags";
-import { FADE_IN, getFadeInTransition } from "@/constants/animations";
 import { cn } from "@/lib/utils";
 import { TProject } from "@/types";
-import { motion } from "framer-motion";
 
 type TProjectCardProps = {
   project: TProject;
@@ -18,16 +17,10 @@ type TProjectCardProps = {
 
 export function ProjectCard({ project, index, large = false }: TProjectCardProps) {
   return (
-    <motion.div
-      {...FADE_IN}
-      transition={getFadeInTransition(index)}
-      className={cn(
-        "group rounded-lg border bg-background p-6 transition-all duration-300 hover:shadow-sm hover:scale-[1.01]",
-        large && "md:col-span-2",
-        project.featured
-          ? "border-muted-foreground/30 hover:border-muted-foreground/50"
-          : "border-muted hover:border-muted-foreground/20"
-      )}
+    <AnimatedCard
+      index={index}
+      featured={project.featured}
+      large={large}
     >
       <div className={cn("flex flex-col h-full", large ? "md:flex-row md:gap-8" : "gap-3")}>
         <div className={cn("flex-1 space-y-3", large && "md:space-y-4")}>
@@ -58,6 +51,6 @@ export function ProjectCard({ project, index, large = false }: TProjectCardProps
           <ProjectLinks href={project.href} github={project.github} />
         </div>
       </div>
-    </motion.div>
+    </AnimatedCard>
   );
 }
