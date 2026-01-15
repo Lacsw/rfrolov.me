@@ -12,19 +12,21 @@ export function LanguageSwitcher() {
   const pathname = usePathname();
 
   const handleLocaleChange = (newLocale: TLocale) => {
-    router.replace(pathname, { locale: newLocale });
+    if (newLocale !== locale) {
+      router.replace(pathname, { locale: newLocale });
+    }
   };
 
   return (
-    <div className="flex items-center gap-1 text-sm">
+    <div className="flex items-center text-sm">
       {locales.map((loc) => (
         <button
           key={loc}
           onClick={() => handleLocaleChange(loc)}
           className={cn(
-            "px-2 py-1 rounded transition-colors cursor-pointer",
+            "px-1.5 py-1 cursor-pointer transition-colors duration-300",
             locale === loc
-              ? "text-foreground bg-muted"
+              ? "text-foreground"
               : "text-muted-foreground hover:text-foreground"
           )}
         >
