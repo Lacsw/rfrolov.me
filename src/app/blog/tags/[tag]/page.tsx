@@ -1,10 +1,7 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { ArrowLeft } from "lucide-react";
-
 import { BlogPostListItem } from "@/components/sections/Blog";
-import { Container } from "@/components/ui";
+import { BackLink, Container } from "@/components/ui";
 import { getAllTags, getPostsByTag } from "@/lib/blog";
 
 type TProps = {
@@ -31,13 +28,7 @@ export default async function TagPage({ params }: TProps) {
     <main className="pt-16">
       <section className="py-12 lg:py-16">
         <Container>
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:opacity-70 transition-opacity cursor-pointer mb-8"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to blog
-          </Link>
+          <BackLink href="/blog">Back to blog</BackLink>
 
           <header className="mb-8">
             <h1 className="text-2xl font-semibold tracking-tight mb-2">

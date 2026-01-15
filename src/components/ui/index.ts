@@ -1,4 +1,5 @@
 export { AnimatedCard } from "./AnimatedCard";
+export { BackLink } from "./BackLink";
 export { Badge } from "./Badge";
 export { Card } from "./Card";
 export { Container } from "./Container";

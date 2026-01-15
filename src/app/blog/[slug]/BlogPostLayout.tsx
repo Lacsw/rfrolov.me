@@ -2,19 +2,14 @@
 
 import { ReactNode } from "react";
 
-import Link from "next/link";
-
 import { motion } from "framer-motion";
-import { ArrowLeft, Clock } from "lucide-react";
+import { Clock } from "lucide-react";
 
 import { BlogTag, PostNavigation, TableOfContents } from "@/components/sections/Blog";
-import { Container, ReadingProgress } from "@/components/ui";
+import { BackLink, Container, ReadingProgress } from "@/components/ui";
 import { TAdjacentPosts } from "@/lib/blog";
 import { formatDate } from "@/lib/date";
 import { TBlogPostMeta, THeading } from "@/types";
-
-
-
 
 type TBlogPostLayoutProps = {
   post: TBlogPostMeta;
@@ -38,13 +33,7 @@ export function BlogPostLayout({ post, headings, adjacentPosts, children }: TBlo
               transition={{ duration: 0.5 }}
               className="max-w-2xl"
             >
-              <Link
-                href="/blog"
-                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:opacity-70 transition-opacity cursor-pointer mb-8"
-              >
-                <ArrowLeft className="h-4 w-4" />
-                Back to blog
-              </Link>
+              <BackLink href="/blog">Back to blog</BackLink>
 
               <header className="mb-8 space-y-4">
                 <div className="flex items-center gap-3 text-sm text-muted-foreground">

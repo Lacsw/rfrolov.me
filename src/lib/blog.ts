@@ -83,6 +83,26 @@ export function getAllTags(): string[] {
   return Array.from(tags).sort();
 }
 
+export type TTagWithCount = {
+  tag: string;
+  count: number;
+};
+
+export function getTagsWithCounts(): TTagWithCount[] {
+  const posts = getAllPosts();
+  const tagCounts = new Map<string, number>();
+
+  posts.forEach((post) => {
+    post.tags.forEach((tag) => {
+      tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
+    });
+  });
+
+  return Array.from(tagCounts.entries())
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => a.tag.localeCompare(b.tag));
+}
+
 export function getPostsByTag(tag: string): TBlogPostMeta[] {
   return getAllPosts().filter((post) =>
     post.tags.map((t) => t.toLowerCase()).includes(tag.toLowerCase())
