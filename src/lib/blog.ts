@@ -89,6 +89,25 @@ export function getPostsByTag(tag: string): TBlogPostMeta[] {
   );
 }
 
+export type TAdjacentPosts = {
+  previous: TBlogPostMeta | null;
+  next: TBlogPostMeta | null;
+};
+
+export function getAdjacentPosts(slug: string): TAdjacentPosts {
+  const posts = getAllPosts();
+  const currentIndex = posts.findIndex((post) => post.slug === slug);
+
+  if (currentIndex === -1) {
+    return { previous: null, next: null };
+  }
+
+  return {
+    previous: currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null,
+    next: currentIndex > 0 ? posts[currentIndex - 1] : null,
+  };
+}
+
 function slugify(text: string): string {
   return text
     .toLowerCase()

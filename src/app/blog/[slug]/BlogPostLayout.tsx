@@ -7,11 +7,12 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowLeft, Clock } from "lucide-react";
 
-import { TableOfContents } from "@/components/sections/Blog";
+import { PostNavigation, TableOfContents } from "@/components/sections/Blog";
 import { getTagColor } from "@/components/sections/Blog/constants";
 import { Container, ReadingProgress } from "@/components/ui";
 import { formatDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
+import { TAdjacentPosts } from "@/lib/blog";
 import { TBlogPostMeta, THeading } from "@/types";
 
 
@@ -20,10 +21,11 @@ import { TBlogPostMeta, THeading } from "@/types";
 type TBlogPostLayoutProps = {
   post: TBlogPostMeta;
   headings: THeading[];
+  adjacentPosts: TAdjacentPosts;
   children: ReactNode;
 };
 
-export function BlogPostLayout({ post, headings, children }: TBlogPostLayoutProps) {
+export function BlogPostLayout({ post, headings, adjacentPosts, children }: TBlogPostLayoutProps) {
   const formattedDate = formatDate(post.date, { month: "long" });
 
   return (
@@ -77,6 +79,11 @@ export function BlogPostLayout({ post, headings, children }: TBlogPostLayoutProp
               <hr className="border-muted mb-8" />
 
               <div className="prose-custom">{children}</div>
+
+              <PostNavigation
+                previous={adjacentPosts.previous}
+                next={adjacentPosts.next}
+              />
             </motion.article>
 
             {headings.length > 0 && (

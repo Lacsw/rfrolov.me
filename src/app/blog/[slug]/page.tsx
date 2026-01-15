@@ -5,7 +5,7 @@ import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 
 import { mdxComponents } from "@/components/sections/Blog";
-import { extractHeadings, getAllPosts, getPostBySlug } from "@/lib/blog";
+import { extractHeadings, getAdjacentPosts, getAllPosts, getPostBySlug } from "@/lib/blog";
 
 import { BlogPostLayout } from "./BlogPostLayout";
 
@@ -40,10 +40,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const { content, ...postMeta } = post;
   const headings = extractHeadings(content);
+  const adjacentPosts = getAdjacentPosts(slug);
 
   return (
     <main className="pt-16">
-      <BlogPostLayout post={postMeta} headings={headings}>
+      <BlogPostLayout post={postMeta} headings={headings} adjacentPosts={adjacentPosts}>
         <MDXRemote
           source={content}
           components={mdxComponents}
