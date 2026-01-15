@@ -5,7 +5,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";
 
-type TPostNavigationProps = {
+type TProps = {
   previous: TBlogPostMeta | null;
   next: TBlogPostMeta | null;
 };
@@ -51,7 +51,7 @@ function NavLink({ post, direction }: TNavLinkProps) {
   );
 }
 
-export function PostNavigation({ previous, next }: TPostNavigationProps) {
+export function PostNavigation({ previous, next }: TProps) {
   if (!previous && !next) {
     return null;
   }

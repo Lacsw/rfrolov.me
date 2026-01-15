@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 type TCalloutVariant = "note" | "tip" | "warning";
 
-type TCalloutProps = {
+type TProps = {
   variant?: TCalloutVariant;
   title?: string;
   children: ReactNode;
@@ -36,7 +36,7 @@ const variantConfig = {
   },
 };
 
-export function Callout({ variant = "note", title, children }: TCalloutProps) {
+export function Callout({ variant = "note", title, children }: TProps) {
   const config = variantConfig[variant];
   const Icon = config.icon;
 
