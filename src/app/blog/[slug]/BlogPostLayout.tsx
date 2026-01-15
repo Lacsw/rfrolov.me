@@ -7,12 +7,10 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowLeft, Clock } from "lucide-react";
 
-import { PostNavigation, TableOfContents } from "@/components/sections/Blog";
-import { getTagColor } from "@/components/sections/Blog/constants";
+import { BlogTag, PostNavigation, TableOfContents } from "@/components/sections/Blog";
 import { Container, ReadingProgress } from "@/components/ui";
-import { formatDate } from "@/lib/date";
-import { cn } from "@/lib/utils";
 import { TAdjacentPosts } from "@/lib/blog";
+import { formatDate } from "@/lib/date";
 import { TBlogPostMeta, THeading } from "@/types";
 
 
@@ -66,12 +64,7 @@ export function BlogPostLayout({ post, headings, adjacentPosts, children }: TBlo
 
                 <div className="flex flex-wrap gap-2">
                   {post.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className={cn("text-xs px-2 py-1 rounded", getTagColor(tag))}
-                    >
-                      {tag}
-                    </span>
+                    <BlogTag key={tag} tag={tag} />
                   ))}
                 </div>
               </header>
