@@ -2,15 +2,17 @@
 
 import { useEffect, useRef } from "react";
 
-import { useRouter } from "next/navigation";
-
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
-import { TerminalLine, TerminalInput, NavigationLinks, TerminalWindow } from "./components";
+import { useRouter } from "@/i18n/routing";
+
+import { NavigationLinks, TerminalInput, TerminalLine, TerminalWindow } from "./components";
 import { INITIAL_LINES, PROMPT } from "./constants";
-import { useBlinkingCursor, useTerminalTyping, useTerminalInput } from "./hooks";
+import { useBlinkingCursor, useTerminalInput, useTerminalTyping } from "./hooks";
 
 export function NotFoundTerminal() {
+  const t = useTranslations("notFound");
   const router = useRouter();
   const terminalRef = useRef<HTMLDivElement>(null);
   const showCursor = useBlinkingCursor();
@@ -98,7 +100,7 @@ export function NotFoundTerminal() {
       </TerminalWindow>
 
       <p className="text-center text-xs text-muted-foreground mt-4">
-        Press any link above or use keyboard navigation
+        {t("hint")}
       </p>
     </div>
   );

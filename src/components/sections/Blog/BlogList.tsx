@@ -1,19 +1,21 @@
 "use client";
 
-import Link from "next/link";
-
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 import { Container } from "@/components/ui";
+import { Link } from "@/i18n/routing";
 import { TBlogPostMeta } from "@/types";
 
 import { BlogPostCard } from "./components";
 
-type TBlogListProps = {
+type TProps = {
   posts: TBlogPostMeta[];
 };
 
-export function BlogList({ posts }: TBlogListProps) {
+export function BlogList({ posts }: TProps) {
+  const t = useTranslations("blog");
+
   if (posts.length === 0) {
     return null;
   }
@@ -29,13 +31,13 @@ export function BlogList({ posts }: TBlogListProps) {
         >
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-semibold tracking-tight">
-              Latest Posts
+              {t("latestPosts")}
             </h2>
             <Link
               href="/blog"
               className="text-sm text-muted-foreground hover:opacity-70 transition-opacity cursor-pointer"
             >
-              View all
+              {t("viewAll")}
             </Link>
           </div>
 

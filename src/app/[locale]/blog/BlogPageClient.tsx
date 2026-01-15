@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 import { BlogPostCard, BlogPostListItem } from "@/components/sections/Blog";
 import { Container, SectionHeader, ViewToggle } from "@/components/ui";
@@ -11,12 +12,13 @@ import { FADE_IN, FADE_IN_TRANSITION } from "@/constants";
 import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";
 
-type TBlogPageClientProps = {
+type TProps = {
   posts: TBlogPostMeta[];
   tags: string[];
 };
 
-export function BlogPageClient({ posts, tags }: TBlogPageClientProps) {
+export function BlogPageClient({ posts, tags }: TProps) {
+  const t = useTranslations("blog");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [view, setView] = useState<TViewMode>("grid");
 
@@ -38,8 +40,8 @@ export function BlogPageClient({ posts, tags }: TBlogPageClientProps) {
             <div className="flex items-start justify-between gap-4">
               <SectionHeader
                 as="h1"
-                description="Thoughts on development, design, and technology"
-                title="Blog"
+                description={t("description")}
+                title={t("title")}
               />
               <ViewToggle view={view} onViewChange={setView} />
             </div>
@@ -55,7 +57,7 @@ export function BlogPageClient({ posts, tags }: TBlogPageClientProps) {
                       : "bg-muted text-muted-foreground hover:opacity-70"
                   )}
                 >
-                  All
+                  {t("filters.all")}
                 </button>
                 {tags.map((tag) => (
                   <button
@@ -91,7 +93,7 @@ export function BlogPageClient({ posts, tags }: TBlogPageClientProps) {
             )
           ) : (
             <p className="text-muted-foreground text-center py-12">
-              No posts found.
+              {t("noPostsFound")}
             </p>
           )}
         </motion.div>

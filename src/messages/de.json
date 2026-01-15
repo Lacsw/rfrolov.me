@@ -1,0 +1,92 @@
+{
+  "common": {
+    "viewAll": "Alle anzeigen",
+    "backToBlog": "Zurück zum Blog"
+  },
+  "nav": {
+    "home": "Startseite",
+    "projects": "Projekte",
+    "blog": "Blog"
+  },
+  "hero": {
+    "greeting": "Hallo, mein Name ist",
+    "name": "Roman Frolov",
+    "role": "Frontend-Entwickler",
+    "description": "Ich entwickle außergewöhnliche digitale Erlebnisse mit modernen Webtechnologien. Fokussiert auf saubere, performante und barrierefreie Oberflächen."
+  },
+  "experience": {
+    "title": "Erfahrung",
+    "showMore": "{count} weitere anzeigen",
+    "showLess": "Weniger anzeigen",
+    "present": "Aktuell"
+  },
+  "projects": {
+    "title": "Projekte",
+    "description": "Eine Sammlung meiner Arbeiten",
+    "featuredTitle": "Ausgewählte Projekte",
+    "viewAll": "Alle anzeigen",
+    "featured": "Empfohlen",
+    "live": "Live",
+    "github": "GitHub",
+    "categories": {
+      "all": "Alle",
+      "personal": "Persönlich",
+      "work": "Arbeit",
+      "opensource": "Open Source"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Gedanken zu Entwicklung, Design und Technologie",
+    "latestPosts": "Neueste Beiträge",
+    "viewAll": "Alle anzeigen",
+    "allTags": "Alle Tags",
+    "browseByTopic": "Beiträge nach Thema durchsuchen",
+    "noPostsFound": "Keine Beiträge gefunden.",
+    "taggedWith": "Beiträge mit Tag \"{tag}\"",
+    "postsFound": "{count} {count, plural, one {Beitrag} other {Beiträge}} gefunden",
+    "filters": {
+      "all": "Alle"
+    },
+    "navigation": {
+      "previous": "Zurück",
+      "next": "Weiter"
+    },
+    "readingTime": {
+      "min": "{minutes} Min",
+      "minRead": "{minutes} Min Lesezeit"
+    }
+  },
+  "contact": {
+    "getInTouch": "Kontakt aufnehmen"
+  },
+  "notFound": {
+    "cdCommand": "$ cd /angeforderte-seite",
+    "cdError": "bash: cd: /angeforderte-seite: Datei oder Verzeichnis nicht gefunden",
+    "catCommand": "$ cat error.log",
+    "errorTitle": "Fehler 404: Seite nicht gefunden",
+    "errorDescription": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    "suggestCommand": "$ suggest --fix",
+    "availablePaths": "Verfügbare Pfade:",
+    "goHome": "zur Startseite",
+    "viewWork": "Arbeiten ansehen",
+    "hint": "Klicken Sie auf einen Link oben oder nutzen Sie die Tastaturnavigation"
+  },
+  "callout": {
+    "note": "Hinweis",
+    "tip": "Tipp",
+    "warning": "Warnung"
+  },
+  "copy": {
+    "copied": "Kopiert",
+    "copyCode": "Code kopieren"
+  },
+  "theme": {
+    "switchToLight": "Zum hellen Modus wechseln",
+    "switchToDark": "Zum dunklen Modus wechseln"
+  },
+  "metadata": {
+    "title": "Roman Frolov - Frontend-Entwickler",
+    "description": "Persönliche Website von Roman Frolov, einem Frontend-Entwickler spezialisiert auf React, TypeScript und moderne Webtechnologien."
+  }
+}

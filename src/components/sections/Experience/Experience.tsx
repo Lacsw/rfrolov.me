@@ -1,22 +1,29 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Container } from "@/components/ui";
-import { experiences } from "@/data/experience";
 import { useToggle } from "@/hooks";
 import { cn } from "@/lib/utils";
+import { TExperience } from "@/types";
 
 import { ExperienceCard } from "./components";
 import { EXPERIENCE_ANIMATION } from "./constants";
 
 const VISIBLE_COUNT = 3;
-const initialExperiences = experiences.slice(0, VISIBLE_COUNT);
-const hiddenExperiences = experiences.slice(VISIBLE_COUNT);
 
-export function Experience() {
+type TProps = {
+  experiences: TExperience[];
+};
+
+export function Experience({ experiences }: TProps) {
+  const t = useTranslations("experience");
   const [isExpanded, { toggle }] = useToggle();
+
+  const initialExperiences = experiences.slice(0, VISIBLE_COUNT);
+  const hiddenExperiences = experiences.slice(VISIBLE_COUNT);
   const hasMore = experiences.length > VISIBLE_COUNT;
 
   return (
@@ -28,7 +35,7 @@ export function Experience() {
           transition={{ duration: 0.5 }}
           className="space-y-6"
         >
-          <h2 className="text-lg font-semibold tracking-tight">Experience</h2>
+          <h2 className="text-lg font-semibold tracking-tight">{t("title")}</h2>
 
           <div>
             <motion.div
@@ -70,7 +77,7 @@ export function Experience() {
               onClick={toggle}
               className="flex items-center gap-1 text-sm text-muted-foreground hover:opacity-70 transition-opacity cursor-pointer"
             >
-              <span>{isExpanded ? "Show less" : `Show ${hiddenExperiences.length} more`}</span>
+              <span>{isExpanded ? t("showLess") : t("showMore", { count: hiddenExperiences.length })}</span>
               <ChevronDown
                 className={cn("h-4 w-4 transition-transform duration-200", isExpanded && "rotate-180")}
               />

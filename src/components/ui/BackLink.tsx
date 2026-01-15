@@ -1,9 +1,9 @@
-import Link from "next/link";
-
 import { ArrowLeft } from "lucide-react";
 
+import { Link } from "@/i18n/routing";
+
 type TProps = {
-  href: string;
+  href: "/blog" | "/projects" | "/";
   children: string;
 };
 

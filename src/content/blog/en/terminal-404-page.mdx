@@ -1,0 +1,83 @@
+---
+title: "Creating a Terminal-Style 404 Page"
+description: "How I built an interactive terminal emulator for handling 404 errors with style."
+date: "2025-01-10"
+tags: ["react", "typescript", "nextjs", "hooks"]
+featured: true
+---
+
+Error pages don't have to be boring. Instead of a simple "Page not found" message, I created an interactive terminal emulator that makes getting lost on my site a bit more fun.
+
+## The Concept
+
+The idea was simple: if developers spend their days in the terminal, why not make the 404 page feel like home? The terminal plays a startup sequence and then accepts `cd` commands with tab completion.
+
+## Key Features
+
+- **Typing animation** with realistic timing and random variance
+- **Blinking cursor** using a reusable `useToggle` hook
+- **Tab completion** for the `cd` command
+- **Keyboard shortcuts** (press 1 or 2 to navigate)
+- **Command execution** with success/error feedback
+
+## Architecture
+
+The terminal is built with a clean separation of concerns:
+
+```
+NotFound/
+├── NotFoundTerminal.tsx    # Main component
+├── components/
+│   ├── TerminalWindow.tsx  # Visual wrapper
+│   ├── TerminalLine.tsx    # Line renderer
+│   ├── TerminalInput.tsx   # Input with suggestions
+│   └── NavigationLinks.tsx # Quick navigation
+├── hooks/
+│   ├── useTerminalTyping.ts   # Typing animation
+│   ├── useBlinkingCursor.ts   # Cursor blink
+│   └── useTerminalInput.ts    # Command handling
+└── constants/
+    └── index.ts            # Configuration
+```
+
+Each hook handles a single responsibility, making the code maintainable and testable.
+
+## Blinking Cursor
+
+The cursor blink uses a reusable `useToggle` hook:
+
+```typescript
+export function useBlinkingCursor() {
+  const [showCursor, { toggle }] = useToggle(true);
+
+  useEffect(() => {
+    const interval = setInterval(toggle, CURSOR_BLINK_INTERVAL);
+    return () => clearInterval(interval);
+  }, [toggle]);
+
+  return showCursor;
+}
+```
+
+## Configuration
+
+All timing is configurable through constants:
+
+```typescript
+export const TYPING_SPEED = {
+  character: { min: 30, variance: 20 },
+  lineDelay: 300,
+  outputDelay: 150,
+  emptyLineDelay: 100,
+};
+
+export const CURSOR_BLINK_INTERVAL = 530;
+```
+
+## Try It Out
+
+Navigate to [/this-page-does-not-exist](/this-page-does-not-exist) to see it in action. Try typing `cd` and pressing Tab to autocomplete!
+
+## Conclusion
+
+Small details like a creative 404 page can make a portfolio memorable. The modular architecture with custom hooks keeps the code clean and each piece focused on doing one thing well.

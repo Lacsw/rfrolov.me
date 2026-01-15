@@ -3,16 +3,21 @@
 import { useState } from "react";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 import { Container, SectionHeader } from "@/components/ui";
 import { CATEGORY_FILTER_OPTIONS, FADE_IN, FADE_IN_TRANSITION } from "@/constants";
-import { projects } from "@/data/projects";
 import { cn } from "@/lib/utils";
-import { TProjectCategory } from "@/types";
+import { TProject, TProjectCategory } from "@/types";
 
 import { ProjectCard } from "./ProjectCard";
 
-export function Projects() {
+type TProps = {
+  projects: TProject[];
+};
+
+export function Projects({ projects }: TProps) {
+  const t = useTranslations("projects");
   const [filter, setFilter] = useState<TProjectCategory | "all">("all");
 
   const filteredProjects = filter === "all"
@@ -31,8 +36,8 @@ export function Projects() {
         >
           <div className="space-y-6">
             <SectionHeader
-              title="Projects"
-              description="A collection of things I've built"
+              title={t("title")}
+              description={t("description")}
               as="h1"
             />
 

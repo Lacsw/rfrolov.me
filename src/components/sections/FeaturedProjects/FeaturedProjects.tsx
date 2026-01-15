@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight, Github } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import {
   AnimatedCard,
@@ -12,11 +13,15 @@ import {
   TechTags,
 } from "@/components/ui";
 import { FADE_IN, FADE_IN_TRANSITION } from "@/constants";
-import { projects } from "@/data/projects";
+import { TProject } from "@/types";
 
-const featuredProjects = projects.filter((p) => p.featured);
+type TProps = {
+  projects: TProject[];
+};
 
-export function FeaturedProjects() {
+export function FeaturedProjects({ projects }: TProps) {
+  const t = useTranslations("projects");
+
   return (
     <section className="py-12 lg:py-16">
       <Container>
@@ -26,12 +31,12 @@ export function FeaturedProjects() {
           className="space-y-6"
         >
           <SectionHeader
-            title="Featured Projects"
-            link={{ href: "/projects", label: "View all" }}
+            title={t("featuredTitle")}
+            link={{ href: "/projects", label: t("viewAll") }}
           />
 
           <div className="grid gap-4 sm:grid-cols-2">
-            {featuredProjects.map((project, index) => (
+            {projects.map((project, index) => (
               <AnimatedCard
                 key={project.id}
                 index={index}

@@ -1,8 +1,17 @@
-import Link from "next/link";
+"use client";
 
-import { ROUTES } from "../constants";
+import { useTranslations } from "next-intl";
+
+import { Link } from "@/i18n/routing";
+
+const ROUTES = [
+  { path: "/", labelKey: "goHome" },
+  { path: "/projects", labelKey: "viewWork" },
+] as const;
 
 export function NavigationLinks() {
+  const t = useTranslations("notFound");
+
   return (
     <div className="flex flex-wrap gap-3 text-sm">
       {ROUTES.map((route) => (
@@ -13,7 +22,7 @@ export function NavigationLinks() {
         >
           <span className="text-green-500">→</span>
           <span>cd {route.path}</span>
-          <span className="text-muted-foreground">({route.label})</span>
+          <span className="text-muted-foreground">({t(route.labelKey)})</span>
         </Link>
       ))}
     </div>

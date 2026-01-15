@@ -1,10 +1,9 @@
 "use client";
 
-import Link from "next/link";
-
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
+import { Link } from "@/i18n/routing";
 import { formatDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";
@@ -12,12 +11,12 @@ import { TBlogPostMeta } from "@/types";
 import { BlogTags } from "./BlogTags";
 import { ReadingTime } from "./ReadingTime";
 
-type TBlogPostListItemProps = {
+type TProps = {
   post: TBlogPostMeta;
   index: number;
 };
 
-export function BlogPostListItem({ post, index }: TBlogPostListItemProps) {
+export function BlogPostListItem({ post, index }: TProps) {
   const formattedDate = formatDate(post.date);
 
   return (
@@ -27,7 +26,7 @@ export function BlogPostListItem({ post, index }: TBlogPostListItemProps) {
       transition={{ delay: index * 0.05, duration: 0.3 }}
     >
       <Link
-        href={`/blog/${post.slug}`}
+        href={`/blog/${post.slug}` as "/blog"}
         className={cn(
           "group flex items-center justify-between gap-4 py-4 border-b border-muted transition-colors",
           "hover:bg-muted/30 -mx-4 px-4 cursor-pointer"

@@ -1,13 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 import { SocialLink } from "@/components/ui";
 import { socialLinks } from "@/data/social-links";
 
-import { HERO_CONTENT, ANIMATION_CONFIG } from "../../constants";
+import { ANIMATION_CONFIG } from "../../constants";
 
 export function HeroContent() {
+  const t = useTranslations("hero");
   const { fadeIn } = ANIMATION_CONFIG;
 
   return (
@@ -17,18 +19,18 @@ export function HeroContent() {
       transition={{ duration: fadeIn.duration }}
       className="space-y-3 lg:max-w-lg"
     >
-      <p className="text-sm text-muted-foreground">{HERO_CONTENT.greeting}</p>
+      <p className="text-sm text-muted-foreground">{t("greeting")}</p>
 
       <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight">
-        {HERO_CONTENT.name}
+        {t("name")}
       </h1>
 
       <p className="text-lg sm:text-xl text-muted-foreground">
-        {HERO_CONTENT.role}
+        {t("role")}
       </p>
 
       <p className="text-sm text-muted-foreground leading-relaxed">
-        {HERO_CONTENT.description}
+        {t("description")}
       </p>
 
       <motion.div

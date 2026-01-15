@@ -1,21 +1,24 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import { Container, ThemeToggle } from "@/components/ui";
 import { useScrolled } from "@/hooks";
+import { Link, usePathname } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
-const navLinks = [
-  { name: "Home", href: "/" },
-  { name: "Projects", href: "/projects" },
-  { name: "Blog", href: "/blog" },
-];
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 export function Navbar() {
+  const t = useTranslations("nav");
   const pathname = usePathname();
   const scrolled = useScrolled(50);
+
+  const navLinks = [
+    { name: t("home"), href: "/" as const },
+    { name: t("projects"), href: "/projects" as const },
+    { name: t("blog"), href: "/blog" as const },
+  ];
 
   return (
     <header
@@ -35,7 +38,7 @@ export function Navbar() {
           <div className="flex items-center gap-6">
             <ul className="flex items-center gap-8">
               {navLinks.map((link) => (
-                <li key={link.name}>
+                <li key={link.href}>
                   <Link
                     href={link.href}
                     className={cn(
@@ -50,6 +53,7 @@ export function Navbar() {
                 </li>
               ))}
             </ul>
+            <LanguageSwitcher />
             <ThemeToggle />
           </div>
         </nav>

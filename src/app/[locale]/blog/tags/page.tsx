@@ -1,26 +1,31 @@
-import Link from "next/link";
+import { getLocale, getTranslations } from "next-intl/server";
 
 import { getTagColor } from "@/components/sections/Blog/constants";
 import { BackLink, Container } from "@/components/ui";
+import { TLocale } from "@/i18n/config";
+import { Link } from "@/i18n/routing";
 import { getTagsWithCounts } from "@/lib/blog";
 import { getTagUrl } from "@/lib/urls";
 import { cn } from "@/lib/utils";
 
-export default function TagsPage() {
-  const tagsWithCounts = getTagsWithCounts();
+export default async function TagsPage() {
+  const locale = (await getLocale()) as TLocale;
+  const t = await getTranslations("blog");
+  const tCommon = await getTranslations("common");
+  const tagsWithCounts = getTagsWithCounts(locale);
 
   return (
     <main className="pt-16">
       <section className="py-12 lg:py-16">
         <Container>
-          <BackLink href="/blog">Back to blog</BackLink>
+          <BackLink href="/blog">{tCommon("backToBlog")}</BackLink>
 
           <header className="mb-8">
             <h1 className="text-2xl font-semibold tracking-tight mb-2">
-              All Tags
+              {t("allTags")}
             </h1>
             <p className="text-muted-foreground">
-              Browse posts by topic
+              {t("browseByTopic")}
             </p>
           </header>
 

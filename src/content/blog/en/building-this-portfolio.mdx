@@ -1,0 +1,70 @@
+---
+title: "Building My Developer Portfolio with Next.js 15"
+description: "A deep dive into the tech stack and design decisions behind this portfolio website."
+date: "2025-01-14"
+tags: ["nextjs", "typescript", "tailwind", "portfolio"]
+featured: true
+---
+
+Building a developer portfolio is one of those projects that seems simple on the surface but offers endless opportunities for learning and experimentation. Here's how I approached building mine.
+
+## The Tech Stack
+
+I chose a modern stack that balances developer experience with performance:
+
+- **Next.js 15** with App Router for the framework
+- **TypeScript** for type safety
+- **Tailwind CSS v4** for styling
+- **Framer Motion** for animations
+- **MDX** for blog content
+
+<Callout variant="tip">
+  MDX lets you use React components directly in your markdown - perfect for interactive code demos and custom UI elements.
+</Callout>
+
+## Design Philosophy
+
+The design follows a minimalist approach with a monospace aesthetic using JetBrains Mono throughout. Key principles:
+
+1. **Simplicity first** - Clean layouts that let the content shine
+2. **Subtle animations** - Framer Motion for smooth transitions without being distracting
+3. **Consistent spacing** - Using Tailwind's spacing scale for visual rhythm
+
+## Project Structure
+
+I organized the codebase using a feature-based structure:
+
+```
+src/
+├── app/           # Next.js App Router pages
+├── components/
+│   ├── layout/    # Navbar, Footer
+│   ├── sections/  # Page sections
+│   └── ui/        # Reusable components
+├── content/       # MDX blog posts
+├── data/          # Static data files
+├── lib/           # Utilities
+└── types/         # TypeScript types
+```
+
+<Callout variant="note">
+  This structure isn't set in stone - adapt it to your project's needs. The key is consistency.
+</Callout>
+
+## What I Learned
+
+Building this portfolio reinforced several important concepts:
+
+- <mark>Type-first development</mark> pays off in maintainability
+- **Component composition** makes complex UIs manageable
+- **Static generation** in Next.js is incredibly powerful for content sites
+
+## What's Next
+
+I plan to continue iterating on this portfolio, adding:
+
+- More blog posts about technical topics
+- Interactive demos and code playgrounds
+- Performance optimizations
+
+Thanks for reading! Feel free to explore the [source code on GitHub](https://github.com/Lacsw/rfrolov.me).

@@ -1,24 +1,31 @@
 import { notFound } from "next/navigation";
 
+import { getLocale, getTranslations } from "next-intl/server";
+
 import { BlogPostListItem } from "@/components/sections/Blog";
 import { BackLink, Container } from "@/components/ui";
+import { locales, TLocale } from "@/i18n/config";
 import { getAllTags, getPostsByTag } from "@/lib/blog";
 
 type TProps = {
-  params: Promise<{ tag: string }>;
+  params: Promise<{ tag: string; locale: string }>;
 };
 
-export async function generateStaticParams() {
-  const tags = getAllTags();
-
-  return tags.map((tag) => ({
-    tag: tag.toLowerCase(),
-  }));
+export function generateStaticParams() {
+  return locales.flatMap((locale) =>
+    getAllTags(locale).map((tag) => ({
+      locale,
+      tag: tag.toLowerCase(),
+    }))
+  );
 }
 
 export default async function TagPage({ params }: TProps) {
   const { tag } = await params;
-  const posts = getPostsByTag(tag);
+  const locale = (await getLocale()) as TLocale;
+  const t = await getTranslations("blog");
+  const tCommon = await getTranslations("common");
+  const posts = getPostsByTag(tag, locale);
 
   if (posts.length === 0) {
     notFound();
@@ -28,14 +35,14 @@ export default async function TagPage({ params }: TProps) {
     <main className="pt-16">
       <section className="py-12 lg:py-16">
         <Container>
-          <BackLink href="/blog">Back to blog</BackLink>
+          <BackLink href="/blog">{tCommon("backToBlog")}</BackLink>
 
           <header className="mb-8">
             <h1 className="text-2xl font-semibold tracking-tight mb-2">
-              Posts tagged with &ldquo;{tag}&rdquo;
+              {t("taggedWith", { tag })}
             </h1>
             <p className="text-muted-foreground">
-              {posts.length} {posts.length === 1 ? "post" : "posts"} found
+              {t("postsFound", { count: posts.length })}
             </p>
           </header>
 

@@ -1,54 +1,9 @@
-import type { Metadata } from "next";
+import type { ReactNode } from "react";
 
-import { JetBrains_Mono } from "next/font/google";
-
-import { Navbar } from "@/components/layout/Navbar";
-import { ThemeProvider } from "@/components/providers";
-import "./globals.css";
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
-});
-
-export const metadata: Metadata = {
-  title: "Roman Frolov - Frontend Developer",
-  description:
-    "Personal website of Roman Frolov, a frontend developer specializing in React, TypeScript, and modern web technologies.",
-  keywords: ["frontend developer", "React", "TypeScript", "web development"],
-  authors: [{ name: "Roman Frolov" }],
-  openGraph: {
-    title: "Roman Frolov - Frontend Developer",
-    description: "Personal website of Roman Frolov",
-    url: "https://rfrolov.me",
-    siteName: "Roman Frolov",
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Roman Frolov - Frontend Developer",
-    description: "Personal website of Roman Frolov",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
+type TProps = {
+  children: ReactNode;
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en" className={jetbrainsMono.variable} suppressHydrationWarning>
-      <body className="min-h-screen bg-background font-mono antialiased" suppressHydrationWarning>
-        <ThemeProvider>
-          <Navbar />
-          {children}
-        </ThemeProvider>
-      </body>
-    </html>
-  );
+export default function RootLayout({ children }: TProps) {
+  return children;
 }

@@ -1,0 +1,92 @@
+{
+  "common": {
+    "viewAll": "View all",
+    "backToBlog": "Back to blog"
+  },
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "blog": "Blog"
+  },
+  "hero": {
+    "greeting": "Hi, my name is",
+    "name": "Roman Frolov",
+    "role": "Frontend Developer",
+    "description": "I build exceptional digital experiences with modern web technologies. Focused on creating clean, performant, and accessible interfaces."
+  },
+  "experience": {
+    "title": "Experience",
+    "showMore": "Show {count} more",
+    "showLess": "Show less",
+    "present": "Present"
+  },
+  "projects": {
+    "title": "Projects",
+    "description": "A collection of things I've built",
+    "featuredTitle": "Featured Projects",
+    "viewAll": "View all",
+    "featured": "Featured",
+    "live": "Live",
+    "github": "GitHub",
+    "categories": {
+      "all": "All",
+      "personal": "Personal",
+      "work": "Work",
+      "opensource": "Open Source"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Thoughts on development, design, and technology",
+    "latestPosts": "Latest Posts",
+    "viewAll": "View all",
+    "allTags": "All Tags",
+    "browseByTopic": "Browse posts by topic",
+    "noPostsFound": "No posts found.",
+    "taggedWith": "Posts tagged with \"{tag}\"",
+    "postsFound": "{count} {count, plural, one {post} other {posts}} found",
+    "filters": {
+      "all": "All"
+    },
+    "navigation": {
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "readingTime": {
+      "min": "{minutes} min",
+      "minRead": "{minutes} min read"
+    }
+  },
+  "contact": {
+    "getInTouch": "Get in touch"
+  },
+  "notFound": {
+    "cdCommand": "$ cd /requested-page",
+    "cdError": "bash: cd: /requested-page: No such file or directory",
+    "catCommand": "$ cat error.log",
+    "errorTitle": "Error 404: Page not found",
+    "errorDescription": "The page you're looking for doesn't exist or has been moved.",
+    "suggestCommand": "$ suggest --fix",
+    "availablePaths": "Available paths:",
+    "goHome": "go home",
+    "viewWork": "view work",
+    "hint": "Press any link above or use keyboard navigation"
+  },
+  "callout": {
+    "note": "Note",
+    "tip": "Tip",
+    "warning": "Warning"
+  },
+  "copy": {
+    "copied": "Copied",
+    "copyCode": "Copy code"
+  },
+  "theme": {
+    "switchToLight": "Switch to light mode",
+    "switchToDark": "Switch to dark mode"
+  },
+  "metadata": {
+    "title": "Roman Frolov - Frontend Developer",
+    "description": "Personal website of Roman Frolov, a frontend developer specializing in React, TypeScript, and modern web technologies."
+  }
+}

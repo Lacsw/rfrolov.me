@@ -4,21 +4,26 @@ import path from "path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 
+import { TLocale } from "@/i18n/config";
 import { TBlogPost, TBlogPostMeta, THeading } from "@/types";
 
-const BLOG_DIR = path.join(process.cwd(), "src/content/blog");
+function getBlogDir(locale: TLocale) {
+  return path.join(process.cwd(), "src/content/blog", locale);
+}
 
-export function getAllPosts(): TBlogPostMeta[] {
-  if (!fs.existsSync(BLOG_DIR)) {
+export function getAllPosts(locale: TLocale): TBlogPostMeta[] {
+  const blogDir = getBlogDir(locale);
+
+  if (!fs.existsSync(blogDir)) {
     return [];
   }
 
-  const files = fs.readdirSync(BLOG_DIR).filter((file) => file.endsWith(".mdx"));
+  const files = fs.readdirSync(blogDir).filter((file) => file.endsWith(".mdx"));
 
   const posts = files
     .map((file) => {
       const slug = file.replace(/\.mdx$/, "");
-      const filePath = path.join(BLOG_DIR, file);
+      const filePath = path.join(blogDir, file);
       const fileContent = fs.readFileSync(filePath, "utf-8");
       const { data, content } = matter(fileContent);
 
@@ -37,8 +42,8 @@ export function getAllPosts(): TBlogPostMeta[] {
   return posts;
 }
 
-export function getPostBySlug(slug: string): TBlogPost | null {
-  const filePath = path.join(BLOG_DIR, `${slug}.mdx`);
+export function getPostBySlug(slug: string, locale: TLocale): TBlogPost | null {
+  const filePath = path.join(getBlogDir(locale), `${slug}.mdx`);
 
   if (!fs.existsSync(filePath)) {
     return null;
@@ -59,8 +64,8 @@ export function getPostBySlug(slug: string): TBlogPost | null {
   };
 }
 
-export function getFeaturedPosts(limit = 3): TBlogPostMeta[] {
-  const posts = getAllPosts();
+export function getFeaturedPosts(locale: TLocale, limit = 3): TBlogPostMeta[] {
+  const posts = getAllPosts(locale);
   const featured = posts.filter((post) => post.featured);
 
   if (featured.length >= limit) {
@@ -72,8 +77,8 @@ export function getFeaturedPosts(limit = 3): TBlogPostMeta[] {
   return [...featured, ...remaining].slice(0, limit);
 }
 
-export function getAllTags(): string[] {
-  const posts = getAllPosts();
+export function getAllTags(locale: TLocale): string[] {
+  const posts = getAllPosts(locale);
   const tags = new Set<string>();
 
   posts.forEach((post) => {
@@ -88,8 +93,8 @@ export type TTagWithCount = {
   count: number;
 };
 
-export function getTagsWithCounts(): TTagWithCount[] {
-  const posts = getAllPosts();
+export function getTagsWithCounts(locale: TLocale): TTagWithCount[] {
+  const posts = getAllPosts(locale);
   const tagCounts = new Map<string, number>();
 
   posts.forEach((post) => {
@@ -103,8 +108,8 @@ export function getTagsWithCounts(): TTagWithCount[] {
     .sort((a, b) => a.tag.localeCompare(b.tag));
 }
 
-export function getPostsByTag(tag: string): TBlogPostMeta[] {
-  return getAllPosts().filter((post) =>
+export function getPostsByTag(tag: string, locale: TLocale): TBlogPostMeta[] {
+  return getAllPosts(locale).filter((post) =>
     post.tags.map((t) => t.toLowerCase()).includes(tag.toLowerCase())
   );
 }
@@ -114,8 +119,8 @@ export type TAdjacentPosts = {
   next: TBlogPostMeta | null;
 };
 
-export function getAdjacentPosts(slug: string): TAdjacentPosts {
-  const posts = getAllPosts();
+export function getAdjacentPosts(slug: string, locale: TLocale): TAdjacentPosts {
+  const posts = getAllPosts(locale);
   const currentIndex = posts.findIndex((post) => post.slug === slug);
 
   if (currentIndex === -1) {

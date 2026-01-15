@@ -1,7 +1,9 @@
-import Link from "next/link";
+"use client";
 
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
+import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";
 
@@ -13,14 +15,15 @@ type TProps = {
 type TNavLinkProps = {
   post: TBlogPostMeta;
   direction: "previous" | "next";
+  label: string;
 };
 
-function NavLink({ post, direction }: TNavLinkProps) {
+function NavLink({ post, direction, label }: TNavLinkProps) {
   const isPrevious = direction === "previous";
 
   return (
     <Link
-      href={`/blog/${post.slug}`}
+      href={`/blog/${post.slug}` as "/blog"}
       className={cn(
         "group flex flex-col gap-2 p-4 rounded-lg border border-muted hover:border-muted-foreground/30 transition-colors cursor-pointer",
         isPrevious ? "items-start" : "items-end"
@@ -37,7 +40,7 @@ function NavLink({ post, direction }: TNavLinkProps) {
         ) : (
           <ArrowRight className="size-3 group-hover:translate-x-1 transition-transform" />
         )}
-        {isPrevious ? "Previous" : "Next"}
+        {label}
       </span>
       <span
         className={cn(
@@ -52,6 +55,8 @@ function NavLink({ post, direction }: TNavLinkProps) {
 }
 
 export function PostNavigation({ previous, next }: TProps) {
+  const t = useTranslations("blog.navigation");
+
   if (!previous && !next) {
     return null;
   }
@@ -59,8 +64,14 @@ export function PostNavigation({ previous, next }: TProps) {
   return (
     <nav className="mt-12 pt-8 border-t border-muted">
       <div className="grid grid-cols-2 gap-4">
-        <div>{previous && <NavLink post={previous} direction="previous" />}</div>
-        <div>{next && <NavLink post={next} direction="next" />}</div>
+        <div>
+          {previous && (
+            <NavLink post={previous} direction="previous" label={t("previous")} />
+          )}
+        </div>
+        <div>
+          {next && <NavLink post={next} direction="next" label={t("next")} />}
+        </div>
       </div>
     </nav>
   );

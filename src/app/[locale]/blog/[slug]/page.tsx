@@ -1,25 +1,27 @@
 import { notFound } from "next/navigation";
 
+import { getLocale } from "next-intl/server";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 
 import { mdxComponents } from "@/components/sections/Blog";
+import { locales, TLocale } from "@/i18n/config";
 import { extractHeadings, getAdjacentPosts, getAllPosts, getPostBySlug } from "@/lib/blog";
 
 import { BlogPostLayout } from "./BlogPostLayout";
 
-
-type BlogPostPageProps = {
-  params: Promise<{ slug: string }>;
+type TProps = {
+  params: Promise<{ slug: string; locale: string }>;
 };
 
-export async function generateStaticParams() {
-  const posts = getAllPosts();
-
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+export function generateStaticParams() {
+  return locales.flatMap((locale) =>
+    getAllPosts(locale).map((post) => ({
+      locale,
+      slug: post.slug,
+    }))
+  );
 }
 
 const rehypePrettyCodeOptions = {
@@ -30,9 +32,10 @@ const rehypePrettyCodeOptions = {
   keepBackground: false,
 };
 
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
+export default async function BlogPostPage({ params }: TProps) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const locale = (await getLocale()) as TLocale;
+  const post = getPostBySlug(slug, locale);
 
   if (!post) {
     notFound();
@@ -40,7 +43,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const { content, ...postMeta } = post;
   const headings = extractHeadings(content);
-  const adjacentPosts = getAdjacentPosts(slug);
+  const adjacentPosts = getAdjacentPosts(slug, locale);
 
   return (
     <main className="pt-16">

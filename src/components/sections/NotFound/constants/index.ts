@@ -1,23 +1,13 @@
-export type TerminalLineType = "command" | "error" | "output" | "empty" | "success";
+export type TTerminalLineType = "command" | "error" | "output" | "empty" | "success";
 
-export type TerminalLine = {
-  type: TerminalLineType;
+export type TTerminalLine = {
+  type: TTerminalLineType;
   text: string;
-};
-
-export type Route = {
-  path: string;
-  label: string;
 };
 
 export const PROMPT = "$ ";
 
-export const ROUTES: Route[] = [
-  { path: "/", label: "go home" },
-  { path: "/projects", label: "view work" },
-];
-
-export const INITIAL_LINES: TerminalLine[] = [
+export const INITIAL_LINES: TTerminalLine[] = [
   { type: "command", text: "$ cd /requested-page" },
   { type: "error", text: "bash: cd: /requested-page: No such file or directory" },
   { type: "empty", text: "" },

@@ -1,13 +1,15 @@
-import { useState, useEffect, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/routing";
 
-import { ROUTES, type TerminalLine } from "../constants";
+import { type TTerminalLine } from "../constants";
+
+const ROUTES = ["/", "/projects"];
 
 export function useTerminalInput() {
   const [inputValue, setInputValue] = useState("");
   const [suggestion, setSuggestion] = useState("");
-  const [commandResult, setCommandResult] = useState<TerminalLine | null>(null);
+  const [commandResult, setCommandResult] = useState<TTerminalLine | null>(null);
   const router = useRouter();
 
   // Update suggestion based on input
@@ -33,9 +35,9 @@ export function useTerminalInput() {
     if (cdMatch) {
       const pathInput = cdMatch[1];
 
-      for (const route of ROUTES) {
-        if (route.path.startsWith(pathInput) && route.path !== pathInput) {
-          setSuggestion(route.path.slice(pathInput.length));
+      for (const path of ROUTES) {
+        if (path.startsWith(pathInput) && path !== pathInput) {
+          setSuggestion(path.slice(pathInput.length));
 
           return;
         }
@@ -56,11 +58,11 @@ export function useTerminalInput() {
 
       if (cdMatch) {
         const path = cdMatch[1];
-        const matchedRoute = ROUTES.find((r) => r.path === path);
+        const isValidPath = ROUTES.includes(path);
 
-        if (matchedRoute) {
-          setCommandResult({ type: "success", text: `Navigating to ${matchedRoute.path}...` });
-          setTimeout(() => router.push(matchedRoute.path), 500);
+        if (isValidPath) {
+          setCommandResult({ type: "success", text: `Navigating to ${path}...` });
+          setTimeout(() => router.push(path as "/" | "/projects"), 500);
         } else {
           setCommandResult({ type: "error", text: `bash: cd: ${path}: No such file or directory` });
         }

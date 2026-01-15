@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-import { INITIAL_LINES, TYPING_SPEED, type TerminalLine } from "../constants";
+import { INITIAL_LINES, TYPING_SPEED, type TTerminalLine } from "../constants";
 
 export function useTerminalTyping() {
-  const [lines, setLines] = useState<TerminalLine[]>([]);
+  const [lines, setLines] = useState<TTerminalLine[]>([]);
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
   const [isTypingComplete, setIsTypingComplete] = useState(false);

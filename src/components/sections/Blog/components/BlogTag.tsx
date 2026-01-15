@@ -1,5 +1,4 @@
-import Link from "next/link";
-
+import { Link } from "@/i18n/routing";
 import { getTagUrl } from "@/lib/urls";
 import { cn } from "@/lib/utils";
 
@@ -21,7 +20,7 @@ export function BlogTag({ tag, size = "md", clickable = true }: TProps) {
 
   if (clickable) {
     return (
-      <Link href={getTagUrl(tag)} className={className}>
+      <Link href={getTagUrl(tag) as "/blog"} className={className}>
         {tag}
       </Link>
     );
