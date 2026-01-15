@@ -1,70 +1,70 @@
 ---
-title: "Building My Developer Portfolio with Next.js 15"
-description: "A deep dive into the tech stack and design decisions behind this portfolio website."
+title: "Mein Entwickler-Portfolio mit Next.js 15 erstellen"
+description: "Ein tiefer Einblick in den Tech-Stack und die Design-Entscheidungen hinter dieser Portfolio-Website."
 date: "2025-01-14"
 tags: ["nextjs", "typescript", "tailwind", "portfolio"]
 featured: true
 ---
 
-Building a developer portfolio is one of those projects that seems simple on the surface but offers endless opportunities for learning and experimentation. Here's how I approached building mine.
+Ein Entwickler-Portfolio zu erstellen ist eines dieser Projekte, die oberflächlich einfach erscheinen, aber endlose Möglichkeiten zum Lernen und Experimentieren bieten. So bin ich beim Aufbau meines Portfolios vorgegangen.
 
-## The Tech Stack
+## Der Tech-Stack
 
-I chose a modern stack that balances developer experience with performance:
+Ich habe einen modernen Stack gewählt, der Entwicklererfahrung mit Performance in Einklang bringt:
 
-- **Next.js 15** with App Router for the framework
-- **TypeScript** for type safety
-- **Tailwind CSS v4** for styling
-- **Framer Motion** for animations
-- **MDX** for blog content
+- **Next.js 15** mit App Router als Framework
+- **TypeScript** für Typsicherheit
+- **Tailwind CSS v4** für das Styling
+- **Framer Motion** für Animationen
+- **MDX** für Blog-Inhalte
 
 <Callout variant="tip">
-  MDX lets you use React components directly in your markdown - perfect for interactive code demos and custom UI elements.
+  MDX ermöglicht die direkte Verwendung von React-Komponenten in Markdown - perfekt für interaktive Code-Demos und benutzerdefinierte UI-Elemente.
 </Callout>
 
-## Design Philosophy
+## Design-Philosophie
 
-The design follows a minimalist approach with a monospace aesthetic using JetBrains Mono throughout. Key principles:
+Das Design folgt einem minimalistischen Ansatz mit einer Monospace-Ästhetik unter Verwendung von JetBrains Mono durchgehend. Wichtige Prinzipien:
 
-1. **Simplicity first** - Clean layouts that let the content shine
-2. **Subtle animations** - Framer Motion for smooth transitions without being distracting
-3. **Consistent spacing** - Using Tailwind's spacing scale for visual rhythm
+1. **Einfachheit zuerst** - Klare Layouts, die den Inhalt in den Vordergrund stellen
+2. **Dezente Animationen** - Framer Motion für sanfte Übergänge ohne abzulenken
+3. **Konsistente Abstände** - Nutzung der Tailwind-Abstandsskala für visuellen Rhythmus
 
-## Project Structure
+## Projektstruktur
 
-I organized the codebase using a feature-based structure:
+Ich habe die Codebasis mit einer Feature-basierten Struktur organisiert:
 
 ```
 src/
-├── app/           # Next.js App Router pages
+├── app/           # Next.js App Router Seiten
 ├── components/
 │   ├── layout/    # Navbar, Footer
-│   ├── sections/  # Page sections
-│   └── ui/        # Reusable components
-├── content/       # MDX blog posts
-├── data/          # Static data files
-├── lib/           # Utilities
-└── types/         # TypeScript types
+│   ├── sections/  # Seitenbereiche
+│   └── ui/        # Wiederverwendbare Komponenten
+├── content/       # MDX Blog-Beiträge
+├── data/          # Statische Datendateien
+├── lib/           # Hilfsfunktionen
+└── types/         # TypeScript-Typen
 ```
 
 <Callout variant="note">
-  This structure isn't set in stone - adapt it to your project's needs. The key is consistency.
+  Diese Struktur ist nicht in Stein gemeißelt - passe sie an die Bedürfnisse deines Projekts an. Der Schlüssel ist Konsistenz.
 </Callout>
 
-## What I Learned
+## Was ich gelernt habe
 
-Building this portfolio reinforced several important concepts:
+Der Aufbau dieses Portfolios hat mehrere wichtige Konzepte verstärkt:
 
-- <mark>Type-first development</mark> pays off in maintainability
-- **Component composition** makes complex UIs manageable
-- **Static generation** in Next.js is incredibly powerful for content sites
+- <mark>Type-first Entwicklung</mark> zahlt sich in der Wartbarkeit aus
+- **Komponenten-Komposition** macht komplexe UIs handhabbar
+- **Statische Generierung** in Next.js ist unglaublich leistungsstark für Content-Seiten
 
-## What's Next
+## Was kommt als Nächstes
 
-I plan to continue iterating on this portfolio, adding:
+Ich plane, dieses Portfolio weiter zu verbessern und hinzuzufügen:
 
-- More blog posts about technical topics
-- Interactive demos and code playgrounds
-- Performance optimizations
+- Mehr Blog-Beiträge zu technischen Themen
+- Interaktive Demos und Code-Playgrounds
+- Performance-Optimierungen
 
-Thanks for reading! Feel free to explore the [source code on GitHub](https://github.com/Lacsw/rfrolov.me).
+Danke fürs Lesen! Schau dir gerne den [Quellcode auf GitHub](https://github.com/Lacsw/rfrolov.me) an.

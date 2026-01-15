@@ -1,50 +1,50 @@
 ---
-title: "Creating a Terminal-Style 404 Page"
-description: "How I built an interactive terminal emulator for handling 404 errors with style."
+title: "Eine Terminal-404-Seite erstellen"
+description: "Wie ich einen interaktiven Terminal-Emulator für die stilvolle Behandlung von 404-Fehlern gebaut habe."
 date: "2025-01-10"
 tags: ["react", "typescript", "nextjs", "hooks"]
 featured: true
 ---
 
-Error pages don't have to be boring. Instead of a simple "Page not found" message, I created an interactive terminal emulator that makes getting lost on my site a bit more fun.
+Fehlerseiten müssen nicht langweilig sein. Anstatt einer einfachen "Seite nicht gefunden"-Nachricht habe ich einen interaktiven Terminal-Emulator erstellt, der das Verirren auf meiner Seite etwas unterhaltsamer macht.
 
-## The Concept
+## Das Konzept
 
-The idea was simple: if developers spend their days in the terminal, why not make the 404 page feel like home? The terminal plays a startup sequence and then accepts `cd` commands with tab completion.
+Die Idee war einfach: Wenn Entwickler ihre Tage im Terminal verbringen, warum nicht die 404-Seite wie zu Hause wirken lassen? Das Terminal spielt eine Startsequenz ab und akzeptiert dann `cd`-Befehle mit Tab-Vervollständigung.
 
-## Key Features
+## Hauptfunktionen
 
-- **Typing animation** with realistic timing and random variance
-- **Blinking cursor** using a reusable `useToggle` hook
-- **Tab completion** for the `cd` command
-- **Keyboard shortcuts** (press 1 or 2 to navigate)
-- **Command execution** with success/error feedback
+- **Tipp-Animation** mit realistischem Timing und zufälliger Varianz
+- **Blinkender Cursor** mit einem wiederverwendbaren `useToggle` Hook
+- **Tab-Vervollständigung** für den `cd`-Befehl
+- **Tastaturkürzel** (drücke 1 oder 2 zum Navigieren)
+- **Befehlsausführung** mit Erfolgs-/Fehler-Feedback
 
-## Architecture
+## Architektur
 
-The terminal is built with a clean separation of concerns:
+Das Terminal ist mit einer sauberen Trennung der Zuständigkeiten aufgebaut:
 
 ```
 NotFound/
-├── NotFoundTerminal.tsx    # Main component
+├── NotFoundTerminal.tsx    # Hauptkomponente
 ├── components/
-│   ├── TerminalWindow.tsx  # Visual wrapper
-│   ├── TerminalLine.tsx    # Line renderer
-│   ├── TerminalInput.tsx   # Input with suggestions
-│   └── NavigationLinks.tsx # Quick navigation
+│   ├── TerminalWindow.tsx  # Visueller Wrapper
+│   ├── TerminalLine.tsx    # Zeilen-Renderer
+│   ├── TerminalInput.tsx   # Eingabe mit Vorschlägen
+│   └── NavigationLinks.tsx # Schnellnavigation
 ├── hooks/
-│   ├── useTerminalTyping.ts   # Typing animation
-│   ├── useBlinkingCursor.ts   # Cursor blink
-│   └── useTerminalInput.ts    # Command handling
+│   ├── useTerminalTyping.ts   # Tipp-Animation
+│   ├── useBlinkingCursor.ts   # Cursor-Blinken
+│   └── useTerminalInput.ts    # Befehlsverarbeitung
 └── constants/
-    └── index.ts            # Configuration
+    └── index.ts            # Konfiguration
 ```
 
-Each hook handles a single responsibility, making the code maintainable and testable.
+Jeder Hook ist für eine einzelne Aufgabe zuständig, was den Code wartbar und testbar macht.
 
-## Blinking Cursor
+## Blinkender Cursor
 
-The cursor blink uses a reusable `useToggle` hook:
+Das Cursor-Blinken verwendet einen wiederverwendbaren `useToggle` Hook:
 
 ```typescript
 export function useBlinkingCursor() {
@@ -59,9 +59,9 @@ export function useBlinkingCursor() {
 }
 ```
 
-## Configuration
+## Konfiguration
 
-All timing is configurable through constants:
+Alle Zeiteinstellungen sind über Konstanten konfigurierbar:
 
 ```typescript
 export const TYPING_SPEED = {
@@ -74,10 +74,10 @@ export const TYPING_SPEED = {
 export const CURSOR_BLINK_INTERVAL = 530;
 ```
 
-## Try It Out
+## Probier es aus
 
-Navigate to [/this-page-does-not-exist](/this-page-does-not-exist) to see it in action. Try typing `cd` and pressing Tab to autocomplete!
+Navigiere zu [/diese-seite-existiert-nicht](/diese-seite-existiert-nicht) um es in Aktion zu sehen. Versuche `cd` zu tippen und Tab zu drücken für die Autovervollständigung!
 
-## Conclusion
+## Fazit
 
-Small details like a creative 404 page can make a portfolio memorable. The modular architecture with custom hooks keeps the code clean and each piece focused on doing one thing well.
+Kleine Details wie eine kreative 404-Seite können ein Portfolio unvergesslich machen. Die modulare Architektur mit benutzerdefinierten Hooks hält den Code sauber und jedes Teil konzentriert sich darauf, eine Sache gut zu machen.
