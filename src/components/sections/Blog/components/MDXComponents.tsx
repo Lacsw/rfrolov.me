@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 
+import { Callout } from "./Callout";
 import { CodeBlock } from "./CodeBlock";
 
 type THeadingProps = ComponentPropsWithoutRef<"h1">;
@@ -120,4 +121,11 @@ export const mdxComponents = {
   strong: ({ className, ...props }: ComponentPropsWithoutRef<"strong">) => (
     <strong className={cn("font-semibold text-foreground", className)} {...props} />
   ),
+  mark: ({ className, ...props }: ComponentPropsWithoutRef<"mark">) => (
+    <mark
+      className={cn("bg-yellow-200/70 text-foreground px-1 rounded-sm", className)}
+      {...props}
+    />
+  ),
+  Callout,
 };

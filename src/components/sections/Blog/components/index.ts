@@ -2,6 +2,7 @@ export { BlogPostCard } from "./BlogPostCard";
 export { BlogPostListItem } from "./BlogPostListItem";
 export { BlogTag } from "./BlogTag";
 export { BlogTags } from "./BlogTags";
+export { Callout } from "./Callout";
 export { mdxComponents } from "./MDXComponents";
 export { ReadingTime } from "./ReadingTime";
 export { TableOfContents } from "./TableOfContents";
