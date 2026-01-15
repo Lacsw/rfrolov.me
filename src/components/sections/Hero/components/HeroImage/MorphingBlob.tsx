@@ -9,6 +9,7 @@ export function MorphingBlob() {
 
   return (
     <motion.div
+      initial={false}
       animate={{
         borderRadius: morphingBlob.borderRadius,
         rotate: morphingBlob.rotate,
