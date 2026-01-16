@@ -2,11 +2,10 @@
 
 import { useState } from "react";
 
-import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
-import { Container, SectionHeader } from "@/components/ui";
-import { CATEGORY_FILTER_OPTIONS, FADE_IN, FADE_IN_TRANSITION } from "@/constants";
+import { AnimatedSection, Container, SectionHeader } from "@/components/ui";
+import { CATEGORY_FILTER_OPTIONS } from "@/constants";
 import { cn } from "@/lib/utils";
 import { TProject, TProjectCategory } from "@/types";
 
@@ -29,11 +28,7 @@ export function Projects({ projects }: TProps) {
   return (
     <section className="min-h-[calc(100vh-4rem)] py-12 lg:py-16">
       <Container>
-        <motion.div
-          {...FADE_IN}
-          transition={FADE_IN_TRANSITION}
-          className="space-y-12"
-        >
+        <AnimatedSection className="space-y-12">
           <div className="space-y-6">
             <SectionHeader
               title={t("title")}
@@ -71,7 +66,7 @@ export function Projects({ projects }: TProps) {
               />
             ))}
           </div>
-        </motion.div>
+        </AnimatedSection>
       </Container>
     </section>
   );

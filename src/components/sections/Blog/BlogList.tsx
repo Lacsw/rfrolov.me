@@ -1,9 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
-import { Container } from "@/components/ui";
+import { AnimatedSection, Container } from "@/components/ui";
 import { Link } from "@/i18n/routing";
 import { TBlogPostMeta } from "@/types";
 
@@ -23,12 +22,7 @@ export function BlogList({ posts }: TProps) {
   return (
     <section className="py-12 lg:py-16">
       <Container>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="space-y-6"
-        >
+        <AnimatedSection className="space-y-6">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-semibold tracking-tight">
               {t("latestPosts")}
@@ -46,7 +40,7 @@ export function BlogList({ posts }: TProps) {
               <BlogPostCard key={post.slug} post={post} index={index} />
             ))}
           </div>
-        </motion.div>
+        </AnimatedSection>
       </Container>
     </section>
   );

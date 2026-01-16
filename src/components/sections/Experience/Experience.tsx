@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { Container } from "@/components/ui";
+import { AnimatedSection, Container } from "@/components/ui";
 import { useToggle } from "@/hooks";
 import { cn } from "@/lib/utils";
 import { TExperience } from "@/types";
@@ -29,12 +29,7 @@ export function Experience({ experiences }: TProps) {
   return (
     <section className="py-12 lg:py-16">
       <Container>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="space-y-6"
-        >
+        <AnimatedSection className="space-y-6">
           <h2 className="text-lg font-semibold tracking-tight">{t("title")}</h2>
 
           <div>
@@ -83,7 +78,7 @@ export function Experience({ experiences }: TProps) {
               />
             </button>
           )}
-        </motion.div>
+        </AnimatedSection>
       </Container>
     </section>
   );

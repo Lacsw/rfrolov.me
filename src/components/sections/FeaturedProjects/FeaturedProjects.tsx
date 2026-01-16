@@ -1,18 +1,17 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ArrowUpRight, Github } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import {
   AnimatedCard,
+  AnimatedSection,
   CategoryWithYear,
   Container,
   ProjectHighlight,
   SectionHeader,
   TechTags,
 } from "@/components/ui";
-import { FADE_IN, FADE_IN_TRANSITION } from "@/constants";
 import { TProject } from "@/types";
 
 type TProps = {
@@ -25,11 +24,7 @@ export function FeaturedProjects({ projects }: TProps) {
   return (
     <section className="py-12 lg:py-16">
       <Container>
-        <motion.div
-          {...FADE_IN}
-          transition={FADE_IN_TRANSITION}
-          className="space-y-6"
-        >
+        <AnimatedSection className="space-y-6">
           <SectionHeader
             title={t("featuredTitle")}
             link={{ href: "/projects", label: t("viewAll") }}
@@ -75,7 +70,7 @@ export function FeaturedProjects({ projects }: TProps) {
               </AnimatedCard>
             ))}
           </div>
-        </motion.div>
+        </AnimatedSection>
       </Container>
     </section>
   );
