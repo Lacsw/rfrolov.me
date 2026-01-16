@@ -2,7 +2,7 @@
 
 import { Grid, List } from "lucide-react";
 
-import { HOVER_TEXT_COLOR } from "@/constants";
+import { HOVER_TEXT_COLOR, ICON_SIZE } from "@/constants";
 import { cn } from "@/lib/utils";
 
 type TViewMode = "grid" | "list";
@@ -26,14 +26,14 @@ export function ViewToggle({ view, onViewChange }: TViewToggleProps) {
         className={getButtonClassName(view === "grid")}
         aria-label="Grid view"
       >
-        <Grid className="h-4 w-4" />
+        <Grid className={ICON_SIZE.sm} />
       </button>
       <button
         onClick={() => onViewChange("list")}
         className={getButtonClassName(view === "list")}
         aria-label="List view"
       >
-        <List className="h-4 w-4" />
+        <List className={ICON_SIZE.sm} />
       </button>
     </div>
   );

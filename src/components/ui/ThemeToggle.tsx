@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
+import { ICON_SIZE } from "@/constants";
 import { useHydrated } from "@/hooks";
 
 import { IconButton } from "./IconButton";
@@ -15,7 +16,7 @@ export function ThemeToggle() {
   if (!hydrated) {
     return (
       <IconButton aria-label="Toggle theme" disabled>
-        <div className="h-4 w-4" />
+        <div className={ICON_SIZE.sm} />
       </IconButton>
     );
   }
@@ -35,7 +36,7 @@ export function ThemeToggle() {
           exit={{ opacity: 0, rotate: 90, scale: 0.8 }}
           transition={{ duration: 0.2 }}
         >
-          {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          {isDark ? <Sun className={ICON_SIZE.sm} /> : <Moon className={ICON_SIZE.sm} />}
         </motion.div>
       </AnimatePresence>
     </IconButton>

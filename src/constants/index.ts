@@ -15,4 +15,5 @@ export {
   CARD_HOVER,
   HOVER_OPACITY,
   HOVER_TEXT_COLOR,
+  ICON_SIZE,
 } from "./styles";

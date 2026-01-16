@@ -1,5 +1,7 @@
 import { ArrowUpRight, Github } from "lucide-react";
 
+import { ICON_SIZE } from "@/constants";
+
 import { LinkButton } from "../LinkButton";
 
 type TProjectLinksProps = {
@@ -15,12 +17,12 @@ export function ProjectLinks({ href, github }: TProjectLinksProps) {
       {href && (
         <LinkButton href={href}>
           Live
-          <ArrowUpRight className="h-3 w-3" />
+          <ArrowUpRight className={ICON_SIZE.xs} />
         </LinkButton>
       )}
       {github && (
         <LinkButton href={github} variant="outline">
-          <Github className="h-3 w-3" />
+          <Github className={ICON_SIZE.xs} />
           GitHub
         </LinkButton>
       )}
