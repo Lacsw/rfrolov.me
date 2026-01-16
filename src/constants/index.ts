@@ -10,6 +10,7 @@ export {
   CATEGORY_LABELS,
 } from "./categories";
 export {
+  ARROW_HOVER,
   CARD_BASE,
   CARD_BORDER,
   CARD_HOVER,

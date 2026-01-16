@@ -40,3 +40,8 @@ export const SPACING = {
     lg: "gap-6",
   },
 } as const;
+
+export const ARROW_HOVER = {
+  upRight: "transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5",
+  right: "transition-transform duration-200 group-hover:translate-x-1",
+} as const;

@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
-import { getStaggeredAnimation } from "@/constants";
+import { ARROW_HOVER, getStaggeredAnimation, ICON_SIZE } from "@/constants";
 import { Link } from "@/i18n/routing";
 import { formatDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
@@ -48,7 +48,7 @@ export function BlogPostListItem({ post, index }: TBlogPostListItemProps) {
             <span>{formattedDate}</span>
             <ReadingTime minutes={post.readingTime} />
           </div>
-          <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform duration-200 group-hover:translate-x-1" />
+          <ArrowRight className={cn(ICON_SIZE.sm, "text-muted-foreground", ARROW_HOVER.right)} />
         </div>
       </Link>
     </motion.div>

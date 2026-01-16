@@ -12,6 +12,8 @@ import {
   SectionHeader,
   TechTags,
 } from "@/components/ui";
+import { ARROW_HOVER, ICON_SIZE } from "@/constants";
+import { cn } from "@/lib/utils";
 import { TProject } from "@/types";
 
 type TProps = {
@@ -51,7 +53,7 @@ export function FeaturedProjects({ projects }: TProps) {
                       {project.github && (
                         <Github className="h-4 w-4 text-muted-foreground" />
                       )}
-                      <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      <ArrowUpRight className={cn(ICON_SIZE.sm, "text-muted-foreground", ARROW_HOVER.upRight)} />
                     </div>
                   </div>
                   <p className="text-muted-foreground text-xs line-clamp-2">

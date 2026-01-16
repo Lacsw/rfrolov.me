@@ -5,7 +5,7 @@ import { Link } from "@/i18n/routing";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
-import { CARD_BASE, CARD_BORDER, CARD_HOVER, getStaggeredAnimation } from "@/constants";
+import { ARROW_HOVER, CARD_BASE, CARD_BORDER, CARD_HOVER, getStaggeredAnimation, ICON_SIZE } from "@/constants";
 import { formatDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";
@@ -41,7 +41,7 @@ export function BlogPostCard({ post, index }: TBlogPostCardProps) {
             </div>
             <h3 className="font-medium">{post.title}</h3>
           </div>
-          <ArrowUpRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          <ArrowUpRight className={cn(ICON_SIZE.sm, "shrink-0 text-muted-foreground", ARROW_HOVER.upRight)} />
         </div>
 
         <p className="text-sm text-muted-foreground line-clamp-2 mt-3 grow">
