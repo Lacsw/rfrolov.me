@@ -7,28 +7,53 @@ import readingTime from "reading-time";
 import { TLocale } from "@/i18n/config";
 import { TBlogPost, TBlogPostMeta, THeading } from "@/types";
 
-function getBlogDir(locale: TLocale) {
-  return path.join(process.cwd(), "src/content/blog", locale);
+const BLOG_DIR = path.join(process.cwd(), "src/content/blog");
+
+// Filename format: 001_slug-name.en.mdx
+const FILENAME_REGEX = /^(\d+)_(.+)\.(en|de)\.mdx$/;
+
+type TParsedFilename = {
+  order: number;
+  slug: string;
+  locale: TLocale;
+};
+
+function parseFilename(filename: string): TParsedFilename | null {
+  const match = filename.match(FILENAME_REGEX);
+
+  if (!match) {
+    return null;
+  }
+
+  return {
+    order: parseInt(match[1], 10),
+    slug: match[2],
+    locale: match[3] as TLocale,
+  };
 }
 
 export function getAllPosts(locale: TLocale): TBlogPostMeta[] {
-  const blogDir = getBlogDir(locale);
-
-  if (!fs.existsSync(blogDir)) {
+  if (!fs.existsSync(BLOG_DIR)) {
     return [];
   }
 
-  const files = fs.readdirSync(blogDir).filter((file) => file.endsWith(".mdx"));
+  const files = fs.readdirSync(BLOG_DIR).filter((file) => file.endsWith(".mdx"));
 
   const posts = files
     .map((file) => {
-      const slug = file.replace(/\.mdx$/, "");
-      const filePath = path.join(blogDir, file);
+      const parsed = parseFilename(file);
+
+      if (!parsed || parsed.locale !== locale) {
+        return null;
+      }
+
+      const filePath = path.join(BLOG_DIR, file);
       const fileContent = fs.readFileSync(filePath, "utf-8");
       const { data, content } = matter(fileContent);
 
       return {
-        slug,
+        slug: parsed.slug,
+        order: parsed.order,
         title: data.title,
         description: data.description,
         date: data.date,
@@ -37,23 +62,41 @@ export function getAllPosts(locale: TLocale): TBlogPostMeta[] {
         readingTime: Math.ceil(readingTime(content).minutes),
       } as TBlogPostMeta;
     })
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    .filter((post): post is TBlogPostMeta => post !== null)
+    .sort((a, b) => a.order - b.order);
 
   return posts;
 }
 
-export function getPostBySlug(slug: string, locale: TLocale): TBlogPost | null {
-  const filePath = path.join(getBlogDir(locale), `${slug}.mdx`);
+function findPostFile(slug: string, locale: TLocale): string | null {
+  if (!fs.existsSync(BLOG_DIR)) {
+    return null;
+  }
 
-  if (!fs.existsSync(filePath)) {
+  const files = fs.readdirSync(BLOG_DIR);
+  const matchingFile = files.find((file) => {
+    const parsed = parseFilename(file);
+
+    return parsed?.slug === slug && parsed?.locale === locale;
+  });
+
+  return matchingFile ? path.join(BLOG_DIR, matchingFile) : null;
+}
+
+export function getPostBySlug(slug: string, locale: TLocale): TBlogPost | null {
+  const filePath = findPostFile(slug, locale);
+
+  if (!filePath) {
     return null;
   }
 
   const fileContent = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(fileContent);
+  const parsed = parseFilename(path.basename(filePath));
 
   return {
     slug,
+    order: parsed?.order ?? 0,
     title: data.title,
     description: data.description,
     date: data.date,
