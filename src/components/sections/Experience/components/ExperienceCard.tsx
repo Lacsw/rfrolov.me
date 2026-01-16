@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 
-import { Tag } from "@/components/ui/Tag";
+import { TechTags } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import { TExperience } from "@/types";
 
@@ -42,13 +42,7 @@ export function ExperienceCard({ experience, isLast }: TExperienceCardProps) {
 
         <p className="text-xs text-muted-foreground pt-1">{experience.description}</p>
 
-        <div className="flex flex-wrap gap-1.5 pt-2">
-          {experience.technologies.slice(0, 4).map((tech) => (
-            <Tag key={tech} size="sm">
-              {tech}
-            </Tag>
-          ))}
-        </div>
+        <TechTags technologies={experience.technologies} limit={4} size="sm" className="pt-2" />
       </div>
     </motion.div>
   );
