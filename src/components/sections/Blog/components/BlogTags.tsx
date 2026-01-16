@@ -7,7 +7,7 @@ type TBlogTagsProps = {
   limit?: number;
   size?: "sm" | "md";
   wrap?: boolean;
-  clickable?: boolean;
+  insideCard?: boolean;
 };
 
 export function BlogTags({
@@ -15,12 +15,12 @@ export function BlogTags({
   limit = 3,
   size = "md",
   wrap = false,
-  clickable = true,
+  insideCard = false,
 }: TBlogTagsProps) {
   return (
     <div className={cn("flex gap-1.5", wrap && "flex-wrap")}>
       {tags.slice(0, limit).map((tag) => (
-        <BlogTag key={tag} tag={tag} size={size} clickable={clickable} />
+        <BlogTag key={tag} tag={tag} size={size} insideCard={insideCard} />
       ))}
     </div>
   );
