@@ -1,6 +1,6 @@
 import { ArrowUpRight, Github } from "lucide-react";
 
-import { ExternalLink } from "../ExternalLink";
+import { LinkButton } from "../LinkButton";
 
 type TProjectLinksProps = {
   href?: string;
@@ -8,27 +8,21 @@ type TProjectLinksProps = {
 };
 
 export function ProjectLinks({ href, github }: TProjectLinksProps) {
-  if (!href && !github) {return null;}
+  if (!href && !github) return null;
 
   return (
     <div className="flex items-center gap-2 pt-2">
       {href && (
-        <ExternalLink
-          href={href}
-          className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-md bg-foreground text-background hover:opacity-80 transition-opacity"
-        >
+        <LinkButton href={href}>
           Live
           <ArrowUpRight className="h-3 w-3" />
-        </ExternalLink>
+        </LinkButton>
       )}
       {github && (
-        <ExternalLink
-          href={github}
-          className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-md border border-muted-foreground/30 text-foreground hover:opacity-80 transition-opacity"
-        >
+        <LinkButton href={github} variant="outline">
           <Github className="h-3 w-3" />
           GitHub
-        </ExternalLink>
+        </LinkButton>
       )}
     </div>
   );

@@ -6,6 +6,7 @@ export { Tag } from "./Tag";
 export { Container } from "./Container";
 export { ExternalLink } from "./ExternalLink";
 export { IconButton } from "./IconButton";
+export { LinkButton } from "./LinkButton";
 export { ReadingProgress } from "./ReadingProgress";
 export { SectionHeader } from "./SectionHeader";
 export { SocialLink } from "./SocialLink";
