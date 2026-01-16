@@ -43,6 +43,7 @@ export type TBlogPost = {
   date: string;
   tags: string[];
   featured?: boolean;
+  draft?: boolean;
   readingTime: number;
   content: string;
 };
