@@ -9,4 +9,10 @@ export {
   CATEGORY_FILTER_OPTIONS,
   CATEGORY_LABELS,
 } from "./categories";
-export { HOVER_OPACITY, HOVER_TEXT_COLOR } from "./styles";
+export {
+  CARD_BASE,
+  CARD_BORDER,
+  CARD_HOVER,
+  HOVER_OPACITY,
+  HOVER_TEXT_COLOR,
+} from "./styles";

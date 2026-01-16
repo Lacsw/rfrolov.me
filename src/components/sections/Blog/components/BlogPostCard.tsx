@@ -1,11 +1,11 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
-import { getStaggeredAnimation } from "@/constants";
+import { CARD_BASE, CARD_BORDER, CARD_HOVER, getStaggeredAnimation } from "@/constants";
 import { formatDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";
@@ -24,13 +24,12 @@ export function BlogPostCard({ post, index }: TBlogPostCardProps) {
   return (
     <motion.div {...getStaggeredAnimation(index)} className="h-full">
       <Link
-        href={`/blog/${post.slug}`}
+        href={`/blog/${post.slug}` as "/blog"}
         className={cn(
-          "group flex flex-col h-full rounded-lg border bg-background p-6 transition-all duration-300",
-          "hover:shadow-sm hover:scale-[1.01] cursor-pointer",
-          post.featured
-            ? "border-muted-foreground/30 hover:border-muted-foreground/50"
-            : "border-muted hover:border-muted-foreground/20"
+          "group flex flex-col h-full cursor-pointer",
+          CARD_BASE,
+          CARD_HOVER,
+          post.featured ? CARD_BORDER.featured : CARD_BORDER.default
         )}
       >
         <div className="flex items-start justify-between gap-4">

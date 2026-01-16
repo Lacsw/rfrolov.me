@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 
 import { motion } from "framer-motion";
 
-import { getStaggeredAnimation } from "@/constants";
+import { CARD_BASE, CARD_BORDER, CARD_HOVER, getStaggeredAnimation } from "@/constants";
 import { cn } from "@/lib/utils";
 
 type TAnimatedCardProps = {
@@ -25,11 +25,11 @@ export function AnimatedCard({
   large = false,
 }: TAnimatedCardProps) {
   const baseClasses = cn(
-    "group block h-full rounded-lg border bg-background p-6 transition-all duration-300 hover:shadow-sm hover:scale-[1.01]",
+    "group block h-full",
+    CARD_BASE,
+    CARD_HOVER,
     large && "md:col-span-2",
-    featured
-      ? "border-muted-foreground/30 hover:border-muted-foreground/50"
-      : "border-muted hover:border-muted-foreground/20",
+    featured ? CARD_BORDER.featured : CARD_BORDER.default,
     className
   );
 
