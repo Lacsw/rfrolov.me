@@ -1,4 +1,5 @@
 import { Tag } from "@/components/ui/Tag";
+import { HOVER_OPACITY } from "@/constants";
 import { Link } from "@/i18n/routing";
 import { getTagUrl } from "@/lib/urls";
 
@@ -15,10 +16,7 @@ export function BlogTag({ tag, size = "md", clickable = true }: TProps) {
 
   if (clickable) {
     return (
-      <Link
-        href={getTagUrl(tag) as "/blog"}
-        className="hover:opacity-70 transition-opacity cursor-pointer"
-      >
+      <Link href={getTagUrl(tag) as "/blog"} className={HOVER_OPACITY}>
         <Tag size={size} variant="colored" colorClass={colorClass}>
           {tag}
         </Tag>

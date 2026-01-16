@@ -2,6 +2,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 
 import { getTagColor } from "@/components/sections/Blog/constants";
 import { BackLink, Container } from "@/components/ui";
+import { HOVER_OPACITY } from "@/constants";
 import { TLocale } from "@/i18n/config";
 import { Link } from "@/i18n/routing";
 import { getTagsWithCounts } from "@/lib/blog";
@@ -35,8 +36,9 @@ export default async function TagsPage() {
                 key={tag}
                 href={getTagUrl(tag)}
                 className={cn(
-                  "inline-flex items-center gap-2 px-3 py-2 rounded-lg hover:opacity-70 transition-opacity cursor-pointer",
-                  getTagColor(tag)
+                  "inline-flex items-center gap-2 px-3 py-2 rounded-lg",
+                  getTagColor(tag),
+                  HOVER_OPACITY
                 )}
               >
                 <span>{tag}</span>

@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 
 import { AnimatedSection, Container } from "@/components/ui";
+import { HOVER_OPACITY } from "@/constants";
 import { Link } from "@/i18n/routing";
 import { TBlogPostMeta } from "@/types";
 
@@ -29,7 +30,7 @@ export function BlogList({ posts }: TProps) {
             </h2>
             <Link
               href="/blog"
-              className="text-sm text-muted-foreground hover:opacity-70 transition-opacity cursor-pointer"
+              className={`text-sm text-muted-foreground ${HOVER_OPACITY}`}
             >
               {t("viewAll")}
             </Link>

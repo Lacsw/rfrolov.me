@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 
 import { Container, ThemeToggle } from "@/components/ui";
+import { HOVER_TEXT_COLOR } from "@/constants";
 import { useScrolled } from "@/hooks";
 import { Link, usePathname } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
@@ -43,9 +44,7 @@ export function Navbar() {
                     href={link.href}
                     className={cn(
                       "text-sm transition-colors duration-300",
-                      pathname === link.href
-                        ? "text-foreground"
-                        : "text-muted-foreground hover:text-foreground"
+                      pathname === link.href ? "text-foreground" : HOVER_TEXT_COLOR
                     )}
                   >
                     {link.name}

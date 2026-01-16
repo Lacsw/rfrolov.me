@@ -2,6 +2,7 @@ import { ComponentPropsWithoutRef } from "react";
 
 import Link from "next/link";
 
+import { HOVER_OPACITY } from "@/constants";
 import { cn } from "@/lib/utils";
 
 import { Callout } from "./Callout";
@@ -49,6 +50,11 @@ export const mdxComponents = {
   ),
   a: ({ href, className, ...props }: TLinkProps) => {
     const isExternal = href?.startsWith("http");
+    const linkClassName = cn(
+      "text-foreground underline underline-offset-4",
+      HOVER_OPACITY,
+      className
+    );
 
     if (isExternal) {
       return (
@@ -56,24 +62,14 @@ export const mdxComponents = {
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className={cn(
-            "text-foreground underline underline-offset-4 hover:opacity-70 transition-opacity cursor-pointer",
-            className
-          )}
+          className={linkClassName}
           {...props}
         />
       );
     }
 
     return (
-      <Link
-        href={href || "#"}
-        className={cn(
-          "text-foreground underline underline-offset-4 hover:opacity-70 transition-opacity cursor-pointer",
-          className
-        )}
-        {...props}
-      />
+      <Link href={href || "#"} className={linkClassName} {...props} />
     );
   },
   ul: ({ className, ...props }: TListProps) => (

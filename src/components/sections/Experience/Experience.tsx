@@ -5,6 +5,7 @@ import { ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { AnimatedSection, Container } from "@/components/ui";
+import { HOVER_OPACITY } from "@/constants";
 import { useToggle } from "@/hooks";
 import { cn } from "@/lib/utils";
 import { TExperience } from "@/types";
@@ -70,7 +71,7 @@ export function Experience({ experiences }: TProps) {
           {hasMore && (
             <button
               onClick={toggle}
-              className="flex items-center gap-1 text-sm text-muted-foreground hover:opacity-70 transition-opacity cursor-pointer"
+              className={`flex items-center gap-1 text-sm text-muted-foreground ${HOVER_OPACITY}`}
             >
               <span>{isExpanded ? t("showLess") : t("showMore", { count: hiddenExperiences.length })}</span>
               <ChevronDown

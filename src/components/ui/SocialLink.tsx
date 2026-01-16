@@ -1,3 +1,4 @@
+import { HOVER_TEXT_COLOR } from "@/constants";
 import { cn } from "@/lib/utils";
 import { TSocialLink } from "@/types";
 
@@ -16,10 +17,7 @@ export function SocialLink({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={cn(
-        "text-muted-foreground hover:text-foreground transition-colors duration-300",
-        className
-      )}
+      className={cn(HOVER_TEXT_COLOR, "transition-colors duration-300", className)}
       aria-label={name}
     >
       <Icon className="h-5 w-5" />
