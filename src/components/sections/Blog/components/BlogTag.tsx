@@ -1,6 +1,6 @@
+import { Tag } from "@/components/ui/Tag";
 import { Link } from "@/i18n/routing";
 import { getTagUrl } from "@/lib/urls";
-import { cn } from "@/lib/utils";
 
 import { getTagColor } from "../constants";
 
@@ -11,20 +11,24 @@ type TProps = {
 };
 
 export function BlogTag({ tag, size = "md", clickable = true }: TProps) {
-  const className = cn(
-    "text-xs py-0.5 rounded",
-    size === "sm" ? "px-1.5" : "px-2",
-    getTagColor(tag),
-    clickable && "hover:opacity-70 transition-opacity cursor-pointer"
-  );
+  const colorClass = getTagColor(tag);
 
   if (clickable) {
     return (
-      <Link href={getTagUrl(tag) as "/blog"} className={className}>
-        {tag}
+      <Link
+        href={getTagUrl(tag) as "/blog"}
+        className="hover:opacity-70 transition-opacity cursor-pointer"
+      >
+        <Tag size={size} variant="colored" colorClass={colorClass}>
+          {tag}
+        </Tag>
       </Link>
     );
   }
 
-  return <span className={className}>{tag}</span>;
+  return (
+    <Tag size={size} variant="colored" colorClass={colorClass}>
+      {tag}
+    </Tag>
+  );
 }

@@ -1,3 +1,4 @@
+import { Tag } from "@/components/ui/Tag";
 import { cn } from "@/lib/utils";
 
 type TTechTagsProps = {
@@ -13,15 +14,9 @@ export function TechTags({ technologies, limit, size = "md", className }: TTechT
   return (
     <div className={cn("flex flex-wrap gap-1.5", className)}>
       {items.map((tech) => (
-        <span
-          key={tech}
-          className={cn(
-            "text-xs text-muted-foreground bg-muted rounded",
-            size === "sm" ? "px-1.5 py-0.5" : "px-2 py-1"
-          )}
-        >
+        <Tag key={tech} size={size}>
           {tech}
-        </span>
+        </Tag>
       ))}
     </div>
   );

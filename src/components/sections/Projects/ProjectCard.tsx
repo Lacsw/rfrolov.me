@@ -2,10 +2,10 @@
 
 import {
   AnimatedCard,
-  Badge,
   CategoryWithYear,
   ProjectHighlight,
   ProjectLinks,
+  Tag,
   TechTags,
 } from "@/components/ui";
 import { cn } from "@/lib/utils";
@@ -29,7 +29,11 @@ export function ProjectCard({ project, index, large = false }: TProjectCardProps
           <div className="flex items-start justify-between gap-4">
             <div className="space-y-1.5">
               <div className="flex items-center gap-2 flex-wrap">
-                {project.featured && <Badge>Featured</Badge>}
+                {project.featured && (
+                  <Tag variant="colored" colorClass="text-foreground bg-foreground/10">
+                    Featured
+                  </Tag>
+                )}
                 <CategoryWithYear category={project.category} year={project.year} />
               </div>
               <h3 className={cn("font-medium", large && "text-lg")}>{project.title}</h3>

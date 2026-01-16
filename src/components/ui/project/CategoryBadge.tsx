@@ -1,5 +1,5 @@
+import { Tag } from "@/components/ui/Tag";
 import { CATEGORY_COLORS, CATEGORY_LABELS } from "@/constants";
-import { cn } from "@/lib/utils";
 import { TProjectCategory } from "@/types";
 
 type TCategoryBadgeProps = {
@@ -9,14 +9,8 @@ type TCategoryBadgeProps = {
 
 export function CategoryBadge({ category, size = "md" }: TCategoryBadgeProps) {
   return (
-    <span
-      className={cn(
-        "text-xs rounded",
-        size === "sm" ? "px-1.5 py-0.5" : "px-2 py-0.5",
-        CATEGORY_COLORS[category]
-      )}
-    >
+    <Tag size={size} variant="colored" colorClass={CATEGORY_COLORS[category]}>
       {CATEGORY_LABELS[category]}
-    </span>
+    </Tag>
   );
 }

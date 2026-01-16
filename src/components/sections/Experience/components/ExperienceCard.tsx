@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 
+import { Tag } from "@/components/ui/Tag";
 import { cn } from "@/lib/utils";
 import { TExperience } from "@/types";
 
@@ -43,12 +44,9 @@ export function ExperienceCard({ experience, isLast }: ExperienceCardProps) {
 
         <div className="flex flex-wrap gap-1.5 pt-2">
           {experience.technologies.slice(0, 4).map((tech) => (
-            <span
-              key={tech}
-              className="text-xs text-muted-foreground bg-muted px-1.5 py-0.5 rounded"
-            >
+            <Tag key={tech} size="sm">
               {tech}
-            </span>
+            </Tag>
           ))}
         </div>
       </div>
