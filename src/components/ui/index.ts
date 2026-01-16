@@ -1,7 +1,6 @@
 export { AnimatedCard } from "./AnimatedCard";
 export { AnimatedSection } from "./AnimatedSection";
 export { BackLink } from "./BackLink";
-export { Card } from "./Card";
 export { Tag } from "./Tag";
 export { Container } from "./Container";
 export { ExternalLink } from "./ExternalLink";
