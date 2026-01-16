@@ -32,16 +32,11 @@ function extractText(node: ReactNode): string {
 }
 
 export function CodeBlock({ children, className }: TCodeBlockProps) {
-  const codeContent = Children.toArray(children)
-    .map(extractText)
-    .join("")
-    .trim();
+  const codeContent = Children.toArray(children).map(extractText).join("").trim();
 
   return (
     <div className="group relative my-4 rounded-lg overflow-hidden">
-      <pre className={cn("p-4 overflow-x-auto text-sm", className)}>
-        {children}
-      </pre>
+      <pre className={cn("p-4 overflow-x-auto text-sm", className)}>{children}</pre>
       <CopyButton text={codeContent} />
     </div>
   );

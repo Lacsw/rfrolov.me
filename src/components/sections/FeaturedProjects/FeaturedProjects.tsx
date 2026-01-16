@@ -34,34 +34,24 @@ export function FeaturedProjects({ projects }: TProps) {
 
           <div className="grid gap-4 sm:grid-cols-2">
             {projects.map((project, index) => (
-              <AnimatedCard
-                key={project.id}
-                index={index}
-                href={project.href || project.github}
-              >
+              <AnimatedCard key={project.id} index={index} href={project.href || project.github}>
                 <div className="space-y-2">
                   <div className="flex items-start justify-between gap-2">
                     <div className="space-y-1">
-                      <CategoryWithYear
-                        category={project.category}
-                        year={project.year}
-                        size="sm"
-                      />
+                      <CategoryWithYear category={project.category} year={project.year} size="sm" />
                       <h3 className="font-medium text-sm">{project.title}</h3>
                     </div>
                     <div className="flex items-center gap-2 shrink-0">
-                      {project.github && (
-                        <Github className="h-4 w-4 text-muted-foreground" />
-                      )}
-                      <ArrowUpRight className={cn(ICON_SIZE.sm, "text-muted-foreground", ARROW_HOVER.upRight)} />
+                      {project.github && <Github className="h-4 w-4 text-muted-foreground" />}
+                      <ArrowUpRight
+                        className={cn(ICON_SIZE.sm, "text-muted-foreground", ARROW_HOVER.upRight)}
+                      />
                     </div>
                   </div>
                   <p className="text-muted-foreground text-xs line-clamp-2">
                     {project.description}
                   </p>
-                  {project.highlight && (
-                    <ProjectHighlight highlight={project.highlight} />
-                  )}
+                  {project.highlight && <ProjectHighlight highlight={project.highlight} />}
                   <TechTags
                     technologies={project.technologies}
                     limit={3}

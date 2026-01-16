@@ -45,9 +45,7 @@ export function BlogPostLayout({ post, headings, adjacentPosts, children }: TBlo
                   </span>
                 </div>
 
-                <h1 className="text-3xl font-semibold tracking-tight">
-                  {post.title}
-                </h1>
+                <h1 className="text-3xl font-semibold tracking-tight">{post.title}</h1>
 
                 <p className="text-lg text-muted-foreground">{post.description}</p>
 
@@ -62,10 +60,7 @@ export function BlogPostLayout({ post, headings, adjacentPosts, children }: TBlo
 
               <div className="prose-custom">{children}</div>
 
-              <PostNavigation
-                previous={adjacentPosts.previous}
-                next={adjacentPosts.next}
-              />
+              <PostNavigation previous={adjacentPosts.previous} next={adjacentPosts.next} />
             </motion.article>
 
             {headings.length > 0 && (

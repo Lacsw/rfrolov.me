@@ -1,5 +1,6 @@
 import nextPlugin from "@next/eslint-plugin-next";
 import stylistic from "@stylistic/eslint-plugin";
+import eslintConfigPrettier from "eslint-config-prettier";
 import eslintImport from "eslint-plugin-import";
 import reactPlugin from "eslint-plugin-react";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
@@ -112,5 +113,6 @@ export default tseslint.config(
         { props: "never", children: "never" },
       ],
     },
-  }
+  },
+  eslintConfigPrettier
 );

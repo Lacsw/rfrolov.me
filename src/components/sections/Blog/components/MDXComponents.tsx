@@ -19,10 +19,7 @@ type TPreProps = ComponentPropsWithoutRef<"pre">;
 
 export const mdxComponents = {
   h1: ({ className, ...props }: THeadingProps) => (
-    <h1
-      className={cn("text-2xl font-semibold tracking-tight mt-8 mb-4", className)}
-      {...props}
-    />
+    <h1 className={cn("text-2xl font-semibold tracking-tight mt-8 mb-4", className)} {...props} />
   ),
   h2: ({ className, ...props }: THeadingProps) => (
     <h2
@@ -37,16 +34,10 @@ export const mdxComponents = {
     />
   ),
   h4: ({ className, ...props }: THeadingProps) => (
-    <h4
-      className={cn("text-base font-semibold tracking-tight mt-6 mb-3", className)}
-      {...props}
-    />
+    <h4 className={cn("text-base font-semibold tracking-tight mt-6 mb-3", className)} {...props} />
   ),
   p: ({ className, ...props }: TParagraphProps) => (
-    <p
-      className={cn("text-muted-foreground leading-relaxed mb-4", className)}
-      {...props}
-    />
+    <p className={cn("text-muted-foreground leading-relaxed mb-4", className)} {...props} />
   ),
   a: ({ href, className, ...props }: TLinkProps) => {
     const isExternal = href?.startsWith("http");
@@ -68,9 +59,7 @@ export const mdxComponents = {
       );
     }
 
-    return (
-      <Link href={href || "#"} className={linkClassName} {...props} />
-    );
+    return <Link href={href || "#"} className={linkClassName} {...props} />;
   },
   ul: ({ className, ...props }: TListProps) => (
     <ul
@@ -101,10 +90,7 @@ export const mdxComponents = {
 
     if (isInlineCode) {
       return (
-        <code
-          className={cn("bg-muted px-1.5 py-0.5 rounded text-sm", className)}
-          {...props}
-        />
+        <code className={cn("bg-muted px-1.5 py-0.5 rounded text-sm", className)} {...props} />
       );
     }
 

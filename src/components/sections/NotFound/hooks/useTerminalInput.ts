@@ -51,7 +51,9 @@ export function useTerminalInput() {
     (command: string) => {
       const cmd = command.trim();
 
-      if (!cmd) {return;}
+      if (!cmd) {
+        return;
+      }
 
       // Parse command - expect "cd /path" format
       const cdMatch = cmd.match(/^cd\s+(.+)$/);

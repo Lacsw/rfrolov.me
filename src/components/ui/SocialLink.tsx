@@ -6,12 +6,7 @@ type TSocialLinkProps = TSocialLink & {
   className?: string;
 };
 
-export function SocialLink({
-  name,
-  href,
-  icon: Icon,
-  className,
-}: TSocialLinkProps) {
+export function SocialLink({ name, href, icon: Icon, className }: TSocialLinkProps) {
   return (
     <a
       href={href}

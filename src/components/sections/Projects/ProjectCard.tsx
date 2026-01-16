@@ -19,11 +19,7 @@ type TProjectCardProps = {
 
 export function ProjectCard({ project, index, large = false }: TProjectCardProps) {
   return (
-    <AnimatedCard
-      index={index}
-      featured={project.featured}
-      large={large}
-    >
+    <AnimatedCard index={index} featured={project.featured} large={large}>
       <div className={cn("flex flex-col h-full", large ? "md:flex-row md:gap-8" : "gap-3")}>
         <div className={cn("flex-1 space-y-3", large && "md:space-y-4")}>
           <div className="flex items-start justify-between gap-4">
@@ -40,13 +36,9 @@ export function ProjectCard({ project, index, large = false }: TProjectCardProps
             </div>
           </div>
 
-          <p className="text-sm text-muted-foreground">
-            {project.description}
-          </p>
+          <p className="text-sm text-muted-foreground">{project.description}</p>
 
-          {project.highlight && (
-            <ProjectHighlight highlight={project.highlight} />
-          )}
+          {project.highlight && <ProjectHighlight highlight={project.highlight} />}
         </div>
 
         <div className={cn("flex flex-col gap-3", large && "md:items-end md:justify-between")}>

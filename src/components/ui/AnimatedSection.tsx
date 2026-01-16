@@ -14,11 +14,7 @@ type TProps = {
 
 export function AnimatedSection({ children, className }: TProps) {
   return (
-    <motion.div
-      {...FADE_IN}
-      transition={FADE_IN_TRANSITION}
-      className={cn(className)}
-    >
+    <motion.div {...FADE_IN} transition={FADE_IN_TRANSITION} className={cn(className)}>
       {children}
     </motion.div>
   );

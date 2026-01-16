@@ -11,12 +11,7 @@ type TLinkButtonProps = {
   className?: string;
 };
 
-export function LinkButton({
-  href,
-  variant = "solid",
-  children,
-  className,
-}: TLinkButtonProps) {
+export function LinkButton({ href, variant = "solid", children, className }: TLinkButtonProps) {
   return (
     <ExternalLink
       href={href}

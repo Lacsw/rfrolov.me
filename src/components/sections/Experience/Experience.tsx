@@ -34,11 +34,7 @@ export function Experience({ experiences }: TProps) {
           <h2 className="text-lg font-semibold tracking-tight">{t("title")}</h2>
 
           <div>
-            <motion.div
-              variants={EXPERIENCE_ANIMATION.container}
-              initial="hidden"
-              animate="show"
-            >
+            <motion.div variants={EXPERIENCE_ANIMATION.container} initial="hidden" animate="show">
               {initialExperiences.map((exp, index) => (
                 <ExperienceCard
                   key={exp.id}
@@ -73,9 +69,16 @@ export function Experience({ experiences }: TProps) {
               onClick={toggle}
               className={cn("flex items-center gap-1 text-sm text-muted-foreground", HOVER_OPACITY)}
             >
-              <span>{isExpanded ? t("showLess") : t("showMore", { count: hiddenExperiences.length })}</span>
+              <span>
+                {isExpanded ? t("showLess") : t("showMore", { count: hiddenExperiences.length })}
+              </span>
               <ChevronDown
-                className={cn(ICON_SIZE.sm, "transition-transform", TRANSITION.normal, isExpanded && "rotate-180")}
+                className={cn(
+                  ICON_SIZE.sm,
+                  "transition-transform",
+                  TRANSITION.normal,
+                  isExpanded && "rotate-180"
+                )}
               />
             </button>
           )}

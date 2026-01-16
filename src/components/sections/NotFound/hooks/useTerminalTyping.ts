@@ -21,20 +21,26 @@ export function useTerminalTyping() {
 
     if (isCommand) {
       if (currentCharIndex < fullText.length) {
-        const timeout = setTimeout(() => {
-          setLines((prev) => {
-            const newLines = [...prev];
+        const timeout = setTimeout(
+          () => {
+            setLines((prev) => {
+              const newLines = [...prev];
 
-            if (newLines.length === currentLineIndex) {
-              newLines.push({ ...currentLine, text: fullText.slice(0, currentCharIndex + 1) });
-            } else {
-              newLines[currentLineIndex] = { ...currentLine, text: fullText.slice(0, currentCharIndex + 1) };
-            }
+              if (newLines.length === currentLineIndex) {
+                newLines.push({ ...currentLine, text: fullText.slice(0, currentCharIndex + 1) });
+              } else {
+                newLines[currentLineIndex] = {
+                  ...currentLine,
+                  text: fullText.slice(0, currentCharIndex + 1),
+                };
+              }
 
-            return newLines;
-          });
-          setCurrentCharIndex((prev) => prev + 1);
-        }, TYPING_SPEED.character.min + Math.random() * TYPING_SPEED.character.variance);
+              return newLines;
+            });
+            setCurrentCharIndex((prev) => prev + 1);
+          },
+          TYPING_SPEED.character.min + Math.random() * TYPING_SPEED.character.variance
+        );
 
         return () => clearTimeout(timeout);
       } else {
@@ -46,7 +52,8 @@ export function useTerminalTyping() {
         return () => clearTimeout(timeout);
       }
     } else {
-      const delay = currentLine.type === "empty" ? TYPING_SPEED.emptyLineDelay : TYPING_SPEED.outputDelay;
+      const delay =
+        currentLine.type === "empty" ? TYPING_SPEED.emptyLineDelay : TYPING_SPEED.outputDelay;
       const timeout = setTimeout(() => {
         setLines((prev) => [...prev, currentLine]);
         setCurrentLineIndex((prev) => prev + 1);

@@ -47,12 +47,7 @@ export function TechIcon({ slug, className }: TTechIconProps) {
   }
 
   return (
-    <svg
-      role="img"
-      viewBox="0 0 24 24"
-      className={className}
-      fill="currentColor"
-    >
+    <svg role="img" viewBox="0 0 24 24" className={className} fill="currentColor">
       <path d={icon.path} />
     </svg>
   );

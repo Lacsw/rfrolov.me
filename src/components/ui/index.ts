@@ -13,9 +13,4 @@ export { TechIcon } from "./TechIcon";
 export { ThemeToggle } from "./ThemeToggle";
 export { ViewToggle } from "./ViewToggle";
 
-export {
-  CategoryWithYear,
-  ProjectHighlight,
-  ProjectLinks,
-  TechTags,
-} from "./project";
+export { CategoryWithYear, ProjectHighlight, ProjectLinks, TechTags } from "./project";

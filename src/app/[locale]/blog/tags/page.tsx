@@ -22,12 +22,8 @@ export default async function TagsPage() {
           <BackLink href="/blog">{tCommon("backToBlog")}</BackLink>
 
           <header className="mb-8">
-            <h1 className="text-2xl font-semibold tracking-tight mb-2">
-              {t("allTags")}
-            </h1>
-            <p className="text-muted-foreground">
-              {t("browseByTopic")}
-            </p>
+            <h1 className="text-2xl font-semibold tracking-tight mb-2">{t("allTags")}</h1>
+            <p className="text-muted-foreground">{t("browseByTopic")}</p>
           </header>
 
           <div className="flex flex-wrap gap-3">

@@ -21,9 +21,7 @@ export function BlogPostListItem({ post, index }: TBlogPostListItemProps) {
   const formattedDate = formatDate(post.date);
 
   return (
-    <motion.div
-      {...getStaggeredAnimation(index, { y: 10, delayMultiplier: 0.05, duration: 0.3 })}
-    >
+    <motion.div {...getStaggeredAnimation(index, { y: 10, delayMultiplier: 0.05, duration: 0.3 })}>
       <Link
         href={`/blog/${post.slug}` as "/blog"}
         className={cn(
@@ -38,9 +36,7 @@ export function BlogPostListItem({ post, index }: TBlogPostListItemProps) {
             </h3>
             <BlogTags tags={post.tags} limit={2} size="sm" insideCard />
           </div>
-          <p className="text-sm text-muted-foreground line-clamp-1">
-            {post.description}
-          </p>
+          <p className="text-sm text-muted-foreground line-clamp-1">{post.description}</p>
         </div>
 
         <div className="flex items-center gap-4 shrink-0">

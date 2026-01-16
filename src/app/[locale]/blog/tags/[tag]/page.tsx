@@ -41,9 +41,7 @@ export default async function TagPage({ params }: TProps) {
             <h1 className="text-2xl font-semibold tracking-tight mb-2">
               {t("taggedWith", { tag })}
             </h1>
-            <p className="text-muted-foreground">
-              {t("postsFound", { count: posts.length })}
-            </p>
+            <p className="text-muted-foreground">{t("postsFound", { count: posts.length })}</p>
           </header>
 
           <div className="space-y-6">

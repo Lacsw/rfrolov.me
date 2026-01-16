@@ -36,10 +36,14 @@ export function NotFoundTerminal() {
   // Keyboard shortcuts (1 and 2) when not focused on input
   useEffect(() => {
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
-      if (!isTypingComplete) {return;}
+      if (!isTypingComplete) {
+        return;
+      }
       const activeElement = document.activeElement;
 
-      if (activeElement?.tagName === "INPUT") {return;}
+      if (activeElement?.tagName === "INPUT") {
+        return;
+      }
 
       if (e.key === "1") {
         router.push("/");
@@ -63,12 +67,13 @@ export function NotFoundTerminal() {
 
           {!isTypingComplete && currentLineIndex < INITIAL_LINES.length && (
             <div className="text-foreground leading-relaxed">
-              {lines.length === currentLineIndex && INITIAL_LINES[currentLineIndex].type === "command" && (
-                <>
-                  {lines[currentLineIndex]?.text || PROMPT}
-                  <span className={showCursor ? "opacity-100" : "opacity-0"}>_</span>
-                </>
-              )}
+              {lines.length === currentLineIndex &&
+                INITIAL_LINES[currentLineIndex].type === "command" && (
+                  <>
+                    {lines[currentLineIndex]?.text || PROMPT}
+                    <span className={showCursor ? "opacity-100" : "opacity-0"}>_</span>
+                  </>
+                )}
             </div>
           )}
 
@@ -99,9 +104,7 @@ export function NotFoundTerminal() {
         </div>
       </TerminalWindow>
 
-      <p className="text-center text-xs text-muted-foreground mt-4">
-        {t("hint")}
-      </p>
+      <p className="text-center text-xs text-muted-foreground mt-4">{t("hint")}</p>
     </div>
   );
 }

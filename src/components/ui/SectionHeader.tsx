@@ -13,12 +13,7 @@ type TSectionHeaderProps = {
   as?: "h1" | "h2" | "h3";
 };
 
-export function SectionHeader({
-  title,
-  description,
-  link,
-  as: Tag = "h2",
-}: TSectionHeaderProps) {
+export function SectionHeader({ title, description, link, as: Tag = "h2" }: TSectionHeaderProps) {
   const titleClasses = cn(
     "font-semibold tracking-tight",
     Tag === "h1" ? TEXT_SIZE.title : TEXT_SIZE.heading

@@ -41,21 +41,14 @@ export function Callout({ variant = "note", title, children }: TProps) {
   const Icon = config.icon;
 
   return (
-    <div
-      className={cn(
-        "my-6 rounded-lg border-l-4 p-4",
-        config.containerClass
-      )}
-    >
+    <div className={cn("my-6 rounded-lg border-l-4 p-4", config.containerClass)}>
       <div className="flex items-center gap-2 mb-2">
         <Icon className={cn("size-5", config.iconClass)} />
         <span className={cn("font-semibold", config.titleClass)}>
           {title || config.defaultTitle}
         </span>
       </div>
-      <div className="text-muted-foreground text-sm [&>p]:mb-0">
-        {children}
-      </div>
+      <div className="text-muted-foreground text-sm [&>p]:mb-0">{children}</div>
     </div>
   );
 }

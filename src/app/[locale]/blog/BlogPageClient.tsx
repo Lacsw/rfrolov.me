@@ -31,18 +31,10 @@ export function BlogPageClient({ posts, tags }: TProps) {
   return (
     <section className="min-h-[calc(100vh-4rem)] py-12 lg:py-16">
       <Container>
-        <motion.div
-          {...FADE_IN}
-          transition={FADE_IN_TRANSITION}
-          className="space-y-12"
-        >
+        <motion.div {...FADE_IN} transition={FADE_IN_TRANSITION} className="space-y-12">
           <div className="space-y-6">
             <div className="flex items-start justify-between gap-4">
-              <SectionHeader
-                as="h1"
-                description={t("description")}
-                title={t("title")}
-              />
+              <SectionHeader as="h1" description={t("description")} title={t("title")} />
               <ViewToggle view={view} onViewChange={setView} />
             </div>
 
@@ -92,9 +84,7 @@ export function BlogPageClient({ posts, tags }: TProps) {
               </div>
             )
           ) : (
-            <p className="text-muted-foreground text-center py-12">
-              {t("noPostsFound")}
-            </p>
+            <p className="text-muted-foreground text-center py-12">{t("noPostsFound")}</p>
           )}
         </motion.div>
       </Container>

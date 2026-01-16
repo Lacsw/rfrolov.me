@@ -4,8 +4,8 @@ import { useTranslations } from "next-intl";
 
 import { AnimatedSection, Container } from "@/components/ui";
 import { HOVER_OPACITY, SPACING } from "@/constants";
-import { cn } from "@/lib/utils";
 import { Link } from "@/i18n/routing";
+import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";
 
 import { BlogPostCard } from "./components";
@@ -26,13 +26,8 @@ export function BlogList({ posts }: TProps) {
       <Container>
         <AnimatedSection className="space-y-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold tracking-tight">
-              {t("latestPosts")}
-            </h2>
-            <Link
-              href="/blog"
-              className={cn("text-sm text-muted-foreground", HOVER_OPACITY)}
-            >
+            <h2 className="text-lg font-semibold tracking-tight">{t("latestPosts")}</h2>
+            <Link href="/blog" className={cn("text-sm text-muted-foreground", HOVER_OPACITY)}>
               {t("viewAll")}
             </Link>
           </div>

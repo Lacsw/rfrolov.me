@@ -1,11 +1,17 @@
 "use client";
 
-import { Link } from "@/i18n/routing";
-
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
-import { ARROW_HOVER, CARD_BASE, CARD_BORDER, CARD_HOVER, getStaggeredAnimation, ICON_SIZE } from "@/constants";
+import {
+  ARROW_HOVER,
+  CARD_BASE,
+  CARD_BORDER,
+  CARD_HOVER,
+  getStaggeredAnimation,
+  ICON_SIZE,
+} from "@/constants";
+import { Link } from "@/i18n/routing";
 import { formatDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";
@@ -41,12 +47,12 @@ export function BlogPostCard({ post, index }: TBlogPostCardProps) {
             </div>
             <h3 className="font-medium">{post.title}</h3>
           </div>
-          <ArrowUpRight className={cn(ICON_SIZE.sm, "shrink-0 text-muted-foreground", ARROW_HOVER.upRight)} />
+          <ArrowUpRight
+            className={cn(ICON_SIZE.sm, "shrink-0 text-muted-foreground", ARROW_HOVER.upRight)}
+          />
         </div>
 
-        <p className="text-sm text-muted-foreground line-clamp-2 mt-3 grow">
-          {post.description}
-        </p>
+        <p className="text-sm text-muted-foreground line-clamp-2 mt-3 grow">{post.description}</p>
 
         <div className="mt-4">
           <BlogTags tags={post.tags} limit={3} wrap insideCard />

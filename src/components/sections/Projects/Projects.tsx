@@ -19,9 +19,8 @@ export function Projects({ projects }: TProps) {
   const t = useTranslations("projects");
   const [filter, setFilter] = useState<TProjectCategory | "all">("all");
 
-  const filteredProjects = filter === "all"
-    ? projects
-    : projects.filter((p) => p.category === filter);
+  const filteredProjects =
+    filter === "all" ? projects : projects.filter((p) => p.category === filter);
 
   const [firstProject, ...restProjects] = filteredProjects;
 
@@ -30,11 +29,7 @@ export function Projects({ projects }: TProps) {
       <Container>
         <AnimatedSection className="space-y-12">
           <div className="space-y-6">
-            <SectionHeader
-              title={t("title")}
-              description={t("description")}
-              as="h1"
-            />
+            <SectionHeader title={t("title")} description={t("description")} as="h1" />
 
             <div className="flex flex-wrap gap-2">
               {CATEGORY_FILTER_OPTIONS.map((option) => (
@@ -55,15 +50,9 @@ export function Projects({ projects }: TProps) {
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
-            {firstProject && (
-              <ProjectCard project={firstProject} index={0} large />
-            )}
+            {firstProject && <ProjectCard project={firstProject} index={0} large />}
             {restProjects.map((project, index) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                index={index + 1}
-              />
+              <ProjectCard key={project.id} project={project} index={index + 1} />
             ))}
           </div>
         </AnimatedSection>
