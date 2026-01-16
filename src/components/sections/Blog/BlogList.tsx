@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 
 import { AnimatedSection, Container } from "@/components/ui";
-import { HOVER_OPACITY } from "@/constants";
+import { HOVER_OPACITY, SPACING } from "@/constants";
 import { cn } from "@/lib/utils";
 import { Link } from "@/i18n/routing";
 import { TBlogPostMeta } from "@/types";
@@ -22,7 +22,7 @@ export function BlogList({ posts }: TProps) {
   }
 
   return (
-    <section className="py-12 lg:py-16">
+    <section className={SPACING.section}>
       <Container>
         <AnimatedSection className="space-y-6">
           <div className="flex items-center justify-between">

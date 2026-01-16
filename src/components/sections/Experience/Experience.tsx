@@ -5,7 +5,7 @@ import { ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { AnimatedSection, Container } from "@/components/ui";
-import { HOVER_OPACITY, ICON_SIZE, TRANSITION } from "@/constants";
+import { HOVER_OPACITY, ICON_SIZE, SPACING, TRANSITION } from "@/constants";
 import { useToggle } from "@/hooks";
 import { cn } from "@/lib/utils";
 import { TExperience } from "@/types";
@@ -28,7 +28,7 @@ export function Experience({ experiences }: TProps) {
   const hasMore = experiences.length > VISIBLE_COUNT;
 
   return (
-    <section className="py-12 lg:py-16">
+    <section className={SPACING.section}>
       <Container>
         <AnimatedSection className="space-y-6">
           <h2 className="text-lg font-semibold tracking-tight">{t("title")}</h2>

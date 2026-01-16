@@ -30,3 +30,13 @@ export const TRANSITION = {
   normal: "duration-200",
   slow: "duration-300",
 } as const;
+
+export const SPACING = {
+  section: "py-12 lg:py-16",
+  gap: {
+    xs: "gap-1.5",
+    sm: "gap-2",
+    md: "gap-4",
+    lg: "gap-6",
+  },
+} as const;
