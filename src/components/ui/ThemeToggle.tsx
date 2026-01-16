@@ -1,10 +1,12 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import { useHydrated } from "@/hooks";
+
+import { IconButton } from "./IconButton";
 
 export function ThemeToggle() {
   const { setTheme, resolvedTheme } = useTheme();
@@ -12,21 +14,17 @@ export function ThemeToggle() {
 
   if (!hydrated) {
     return (
-      <button
-        className="p-2 rounded-md text-muted-foreground"
-        aria-label="Toggle theme"
-      >
+      <IconButton aria-label="Toggle theme" disabled>
         <div className="h-4 w-4" />
-      </button>
+      </IconButton>
     );
   }
 
   const isDark = resolvedTheme === "dark";
 
   return (
-    <button
+    <IconButton
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors cursor-pointer"
       aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
     >
       <AnimatePresence mode="wait" initial={false}>
@@ -40,6 +38,6 @@ export function ThemeToggle() {
           {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
         </motion.div>
       </AnimatePresence>
-    </button>
+    </IconButton>
   );
 }
