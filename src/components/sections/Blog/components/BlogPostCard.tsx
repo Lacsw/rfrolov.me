@@ -54,7 +54,7 @@ export function BlogPostCard({ post, index }: TBlogPostCardProps) {
         </p>
 
         <div className="mt-4">
-          <BlogTags tags={post.tags} limit={3} wrap />
+          <BlogTags tags={post.tags} limit={3} wrap clickable={false} />
         </div>
       </Link>
     </motion.div>

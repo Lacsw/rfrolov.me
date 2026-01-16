@@ -37,7 +37,7 @@ export function BlogPostListItem({ post, index }: TProps) {
             <h3 className="font-medium truncate group-hover:text-foreground/80 transition-colors">
               {post.title}
             </h3>
-            <BlogTags tags={post.tags} limit={2} size="sm" />
+            <BlogTags tags={post.tags} limit={2} size="sm" clickable={false} />
           </div>
           <p className="text-sm text-muted-foreground line-clamp-1">
             {post.description}
