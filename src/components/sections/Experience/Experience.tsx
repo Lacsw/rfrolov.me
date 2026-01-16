@@ -5,7 +5,7 @@ import { ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { AnimatedSection, Container } from "@/components/ui";
-import { HOVER_OPACITY } from "@/constants";
+import { HOVER_OPACITY, ICON_SIZE, TRANSITION } from "@/constants";
 import { useToggle } from "@/hooks";
 import { cn } from "@/lib/utils";
 import { TExperience } from "@/types";
@@ -75,7 +75,7 @@ export function Experience({ experiences }: TProps) {
             >
               <span>{isExpanded ? t("showLess") : t("showMore", { count: hiddenExperiences.length })}</span>
               <ChevronDown
-                className={cn("h-4 w-4 transition-transform duration-200", isExpanded && "rotate-180")}
+                className={cn(ICON_SIZE.sm, "transition-transform", TRANSITION.normal, isExpanded && "rotate-180")}
               />
             </button>
           )}

@@ -17,4 +17,5 @@ export {
   HOVER_TEXT_COLOR,
   ICON_SIZE,
   TEXT_SIZE,
+  TRANSITION,
 } from "./styles";

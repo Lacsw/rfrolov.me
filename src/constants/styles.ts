@@ -24,3 +24,9 @@ export const TEXT_SIZE = {
   heading: "text-lg",
   title: "text-2xl",
 } as const;
+
+export const TRANSITION = {
+  fast: "duration-100",
+  normal: "duration-200",
+  slow: "duration-300",
+} as const;
