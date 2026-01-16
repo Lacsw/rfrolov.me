@@ -33,7 +33,16 @@ function parseFilename(filename: string): TParsedFilename | null {
   };
 }
 
-export function getAllPosts(locale: TLocale): TBlogPostMeta[] {
+type TGetAllPostsOptions = {
+  includeDrafts?: boolean;
+};
+
+export function getAllPosts(
+  locale: TLocale,
+  options: TGetAllPostsOptions = {}
+): TBlogPostMeta[] {
+  const { includeDrafts = false } = options;
+
   if (!fs.existsSync(BLOG_DIR)) {
     return [];
   }
@@ -54,8 +63,8 @@ export function getAllPosts(locale: TLocale): TBlogPostMeta[] {
 
       const isDraft = data.draft || false;
 
-      // Hide drafts in production
-      if (IS_PRODUCTION && isDraft) {
+      // Hide drafts in production (unless explicitly requested)
+      if (IS_PRODUCTION && isDraft && !includeDrafts) {
         return null;
       }
 
@@ -75,6 +84,11 @@ export function getAllPosts(locale: TLocale): TBlogPostMeta[] {
     .sort((a, b) => a.order - b.order);
 
   return posts;
+}
+
+// For generateStaticParams - always include all posts including drafts
+export function getAllPostSlugs(locale: TLocale): string[] {
+  return getAllPosts(locale, { includeDrafts: true }).map((post) => post.slug);
 }
 
 function findPostFile(slug: string, locale: TLocale): string | null {

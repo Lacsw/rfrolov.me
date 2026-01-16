@@ -7,7 +7,7 @@ import rehypeSlug from "rehype-slug";
 
 import { mdxComponents } from "@/components/sections/Blog";
 import { locales, TLocale } from "@/i18n/config";
-import { extractHeadings, getAdjacentPosts, getAllPosts, getPostBySlug } from "@/lib/blog";
+import { extractHeadings, getAdjacentPosts, getAllPostSlugs, getPostBySlug } from "@/lib/blog";
 
 import { BlogPostLayout } from "./BlogPostLayout";
 
@@ -17,9 +17,9 @@ type TProps = {
 
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
-    getAllPosts(locale).map((post) => ({
+    getAllPostSlugs(locale).map((slug) => ({
       locale,
-      slug: post.slug,
+      slug,
     }))
   );
 }
