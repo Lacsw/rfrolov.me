@@ -15,7 +15,6 @@ export { ThemeToggle } from "./ThemeToggle";
 export { ViewToggle } from "./ViewToggle";
 
 export {
-  CategoryBadge,
   CategoryWithYear,
   ProjectHighlight,
   ProjectLinks,
