@@ -1,3 +1,5 @@
+import { cn } from "@/lib/utils";
+
 import { type TTerminalLineType } from "../constants";
 
 type TProps = {
@@ -15,7 +17,7 @@ const LINE_COLORS: Record<TTerminalLineType, string> = {
 
 export function TerminalLine({ type, text }: TProps) {
   return (
-    <div className={`${LINE_COLORS[type]} leading-relaxed whitespace-pre`}>
+    <div className={cn(LINE_COLORS[type], "leading-relaxed whitespace-pre")}>
       {text || "\u00A0"}
     </div>
   );

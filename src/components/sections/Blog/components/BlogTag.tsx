@@ -4,6 +4,7 @@ import { MouseEvent } from "react";
 
 import { Tag } from "@/components/ui/Tag";
 import { HOVER_OPACITY } from "@/constants";
+import { cn } from "@/lib/utils";
 import { Link, useRouter } from "@/i18n/routing";
 import { getTagUrl } from "@/lib/urls";
 
@@ -30,7 +31,7 @@ export function BlogTag({ tag, size = "md", insideCard = false }: TProps) {
       <span
         role="link"
         onClick={handleClick}
-        className={`relative z-10 ${HOVER_OPACITY}`}
+        className={cn("relative z-10", HOVER_OPACITY)}
       >
         <Tag size={size} variant="colored" colorClass={colorClass}>
           {tag}

@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { HOVER_OPACITY } from "@/constants";
+import { cn } from "@/lib/utils";
 
 type TSectionHeaderProps = {
   title: string;
@@ -33,7 +34,7 @@ export function SectionHeader({
       {link && (
         <Link
           href={link.href}
-          className={`text-sm text-muted-foreground ${HOVER_OPACITY}`}
+          className={cn("text-sm text-muted-foreground", HOVER_OPACITY)}
         >
           {link.label}
         </Link>

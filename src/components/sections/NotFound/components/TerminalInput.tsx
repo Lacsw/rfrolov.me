@@ -2,6 +2,8 @@
 
 import { useRef, useEffect } from "react";
 
+import { cn } from "@/lib/utils";
+
 import { PROMPT } from "../constants";
 
 type TTerminalInputProps = {
@@ -58,7 +60,7 @@ export function TerminalInput({
         <div className="absolute inset-0 pointer-events-none flex items-center">
           <span className="text-foreground">{value}</span>
           <span className="text-muted-foreground/50">{suggestion}</span>
-          <span className={`${showCursor ? "opacity-100" : "opacity-0"} text-foreground`}>_</span>
+          <span className={cn("text-foreground", showCursor ? "opacity-100" : "opacity-0")}>_</span>
         </div>
       </div>
     </div>

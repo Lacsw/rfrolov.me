@@ -71,7 +71,7 @@ export function Experience({ experiences }: TProps) {
           {hasMore && (
             <button
               onClick={toggle}
-              className={`flex items-center gap-1 text-sm text-muted-foreground ${HOVER_OPACITY}`}
+              className={cn("flex items-center gap-1 text-sm text-muted-foreground", HOVER_OPACITY)}
             >
               <span>{isExpanded ? t("showLess") : t("showMore", { count: hiddenExperiences.length })}</span>
               <ChevronDown
