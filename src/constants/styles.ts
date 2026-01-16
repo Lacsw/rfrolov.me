@@ -17,3 +17,10 @@ export const ICON_SIZE = {
   md: "h-5 w-5",
   lg: "h-6 w-6",
 } as const;
+
+export const TEXT_SIZE = {
+  label: "text-xs",
+  body: "text-sm",
+  heading: "text-lg",
+  title: "text-2xl",
+} as const;

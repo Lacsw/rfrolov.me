@@ -16,4 +16,5 @@ export {
   HOVER_OPACITY,
   HOVER_TEXT_COLOR,
   ICON_SIZE,
+  TEXT_SIZE,
 } from "./styles";
