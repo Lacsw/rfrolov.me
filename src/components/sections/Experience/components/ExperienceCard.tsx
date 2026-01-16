@@ -8,12 +8,12 @@ import { TExperience } from "@/types";
 
 import { EXPERIENCE_ANIMATION } from "../constants";
 
-type ExperienceCardProps = {
+type TExperienceCardProps = {
   experience: TExperience;
   isLast?: boolean;
 };
 
-export function ExperienceCard({ experience, isLast }: ExperienceCardProps) {
+export function ExperienceCard({ experience, isLast }: TExperienceCardProps) {
   const isCurrentPosition = experience.endDate === "Present";
 
   return (

@@ -1,11 +1,11 @@
 import { type ReactNode } from "react";
 
-type TerminalWindowProps = {
+type TTerminalWindowProps = {
   children: ReactNode;
   onContentClick?: () => void;
 };
 
-export function TerminalWindow({ children, onContentClick }: TerminalWindowProps) {
+export function TerminalWindow({ children, onContentClick }: TTerminalWindowProps) {
   return (
     <div className="rounded-lg border border-muted overflow-hidden bg-muted/30">
       <div className="flex items-center gap-2 px-4 py-3 bg-muted/50 border-b border-muted">

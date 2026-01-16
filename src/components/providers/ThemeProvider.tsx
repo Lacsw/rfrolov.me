@@ -2,11 +2,11 @@
 
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 
-type ThemeProviderProps = {
+type TThemeProviderProps = {
   children: React.ReactNode;
 };
 
-export function ThemeProvider({ children }: ThemeProviderProps) {
+export function ThemeProvider({ children }: TThemeProviderProps) {
   return (
     <NextThemesProvider
       attribute="class"

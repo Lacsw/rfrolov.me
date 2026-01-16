@@ -4,7 +4,7 @@ import { useRef, useEffect } from "react";
 
 import { PROMPT } from "../constants";
 
-type TerminalInputProps = {
+type TTerminalInputProps = {
   value: string;
   suggestion: string;
   showCursor: boolean;
@@ -22,7 +22,7 @@ export function TerminalInput({
   onChange,
   onSubmit,
   onTabComplete,
-}: TerminalInputProps) {
+}: TTerminalInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
