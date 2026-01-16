@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 
 import { motion } from "framer-motion";
 
-import { FADE_IN, getFadeInTransition } from "@/constants";
+import { getStaggeredAnimation } from "@/constants";
 import { cn } from "@/lib/utils";
 
 type TAnimatedCardProps = {
@@ -33,14 +33,15 @@ export function AnimatedCard({
     className
   );
 
+  const animation = getStaggeredAnimation(index);
+
   if (href) {
     return (
       <motion.a
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        {...FADE_IN}
-        transition={getFadeInTransition(index)}
+        {...animation}
         className={cn(baseClasses, "cursor-pointer")}
       >
         {children}
@@ -49,11 +50,7 @@ export function AnimatedCard({
   }
 
   return (
-    <motion.div
-      {...FADE_IN}
-      transition={getFadeInTransition(index)}
-      className={baseClasses}
-    >
+    <motion.div {...animation} className={baseClasses}>
       {children}
     </motion.div>
   );

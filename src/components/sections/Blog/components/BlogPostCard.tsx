@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
+import { getStaggeredAnimation } from "@/constants";
 import { formatDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";
@@ -21,12 +22,7 @@ export function BlogPostCard({ post, index }: TBlogPostCardProps) {
   const formattedDate = formatDate(post.date);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1, duration: 0.5 }}
-      className="h-full"
-    >
+    <motion.div {...getStaggeredAnimation(index)} className="h-full">
       <Link
         href={`/blog/${post.slug}`}
         className={cn(

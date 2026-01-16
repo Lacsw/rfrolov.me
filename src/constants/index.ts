@@ -2,6 +2,7 @@ export {
   FADE_IN,
   FADE_IN_TRANSITION,
   getFadeInTransition,
+  getStaggeredAnimation,
 } from "./animations";
 export {
   CATEGORY_COLORS,
