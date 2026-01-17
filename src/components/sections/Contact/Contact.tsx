@@ -8,13 +8,14 @@ import { socialLinks } from "@/data/social-links";
 
 export function Contact() {
   const t = useTranslations("contact");
+  const linkedInUrl = socialLinks.find((link) => link.name === "LinkedIn")?.href;
 
   return (
     <section className="py-8 lg:py-12 border-t border-muted">
       <Container>
         <AnimatedSection className="flex items-center justify-between">
           <a
-            href="https://www.linkedin.com/in/r-frolov"
+            href={linkedInUrl}
             {...EXTERNAL_LINK_PROPS}
             className="text-lg font-semibold tracking-tight hover:text-muted-foreground transition-colors"
           >
