@@ -13,11 +13,14 @@ import { ProjectCard } from "./ProjectCard";
 
 type TProps = {
   projects: TProject[];
+  projectsWithDetails?: string[];
 };
 
-export function Projects({ projects }: TProps) {
+export function Projects({ projects, projectsWithDetails = [] }: TProps) {
   const t = useTranslations("projects");
   const [filter, setFilter] = useState<TProjectCategory | "all">("all");
+
+  const detailIds = new Set(projectsWithDetails);
 
   const filteredProjects =
     filter === "all" ? projects : projects.filter((p) => p.category === filter);
@@ -50,9 +53,21 @@ export function Projects({ projects }: TProps) {
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
-            {firstProject && <ProjectCard project={firstProject} index={0} large />}
+            {firstProject && (
+              <ProjectCard
+                project={firstProject}
+                index={0}
+                large
+                hasDetail={detailIds.has(firstProject.id)}
+              />
+            )}
             {restProjects.map((project, index) => (
-              <ProjectCard key={project.id} project={project} index={index + 1} />
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={index + 1}
+                hasDetail={detailIds.has(project.id)}
+              />
             ))}
           </div>
         </AnimatedSection>

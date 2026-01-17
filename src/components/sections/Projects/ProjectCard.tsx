@@ -15,9 +15,12 @@ type TProjectCardProps = {
   project: TProject;
   index: number;
   large?: boolean;
+  hasDetail?: boolean;
 };
 
-export function ProjectCard({ project, index, large = false }: TProjectCardProps) {
+export function ProjectCard({ project, index, large = false, hasDetail = false }: TProjectCardProps) {
+  const detailHref = hasDetail ? `/projects/${project.id}` : undefined;
+
   return (
     <AnimatedCard index={index} featured={project.featured} large={large}>
       <div className={cn("flex flex-col h-full", large ? "md:flex-row md:gap-8" : "gap-3")}>
@@ -46,7 +49,7 @@ export function ProjectCard({ project, index, large = false }: TProjectCardProps
             technologies={project.technologies}
             className={cn("gap-2", large && "md:flex-col md:items-end md:gap-1.5")}
           />
-          <ProjectLinks href={project.href} github={project.github} />
+          <ProjectLinks href={project.href} github={project.github} detailHref={detailHref} />
         </div>
       </div>
     </AnimatedCard>
