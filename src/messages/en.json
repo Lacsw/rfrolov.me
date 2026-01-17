@@ -33,7 +33,16 @@
       "personal": "Personal",
       "work": "Work",
       "opensource": "Open Source"
-    }
+    },
+    "backToProjects": "Back to Projects",
+    "role": "Role",
+    "duration": "Duration",
+    "team": "Team",
+    "technologies": "Technologies",
+    "relatedProjects": "Related Projects",
+    "viewLive": "View Live",
+    "viewSource": "View Source",
+    "readCaseStudy": "Read Case Study"
   },
   "blog": {
     "title": "Blog",

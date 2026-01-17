@@ -33,7 +33,16 @@
       "personal": "Persönlich",
       "work": "Arbeit",
       "opensource": "Open Source"
-    }
+    },
+    "backToProjects": "Zurück zu Projekten",
+    "role": "Rolle",
+    "duration": "Dauer",
+    "team": "Team",
+    "technologies": "Technologien",
+    "relatedProjects": "Ähnliche Projekte",
+    "viewLive": "Live ansehen",
+    "viewSource": "Quellcode ansehen",
+    "readCaseStudy": "Case Study lesen"
   },
   "blog": {
     "title": "Blog",
