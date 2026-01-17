@@ -61,3 +61,21 @@ export type THeading = {
   text: string;
   level: 2 | 3;
 };
+
+export type TProjectScreenshot = {
+  src: string;
+  alt: string;
+  caption?: string;
+};
+
+export type TProjectDetailMeta = TProject & {
+  longDescription?: string;
+  role?: string;
+  duration?: string;
+  team?: string;
+  screenshots?: TProjectScreenshot[];
+};
+
+export type TProjectDetail = TProjectDetailMeta & {
+  content: string;
+};
