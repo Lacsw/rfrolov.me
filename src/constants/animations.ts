@@ -1,10 +1,17 @@
+export const ANIMATION_DURATION = {
+  fast: 0.2,
+  normal: 0.3,
+  slow: 0.4,
+  slower: 0.5,
+} as const;
+
 export const FADE_IN = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
 };
 
 export const FADE_IN_TRANSITION = {
-  duration: 0.5,
+  duration: ANIMATION_DURATION.slower,
 };
 
 type TStaggerOptions = {
@@ -14,7 +21,7 @@ type TStaggerOptions = {
 };
 
 export function getStaggeredAnimation(index: number, options: TStaggerOptions = {}) {
-  const { y = 20, delayMultiplier = 0.1, duration = 0.5 } = options;
+  const { y = 20, delayMultiplier = 0.1, duration = ANIMATION_DURATION.slower } = options;
 
   return {
     initial: { opacity: 0, y },

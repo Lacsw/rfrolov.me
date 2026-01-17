@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
-import { ARROW_HOVER, getStaggeredAnimation, ICON_SIZE } from "@/constants";
+import { ANIMATION_DURATION, ARROW_HOVER, getStaggeredAnimation, ICON_SIZE } from "@/constants";
 import { Link } from "@/i18n/routing";
 import { formatDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
@@ -21,7 +21,9 @@ export function BlogPostListItem({ post, index }: TBlogPostListItemProps) {
   const formattedDate = formatDate(post.date);
 
   return (
-    <motion.div {...getStaggeredAnimation(index, { y: 10, delayMultiplier: 0.05, duration: 0.3 })}>
+    <motion.div
+      {...getStaggeredAnimation(index, { y: 10, delayMultiplier: 0.05, duration: ANIMATION_DURATION.normal })}
+    >
       <Link
         href={`/blog/${post.slug}` as "/blog"}
         className={cn(

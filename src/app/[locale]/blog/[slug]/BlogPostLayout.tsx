@@ -7,6 +7,7 @@ import { Clock } from "lucide-react";
 
 import { BlogTag, PostNavigation, TableOfContents } from "@/components/sections/Blog";
 import { BackLink, Container, ReadingProgress } from "@/components/ui";
+import { ANIMATION_DURATION } from "@/constants";
 import { TAdjacentPosts } from "@/lib/blog";
 import { formatDate } from "@/lib/date";
 import { TBlogPostMeta, THeading } from "@/types";
@@ -30,7 +31,7 @@ export function BlogPostLayout({ post, headings, adjacentPosts, children }: TBlo
             <motion.article
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: ANIMATION_DURATION.slower }}
               className="max-w-2xl"
             >
               <BackLink href="/blog">Back to blog</BackLink>

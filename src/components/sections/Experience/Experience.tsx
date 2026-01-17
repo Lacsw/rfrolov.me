@@ -5,7 +5,7 @@ import { ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { AnimatedSection, Container } from "@/components/ui";
-import { HOVER_OPACITY, ICON_SIZE, SPACING, TRANSITION } from "@/constants";
+import { ANIMATION_DURATION, HOVER_OPACITY, ICON_SIZE, SPACING, TRANSITION } from "@/constants";
 import { useToggle } from "@/hooks";
 import { cn } from "@/lib/utils";
 import { TExperience } from "@/types";
@@ -50,7 +50,7 @@ export function Experience({ experiences }: TProps) {
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: ANIMATION_DURATION.normal }}
                 >
                   {hiddenExperiences.map((exp, index) => (
                     <ExperienceCard

@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
-import { ICON_SIZE } from "@/constants";
+import { ANIMATION_DURATION, ICON_SIZE } from "@/constants";
 import { useHydrated } from "@/hooks";
 
 import { IconButton } from "./IconButton";
@@ -34,7 +34,7 @@ export function ThemeToggle() {
           initial={{ opacity: 0, rotate: -90, scale: 0.8 }}
           animate={{ opacity: 1, rotate: 0, scale: 1 }}
           exit={{ opacity: 0, rotate: 90, scale: 0.8 }}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: ANIMATION_DURATION.fast }}
         >
           {isDark ? <Sun className={ICON_SIZE.sm} /> : <Moon className={ICON_SIZE.sm} />}
         </motion.div>

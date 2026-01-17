@@ -1,3 +1,4 @@
+import { ANIMATION_DURATION } from "@/constants";
 import { TSkill } from "@/types";
 
 export const SKILLS: TSkill[] = [
@@ -34,7 +35,7 @@ export const SKILLS_ANIMATION = {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.3,
+        duration: ANIMATION_DURATION.normal,
         ease: "easeOut",
       },
     },

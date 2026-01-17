@@ -1,3 +1,5 @@
+import { ANIMATION_DURATION } from "@/constants";
+
 export const EXPERIENCE_ANIMATION = {
   container: {
     hidden: { opacity: 0 },
@@ -14,7 +16,7 @@ export const EXPERIENCE_ANIMATION = {
       opacity: 1,
       x: 0,
       transition: {
-        duration: 0.4,
+        duration: ANIMATION_DURATION.slow,
         ease: "easeOut",
       },
     },

@@ -1,3 +1,5 @@
+import { ANIMATION_DURATION } from "@/constants";
+
 export const HERO_CONTENT = {
   greeting: "Hi, my name is",
   name: "Roman Frolov",
@@ -23,12 +25,12 @@ export const ANIMATION_CONFIG = {
   fadeIn: {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
-    duration: 0.5,
+    duration: ANIMATION_DURATION.slower,
   },
   scaleIn: {
     initial: { opacity: 0, scale: 0.95 },
     animate: { opacity: 1, scale: 1 },
-    duration: 0.5,
-    delay: 0.2,
+    duration: ANIMATION_DURATION.slower,
+    delay: ANIMATION_DURATION.fast,
   },
 };
