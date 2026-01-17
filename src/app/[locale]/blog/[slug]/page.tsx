@@ -6,6 +6,7 @@ import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 
 import { mdxComponents } from "@/components/sections/Blog";
+import { JsonLd } from "@/components/seo";
 import { locales, TLocale } from "@/i18n/config";
 import {
   extractHeadings,
@@ -16,6 +17,7 @@ import {
   getSeriesInfo,
   TSeriesInfo,
 } from "@/lib/blog";
+import { generateBlogPostSchema } from "@/lib/jsonld";
 
 import { BlogPostLayout } from "./BlogPostLayout";
 
@@ -59,6 +61,7 @@ export default async function BlogPostPage({ params }: TProps) {
 
   return (
     <main className="pt-16">
+      <JsonLd data={generateBlogPostSchema(postMeta, locale)} />
       <BlogPostLayout
         post={postMeta}
         headings={headings}
