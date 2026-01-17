@@ -6,6 +6,8 @@ import { Check, Copy } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
+const COPY_RESET_DELAY_MS = 2000;
+
 type TCopyButtonProps = {
   text: string;
 };
@@ -16,7 +18,7 @@ export function CopyButton({ text }: TCopyButtonProps) {
   const handleCopy = useCallback(async () => {
     await navigator.clipboard.writeText(text);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setTimeout(() => setCopied(false), COPY_RESET_DELAY_MS);
   }, [text]);
 
   return (

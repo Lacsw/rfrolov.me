@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { THeading } from "@/types";
 
+// -96px accounts for sticky header, -66% triggers when heading is in top third of viewport
+const TOC_OBSERVER_MARGIN = "-96px 0px -66% 0px";
+
 type TTableOfContentsProps = {
   headings: THeading[];
 };
@@ -22,7 +25,7 @@ export function TableOfContents({ headings }: TTableOfContentsProps) {
           }
         }
       },
-      { rootMargin: "-96px 0px -66% 0px" }
+      { rootMargin: TOC_OBSERVER_MARGIN }
     );
 
     headings.forEach(({ id }) => {
