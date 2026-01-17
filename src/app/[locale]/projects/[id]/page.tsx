@@ -13,8 +13,10 @@ import {
   ProjectMeta,
   RelatedProjects,
 } from "@/components/sections/Projects";
+import { JsonLd } from "@/components/seo";
 import { Container } from "@/components/ui";
 import { locales, TLocale } from "@/i18n/config";
+import { generateProjectJsonLd } from "@/lib/jsonld";
 import { getAllProjectIdsWithContent, getProjectById, getRelatedProjects } from "@/lib/projects";
 
 type TProps = {
@@ -69,6 +71,7 @@ export default async function ProjectDetailPage({ params }: TProps) {
 
   return (
     <main className="pt-16">
+      <JsonLd data={generateProjectJsonLd(projectMeta, locale)} />
       <section className="py-12 lg:py-16">
         <Container>
           <div className="lg:grid lg:grid-cols-[1fr_200px] lg:gap-10 xl:grid-cols-[1fr_250px]">

@@ -1,4 +1,4 @@
-import { TBlogPostMeta } from "@/types";
+import { TBlogPostMeta, TProjectDetailMeta } from "@/types";
 
 const BASE_URL = "https://rfrolov.me";
 
@@ -55,5 +55,25 @@ export function generateWebsiteSchema() {
       "@type": "Person",
       name: "Roman Frolov",
     },
+  };
+}
+
+export function generateProjectJsonLd(project: TProjectDetailMeta, locale: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: project.title,
+    description: project.longDescription || project.description,
+    applicationCategory: "WebApplication",
+    author: {
+      "@type": "Person",
+      name: "Roman Frolov",
+      url: BASE_URL,
+    },
+    dateCreated: `${project.year}-01-01`,
+    url: project.href || `${BASE_URL}/${locale}/projects/${project.id}`,
+    ...(project.github && { codeRepository: project.github }),
+    keywords: project.technologies.join(", "),
+    inLanguage: locale === "de" ? "de-DE" : "en-US",
   };
 }
