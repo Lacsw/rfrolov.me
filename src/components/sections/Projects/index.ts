@@ -3,3 +3,4 @@ export { ProjectCard } from "./ProjectCard";
 export { ProjectContent } from "./ProjectContent";
 export { ProjectHero } from "./ProjectHero";
 export { ProjectMeta } from "./ProjectMeta";
+export { RelatedProjects } from "./RelatedProjects";
