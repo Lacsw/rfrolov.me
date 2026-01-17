@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { Clock } from "lucide-react";
 
-import { BlogTag, PostNavigation, TableOfContents } from "@/components/sections/Blog";
+import { BlogTag, PostNavigation, RelatedPosts, TableOfContents } from "@/components/sections/Blog";
 import { BackLink, Container, ReadingProgress } from "@/components/ui";
 import { ANIMATION_DURATION } from "@/constants";
 import { TAdjacentPosts } from "@/lib/blog";
@@ -16,10 +16,17 @@ type TBlogPostLayoutProps = {
   post: TBlogPostMeta;
   headings: THeading[];
   adjacentPosts: TAdjacentPosts;
+  relatedPosts: TBlogPostMeta[];
   children: ReactNode;
 };
 
-export function BlogPostLayout({ post, headings, adjacentPosts, children }: TBlogPostLayoutProps) {
+export function BlogPostLayout({
+  post,
+  headings,
+  adjacentPosts,
+  relatedPosts,
+  children,
+}: TBlogPostLayoutProps) {
   const formattedDate = formatDate(post.date, { month: "long" });
 
   return (
@@ -62,6 +69,8 @@ export function BlogPostLayout({ post, headings, adjacentPosts, children }: TBlo
               <div className="prose-custom">{children}</div>
 
               <PostNavigation previous={adjacentPosts.previous} next={adjacentPosts.next} />
+
+              <RelatedPosts posts={relatedPosts} />
             </motion.article>
 
             {headings.length > 0 && (

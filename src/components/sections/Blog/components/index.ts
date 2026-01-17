@@ -6,4 +6,5 @@ export { Callout } from "./Callout";
 export { mdxComponents } from "./MDXComponents";
 export { PostNavigation } from "./PostNavigation";
 export { ReadingTime } from "./ReadingTime";
+export { RelatedPosts } from "./RelatedPosts";
 export { TableOfContents } from "./TableOfContents";

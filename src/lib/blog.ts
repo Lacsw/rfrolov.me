@@ -209,6 +209,33 @@ export function getAdjacentPosts(slug: string, locale: TLocale): TAdjacentPosts 
   };
 }
 
+export function getRelatedPosts(
+  currentSlug: string,
+  tags: string[],
+  locale: TLocale,
+  limit = 3
+): TBlogPostMeta[] {
+  const posts = getAllPosts(locale);
+
+  // Calculate relevance score based on shared tags
+  const scoredPosts = posts
+    .filter((post) => post.slug !== currentSlug)
+    .map((post) => {
+      const sharedTags = post.tags.filter((tag) =>
+        tags.map((t) => t.toLowerCase()).includes(tag.toLowerCase())
+      );
+
+      return {
+        post,
+        score: sharedTags.length,
+      };
+    })
+    .filter(({ score }) => score > 0)
+    .sort((a, b) => b.score - a.score);
+
+  return scoredPosts.slice(0, limit).map(({ post }) => post);
+}
+
 function slugify(text: string): string {
   return text
     .toLowerCase()
