@@ -22,10 +22,3 @@ export function getStaggeredAnimation(index: number, options: TStaggerOptions = 
     transition: { delay: index * delayMultiplier, duration },
   };
 }
-
-export function getFadeInTransition(index: number) {
-  return {
-    delay: index * 0.1,
-    duration: 0.5,
-  };
-}
