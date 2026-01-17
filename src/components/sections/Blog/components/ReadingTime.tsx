@@ -13,7 +13,7 @@ export function ReadingTime({ minutes, showLabel = false }: TProps) {
 
   return (
     <span className="inline-flex items-center gap-1">
-      <Clock className="h-3 w-3" />
+      <Clock className="h-3 w-3" aria-hidden="true" />
       {showLabel ? t("minRead", { minutes }) : t("min", { minutes })}
     </span>
   );

@@ -41,7 +41,7 @@ export function BlogPostLayout({ post, headings, adjacentPosts, children }: TBlo
                   <time dateTime={post.date}>{formattedDate}</time>
                   <span>·</span>
                   <span className="inline-flex items-center gap-1">
-                    <Clock className="h-4 w-4" />
+                    <Clock className="h-4 w-4" aria-hidden="true" />
                     {post.readingTime} min read
                   </span>
                 </div>
