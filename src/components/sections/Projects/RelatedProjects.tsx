@@ -1,7 +1,6 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-
 import { useTranslations } from "next-intl";
 
 import { TechTags } from "@/components/ui";

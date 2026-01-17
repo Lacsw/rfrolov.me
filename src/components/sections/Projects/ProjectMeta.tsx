@@ -1,5 +1,4 @@
 import { ExternalLink, Github } from "lucide-react";
-
 import { useTranslations } from "next-intl";
 
 import { EXTERNAL_LINK_PROPS, HOVER_OPACITY, ICON_SIZE, TEXT_SIZE } from "@/constants";

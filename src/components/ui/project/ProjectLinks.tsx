@@ -1,5 +1,4 @@
 import { ArrowRight, ArrowUpRight, Github } from "lucide-react";
-
 import { useTranslations } from "next-intl";
 
 import { ICON_SIZE } from "@/constants";
