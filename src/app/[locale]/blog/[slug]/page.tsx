@@ -13,6 +13,8 @@ import {
   getAllPostSlugs,
   getPostBySlug,
   getRelatedPosts,
+  getSeriesInfo,
+  TSeriesInfo,
 } from "@/lib/blog";
 
 import { BlogPostLayout } from "./BlogPostLayout";
@@ -51,6 +53,9 @@ export default async function BlogPostPage({ params }: TProps) {
   const headings = extractHeadings(content);
   const adjacentPosts = getAdjacentPosts(slug, locale);
   const relatedPosts = getRelatedPosts(slug, post.tags, locale);
+  const seriesInfo: TSeriesInfo | null = post.series
+    ? getSeriesInfo(slug, post.series.name, locale)
+    : null;
 
   return (
     <main className="pt-16">
@@ -59,6 +64,7 @@ export default async function BlogPostPage({ params }: TProps) {
         headings={headings}
         adjacentPosts={adjacentPosts}
         relatedPosts={relatedPosts}
+        seriesInfo={seriesInfo}
       >
         <MDXRemote
           source={content}

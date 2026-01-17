@@ -5,10 +5,16 @@ import { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { Clock } from "lucide-react";
 
-import { BlogTag, PostNavigation, RelatedPosts, TableOfContents } from "@/components/sections/Blog";
+import {
+  BlogTag,
+  PostNavigation,
+  RelatedPosts,
+  SeriesNavigation,
+  TableOfContents,
+} from "@/components/sections/Blog";
 import { BackLink, Container, ReadingProgress } from "@/components/ui";
 import { ANIMATION_DURATION } from "@/constants";
-import { TAdjacentPosts } from "@/lib/blog";
+import { TAdjacentPosts, TSeriesInfo } from "@/lib/blog";
 import { formatDate } from "@/lib/date";
 import { TBlogPostMeta, THeading } from "@/types";
 
@@ -17,6 +23,7 @@ type TBlogPostLayoutProps = {
   headings: THeading[];
   adjacentPosts: TAdjacentPosts;
   relatedPosts: TBlogPostMeta[];
+  seriesInfo: TSeriesInfo | null;
   children: ReactNode;
 };
 
@@ -25,6 +32,7 @@ export function BlogPostLayout({
   headings,
   adjacentPosts,
   relatedPosts,
+  seriesInfo,
   children,
 }: TBlogPostLayoutProps) {
   const formattedDate = formatDate(post.date, { month: "long" });
@@ -63,6 +71,8 @@ export function BlogPostLayout({
                   ))}
                 </div>
               </header>
+
+              {seriesInfo && <SeriesNavigation series={seriesInfo} />}
 
               <hr className="border-muted mb-8" />
 

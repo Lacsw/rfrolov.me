@@ -5,7 +5,7 @@ import matter from "gray-matter";
 import readingTime from "reading-time";
 
 import { TLocale } from "@/i18n/config";
-import { TBlogPost, TBlogPostMeta, THeading } from "@/types";
+import { TBlogPost, TBlogPostMeta, TBlogPostSeries, THeading } from "@/types";
 
 const BLOG_DIR = path.join(process.cwd(), "src/content/blog");
 const IS_PRODUCTION = process.env.NODE_ENV === "production";
@@ -68,6 +68,10 @@ export function getAllPosts(
         return null;
       }
 
+      const series: TBlogPostSeries | undefined = data.series
+        ? { name: data.series.name, order: data.series.order }
+        : undefined;
+
       return {
         slug: parsed.slug,
         order: parsed.order,
@@ -77,6 +81,7 @@ export function getAllPosts(
         tags: data.tags || [],
         featured: data.featured || false,
         draft: isDraft,
+        series,
         readingTime: Math.ceil(readingTime(content).minutes),
       } as TBlogPostMeta;
     })
@@ -123,6 +128,10 @@ export function getPostBySlug(slug: string, locale: TLocale): TBlogPost | null {
     return null;
   }
 
+  const series: TBlogPostSeries | undefined = data.series
+    ? { name: data.series.name, order: data.series.order }
+    : undefined;
+
   return {
     slug,
     order: parsed?.order ?? 0,
@@ -132,6 +141,7 @@ export function getPostBySlug(slug: string, locale: TLocale): TBlogPost | null {
     tags: data.tags || [],
     featured: data.featured || false,
     draft: isDraft,
+    series,
     readingTime: Math.ceil(readingTime(content).minutes),
     content,
   };
@@ -206,6 +216,36 @@ export function getAdjacentPosts(slug: string, locale: TLocale): TAdjacentPosts 
   return {
     previous: currentIndex > 0 ? posts[currentIndex - 1] : null,
     next: currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null,
+  };
+}
+
+export type TSeriesInfo = {
+  name: string;
+  posts: TBlogPostMeta[];
+  currentIndex: number;
+};
+
+export function getSeriesInfo(
+  currentSlug: string,
+  seriesName: string,
+  locale: TLocale
+): TSeriesInfo | null {
+  const posts = getAllPosts(locale);
+
+  const seriesPosts = posts
+    .filter((post) => post.series?.name === seriesName)
+    .sort((a, b) => (a.series?.order ?? 0) - (b.series?.order ?? 0));
+
+  if (seriesPosts.length === 0) {
+    return null;
+  }
+
+  const currentIndex = seriesPosts.findIndex((post) => post.slug === currentSlug);
+
+  return {
+    name: seriesName,
+    posts: seriesPosts,
+    currentIndex,
   };
 }
 

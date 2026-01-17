@@ -35,6 +35,11 @@ export type TExperience = {
   technologies: string[];
 };
 
+export type TBlogPostSeries = {
+  name: string;
+  order: number;
+};
+
 export type TBlogPost = {
   slug: string;
   order: number;
@@ -44,6 +49,7 @@ export type TBlogPost = {
   tags: string[];
   featured?: boolean;
   draft?: boolean;
+  series?: TBlogPostSeries;
   readingTime: number;
   content: string;
 };
