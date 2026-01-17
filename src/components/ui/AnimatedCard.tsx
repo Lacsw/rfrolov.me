@@ -4,7 +4,13 @@ import { ReactNode } from "react";
 
 import { motion } from "framer-motion";
 
-import { CARD_BASE, CARD_BORDER, CARD_HOVER, getStaggeredAnimation } from "@/constants";
+import {
+  CARD_BASE,
+  CARD_BORDER,
+  CARD_HOVER,
+  EXTERNAL_LINK_PROPS,
+  getStaggeredAnimation,
+} from "@/constants";
 import { cn } from "@/lib/utils";
 
 type TAnimatedCardProps = {
@@ -39,8 +45,7 @@ export function AnimatedCard({
     return (
       <motion.a
         href={href}
-        target="_blank"
-        rel="noopener noreferrer"
+        {...EXTERNAL_LINK_PROPS}
         {...animation}
         className={cn(baseClasses, "cursor-pointer")}
       >

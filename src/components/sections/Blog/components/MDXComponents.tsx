@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef } from "react";
 
 import Link from "next/link";
 
-import { HOVER_OPACITY } from "@/constants";
+import { EXTERNAL_LINK_PROPS, HOVER_OPACITY } from "@/constants";
 import { cn } from "@/lib/utils";
 
 import { Callout } from "./Callout";
@@ -48,15 +48,7 @@ export const mdxComponents = {
     );
 
     if (isExternal) {
-      return (
-        <a
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={linkClassName}
-          {...props}
-        />
-      );
+      return <a href={href} {...EXTERNAL_LINK_PROPS} className={linkClassName} {...props} />;
     }
 
     return <Link href={href || "#"} className={linkClassName} {...props} />;

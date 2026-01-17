@@ -46,3 +46,8 @@ export const ARROW_HOVER = {
     "transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5",
   right: "transition-transform duration-200 group-hover:translate-x-1",
 } as const;
+
+export const EXTERNAL_LINK_PROPS = {
+  target: "_blank",
+  rel: "noopener noreferrer",
+} as const;

@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 
+import { EXTERNAL_LINK_PROPS } from "@/constants";
 import { cn } from "@/lib/utils";
 
 type TExternalLinkProps = {
@@ -10,12 +11,7 @@ type TExternalLinkProps = {
 
 export function ExternalLink({ href, children, className }: TExternalLinkProps) {
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={cn("cursor-pointer", className)}
-    >
+    <a href={href} {...EXTERNAL_LINK_PROPS} className={cn("cursor-pointer", className)}>
       {children}
     </a>
   );

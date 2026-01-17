@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 
 import { AnimatedSection, Container, SocialLink } from "@/components/ui";
+import { EXTERNAL_LINK_PROPS } from "@/constants";
 import { socialLinks } from "@/data/social-links";
 
 export function Contact() {
@@ -14,8 +15,7 @@ export function Contact() {
         <AnimatedSection className="flex items-center justify-between">
           <a
             href="https://www.linkedin.com/in/r-frolov"
-            target="_blank"
-            rel="noopener noreferrer"
+            {...EXTERNAL_LINK_PROPS}
             className="text-lg font-semibold tracking-tight hover:text-muted-foreground transition-colors"
           >
             {t("getInTouch")}

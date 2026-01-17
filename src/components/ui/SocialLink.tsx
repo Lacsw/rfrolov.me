@@ -1,4 +1,4 @@
-import { HOVER_TEXT_COLOR, ICON_SIZE } from "@/constants";
+import { EXTERNAL_LINK_PROPS, HOVER_TEXT_COLOR, ICON_SIZE } from "@/constants";
 import { cn } from "@/lib/utils";
 import { TSocialLink } from "@/types";
 
@@ -10,8 +10,7 @@ export function SocialLink({ name, href, icon: Icon, className }: TSocialLinkPro
   return (
     <a
       href={href}
-      target="_blank"
-      rel="noopener noreferrer"
+      {...EXTERNAL_LINK_PROPS}
       className={cn(HOVER_TEXT_COLOR, "transition-colors duration-300", className)}
       aria-label={name}
     >
