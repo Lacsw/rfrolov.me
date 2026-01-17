@@ -5,5 +5,5 @@ type TProps = {
 };
 
 export function ProjectContent({ children }: TProps) {
-  return <article className="prose-project">{children}</article>;
+  return <div className="prose-custom">{children}</div>;
 }

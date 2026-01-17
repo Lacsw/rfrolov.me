@@ -2,6 +2,7 @@ import { MetadataRoute } from "next";
 
 import { locales } from "@/i18n/config";
 import { getAllPosts } from "@/lib/blog";
+import { getAllProjectsWithContent } from "@/lib/projects";
 
 const BASE_URL = "https://rfrolov.me";
 
@@ -28,5 +29,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   );
 
-  return [...staticUrls, ...blogUrls];
+  // Generate URLs for project detail pages in all locales
+  const projectUrls = locales.flatMap((locale) =>
+    getAllProjectsWithContent(locale).map((project) => ({
+      url: `${BASE_URL}/${locale}/projects/${project.id}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    }))
+  );
+
+  return [...staticUrls, ...blogUrls, ...projectUrls];
 }
