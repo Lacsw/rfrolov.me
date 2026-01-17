@@ -39,7 +39,7 @@ export function BlogPostLayout({
 
   return (
     <>
-      <ReadingProgress />
+      <ReadingProgress showPercentage />
       <section className="py-12 lg:py-16">
         <Container>
           <div className="relative lg:grid lg:grid-cols-[1fr_200px] lg:gap-10 xl:grid-cols-[1fr_250px]">
