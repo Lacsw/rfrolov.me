@@ -1,9 +1,7 @@
 import { ImageResponse } from "next/og";
 
-import { locales, TLocale } from "@/i18n/config";
-import { getAllPostSlugs, getPostBySlug } from "@/lib/blog";
-
-export const runtime = "edge";
+import { TLocale } from "@/i18n/config";
+import { getPostBySlug } from "@/lib/blog";
 
 export const alt = "Blog post";
 export const size = {
@@ -11,15 +9,6 @@ export const size = {
   height: 630,
 };
 export const contentType = "image/png";
-
-export function generateStaticParams() {
-  return locales.flatMap((locale) =>
-    getAllPostSlugs(locale).map((slug) => ({
-      locale,
-      slug,
-    }))
-  );
-}
 
 type TProps = {
   params: Promise<{ slug: string; locale: string }>;

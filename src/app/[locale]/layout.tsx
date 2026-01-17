@@ -1,21 +1,13 @@
 import type { Metadata } from "next";
 
-import { JetBrains_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Navbar } from "@/components/layout/Navbar";
-import { ThemeProvider } from "@/components/providers";
+import { LanguageProvider, ThemeProvider } from "@/components/providers";
 import { routing } from "@/i18n/routing";
-
-import "../globals.css";
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
-});
 
 type TProps = {
   children: React.ReactNode;
@@ -35,6 +27,7 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "metadata" });
 
   return {
+    metadataBase: new URL("https://rfrolov.me"),
     title: t("title"),
     description: t("description"),
     keywords: ["frontend developer", "React", "TypeScript", "web development"],
@@ -77,15 +70,13 @@ export default async function LocaleLayout({ children, params }: TProps) {
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={jetbrainsMono.variable} suppressHydrationWarning>
-      <body className="min-h-screen bg-background font-mono antialiased" suppressHydrationWarning>
-        <NextIntlClientProvider messages={messages}>
-          <ThemeProvider>
-            <Navbar />
-            {children}
-          </ThemeProvider>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider messages={messages}>
+      <LanguageProvider>
+        <ThemeProvider>
+          <Navbar />
+          {children}
+        </ThemeProvider>
+      </LanguageProvider>
+    </NextIntlClientProvider>
   );
 }

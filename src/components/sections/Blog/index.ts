@@ -5,6 +5,8 @@ export {
   BlogTag,
   mdxComponents,
   PostNavigation,
+  RelatedPosts,
+  SeriesNavigation,
   TableOfContents,
 } from "./components";
 export { TAG_COLORS, getTagColor } from "./constants";

@@ -1,19 +1,11 @@
 import { ImageResponse } from "next/og";
 
-import { locales } from "@/i18n/config";
-
-export const runtime = "edge";
-
 export const alt = "Roman Frolov - Frontend Developer";
 export const size = {
   width: 1200,
   height: 630,
 };
 export const contentType = "image/png";
-
-export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
-}
 
 export default function Image() {
   return new ImageResponse(
