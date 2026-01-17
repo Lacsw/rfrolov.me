@@ -8,14 +8,8 @@ import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 
 import { mdxComponents } from "@/components/sections/Blog";
-import {
-  ProjectContent,
-  ProjectHero,
-  ProjectMeta,
-  RelatedProjects,
-} from "@/components/sections/Projects";
+import { ProjectContent, ProjectDetailLayout } from "@/components/sections/Projects";
 import { JsonLd } from "@/components/seo";
-import { Container } from "@/components/ui";
 import { locales, TLocale } from "@/i18n/config";
 import { generateProjectJsonLd } from "@/lib/jsonld";
 import { getAllProjectIdsWithContent, getProjectById, getRelatedProjects } from "@/lib/projects";
@@ -33,6 +27,8 @@ export async function generateStaticParams() {
   );
 }
 
+const BASE_URL = "https://rfrolov.me";
+
 export async function generateMetadata({ params }: TProps): Promise<Metadata> {
   const { id, locale } = await params;
   const project = getProjectById(id, locale as TLocale);
@@ -44,9 +40,26 @@ export async function generateMetadata({ params }: TProps): Promise<Metadata> {
     };
   }
 
+  const description = project.longDescription || project.description;
+  const url = `${BASE_URL}/${locale}/projects/${id}`;
+
   return {
     title: `${project.title} | Roman Frolov`,
-    description: project.longDescription || project.description,
+    description,
+    openGraph: {
+      title: project.title,
+      description,
+      url,
+      type: "article",
+      locale: locale === "de" ? "de_DE" : "en_US",
+    },
+    alternates: {
+      canonical: url,
+      languages: {
+        en: `${BASE_URL}/en/projects/${id}`,
+        de: `${BASE_URL}/de/projects/${id}`,
+      },
+    },
   };
 }
 
@@ -73,37 +86,19 @@ export default async function ProjectDetailPage({ params }: TProps) {
   return (
     <main className="pt-16">
       <JsonLd data={generateProjectJsonLd(projectMeta, locale)} />
-      <section className="py-12 lg:py-16">
-        <Container>
-          <div className="lg:grid lg:grid-cols-[1fr_200px] lg:gap-10 xl:grid-cols-[1fr_250px]">
-            <article className="max-w-2xl space-y-8">
-              <ProjectHero project={projectMeta} />
-
-              <hr className="border-muted" />
-
-              <ProjectContent>
-                <MDXRemote
-                  source={content}
-                  components={mdxComponents}
-                  options={{
-                    mdxOptions: {
-                      rehypePlugins: [rehypeSlug, [rehypePrettyCode, rehypePrettyCodeOptions]],
-                    },
-                  }}
-                />
-              </ProjectContent>
-
-              <RelatedProjects projects={relatedProjects} />
-            </article>
-
-            <aside className="hidden lg:block">
-              <div className="sticky top-24">
-                <ProjectMeta project={projectMeta} />
-              </div>
-            </aside>
-          </div>
-        </Container>
-      </section>
+      <ProjectDetailLayout project={projectMeta} relatedProjects={relatedProjects}>
+        <ProjectContent>
+          <MDXRemote
+            source={content}
+            components={mdxComponents}
+            options={{
+              mdxOptions: {
+                rehypePlugins: [rehypeSlug, [rehypePrettyCode, rehypePrettyCodeOptions]],
+              },
+            }}
+          />
+        </ProjectContent>
+      </ProjectDetailLayout>
     </main>
   );
 }

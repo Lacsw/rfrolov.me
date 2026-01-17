@@ -3,6 +3,12 @@ import { ImageResponse } from "next/og";
 import { TLocale } from "@/i18n/config";
 import { getProjectById } from "@/lib/projects";
 
+function truncate(text: string, maxLength: number): string {
+  if (text.length <= maxLength) return text;
+
+  return text.slice(0, maxLength - 3).trim() + "...";
+}
+
 export const alt = "Project";
 export const size = {
   width: 1200,
@@ -97,7 +103,7 @@ export default async function Image({ params }: TProps) {
               lineHeight: 1.4,
             }}
           >
-            {project.longDescription || project.description}
+            {truncate(project.longDescription || project.description, 150)}
           </p>
         </div>
         <div

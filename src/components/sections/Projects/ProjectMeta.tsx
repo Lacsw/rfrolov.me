@@ -49,13 +49,14 @@ export function ProjectMeta({ project }: TProps) {
             <a
               href={project.href}
               {...EXTERNAL_LINK_PROPS}
+              aria-label={`${t("viewLive")} - ${project.title} (opens in new tab)`}
               className={cn(
                 "inline-flex items-center gap-2",
                 TEXT_SIZE.body,
                 HOVER_OPACITY
               )}
             >
-              <ExternalLink className={ICON_SIZE.sm} />
+              <ExternalLink className={ICON_SIZE.sm} aria-hidden="true" />
               {t("viewLive")}
             </a>
           )}
@@ -63,13 +64,14 @@ export function ProjectMeta({ project }: TProps) {
             <a
               href={project.github}
               {...EXTERNAL_LINK_PROPS}
+              aria-label={`${t("viewSource")} - ${project.title} (opens in new tab)`}
               className={cn(
                 "inline-flex items-center gap-2",
                 TEXT_SIZE.body,
                 HOVER_OPACITY
               )}
             >
-              <Github className={ICON_SIZE.sm} />
+              <Github className={ICON_SIZE.sm} aria-hidden="true" />
               {t("viewSource")}
             </a>
           )}

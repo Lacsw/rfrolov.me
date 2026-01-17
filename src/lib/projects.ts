@@ -77,12 +77,13 @@ export function getRelatedProjects(
   limit = 3
 ): TProject[] {
   const projects = getProjects(locale);
+  const currentTechLower = currentProject.technologies.map((t) => t.toLowerCase());
 
   const scoredProjects = projects
-    .filter((project) => project.id !== currentProject.id)
+    .filter((project) => project.id !== currentProject.id && hasProjectDetail(project.id, locale))
     .map((project) => {
       const sharedTechnologies = project.technologies.filter((tech) =>
-        currentProject.technologies.map((t) => t.toLowerCase()).includes(tech.toLowerCase())
+        currentTechLower.includes(tech.toLowerCase())
       );
 
       return {
