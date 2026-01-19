@@ -1,6 +1,6 @@
 "use client";
 
-import { Children, isValidElement, ReactNode, useState } from "react";
+import { Children, isValidElement, ReactNode, useMemo, useState } from "react";
 
 import { ChevronDown, ChevronRight } from "lucide-react";
 
@@ -28,7 +28,10 @@ function extractTextFromChildren(node: ReactNode): string {
 
 export function CollapsibleCode({ title, children, defaultOpen = false }: TCollapsibleCodeProps) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
-  const codeContent = Children.toArray(children).map(extractTextFromChildren).join("").trim();
+  const codeContent = useMemo(
+    () => Children.toArray(children).map(extractTextFromChildren).join("").trim(),
+    [children]
+  );
 
   return (
     <div className="my-4 rounded-lg border border-muted overflow-hidden">
