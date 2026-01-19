@@ -64,7 +64,8 @@
     "readingTime": {
       "min": "{minutes} min",
       "minRead": "{minutes} min read"
-    }
+    },
+    "onThisPage": "On this page"
   },
   "contact": {
     "getInTouch": "Get in touch"

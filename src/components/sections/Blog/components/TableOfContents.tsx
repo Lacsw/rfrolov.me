@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+import { useTranslations } from "next-intl";
+
 import { cn } from "@/lib/utils";
 import { THeading } from "@/types";
 
@@ -13,6 +15,7 @@ type TTableOfContentsProps = {
 };
 
 export function TableOfContents({ headings }: TTableOfContentsProps) {
+  const t = useTranslations("blog");
   const [activeId, setActiveId] = useState<string>("");
 
   useEffect(() => {
@@ -46,7 +49,7 @@ export function TableOfContents({ headings }: TTableOfContentsProps) {
   return (
     <nav aria-label="Table of contents">
       <p className="mb-3 text-xs font-medium uppercase tracking-wider text-muted-foreground">
-        On this page
+        {t("onThisPage")}
       </p>
       <ul className="border-l border-muted">
         {headings.map(({ id, text, level }) => {
