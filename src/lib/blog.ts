@@ -86,7 +86,7 @@ export function getAllPosts(
       } as TBlogPostMeta;
     })
     .filter((post): post is TBlogPostMeta => post !== null)
-    .sort((a, b) => a.order - b.order);
+    .sort((a, b) => b.order - a.order);
 
   return posts;
 }
@@ -210,12 +210,12 @@ export function getAdjacentPosts(slug: string, locale: TLocale): TAdjacentPosts 
     return { previous: null, next: null };
   }
 
-  // Posts are sorted by order ascending (1, 2, 3...)
-  // Previous = lower order (earlier in list)
-  // Next = higher order (later in list)
+  // Posts are sorted by order descending (newest first: 3, 2, 1)
+  // Previous = older post (later in list, higher index)
+  // Next = newer post (earlier in list, lower index)
   return {
-    previous: currentIndex > 0 ? posts[currentIndex - 1] : null,
-    next: currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null,
+    previous: currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null,
+    next: currentIndex > 0 ? posts[currentIndex - 1] : null,
   };
 }
 
