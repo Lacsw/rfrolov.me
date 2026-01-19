@@ -35,9 +35,13 @@ export function CodeBlock({ children, className }: TCodeBlockProps) {
   const codeContent = Children.toArray(children).map(extractText).join("").trim();
 
   return (
-    <div className="group relative my-4 rounded-lg overflow-hidden">
-      <pre className={cn("p-4 overflow-x-auto text-sm", className)}>{children}</pre>
-      <CopyButton text={codeContent} />
+    <div className="my-4 rounded-lg border border-muted overflow-hidden">
+      <div className="flex items-center justify-end px-4 py-2 bg-muted/50 border-b border-muted">
+        <CopyButton text={codeContent} />
+      </div>
+      <div className="overflow-x-auto">
+        <pre className={cn("p-4 text-sm min-w-max", className)}>{children}</pre>
+      </div>
     </div>
   );
 }
