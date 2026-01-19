@@ -1,0 +1,293 @@
+---
+title: "Eine eigene Statuszeile für Claude Code erstellen"
+description: "Wie man eine informative Statuszeile mit Model-Info, Kontext-Nutzung und Git-Status in Claude Code CLI erstellt."
+date: "2026-01-19"
+tags: ["claude-code", "bash", "cli", "developer-tools"]
+featured: true
+---
+
+Bei der Arbeit mit Claude Code zeigt die Standard-Statuszeile nur grundlegende Informationen. Aber was wäre, wenn du genau sehen könntest, wie viel Kontext du verwendest, welches Modell aktiv ist und deinen aktuellen Git-Status - alles auf einen Blick?
+
+## Das Endergebnis
+
+Hier ist, was wir bauen:
+
+<div className="my-6 rounded-lg bg-[#1a1a1a] p-4 font-mono text-sm">
+  <span style={{color: '#00BFFF'}}>Opus 4.5</span>
+  <span style={{color: '#9ca3af'}}> [====      ] </span>
+  <span style={{color: '#FACC15'}}>43%</span>
+  <span style={{color: '#9ca3af'}}> | 86k/200k | </span>
+  <span style={{color: '#00BFFF'}}>rfrolov.me</span>
+  <span style={{color: '#60a5fa'}}>(</span>
+  <span style={{color: '#f87171'}}>main</span>
+  <span style={{color: '#60a5fa'}}>)</span>
+  <span style={{color: '#FACC15'}}> ✗</span>
+</div>
+
+Jede Komponente dient einem Zweck:
+- <span style={{color: '#00BFFF'}}>**Modellname**</span> - Zeigt welches Claude-Modell aktiv ist
+- **Fortschrittsbalken** - Visuelle Darstellung der Kontextfenster-Nutzung
+- <span style={{color: '#FACC15'}}>**Prozentsatz**</span> - Genaue Kontext-Nutzung
+- **Token-Anzahl** - Verwendet/gesamt Tokens (z.B. 42k/200k)
+- <span style={{color: '#00BFFF'}}>**Projekt**</span><span style={{color: '#60a5fa'}}>(</span><span style={{color: '#f87171'}}>**Branch**</span><span style={{color: '#60a5fa'}}>)</span> - Git-Info mit <span style={{color: '#FACC15'}}>Dirty-Indikator</span>
+
+## Dateistruktur
+
+Claude Code sucht nach Konfiguration in `~/.claude/`. Wir erstellen zwei Dateien:
+
+```
+~/.claude/
+├── settings.json    # Verweist auf unser eigenes Skript
+└── statusline.sh    # Das Bash-Skript das den Status generiert
+```
+
+## Konfiguration
+
+Füge zuerst die statusLine-Konfiguration zu `~/.claude/settings.json` hinzu:
+
+```json
+{
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline.sh"
+  }
+}
+```
+
+<Callout variant="note">
+  Falls du bereits eine settings.json Datei hast, füge einfach das `statusLine` Objekt zu deiner bestehenden Konfiguration hinzu.
+</Callout>
+
+## Das Skript
+
+Jetzt zum Hauptteil - das Bash-Skript, das unsere Statuszeile generiert. Erstelle `~/.claude/statusline.sh`:
+
+```bash
+#!/bin/bash
+
+# JSON-Input von stdin lesen
+input=$(cat)
+
+# Daten aus JSON extrahieren
+model_name=$(echo "$input" | jq -r '.model.display_name // .model.id')
+cwd=$(echo "$input" | jq -r '.workspace.current_dir')
+project_dir=$(echo "$input" | jq -r '.workspace.project_dir')
+total_input=$(echo "$input" | jq -r '.context_window.total_input_tokens // 0')
+context_size=$(echo "$input" | jq -r '.context_window.context_window_size // 0')
+
+# Vorberechneten Prozentsatz von Claude Code verwenden (am genauesten)
+used_pct=$(echo "$input" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)
+
+# Modellnamen vereinfachen
+short_model="$model_name"
+[[ "$model_name" =~ Opus ]] && short_model="Opus 4.5"
+[[ "$model_name" =~ Sonnet ]] && short_model="Sonnet 4"
+[[ "$model_name" =~ Haiku ]] && short_model="Haiku 3.5"
+
+# Token-Anzahl formatieren (z.B. 25000 -> 25k)
+format_tokens() {
+    local n=$1
+    if [ "$n" -ge 1000 ]; then
+        echo "$((n / 1000))k"
+    else
+        echo "$n"
+    fi
+}
+
+tokens_display=$(format_tokens "$total_input")
+context_display=$(format_tokens "$context_size")
+
+# Fortschrittsbalken erstellen (10 Zeichen breit)
+bar_width=10
+filled=$((used_pct * bar_width / 100))
+empty=$((bar_width - filled))
+
+progress_bar="["
+for ((i=0; i<filled; i++)); do progress_bar+="="; done
+for ((i=0; i<empty; i++)); do progress_bar+=" "; done
+progress_bar+="]"
+
+# Git-Branch und Projektnamen holen
+git_branch=""
+if git -C "$cwd" rev-parse --git-dir > /dev/null 2>&1; then
+    git_branch=$(git -C "$cwd" symbolic-ref --short HEAD 2>/dev/null || \
+                 git -C "$cwd" rev-parse --short HEAD 2>/dev/null)
+fi
+
+project_name=$(basename "$project_dir")
+
+# ANSI-Farben
+CYAN=$'\033[36m'
+YELLOW=$'\033[33m'
+RED=$'\033[31m'
+BLUE=$'\033[34m'
+RESET=$'\033[0m'
+
+# Git-Status: "projekt(branch)" Format mit Dirty-Indikator
+if [ -n "$git_branch" ]; then
+    if ! git -C "$cwd" diff-index --quiet HEAD -- 2>/dev/null; then
+        dirty=" ${YELLOW}✗${RESET}"
+    else
+        dirty=""
+    fi
+    git_status="${CYAN}${project_name}${RESET}${BLUE}(${RESET}${RED}${git_branch}${RESET}${BLUE})${RESET}${dirty}"
+else
+    git_status="${CYAN}${project_name}${RESET}"
+fi
+
+# Statuszeile zusammenbauen und ausgeben
+echo "${CYAN}${short_model}${RESET} ${progress_bar} ${YELLOW}${used_pct}%${RESET} | ${tokens_display}/${context_display} | ${git_status}"
+```
+
+Mache das Skript ausführbar:
+
+```bash
+chmod +x ~/.claude/statusline.sh
+```
+
+## Wie es funktioniert
+
+### JSON-Input
+
+Claude Code übergibt Sitzungsdaten als JSON an stdin. Hier ist die vollständige Struktur:
+
+```json
+{
+  "model": {
+    "id": "claude-opus-4-5-20251101",
+    "display_name": "Claude Opus 4.5"
+  },
+  "context_window": {
+    "used_percentage": 21.5,
+    "remaining_percentage": 78.5,
+    "total_input_tokens": 42000,
+    "total_output_tokens": 8500,
+    "context_window_size": 200000
+  },
+  "cost": {
+    "total_cost_usd": 0.42,
+    "total_duration_ms": 125000,
+    "total_api_duration_ms": 98000,
+    "total_lines_added": 150,
+    "total_lines_removed": 30
+  },
+  "workspace": {
+    "current_dir": "/Users/du/projekt",
+    "project_dir": "/Users/du/projekt"
+  },
+  "version": "1.0.30",
+  "session_id": "abc123-def456"
+}
+```
+
+<Callout variant="warning">
+  **Rate-Limits sind nicht verfügbar.** Die stündliche Sitzungsnutzung (sichtbar in Einstellungen → Nutzungslimits) wird nicht an Statuszeilen-Skripte übergeben. Es gibt einen [offenen Feature-Request](https://github.com/anthropics/claude-code/issues/18121) dafür.
+</Callout>
+
+### Wichtige Abschnitte erklärt
+
+**Modellnamen-Vereinfachung**
+
+```bash
+[[ "$model_name" =~ Opus ]] && short_model="Opus 4.5"
+[[ "$model_name" =~ Sonnet ]] && short_model="Sonnet 4"
+```
+
+Dies konvertiert ausführliche Modellnamen wie "Claude Opus 4.5 (claude-opus-4-5-20251101)" zu nur "Opus 4.5".
+
+**Token-Formatierung**
+
+```bash
+format_tokens() {
+    local n=$1
+    if [ "$n" -ge 1000 ]; then
+        echo "$((n / 1000))k"
+    else
+        echo "$n"
+    fi
+}
+```
+
+Konvertiert `42000` zu `42k` für bessere Lesbarkeit.
+
+**Fortschrittsbalken-Generierung**
+
+```bash
+bar_width=10
+filled=$((used_pct * bar_width / 100))
+empty=$((bar_width - filled))
+```
+
+Erstellt einen visuellen Balken wie `[===       ]` basierend auf dem Prozentsatz.
+
+**Git-Status-Erkennung**
+
+```bash
+if ! git -C "$cwd" diff-index --quiet HEAD -- 2>/dev/null; then
+    dirty=" ${YELLOW}✗${RESET}"
+fi
+```
+
+Zeigt ein gelbes `✗` wenn es uncommittete Änderungen gibt.
+
+## Anpassungsideen
+
+### Verschiedene Fortschrittsbalken-Stile
+
+Probiere diese Alternativen:
+
+```bash
+# Blöcke: [▓▓▓░░░░░░░]
+progress_bar="["
+for ((i=0; i<filled; i++)); do progress_bar+="▓"; done
+for ((i=0; i<empty; i++)); do progress_bar+="░"; done
+progress_bar+="]"
+
+# Punkte: [●●●○○○○○○○]
+progress_bar="["
+for ((i=0; i<filled; i++)); do progress_bar+="●"; done
+for ((i=0; i<empty; i++)); do progress_bar+="○"; done
+progress_bar+="]"
+```
+
+### Farbcodierter Prozentsatz
+
+Lasse die Farbe des Prozentsatzes je nach Nutzung wechseln:
+
+```bash
+if [ "$used_pct" -lt 50 ]; then
+    pct_color="$GREEN"
+elif [ "$used_pct" -lt 80 ]; then
+    pct_color="$YELLOW"
+else
+    pct_color="$RED"
+fi
+echo "... ${pct_color}${used_pct}%${RESET} ..."
+```
+
+### Sitzungskosten anzeigen
+
+Zeige an, wie viel die aktuelle Sitzung gekostet hat:
+
+```bash
+cost=$(echo "$input" | jq -r '.cost.total_cost_usd // 0')
+echo "... | \$${cost} | ..."
+```
+
+### Minimale Version
+
+Wenn du es kompakt bevorzugst:
+
+```bash
+echo "${short_model} ${used_pct}% ${project_name}"
+```
+
+<Callout variant="tip">
+  Das Skript läuft bei jeder Status-Aktualisierung, also halte es schnell. Vermeide aufwändige Operationen wie Netzwerk-Aufrufe.
+</Callout>
+
+## Fazit
+
+Eine eigene Statuszeile verwandelt Claude Code von einer Blackbox in ein transparentes Werkzeug. Du kannst auf einen Blick sehen, welches Modell du verwendest, wie viel Kontext noch verfügbar ist und ob du uncommittete Änderungen hast.
+
+Das Skript ist vollständig anpassbar - passe Farben an, füge Metriken hinzu oder vereinfache es nach deinem Geschmack. Der JSON-Input enthält mehr Daten als hier gezeigt, also erkunde, was du noch anzeigen kannst.

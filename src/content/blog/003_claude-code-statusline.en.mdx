@@ -1,0 +1,293 @@
+---
+title: "Building a Custom Status Line for Claude Code"
+description: "How to create a rich, informative status line showing model info, context usage, and git status in Claude Code CLI."
+date: "2026-01-19"
+tags: ["claude-code", "bash", "cli", "developer-tools"]
+featured: true
+---
+
+When working with Claude Code, the default status line shows basic information. But what if you could see exactly how much context you're using, which model is active, and your current git status - all at a glance?
+
+## The End Result
+
+Here's what we're building:
+
+<div className="my-6 rounded-lg bg-[#1a1a1a] p-4 font-mono text-sm">
+  <span style={{color: '#00BFFF'}}>Opus 4.5</span>
+  <span style={{color: '#9ca3af'}}> [====      ] </span>
+  <span style={{color: '#FACC15'}}>43%</span>
+  <span style={{color: '#9ca3af'}}> | 86k/200k | </span>
+  <span style={{color: '#00BFFF'}}>rfrolov.me</span>
+  <span style={{color: '#60a5fa'}}>(</span>
+  <span style={{color: '#f87171'}}>main</span>
+  <span style={{color: '#60a5fa'}}>)</span>
+  <span style={{color: '#FACC15'}}> ✗</span>
+</div>
+
+Each component serves a purpose:
+- <span style={{color: '#00BFFF'}}>**Model name**</span> - Shows which Claude model is active
+- **Progress bar** - Visual representation of context window usage
+- <span style={{color: '#FACC15'}}>**Percentage**</span> - Exact context usage
+- **Token count** - Used/total tokens (e.g., 42k/200k)
+- <span style={{color: '#00BFFF'}}>**Project**</span><span style={{color: '#60a5fa'}}>(</span><span style={{color: '#f87171'}}>**branch**</span><span style={{color: '#60a5fa'}}>)</span> - Git info with <span style={{color: '#FACC15'}}>dirty indicator</span>
+
+## File Structure
+
+Claude Code looks for configuration in `~/.claude/`. We'll create two files:
+
+```
+~/.claude/
+├── settings.json    # Points to our custom script
+└── statusline.sh    # The bash script that generates the status
+```
+
+## Configuration
+
+First, add the statusLine configuration to `~/.claude/settings.json`:
+
+```json
+{
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline.sh"
+  }
+}
+```
+
+<Callout variant="note">
+  If you already have a settings.json file, just add the `statusLine` object to your existing configuration.
+</Callout>
+
+## The Script
+
+Now for the main event - the bash script that generates our status line. Create `~/.claude/statusline.sh`:
+
+```bash
+#!/bin/bash
+
+# Read JSON input from stdin
+input=$(cat)
+
+# Extract data from JSON
+model_name=$(echo "$input" | jq -r '.model.display_name // .model.id')
+cwd=$(echo "$input" | jq -r '.workspace.current_dir')
+project_dir=$(echo "$input" | jq -r '.workspace.project_dir')
+total_input=$(echo "$input" | jq -r '.context_window.total_input_tokens // 0')
+context_size=$(echo "$input" | jq -r '.context_window.context_window_size // 0')
+
+# Use Claude Code's pre-calculated percentage (most accurate)
+used_pct=$(echo "$input" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)
+
+# Simplify model name
+short_model="$model_name"
+[[ "$model_name" =~ Opus ]] && short_model="Opus 4.5"
+[[ "$model_name" =~ Sonnet ]] && short_model="Sonnet 4"
+[[ "$model_name" =~ Haiku ]] && short_model="Haiku 3.5"
+
+# Format token counts (e.g., 25000 -> 25k)
+format_tokens() {
+    local n=$1
+    if [ "$n" -ge 1000 ]; then
+        echo "$((n / 1000))k"
+    else
+        echo "$n"
+    fi
+}
+
+tokens_display=$(format_tokens "$total_input")
+context_display=$(format_tokens "$context_size")
+
+# Create progress bar (10 chars wide)
+bar_width=10
+filled=$((used_pct * bar_width / 100))
+empty=$((bar_width - filled))
+
+progress_bar="["
+for ((i=0; i<filled; i++)); do progress_bar+="="; done
+for ((i=0; i<empty; i++)); do progress_bar+=" "; done
+progress_bar+="]"
+
+# Get git branch and project name
+git_branch=""
+if git -C "$cwd" rev-parse --git-dir > /dev/null 2>&1; then
+    git_branch=$(git -C "$cwd" symbolic-ref --short HEAD 2>/dev/null || \
+                 git -C "$cwd" rev-parse --short HEAD 2>/dev/null)
+fi
+
+project_name=$(basename "$project_dir")
+
+# ANSI colors
+CYAN=$'\033[36m'
+YELLOW=$'\033[33m'
+RED=$'\033[31m'
+BLUE=$'\033[34m'
+RESET=$'\033[0m'
+
+# Git status: "project(branch)" format with dirty indicator
+if [ -n "$git_branch" ]; then
+    if ! git -C "$cwd" diff-index --quiet HEAD -- 2>/dev/null; then
+        dirty=" ${YELLOW}✗${RESET}"
+    else
+        dirty=""
+    fi
+    git_status="${CYAN}${project_name}${RESET}${BLUE}(${RESET}${RED}${git_branch}${RESET}${BLUE})${RESET}${dirty}"
+else
+    git_status="${CYAN}${project_name}${RESET}"
+fi
+
+# Build and output the status line
+echo "${CYAN}${short_model}${RESET} ${progress_bar} ${YELLOW}${used_pct}%${RESET} | ${tokens_display}/${context_display} | ${git_status}"
+```
+
+Make the script executable:
+
+```bash
+chmod +x ~/.claude/statusline.sh
+```
+
+## How It Works
+
+### JSON Input
+
+Claude Code passes session data as JSON to stdin. Here's the complete structure:
+
+```json
+{
+  "model": {
+    "id": "claude-opus-4-5-20251101",
+    "display_name": "Claude Opus 4.5"
+  },
+  "context_window": {
+    "used_percentage": 21.5,
+    "remaining_percentage": 78.5,
+    "total_input_tokens": 42000,
+    "total_output_tokens": 8500,
+    "context_window_size": 200000
+  },
+  "cost": {
+    "total_cost_usd": 0.42,
+    "total_duration_ms": 125000,
+    "total_api_duration_ms": 98000,
+    "total_lines_added": 150,
+    "total_lines_removed": 30
+  },
+  "workspace": {
+    "current_dir": "/Users/you/project",
+    "project_dir": "/Users/you/project"
+  },
+  "version": "1.0.30",
+  "session_id": "abc123-def456"
+}
+```
+
+<Callout variant="warning">
+  **Rate limits are not available.** The hourly session usage (shown in Settings → Plan usage limits) is not exposed to statusline scripts. There's an [open feature request](https://github.com/anthropics/claude-code/issues/18121) for this.
+</Callout>
+
+### Key Sections Explained
+
+**Model Name Simplification**
+
+```bash
+[[ "$model_name" =~ Opus ]] && short_model="Opus 4.5"
+[[ "$model_name" =~ Sonnet ]] && short_model="Sonnet 4"
+```
+
+This converts verbose model names like "Claude Opus 4.5 (claude-opus-4-5-20251101)" to just "Opus 4.5".
+
+**Token Formatting**
+
+```bash
+format_tokens() {
+    local n=$1
+    if [ "$n" -ge 1000 ]; then
+        echo "$((n / 1000))k"
+    else
+        echo "$n"
+    fi
+}
+```
+
+Converts `42000` to `42k` for readability.
+
+**Progress Bar Generation**
+
+```bash
+bar_width=10
+filled=$((used_pct * bar_width / 100))
+empty=$((bar_width - filled))
+```
+
+Creates a visual bar like `[===       ]` based on percentage.
+
+**Git Status Detection**
+
+```bash
+if ! git -C "$cwd" diff-index --quiet HEAD -- 2>/dev/null; then
+    dirty=" ${YELLOW}✗${RESET}"
+fi
+```
+
+Shows a yellow `✗` when there are uncommitted changes.
+
+## Customization Ideas
+
+### Different Progress Bar Styles
+
+Try these alternatives:
+
+```bash
+# Blocks: [▓▓▓░░░░░░░]
+progress_bar="["
+for ((i=0; i<filled; i++)); do progress_bar+="▓"; done
+for ((i=0; i<empty; i++)); do progress_bar+="░"; done
+progress_bar+="]"
+
+# Dots: [●●●○○○○○○○]
+progress_bar="["
+for ((i=0; i<filled; i++)); do progress_bar+="●"; done
+for ((i=0; i<empty; i++)); do progress_bar+="○"; done
+progress_bar+="]"
+```
+
+### Color Coded Percentage
+
+Make the percentage color change based on usage:
+
+```bash
+if [ "$used_pct" -lt 50 ]; then
+    pct_color="$GREEN"
+elif [ "$used_pct" -lt 80 ]; then
+    pct_color="$YELLOW"
+else
+    pct_color="$RED"
+fi
+echo "... ${pct_color}${used_pct}%${RESET} ..."
+```
+
+### Show Session Cost
+
+Display how much the current session has cost:
+
+```bash
+cost=$(echo "$input" | jq -r '.cost.total_cost_usd // 0')
+echo "... | \$${cost} | ..."
+```
+
+### Minimal Version
+
+If you prefer something compact:
+
+```bash
+echo "${short_model} ${used_pct}% ${project_name}"
+```
+
+<Callout variant="tip">
+  The script runs on every status update, so keep it fast. Avoid expensive operations like network calls.
+</Callout>
+
+## Conclusion
+
+A custom status line transforms Claude Code from a black box into a transparent tool. You can see at a glance which model you're using, how much context remains, and whether you have uncommitted changes.
+
+The script is fully customizable - adjust colors, add metrics, or simplify to your liking. The JSON input contains more data than shown here, so explore what else you can display.
