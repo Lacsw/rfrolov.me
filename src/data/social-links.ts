@@ -1,4 +1,4 @@
-import { Github, Linkedin } from "lucide-react";
+import { GithubIcon, Linkedin } from "lucide-react";
 
 import { TSocialLink } from "@/types";
 
@@ -6,7 +6,7 @@ export const socialLinks: TSocialLink[] = [
   {
     name: "GitHub",
     href: "https://github.com/Lacsw",
-    icon: Github,
+    icon: GithubIcon,
   },
   {
     name: "LinkedIn",

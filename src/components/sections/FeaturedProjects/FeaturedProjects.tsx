@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, ArrowUpRight, Github } from "lucide-react";
+import { ArrowRight, ArrowUpRight, GithubIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import {
@@ -55,7 +55,7 @@ export function FeaturedProjects({ projects, projectsWithDetails = [] }: TProps)
                       </div>
                       <div className="flex items-center gap-2 shrink-0">
                         {!hasDetail && project.github && (
-                          <Github className="h-4 w-4 text-muted-foreground" />
+                          <GithubIcon className="h-4 w-4 text-muted-foreground" />
                         )}
                         {hasDetail ? (
                           <ArrowRight

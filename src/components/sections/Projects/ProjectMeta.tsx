@@ -1,4 +1,4 @@
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, GithubIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { EXTERNAL_LINK_PROPS, HOVER_OPACITY, ICON_SIZE, TEXT_SIZE } from "@/constants";
@@ -71,7 +71,7 @@ export function ProjectMeta({ project }: TProps) {
                 HOVER_OPACITY
               )}
             >
-              <Github className={ICON_SIZE.sm} aria-hidden="true" />
+              <GithubIcon className={ICON_SIZE.sm} aria-hidden="true" />
               {t("viewSource")}
             </a>
           )}

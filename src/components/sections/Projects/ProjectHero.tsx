@@ -1,4 +1,4 @@
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, GithubIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { BackLink, TechTags } from "@/components/ui";
@@ -36,7 +36,7 @@ export function ProjectHero({ project }: TProps) {
               <a
                 href={project.href}
                 {...EXTERNAL_LINK_PROPS}
-                aria-label={`${t("viewLive")} (opens in new tab)`}
+                aria-label={`${t("viewLive")} - ${project.title} (opens in new tab)`}
                 className={cn("inline-flex items-center gap-2", TEXT_SIZE.body, HOVER_OPACITY)}
               >
                 <ExternalLink className={ICON_SIZE.sm} aria-hidden="true" />
@@ -47,10 +47,10 @@ export function ProjectHero({ project }: TProps) {
               <a
                 href={project.github}
                 {...EXTERNAL_LINK_PROPS}
-                aria-label={`${t("viewSource")} (opens in new tab)`}
+                aria-label={`${t("viewSource")} - ${project.title} (opens in new tab)`}
                 className={cn("inline-flex items-center gap-2", TEXT_SIZE.body, HOVER_OPACITY)}
               >
-                <Github className={ICON_SIZE.sm} aria-hidden="true" />
+                <GithubIcon className={ICON_SIZE.sm} aria-hidden="true" />
                 {t("viewSource")}
               </a>
             )}

@@ -1,4 +1,4 @@
-import { ArrowRight, ArrowUpRight, Github } from "lucide-react";
+import { ArrowRight, ArrowUpRight, GithubIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { ICON_SIZE } from "@/constants";
@@ -40,7 +40,7 @@ export function ProjectLinks({ href, github, detailHref }: TProjectLinksProps) {
       )}
       {github && (
         <LinkButton href={github} variant="outline">
-          <Github className={ICON_SIZE.xs} />
+          <GithubIcon className={ICON_SIZE.xs} />
           {t("github")}
         </LinkButton>
       )}
