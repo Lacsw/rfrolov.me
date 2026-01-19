@@ -12,12 +12,14 @@ import { getFeaturedProjects } from "@/data/projects";
 import { TLocale } from "@/i18n/config";
 import { getFeaturedPosts } from "@/lib/blog";
 import { generatePersonSchema, generateWebsiteSchema } from "@/lib/jsonld";
+import { getAllProjectIdsWithContent } from "@/lib/projects";
 
 export default async function Home() {
   const locale = (await getLocale()) as TLocale;
   const featuredPosts = getFeaturedPosts(locale, 2);
   const experiences = getExperiences(locale);
   const featuredProjects = getFeaturedProjects(locale);
+  const projectsWithDetails = getAllProjectIdsWithContent(locale);
 
   return (
     <main className="pt-16">
@@ -26,7 +28,7 @@ export default async function Home() {
       <Hero />
       <Skills />
       <Experience experiences={experiences} />
-      <FeaturedProjects projects={featuredProjects} />
+      <FeaturedProjects projects={featuredProjects} projectsWithDetails={projectsWithDetails} />
       <BlogList posts={featuredPosts} />
       <Contact />
     </main>

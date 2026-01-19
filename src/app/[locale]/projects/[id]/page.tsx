@@ -11,6 +11,7 @@ import { mdxComponents } from "@/components/sections/Blog";
 import { ProjectContent, ProjectDetailLayout } from "@/components/sections/Projects";
 import { JsonLd } from "@/components/seo";
 import { locales, TLocale } from "@/i18n/config";
+import { extractHeadings } from "@/lib/blog";
 import { generateProjectJsonLd } from "@/lib/jsonld";
 import { getAllProjectIdsWithContent, getProjectById, getRelatedProjects } from "@/lib/projects";
 
@@ -81,12 +82,13 @@ export default async function ProjectDetailPage({ params }: TProps) {
   }
 
   const { content, ...projectMeta } = project;
+  const headings = extractHeadings(content);
   const relatedProjects = getRelatedProjects(project, locale);
 
   return (
     <main className="pt-16">
       <JsonLd data={generateProjectJsonLd(projectMeta, locale)} />
-      <ProjectDetailLayout project={projectMeta} relatedProjects={relatedProjects}>
+      <ProjectDetailLayout project={projectMeta} relatedProjects={relatedProjects} headings={headings}>
         <ProjectContent>
           <MDXRemote
             source={content}

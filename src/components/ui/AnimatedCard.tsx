@@ -11,6 +11,7 @@ import {
   EXTERNAL_LINK_PROPS,
   getStaggeredAnimation,
 } from "@/constants";
+import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
 type TAnimatedCardProps = {
@@ -20,6 +21,7 @@ type TAnimatedCardProps = {
   href?: string;
   featured?: boolean;
   large?: boolean;
+  internal?: boolean;
 };
 
 export function AnimatedCard({
@@ -29,6 +31,7 @@ export function AnimatedCard({
   href,
   featured = false,
   large = false,
+  internal = false,
 }: TAnimatedCardProps) {
   const baseClasses = cn(
     "group block h-full",
@@ -40,6 +43,16 @@ export function AnimatedCard({
   );
 
   const animation = getStaggeredAnimation(index);
+
+  if (href && internal) {
+    return (
+      <Link href={href as "/projects"}>
+        <motion.div {...animation} className={cn(baseClasses, "cursor-pointer")}>
+          {children}
+        </motion.div>
+      </Link>
+    );
+  }
 
   if (href) {
     return (

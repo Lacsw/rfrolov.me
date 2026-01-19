@@ -4,9 +4,10 @@ import { ReactNode } from "react";
 
 import { motion } from "framer-motion";
 
+import { TableOfContents } from "@/components/sections/Blog";
 import { Container } from "@/components/ui";
 import { ANIMATION_DURATION } from "@/constants";
-import { TProject, TProjectDetailMeta } from "@/types";
+import { THeading, TProject, TProjectDetailMeta } from "@/types";
 
 import { ProjectHero } from "./ProjectHero";
 import { ProjectMeta } from "./ProjectMeta";
@@ -15,10 +16,11 @@ import { RelatedProjects } from "./RelatedProjects";
 type TProps = {
   project: TProjectDetailMeta;
   relatedProjects: TProject[];
+  headings: THeading[];
   children: ReactNode;
 };
 
-export function ProjectDetailLayout({ project, relatedProjects, children }: TProps) {
+export function ProjectDetailLayout({ project, relatedProjects, headings, children }: TProps) {
   return (
     <section className="py-12 lg:py-16">
       <Container>
@@ -43,9 +45,10 @@ export function ProjectDetailLayout({ project, relatedProjects, children }: TPro
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: ANIMATION_DURATION.slower, delay: 0.2 }}
-              className="sticky top-24"
+              className="sticky top-24 space-y-8"
             >
               <ProjectMeta project={project} />
+              {headings.length > 0 && <TableOfContents headings={headings} />}
             </motion.div>
           </aside>
         </div>
