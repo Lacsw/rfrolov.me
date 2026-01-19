@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 
 import { Callout } from "./Callout";
 import { CodeBlock } from "./CodeBlock";
+import { CollapsibleCode } from "./CollapsibleCode";
 
 type THeadingProps = ComponentPropsWithoutRef<"h1">;
 type TParagraphProps = ComponentPropsWithoutRef<"p">;
@@ -102,4 +103,5 @@ export const mdxComponents = {
     />
   ),
   Callout,
+  CollapsibleCode,
 };

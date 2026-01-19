@@ -3,6 +3,7 @@ export { BlogPostListItem } from "./BlogPostListItem";
 export { BlogTag } from "./BlogTag";
 export { BlogTags } from "./BlogTags";
 export { Callout } from "./Callout";
+export { CollapsibleCode } from "./CollapsibleCode";
 export { mdxComponents } from "./MDXComponents";
 export { PostNavigation } from "./PostNavigation";
 export { ReadingTime } from "./ReadingTime";

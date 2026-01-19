@@ -37,6 +37,7 @@ In `~/.claude/settings.json` hinzufügen:
 
 `~/.claude/statusline.sh` erstellen und ausführbar machen (`chmod +x`):
 
+<CollapsibleCode title="~/.claude/statusline.sh">
 ```bash
 #!/bin/bash
 
@@ -95,6 +96,7 @@ fi
 
 echo "${CYAN}${short_model}${RESET} ${progress_bar} ${YELLOW}${used_pct}%${RESET} | ${tokens_display}/${context_display} | ${git_status}"
 ```
+</CollapsibleCode>
 
 ## Verfügbare Daten
 
