@@ -1,5 +1,7 @@
 "use client";
 
+import { memo } from "react";
+
 import { ArrowRight } from "lucide-react";
 
 import { ARROW_HOVER, ICON_SIZE } from "@/constants";
@@ -14,7 +16,10 @@ type TRelatedPostsProps = {
   title?: string;
 };
 
-export function RelatedPosts({ posts, title = "Related Posts" }: TRelatedPostsProps) {
+export const RelatedPosts = memo(function RelatedPosts({
+  posts,
+  title = "Related Posts",
+}: TRelatedPostsProps) {
   if (posts.length === 0) {
     return null;
   }
@@ -47,4 +52,4 @@ export function RelatedPosts({ posts, title = "Related Posts" }: TRelatedPostsPr
       </div>
     </section>
   );
-}
+});
