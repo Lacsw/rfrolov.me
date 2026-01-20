@@ -34,6 +34,24 @@ const ICONS: Record<string, { path: string }> = {
   github: siGithub,
 };
 
+const ICON_LABELS: Record<string, string> = {
+  react: "React",
+  typescript: "TypeScript",
+  nextdotjs: "Next.js",
+  tailwindcss: "Tailwind CSS",
+  nodedotjs: "Node.js",
+  graphql: "GraphQL",
+  framer: "Framer Motion",
+  git: "Git",
+  docker: "Docker",
+  figma: "Figma",
+  jest: "Jest",
+  vite: "Vite",
+  redux: "Redux",
+  bun: "Bun",
+  github: "GitHub",
+};
+
 type TTechIconProps = {
   slug: string;
   className?: string;
@@ -41,13 +59,21 @@ type TTechIconProps = {
 
 export function TechIcon({ slug, className }: TTechIconProps) {
   const icon = ICONS[slug];
+  const label = ICON_LABELS[slug] || slug;
 
   if (!icon) {
-    return <div className={className} />;
+    return <div className={className} aria-hidden="true" />;
   }
 
   return (
-    <svg role="img" viewBox="0 0 24 24" className={className} fill="currentColor">
+    <svg
+      role="img"
+      aria-label={label}
+      viewBox="0 0 24 24"
+      className={className}
+      fill="currentColor"
+    >
+      <title>{label}</title>
       <path d={icon.path} />
     </svg>
   );
