@@ -27,6 +27,8 @@ export function Projects({ projects, projectsWithDetails = [] }: TProps) {
 
   const [firstProject, ...restProjects] = filteredProjects;
 
+  const showFilterCount = filter !== "all" && filteredProjects.length !== projects.length;
+
   return (
     <section className="min-h-[calc(100vh-4rem)] py-12 lg:py-16">
       <Container>
@@ -34,7 +36,7 @@ export function Projects({ projects, projectsWithDetails = [] }: TProps) {
           <div className="space-y-6">
             <SectionHeader title={t("title")} description={t("description")} as="h1" />
 
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               {CATEGORY_FILTER_OPTIONS.map((option) => (
                 <button
                   key={option.value}
@@ -49,6 +51,11 @@ export function Projects({ projects, projectsWithDetails = [] }: TProps) {
                   {option.label}
                 </button>
               ))}
+              {showFilterCount && (
+                <span className="text-xs text-muted-foreground ml-2">
+                  {t("showingCount", { count: filteredProjects.length, total: projects.length })}
+                </span>
+              )}
             </div>
           </div>
 

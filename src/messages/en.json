@@ -35,6 +35,7 @@
       "opensource": "Open Source"
     },
     "backToProjects": "Back to Projects",
+    "showingCount": "Showing {count} of {total}",
     "role": "Role",
     "duration": "Duration",
     "team": "Team",
@@ -54,6 +55,7 @@
     "noPostsFound": "No posts found.",
     "taggedWith": "Posts tagged with \"{tag}\"",
     "postsFound": "{count} {count, plural, one {post} other {posts}} found",
+    "showingCount": "Showing {count} of {total}",
     "filters": {
       "all": "All"
     },

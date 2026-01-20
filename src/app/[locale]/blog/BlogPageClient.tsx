@@ -29,6 +29,8 @@ export function BlogPageClient({ posts, tags }: TProps) {
       )
     : posts;
 
+  const showFilterCount = selectedTag !== null && filteredPosts.length !== posts.length;
+
   return (
     <section className="min-h-[calc(100vh-4rem)] py-12 lg:py-16">
       <Container>
@@ -40,7 +42,7 @@ export function BlogPageClient({ posts, tags }: TProps) {
             </div>
 
             {tags.length > 0 && (
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <button
                   onClick={() => setSelectedTag(null)}
                   className={cn(
@@ -66,6 +68,11 @@ export function BlogPageClient({ posts, tags }: TProps) {
                     {tag}
                   </button>
                 ))}
+                {showFilterCount && (
+                  <span className="text-xs text-muted-foreground ml-2">
+                    {t("showingCount", { count: filteredPosts.length, total: posts.length })}
+                  </span>
+                )}
               </div>
             )}
           </div>
