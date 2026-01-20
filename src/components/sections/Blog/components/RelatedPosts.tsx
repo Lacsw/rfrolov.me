@@ -9,7 +9,7 @@ import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";
 
-import { BlogTags } from "./BlogTags";
+import { BlogTags } from "./post";
 
 type TRelatedPostsProps = {
   posts: TBlogPostMeta[];

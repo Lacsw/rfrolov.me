@@ -8,7 +8,7 @@ import { Link, useRouter } from "@/i18n/routing";
 import { getTagUrl } from "@/lib/urls";
 import { cn } from "@/lib/utils";
 
-import { getTagColor } from "../constants";
+import { getTagColor } from "../../constants";
 
 type TProps = {
   tag: string;
