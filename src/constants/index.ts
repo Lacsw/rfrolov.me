@@ -1,5 +1,6 @@
 export {
   ANIMATION_DURATION,
+  createStaggerAnimation,
   FADE_IN,
   FADE_IN_TRANSITION,
   getStaggeredAnimation,

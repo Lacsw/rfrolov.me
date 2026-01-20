@@ -1,4 +1,4 @@
-import { ANIMATION_DURATION } from "@/constants";
+import { ANIMATION_DURATION, createStaggerAnimation } from "@/constants";
 import { TSkill } from "@/types";
 
 export const SKILLS: TSkill[] = [
@@ -19,25 +19,8 @@ export const SKILLS: TSkill[] = [
   { name: "Bun", icon: "bun" },
 ];
 
-export const SKILLS_ANIMATION = {
-  container: {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.04,
-      },
-    },
-  },
-  item: {
-    hidden: { opacity: 0, y: 10 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: ANIMATION_DURATION.normal,
-        ease: "easeOut",
-      },
-    },
-  },
-} as const;
+export const SKILLS_ANIMATION = createStaggerAnimation({
+  staggerChildren: 0.04,
+  offset: 10,
+  duration: ANIMATION_DURATION.normal,
+});

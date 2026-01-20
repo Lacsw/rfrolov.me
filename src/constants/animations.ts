@@ -31,3 +31,42 @@ export function getStaggeredAnimation(index: number, options: TStaggerOptions = 
     transition: { delay: index * delayMultiplier, duration },
   };
 }
+
+type TEase = "easeIn" | "easeOut" | "easeInOut" | "linear";
+
+type TStaggerContainerOptions = {
+  staggerChildren?: number;
+  direction?: "x" | "y";
+  offset?: number;
+  duration?: number;
+  ease?: TEase;
+};
+
+export function createStaggerAnimation(options: TStaggerContainerOptions = {}) {
+  const {
+    staggerChildren = 0.1,
+    direction = "y",
+    offset = 20,
+    duration = ANIMATION_DURATION.normal,
+    ease = "easeOut",
+  } = options;
+
+  return {
+    container: {
+      hidden: { opacity: 0 },
+      show: {
+        opacity: 1,
+        transition: { staggerChildren },
+      },
+    },
+    item: {
+      hidden: { opacity: 0, x: direction === "x" ? offset : 0, y: direction === "y" ? offset : 0 },
+      show: {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        transition: { duration, ease },
+      },
+    },
+  };
+}
