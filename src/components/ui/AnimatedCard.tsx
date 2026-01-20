@@ -11,6 +11,7 @@ import {
   EXTERNAL_LINK_PROPS,
   getStaggeredAnimation,
 } from "@/constants";
+import { useReducedMotion } from "@/hooks";
 import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
@@ -33,6 +34,7 @@ export function AnimatedCard({
   large = false,
   internal = false,
 }: TAnimatedCardProps) {
+  const prefersReducedMotion = useReducedMotion();
   const baseClasses = cn(
     "group block h-full",
     CARD_BASE,
@@ -42,7 +44,7 @@ export function AnimatedCard({
     className
   );
 
-  const animation = getStaggeredAnimation(index);
+  const animation = prefersReducedMotion ? {} : getStaggeredAnimation(index);
 
   if (href && internal) {
     return (
