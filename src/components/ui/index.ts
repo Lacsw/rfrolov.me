@@ -11,6 +11,7 @@ export { SectionHeader } from "./SectionHeader";
 export { SocialLink } from "./SocialLink";
 export { TechIcon } from "./TechIcon";
 export { ThemeToggle } from "./ThemeToggle";
+export { ToastProvider, useToast } from "./Toast";
 export { ViewToggle } from "./ViewToggle";
 
 export { CategoryWithYear, ProjectHighlight, ProjectLinks, TechTags } from "./project";
