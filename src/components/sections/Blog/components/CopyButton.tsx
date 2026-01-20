@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback } from "react";
+import { memo, useCallback } from "react";
 
 import { Copy } from "lucide-react";
 
@@ -11,7 +11,7 @@ type TCopyButtonProps = {
   text: string;
 };
 
-export function CopyButton({ text }: TCopyButtonProps) {
+export const CopyButton = memo(function CopyButton({ text }: TCopyButtonProps) {
   const { showToast } = useToast();
 
   const handleCopy = useCallback(async () => {
@@ -35,4 +35,4 @@ export function CopyButton({ text }: TCopyButtonProps) {
       <Copy className="h-4 w-4" />
     </button>
   );
-}
+});
