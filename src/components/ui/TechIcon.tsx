@@ -1,3 +1,4 @@
+import { Code } from "lucide-react";
 import {
   siReact,
   siTypescript,
@@ -62,7 +63,7 @@ export function TechIcon({ slug, className }: TTechIconProps) {
   const label = ICON_LABELS[slug] || slug;
 
   if (!icon) {
-    return <div className={className} aria-hidden="true" />;
+    return <Code className={className} aria-label={label} />;
   }
 
   return (
