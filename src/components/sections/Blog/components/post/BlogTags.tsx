@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { TagList } from "@/components/ui";
 
 import { BlogTag } from "./BlogTag";
 
@@ -18,10 +18,13 @@ export function BlogTags({
   insideCard = false,
 }: TBlogTagsProps) {
   return (
-    <div className={cn("flex gap-1.5", wrap && "flex-wrap")}>
-      {tags.slice(0, limit).map((tag) => (
+    <TagList
+      items={tags}
+      limit={limit}
+      wrap={wrap}
+      renderItem={(tag) => (
         <BlogTag key={tag} tag={tag} size={size} insideCard={insideCard} />
-      ))}
-    </div>
+      )}
+    />
   );
 }

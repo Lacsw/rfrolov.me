@@ -1,5 +1,4 @@
-import { Tag } from "@/components/ui/Tag";
-import { cn } from "@/lib/utils";
+import { Tag, TagList } from "@/components/ui";
 
 type TTechTagsProps = {
   technologies: string[];
@@ -9,15 +8,17 @@ type TTechTagsProps = {
 };
 
 export function TechTags({ technologies, limit, size = "md", className }: TTechTagsProps) {
-  const items = limit ? technologies.slice(0, limit) : technologies;
-
   return (
-    <div className={cn("flex flex-wrap gap-1.5", className)}>
-      {items.map((tech) => (
+    <TagList
+      items={technologies}
+      limit={limit}
+      wrap
+      className={className}
+      renderItem={(tech) => (
         <Tag key={tech} size={size}>
           {tech}
         </Tag>
-      ))}
-    </div>
+      )}
+    />
   );
 }
