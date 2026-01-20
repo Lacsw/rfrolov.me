@@ -61,6 +61,7 @@ export function TableOfContents({ headings }: TTableOfContentsProps) {
                 href={`#${id}`}
                 className={cn(
                   "block -ml-px border-l-2 py-1.5 text-sm transition-colors duration-150 cursor-pointer",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm",
                   level === 2 ? "pl-4" : "pl-7",
                   isActive
                     ? "border-foreground text-foreground font-medium"
