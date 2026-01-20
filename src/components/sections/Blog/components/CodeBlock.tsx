@@ -1,7 +1,8 @@
 "use client";
 
-import { Children, isValidElement, ReactNode } from "react";
+import { ReactNode } from "react";
 
+import { getTextContent } from "@/lib/extract-text";
 import { cn } from "@/lib/utils";
 
 import { CopyButton } from "./CopyButton";
@@ -11,28 +12,8 @@ type TCodeBlockProps = {
   className?: string;
 };
 
-function extractText(node: ReactNode): string {
-  if (typeof node === "string") {
-    return node;
-  }
-
-  if (Array.isArray(node)) {
-    return node.map(extractText).join("");
-  }
-
-  if (isValidElement(node)) {
-    const props = node.props as { children?: ReactNode };
-
-    if (props.children) {
-      return extractText(props.children);
-    }
-  }
-
-  return "";
-}
-
 export function CodeBlock({ children, className }: TCodeBlockProps) {
-  const codeContent = Children.toArray(children).map(extractText).join("").trim();
+  const codeContent = getTextContent(children);
 
   return (
     <div className="my-4 rounded-lg border border-muted overflow-hidden">

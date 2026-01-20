@@ -1,9 +1,10 @@
 "use client";
 
-import { Children, isValidElement, ReactNode, useMemo, useState } from "react";
+import { ReactNode, useMemo, useState } from "react";
 
 import { ChevronDown, ChevronRight } from "lucide-react";
 
+import { getTextContent } from "@/lib/extract-text";
 import { cn } from "@/lib/utils";
 
 import { CopyButton } from "./CopyButton";
@@ -14,24 +15,9 @@ type TCollapsibleCodeProps = {
   defaultOpen?: boolean;
 };
 
-function extractTextFromChildren(node: ReactNode): string {
-  if (typeof node === "string") return node;
-  if (Array.isArray(node)) return node.map(extractTextFromChildren).join("");
-
-  if (isValidElement(node)) {
-    const props = node.props as { children?: ReactNode };
-    if (props.children) return extractTextFromChildren(props.children);
-  }
-
-  return "";
-}
-
 export function CollapsibleCode({ title, children, defaultOpen = false }: TCollapsibleCodeProps) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
-  const codeContent = useMemo(
-    () => Children.toArray(children).map(extractTextFromChildren).join("").trim(),
-    [children]
-  );
+  const codeContent = useMemo(() => getTextContent(children), [children]);
 
   return (
     <div className="my-4 rounded-lg border border-muted overflow-hidden">
