@@ -10,6 +10,7 @@ export { LinkButton } from "./LinkButton";
 export { ReadingProgress } from "./ReadingProgress";
 export { ScrollToTop } from "./ScrollToTop";
 export { SectionHeader } from "./SectionHeader";
+export { CardSkeleton, Skeleton } from "./Skeleton";
 export { SocialLink } from "./SocialLink";
 export { TechIcon } from "./TechIcon";
 export { ThemeToggle } from "./ThemeToggle";
