@@ -7,6 +7,7 @@ import { Clock } from "lucide-react";
 
 import {
   BlogTag,
+  MobileTOC,
   PostNavigation,
   RelatedPosts,
   SeriesNavigation,
@@ -93,6 +94,8 @@ export function BlogPostLayout({
           </div>
         </Container>
       </section>
+
+      <MobileTOC headings={headings} />
     </>
   );
 }

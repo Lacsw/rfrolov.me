@@ -72,7 +72,9 @@
       "min": "{minutes} min",
       "minRead": "{minutes} min read"
     },
-    "onThisPage": "On this page"
+    "onThisPage": "On this page",
+    "openTableOfContents": "Open table of contents",
+    "closeTableOfContents": "Close table of contents"
   },
   "contact": {
     "getInTouch": "Get in touch"
