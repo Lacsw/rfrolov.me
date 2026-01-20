@@ -7,6 +7,7 @@ export { ExternalLink } from "./ExternalLink";
 export { IconButton } from "./IconButton";
 export { LinkButton } from "./LinkButton";
 export { ReadingProgress } from "./ReadingProgress";
+export { ScrollToTop } from "./ScrollToTop";
 export { SectionHeader } from "./SectionHeader";
 export { SocialLink } from "./SocialLink";
 export { TechIcon } from "./TechIcon";
