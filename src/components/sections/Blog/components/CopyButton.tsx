@@ -15,8 +15,12 @@ export function CopyButton({ text }: TCopyButtonProps) {
   const { showToast } = useToast();
 
   const handleCopy = useCallback(async () => {
-    await navigator.clipboard.writeText(text);
-    showToast("Copied to clipboard");
+    try {
+      await navigator.clipboard.writeText(text);
+      showToast("Copied to clipboard");
+    } catch {
+      showToast("Failed to copy");
+    }
   }, [text, showToast]);
 
   return (
