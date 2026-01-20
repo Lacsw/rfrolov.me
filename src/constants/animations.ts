@@ -5,6 +5,8 @@ export const ANIMATION_DURATION = {
   slower: 0.5,
 } as const;
 
+export const TOAST_DURATION_MS = 2000;
+
 export const FADE_IN = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },

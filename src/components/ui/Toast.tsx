@@ -5,6 +5,8 @@ import { createContext, ReactNode, useCallback, useContext, useState } from "rea
 import { AnimatePresence, motion } from "framer-motion";
 import { Check } from "lucide-react";
 
+import { TOAST_DURATION_MS } from "@/constants";
+
 type TToast = {
   id: number;
   message: string;
@@ -15,8 +17,6 @@ type TToastContext = {
 };
 
 const ToastContext = createContext<TToastContext | null>(null);
-
-const TOAST_DURATION_MS = 2000;
 
 export function ToastProvider({ children }: { children: ReactNode }) {
   const [toasts, setToasts] = useState<TToast[]>([]);
