@@ -4,10 +4,11 @@ import path from "path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 
+import { CONTENT_PATHS } from "@/constants";
 import { TLocale } from "@/i18n/config";
 import { TBlogPost, TBlogPostMeta, TBlogPostSeries, THeading } from "@/types";
 
-const BLOG_DIR = path.join(process.cwd(), "src/content/blog");
+const BLOG_DIR = CONTENT_PATHS.blog;
 const IS_PRODUCTION = process.env.NODE_ENV === "production";
 
 // Filename format: 001_slug-name.en.mdx

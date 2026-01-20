@@ -3,16 +3,13 @@ import path from "path";
 
 import matter from "gray-matter";
 
+import { CONTENT_PATHS } from "@/constants";
 import { getProjects } from "@/data/projects";
 import { TLocale } from "@/i18n/config";
 import { TProject, TProjectDetail, TProjectDetailMeta } from "@/types";
 
-function getProjectsDir(): string {
-  return path.join(process.cwd(), "src/content/projects");
-}
-
 function getProjectFilePath(id: string, locale: TLocale): string {
-  return path.join(getProjectsDir(), `${id}.${locale}.mdx`);
+  return path.join(CONTENT_PATHS.projects, `${id}.${locale}.mdx`);
 }
 
 export function hasProjectDetail(id: string, locale: TLocale): boolean {
