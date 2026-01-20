@@ -1,5 +1,7 @@
 "use client";
 
+import { memo } from "react";
+
 import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -13,7 +15,7 @@ type TProps = {
   projects: TProject[];
 };
 
-export function RelatedProjects({ projects }: TProps) {
+export const RelatedProjects = memo(function RelatedProjects({ projects }: TProps) {
   const t = useTranslations("projects");
 
   if (projects.length === 0) {
@@ -50,4 +52,4 @@ export function RelatedProjects({ projects }: TProps) {
       </div>
     </section>
   );
-}
+});
