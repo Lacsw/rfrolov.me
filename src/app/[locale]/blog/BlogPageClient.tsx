@@ -9,6 +9,7 @@ import { BlogPostCard, BlogPostListItem } from "@/components/sections/Blog";
 import { Container, SectionHeader, ViewToggle } from "@/components/ui";
 import { type TViewMode } from "@/components/ui/ViewToggle";
 import { FADE_IN, FADE_IN_TRANSITION } from "@/constants";
+import { usePersistedState } from "@/hooks";
 import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";
 
@@ -20,7 +21,7 @@ type TProps = {
 export function BlogPageClient({ posts, tags }: TProps) {
   const t = useTranslations("blog");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
-  const [view, setView] = useState<TViewMode>("grid");
+  const [view, setView] = usePersistedState<TViewMode>("blog-view-mode", "grid");
 
   const filteredPosts = selectedTag
     ? posts.filter((post) =>
