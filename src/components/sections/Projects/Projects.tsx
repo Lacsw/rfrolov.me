@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { AnimatedSection, Container, SectionHeader } from "@/components/ui";
+import { AnimatedSection, Container, EmptyState, SectionHeader } from "@/components/ui";
 import { CATEGORY_FILTER_OPTIONS } from "@/constants";
 import { cn } from "@/lib/utils";
 import { TProject, TProjectCategory } from "@/types";
@@ -59,24 +59,32 @@ export function Projects({ projects, projectsWithDetails = [] }: TProps) {
             </div>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2">
-            {firstProject && (
-              <ProjectCard
-                project={firstProject}
-                index={0}
-                large
-                hasDetail={detailIds.has(firstProject.id)}
-              />
-            )}
-            {restProjects.map((project, index) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                index={index + 1}
-                hasDetail={detailIds.has(project.id)}
-              />
-            ))}
-          </div>
+          {filteredProjects.length > 0 ? (
+            <div className="grid gap-4 md:grid-cols-2">
+              {firstProject && (
+                <ProjectCard
+                  project={firstProject}
+                  index={0}
+                  large
+                  hasDetail={detailIds.has(firstProject.id)}
+                />
+              )}
+              {restProjects.map((project, index) => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  index={index + 1}
+                  hasDetail={detailIds.has(project.id)}
+                />
+              ))}
+            </div>
+          ) : (
+            <EmptyState
+              title={t("noProjectsFound")}
+              description={t("tryDifferentFilter")}
+              variant="filter"
+            />
+          )}
         </AnimatedSection>
       </Container>
     </section>

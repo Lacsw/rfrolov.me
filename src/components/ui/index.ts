@@ -3,6 +3,7 @@ export { AnimatedSection } from "./AnimatedSection";
 export { BackLink } from "./BackLink";
 export { Tag } from "./Tag";
 export { Container } from "./Container";
+export { EmptyState } from "./EmptyState";
 export { ExternalLink } from "./ExternalLink";
 export { IconButton } from "./IconButton";
 export { LinkButton } from "./LinkButton";

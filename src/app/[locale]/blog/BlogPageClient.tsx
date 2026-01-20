@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 import { BlogPostCard, BlogPostListItem } from "@/components/sections/Blog";
-import { Container, SectionHeader, ViewToggle } from "@/components/ui";
+import { Container, EmptyState, SectionHeader, ViewToggle } from "@/components/ui";
 import { type TViewMode } from "@/components/ui/ViewToggle";
 import { FADE_IN, FADE_IN_TRANSITION } from "@/constants";
 import { usePersistedState } from "@/hooks";
@@ -92,7 +92,11 @@ export function BlogPageClient({ posts, tags }: TProps) {
               </div>
             )
           ) : (
-            <p className="text-muted-foreground text-center py-12">{t("noPostsFound")}</p>
+            <EmptyState
+              title={t("noPostsFound")}
+              description={t("tryDifferentFilter")}
+              variant="filter"
+            />
           )}
         </motion.div>
       </Container>
