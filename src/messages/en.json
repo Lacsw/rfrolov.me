@@ -1,7 +1,9 @@
 {
   "common": {
     "viewAll": "View all",
-    "backToBlog": "Back to blog"
+    "backToBlog": "Back to blog",
+    "linkCopied": "Link copied to clipboard",
+    "copyLink": "Copy link to section"
   },
   "nav": {
     "home": "Home",

@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { Callout } from "./Callout";
 import { CodeBlock } from "./CodeBlock";
 import { CollapsibleCode } from "./CollapsibleCode";
+import { HeadingLink } from "./HeadingLink";
 
 type THeadingProps = ComponentPropsWithoutRef<"h1">;
 type TParagraphProps = ComponentPropsWithoutRef<"p">;
@@ -22,18 +23,8 @@ export const mdxComponents = {
   h1: ({ className, ...props }: THeadingProps) => (
     <h1 className={cn("text-2xl font-semibold tracking-tight mt-8 mb-4", className)} {...props} />
   ),
-  h2: ({ className, ...props }: THeadingProps) => (
-    <h2
-      className={cn("text-xl font-semibold tracking-tight mt-8 mb-4 scroll-mt-24", className)}
-      {...props}
-    />
-  ),
-  h3: ({ className, ...props }: THeadingProps) => (
-    <h3
-      className={cn("text-lg font-semibold tracking-tight mt-6 mb-3 scroll-mt-24", className)}
-      {...props}
-    />
-  ),
+  h2: (props: THeadingProps) => <HeadingLink as="h2" {...props} />,
+  h3: (props: THeadingProps) => <HeadingLink as="h3" {...props} />,
   h4: ({ className, ...props }: THeadingProps) => (
     <h4 className={cn("text-base font-semibold tracking-tight mt-6 mb-3", className)} {...props} />
   ),

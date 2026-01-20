@@ -4,6 +4,7 @@ export { BlogTag } from "./BlogTag";
 export { BlogTags } from "./BlogTags";
 export { Callout } from "./Callout";
 export { CollapsibleCode } from "./CollapsibleCode";
+export { HeadingLink } from "./HeadingLink";
 export { mdxComponents } from "./MDXComponents";
 export { PostNavigation } from "./PostNavigation";
 export { ReadingTime } from "./ReadingTime";
