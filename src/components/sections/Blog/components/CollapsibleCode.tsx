@@ -43,12 +43,14 @@ export function CollapsibleCode({ title, children, defaultOpen = false }: TColla
       </div>
       <div
         className={cn(
-          "transition-all duration-200 ease-in-out overflow-hidden",
-          isOpen ? "max-h-[5000px] opacity-100" : "max-h-0 opacity-0"
+          "grid transition-[grid-template-rows] duration-200 ease-in-out",
+          isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
         )}
       >
-        <div className="collapsible-code-content [&_.code-block-header]:hidden [&>div]:my-0 [&>div]:rounded-none [&>div]:border-0">
-          {children}
+        <div className="overflow-hidden">
+          <div className="collapsible-code-content [&_.code-block-header]:hidden [&>div]:my-0 [&>div]:rounded-none [&>div]:border-0">
+            {children}
+          </div>
         </div>
       </div>
     </div>
