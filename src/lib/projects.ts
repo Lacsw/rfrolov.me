@@ -1,21 +1,18 @@
-import fs from "fs";
 import path from "path";
-
-import matter from "gray-matter";
 
 import { CONTENT_PATHS } from "@/constants";
 import { getProjects } from "@/data/projects";
 import { TLocale } from "@/i18n/config";
 import { TProject, TProjectDetail, TProjectDetailMeta } from "@/types";
 
+import { fileExists, parseMDXFile } from "./content";
+
 function getProjectFilePath(id: string, locale: TLocale): string {
   return path.join(CONTENT_PATHS.projects, `${id}.${locale}.mdx`);
 }
 
 export function hasProjectDetail(id: string, locale: TLocale): boolean {
-  const filePath = getProjectFilePath(id, locale);
-
-  return fs.existsSync(filePath);
+  return fileExists(getProjectFilePath(id, locale));
 }
 
 export function getProjectById(id: string, locale: TLocale): TProjectDetail | null {
@@ -28,20 +25,19 @@ export function getProjectById(id: string, locale: TLocale): TProjectDetail | nu
 
   const filePath = getProjectFilePath(id, locale);
 
-  if (!fs.existsSync(filePath)) {
+  if (!fileExists(filePath)) {
     return null;
   }
 
-  const fileContent = fs.readFileSync(filePath, "utf-8");
-  const { data, content } = matter(fileContent);
+  const { data, content } = parseMDXFile(filePath);
 
   return {
     ...baseProject,
-    longDescription: data.longDescription,
-    role: data.role,
-    duration: data.duration,
-    team: data.team,
-    screenshots: data.screenshots || [],
+    longDescription: data.longDescription as string,
+    role: data.role as string,
+    duration: data.duration as string,
+    team: data.team as string,
+    screenshots: (data.screenshots as TProjectDetail["screenshots"]) || [],
     content,
   };
 }
