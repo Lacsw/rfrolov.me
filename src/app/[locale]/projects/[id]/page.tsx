@@ -70,6 +70,7 @@ const rehypePrettyCodeOptions = {
     light: "github-light",
   },
   keepBackground: false,
+  defaultLang: "plaintext",
 };
 
 export default async function ProjectDetailPage({ params }: TProps) {

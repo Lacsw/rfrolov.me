@@ -40,6 +40,7 @@ const rehypePrettyCodeOptions = {
     light: "github-light",
   },
   keepBackground: false,
+  defaultLang: "plaintext",
 };
 
 export default async function BlogPostPage({ params }: TProps) {

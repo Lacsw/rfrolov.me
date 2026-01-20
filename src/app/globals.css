@@ -95,3 +95,19 @@ body {
 .dark [data-rehype-pretty-code-figure] code span {
   color: var(--shiki-dark) !important;
 }
+
+/* Line numbers for code blocks */
+code[data-line-numbers] {
+  counter-reset: line;
+}
+
+code[data-line-numbers] > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 1.5rem;
+  margin-right: 1rem;
+  text-align: right;
+  color: hsl(var(--muted-foreground));
+  opacity: 0.5;
+}
