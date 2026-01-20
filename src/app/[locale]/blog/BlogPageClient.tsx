@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 import { BlogPostCard, BlogPostListItem } from "@/components/sections/Blog";
-import { Container, EmptyState, SectionHeader, ViewToggle } from "@/components/ui";
+import { Container, EmptyState, SearchInput, SectionHeader, ViewToggle } from "@/components/ui";
 import { type TViewMode } from "@/components/ui/ViewToggle";
 import { FADE_IN, FADE_IN_TRANSITION } from "@/constants";
 import { usePersistedState } from "@/hooks";
@@ -22,14 +22,31 @@ export function BlogPageClient({ posts, tags }: TProps) {
   const t = useTranslations("blog");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [view, setView] = usePersistedState<TViewMode>("blog-view-mode", "grid");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredPosts = selectedTag
-    ? posts.filter((post) =>
+  const filteredPosts = useMemo(() => {
+    let result = posts;
+
+    if (selectedTag) {
+      result = result.filter((post) =>
         post.tags.map((t) => t.toLowerCase()).includes(selectedTag.toLowerCase())
-      )
-    : posts;
+      );
+    }
 
-  const showFilterCount = selectedTag !== null && filteredPosts.length !== posts.length;
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      result = result.filter(
+        (post) =>
+          post.title.toLowerCase().includes(query) ||
+          post.description.toLowerCase().includes(query)
+      );
+    }
+
+    return result;
+  }, [posts, selectedTag, searchQuery]);
+
+  const isFiltering = selectedTag !== null || searchQuery.trim() !== "";
+  const showFilterCount = isFiltering && filteredPosts.length !== posts.length;
 
   return (
     <section className="min-h-[calc(100vh-4rem)] py-12 lg:py-16">
@@ -40,6 +57,13 @@ export function BlogPageClient({ posts, tags }: TProps) {
               <SectionHeader as="h1" description={t("description")} title={t("title")} />
               <ViewToggle view={view} onViewChange={setView} />
             </div>
+
+            <SearchInput
+              value={searchQuery}
+              onChange={setSearchQuery}
+              placeholder={t("searchPlaceholder")}
+              className="max-w-md"
+            />
 
             {tags.length > 0 && (
               <div className="flex flex-wrap items-center gap-2">
@@ -94,8 +118,8 @@ export function BlogPageClient({ posts, tags }: TProps) {
           ) : (
             <EmptyState
               title={t("noPostsFound")}
-              description={t("tryDifferentFilter")}
-              variant="filter"
+              description={searchQuery ? t("tryDifferentSearch") : t("tryDifferentFilter")}
+              variant={searchQuery ? "search" : "filter"}
             />
           )}
         </motion.div>

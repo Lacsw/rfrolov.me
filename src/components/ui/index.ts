@@ -9,6 +9,7 @@ export { IconButton } from "./IconButton";
 export { LinkButton } from "./LinkButton";
 export { ReadingProgress } from "./ReadingProgress";
 export { ScrollToTop } from "./ScrollToTop";
+export { SearchInput } from "./SearchInput";
 export { SectionHeader } from "./SectionHeader";
 export { CardSkeleton, Skeleton } from "./Skeleton";
 export { SocialLink } from "./SocialLink";

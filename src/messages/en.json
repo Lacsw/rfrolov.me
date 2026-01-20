@@ -58,6 +58,8 @@
     "browseByTopic": "Browse posts by topic",
     "noPostsFound": "No posts found",
     "tryDifferentFilter": "Try selecting a different filter",
+    "tryDifferentSearch": "Try a different search term",
+    "searchPlaceholder": "Search posts...",
     "taggedWith": "Posts tagged with \"{tag}\"",
     "postsFound": "{count} {count, plural, one {post} other {posts}} found",
     "showingCount": "Showing {count} of {total}",

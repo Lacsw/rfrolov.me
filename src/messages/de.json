@@ -58,6 +58,8 @@
     "browseByTopic": "Beiträge nach Thema durchsuchen",
     "noPostsFound": "Keine Beiträge gefunden",
     "tryDifferentFilter": "Versuchen Sie einen anderen Filter",
+    "tryDifferentSearch": "Versuchen Sie einen anderen Suchbegriff",
+    "searchPlaceholder": "Beiträge suchen...",
     "taggedWith": "Beiträge mit Tag \"{tag}\"",
     "postsFound": "{count} {count, plural, one {Beitrag} other {Beiträge}} gefunden",
     "showingCount": "Zeige {count} von {total}",
