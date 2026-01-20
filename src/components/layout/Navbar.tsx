@@ -36,19 +36,25 @@ export function Navbar() {
 
           <div className="flex items-center gap-6">
             <ul className="flex items-center gap-8">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className={cn(
-                      "text-sm transition-colors duration-300",
-                      pathname === link.href ? "text-foreground" : HOVER_TEXT_COLOR
-                    )}
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
+              {navLinks.map((link) => {
+                const isActive =
+                  link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+
+                return (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      aria-current={isActive ? "page" : undefined}
+                      className={cn(
+                        "text-sm transition-colors duration-300",
+                        isActive ? "text-foreground" : HOVER_TEXT_COLOR
+                      )}
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
             <LanguageSwitcher />
             <ThemeToggle />
