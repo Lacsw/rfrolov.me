@@ -4,6 +4,7 @@ export {
   BlogPostListItem,
   BlogTag,
   mdxComponents,
+  MobileTOC,
   PostNavigation,
   RelatedPosts,
   SeriesNavigation,
