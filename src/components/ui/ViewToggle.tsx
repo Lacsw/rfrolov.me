@@ -25,6 +25,7 @@ export function ViewToggle({ view, onViewChange }: TViewToggleProps) {
         onClick={() => onViewChange("grid")}
         className={getButtonClassName(view === "grid")}
         aria-label="Grid view"
+        aria-pressed={view === "grid"}
       >
         <Grid className={ICON_SIZE.sm} />
       </button>
@@ -32,6 +33,7 @@ export function ViewToggle({ view, onViewChange }: TViewToggleProps) {
         onClick={() => onViewChange("list")}
         className={getButtonClassName(view === "list")}
         aria-label="List view"
+        aria-pressed={view === "list"}
       >
         <List className={ICON_SIZE.sm} />
       </button>
