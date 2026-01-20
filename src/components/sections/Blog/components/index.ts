@@ -1,8 +1,5 @@
+export { Callout, CollapsibleCode, HeadingLink, mdxComponents } from "./mdx";
 export { BlogPostCard, BlogPostListItem, BlogTag, BlogTags, ReadingTime } from "./post";
-export { Callout } from "./Callout";
-export { CollapsibleCode } from "./CollapsibleCode";
-export { HeadingLink } from "./HeadingLink";
-export { mdxComponents } from "./MDXComponents";
 export { MobileTOC } from "./MobileTOC";
 export { PostNavigation } from "./PostNavigation";
 export { RelatedPosts } from "./RelatedPosts";
