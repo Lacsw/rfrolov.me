@@ -1,5 +1,7 @@
 "use client";
 
+import { memo } from "react";
+
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
@@ -17,7 +19,7 @@ type TBlogPostListItemProps = {
   index: number;
 };
 
-export function BlogPostListItem({ post, index }: TBlogPostListItemProps) {
+export const BlogPostListItem = memo(function BlogPostListItem({ post, index }: TBlogPostListItemProps) {
   const formattedDate = formatDate(post.date);
 
   return (
@@ -51,4 +53,4 @@ export function BlogPostListItem({ post, index }: TBlogPostListItemProps) {
       </Link>
     </motion.div>
   );
-}
+});

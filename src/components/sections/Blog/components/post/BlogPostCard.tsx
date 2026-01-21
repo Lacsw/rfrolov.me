@@ -1,5 +1,7 @@
 "use client";
 
+import { memo } from "react";
+
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
@@ -24,7 +26,7 @@ type TBlogPostCardProps = {
   index: number;
 };
 
-export function BlogPostCard({ post, index }: TBlogPostCardProps) {
+export const BlogPostCard = memo(function BlogPostCard({ post, index }: TBlogPostCardProps) {
   const formattedDate = formatDate(post.date);
 
   return (
@@ -60,4 +62,4 @@ export function BlogPostCard({ post, index }: TBlogPostCardProps) {
       </Link>
     </motion.div>
   );
-}
+});

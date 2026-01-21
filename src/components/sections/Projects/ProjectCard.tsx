@@ -1,5 +1,7 @@
 "use client";
 
+import { memo } from "react";
+
 import {
   AnimatedCard,
   CategoryWithYear,
@@ -18,7 +20,12 @@ type TProjectCardProps = {
   hasDetail?: boolean;
 };
 
-export function ProjectCard({ project, index, large = false, hasDetail = false }: TProjectCardProps) {
+export const ProjectCard = memo(function ProjectCard({
+  project,
+  index,
+  large = false,
+  hasDetail = false,
+}: TProjectCardProps) {
   const detailHref = hasDetail ? `/projects/${project.id}` : undefined;
 
   return (
@@ -54,4 +61,4 @@ export function ProjectCard({ project, index, large = false, hasDetail = false }
       </div>
     </AnimatedCard>
   );
-}
+});
