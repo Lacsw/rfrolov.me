@@ -1,6 +1,6 @@
 "use client";
 
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 import { HOVER_TEXT_COLOR } from "@/constants";
 import { locales, TLocale } from "@/i18n/config";
@@ -11,6 +11,7 @@ export function LanguageSwitcher() {
   const locale = useLocale() as TLocale;
   const router = useRouter();
   const pathname = usePathname();
+  const t = useTranslations("language");
 
   const handleLocaleChange = (newLocale: TLocale) => {
     if (newLocale !== locale) {
@@ -19,19 +20,30 @@ export function LanguageSwitcher() {
   };
 
   return (
-    <div className="flex items-center text-sm">
-      {locales.map((loc) => (
-        <button
-          key={loc}
-          onClick={() => handleLocaleChange(loc)}
-          className={cn(
-            "px-1.5 py-1 cursor-pointer transition-colors duration-300",
-            locale === loc ? "text-foreground" : HOVER_TEXT_COLOR
-          )}
-        >
-          {loc.toUpperCase()}
-        </button>
-      ))}
+    <div
+      role="group"
+      aria-label={t("languageSelector")}
+      className="flex items-center text-sm"
+    >
+      {locales.map((loc) => {
+        const isCurrent = locale === loc;
+        const languageName = t(loc);
+
+        return (
+          <button
+            key={loc}
+            onClick={() => handleLocaleChange(loc)}
+            aria-label={isCurrent ? t("currentLanguage", { language: languageName }) : t("switchTo", { language: languageName })}
+            aria-current={isCurrent ? "true" : undefined}
+            className={cn(
+              "px-1.5 py-1 cursor-pointer transition-colors duration-300",
+              isCurrent ? "text-foreground" : HOVER_TEXT_COLOR
+            )}
+          >
+            {loc.toUpperCase()}
+          </button>
+        );
+      })}
     </div>
   );
 }

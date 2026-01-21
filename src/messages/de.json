@@ -106,6 +106,13 @@
     "switchToLight": "Zum hellen Modus wechseln",
     "switchToDark": "Zum dunklen Modus wechseln"
   },
+  "language": {
+    "switchTo": "Zu {language} wechseln",
+    "currentLanguage": "Aktuelle Sprache: {language}",
+    "languageSelector": "Sprachauswahl",
+    "en": "Englisch",
+    "de": "Deutsch"
+  },
   "metadata": {
     "title": "Roman Frolov - Frontend-Entwickler",
     "description": "Persönliche Website von Roman Frolov, einem Frontend-Entwickler spezialisiert auf React, TypeScript und moderne Webtechnologien."
