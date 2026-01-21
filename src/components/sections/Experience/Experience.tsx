@@ -5,7 +5,14 @@ import { ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { AnimatedSection, Container } from "@/components/ui";
-import { ANIMATION_DURATION, HOVER_OPACITY, ICON_SIZE, SPACING, TRANSITION } from "@/constants";
+import {
+  ANIMATION_DURATION,
+  HOVER_OPACITY,
+  ICON_SIZE,
+  SPACING,
+  TEXT_SIZE,
+  TRANSITION,
+} from "@/constants";
 import { useToggle } from "@/hooks";
 import { cn } from "@/lib/utils";
 import { TExperience } from "@/types";
@@ -31,7 +38,7 @@ export function Experience({ experiences }: TProps) {
     <section className={SPACING.section}>
       <Container>
         <AnimatedSection className="space-y-6">
-          <h2 className="text-lg font-semibold tracking-tight">{t("title")}</h2>
+          <h2 className={cn(TEXT_SIZE.heading, "font-semibold tracking-tight")}>{t("title")}</h2>
 
           <div>
             <motion.div variants={EXPERIENCE_ANIMATION.container} initial="hidden" animate="show">

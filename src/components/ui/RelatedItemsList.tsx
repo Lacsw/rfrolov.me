@@ -4,7 +4,7 @@ import { memo, ReactNode } from "react";
 
 import { ArrowRight } from "lucide-react";
 
-import { ARROW_HOVER, ICON_SIZE } from "@/constants";
+import { ARROW_HOVER, ICON_SIZE, TEXT_SIZE } from "@/constants";
 import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
@@ -34,7 +34,7 @@ function RelatedItemsListInner<T extends TRelatedItem>({
 
   return (
     <section className="mt-12 pt-8 border-t border-muted">
-      <h2 className="text-lg font-semibold tracking-tight mb-6">{title}</h2>
+      <h2 className={cn(TEXT_SIZE.heading, "font-semibold tracking-tight mb-6")}>{title}</h2>
       <div className="space-y-4">
         {items.map((item) => (
           <Link
