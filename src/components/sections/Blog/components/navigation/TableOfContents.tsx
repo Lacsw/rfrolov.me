@@ -7,8 +7,7 @@ import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { THeading } from "@/types";
 
-// -96px accounts for sticky header, -66% triggers when heading is in top third of viewport
-const TOC_OBSERVER_MARGIN = "-96px 0px -66% 0px";
+import { TOC_OBSERVER_MARGIN } from "../../constants";
 
 type TTableOfContentsProps = {
   headings: THeading[];

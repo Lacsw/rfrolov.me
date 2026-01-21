@@ -10,4 +10,4 @@ export {
   SeriesNavigation,
   TableOfContents,
 } from "./components";
-export { TAG_COLORS, getTagColor } from "./constants";
+export { getTagColor, TAG_COLORS, TOC_OBSERVER_MARGIN } from "./constants";

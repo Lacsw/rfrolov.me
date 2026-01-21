@@ -10,7 +10,7 @@ import { useReducedMotion } from "@/hooks";
 import { cn } from "@/lib/utils";
 import { THeading } from "@/types";
 
-const TOC_OBSERVER_MARGIN = "-96px 0px -66% 0px";
+import { TOC_OBSERVER_MARGIN } from "../../constants";
 
 type TMobileTOCProps = {
   headings: THeading[];
