@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { AnimatedSection, Container, EmptyState, SectionHeader } from "@/components/ui";
-import { CATEGORY_FILTER_OPTIONS } from "@/constants";
+import { CATEGORY_KEYS } from "@/constants";
 import { cn } from "@/lib/utils";
 import { TProject, TProjectCategory } from "@/types";
 
@@ -37,18 +37,18 @@ export function Projects({ projects, projectsWithDetails = [] }: TProps) {
             <SectionHeader title={t("title")} description={t("description")} as="h1" />
 
             <div className="flex flex-wrap items-center gap-2">
-              {CATEGORY_FILTER_OPTIONS.map((option) => (
+              {CATEGORY_KEYS.map((key) => (
                 <button
-                  key={option.value}
-                  onClick={() => setFilter(option.value)}
+                  key={key}
+                  onClick={() => setFilter(key)}
                   className={cn(
                     "text-xs px-3 py-1.5 rounded-full cursor-pointer transition-all",
-                    filter === option.value
+                    filter === key
                       ? "bg-foreground text-background"
                       : "bg-muted text-muted-foreground hover:opacity-70"
                   )}
                 >
-                  {option.label}
+                  {t(`categories.${key}`)}
                 </button>
               ))}
               {showFilterCount && (

@@ -6,7 +6,7 @@ export {
   getStaggeredAnimation,
   TOAST_DURATION_MS,
 } from "./animations";
-export { CATEGORY_COLORS, CATEGORY_FILTER_OPTIONS, CATEGORY_LABELS } from "./categories";
+export { CATEGORY_COLORS, CATEGORY_KEYS } from "./categories";
 export { CONTENT_PATHS } from "./paths";
 export { SITE_URL } from "./urls";
 export {
