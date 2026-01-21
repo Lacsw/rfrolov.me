@@ -1,13 +1,12 @@
+import { SITE_URL } from "@/constants";
 import { TBlogPostMeta, TProjectDetailMeta } from "@/types";
-
-const BASE_URL = "https://rfrolov.me";
 
 export function generatePersonSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Roman Frolov",
-    url: BASE_URL,
+    url: SITE_URL,
     jobTitle: "Frontend Developer",
     sameAs: [
       "https://github.com/Lacsw",
@@ -27,16 +26,16 @@ export function generateBlogPostSchema(post: TBlogPostMeta, locale: string) {
     author: {
       "@type": "Person",
       name: "Roman Frolov",
-      url: BASE_URL,
+      url: SITE_URL,
     },
     publisher: {
       "@type": "Person",
       name: "Roman Frolov",
-      url: BASE_URL,
+      url: SITE_URL,
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `${BASE_URL}/${locale}/blog/${post.slug}`,
+      "@id": `${SITE_URL}/${locale}/blog/${post.slug}`,
     },
     keywords: post.tags.join(", "),
     // Approximate word count based on reading time (200 words per minute)
@@ -50,7 +49,7 @@ export function generateWebsiteSchema() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "Roman Frolov",
-    url: BASE_URL,
+    url: SITE_URL,
     author: {
       "@type": "Person",
       name: "Roman Frolov",
@@ -68,10 +67,10 @@ export function generateProjectJsonLd(project: TProjectDetailMeta, locale: strin
     author: {
       "@type": "Person",
       name: "Roman Frolov",
-      url: BASE_URL,
+      url: SITE_URL,
     },
     dateCreated: `${project.year}-01-01`,
-    url: project.href || `${BASE_URL}/${locale}/projects/${project.id}`,
+    url: project.href || `${SITE_URL}/${locale}/projects/${project.id}`,
     ...(project.github && { codeRepository: project.github }),
     keywords: project.technologies.join(", "),
     inLanguage: locale === "de" ? "de-DE" : "en-US",

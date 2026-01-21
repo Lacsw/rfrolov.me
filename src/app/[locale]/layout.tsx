@@ -8,6 +8,7 @@ import { getMessages, getTranslations, setRequestLocale } from "next-intl/server
 import { Navbar } from "@/components/layout/Navbar";
 import { LanguageProvider, ThemeProvider } from "@/components/providers";
 import { ScrollToTop, ToastProvider } from "@/components/ui";
+import { SITE_URL } from "@/constants";
 import { routing } from "@/i18n/routing";
 
 type TProps = {
@@ -28,7 +29,7 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "metadata" });
 
   return {
-    metadataBase: new URL("https://rfrolov.me"),
+    metadataBase: new URL(SITE_URL),
     title: t("title"),
     description: t("description"),
     keywords: ["frontend developer", "React", "TypeScript", "web development"],
@@ -36,7 +37,7 @@ export async function generateMetadata({
     openGraph: {
       title: t("title"),
       description: t("description"),
-      url: "https://rfrolov.me",
+      url: SITE_URL,
       siteName: "Roman Frolov",
       locale: locale === "de" ? "de_DE" : "en_US",
       type: "website",
@@ -51,10 +52,10 @@ export async function generateMetadata({
       follow: true,
     },
     alternates: {
-      canonical: `https://rfrolov.me/${locale}`,
+      canonical: `${SITE_URL}/${locale}`,
       languages: {
-        en: "https://rfrolov.me/en",
-        de: "https://rfrolov.me/de",
+        en: `${SITE_URL}/en`,
+        de: `${SITE_URL}/de`,
       },
     },
   };
