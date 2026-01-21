@@ -82,6 +82,12 @@
   "contact": {
     "getInTouch": "Get in touch"
   },
+  "error": {
+    "title": "Something went wrong",
+    "description": "An unexpected error occurred. Please try again.",
+    "retry": "Try again",
+    "goHome": "Go home"
+  },
   "notFound": {
     "cdCommand": "$ cd /requested-page",
     "cdError": "bash: cd: /requested-page: No such file or directory",

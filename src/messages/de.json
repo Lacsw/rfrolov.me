@@ -82,6 +82,12 @@
   "contact": {
     "getInTouch": "Kontakt aufnehmen"
   },
+  "error": {
+    "title": "Etwas ist schiefgelaufen",
+    "description": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+    "retry": "Erneut versuchen",
+    "goHome": "Zur Startseite"
+  },
   "notFound": {
     "cdCommand": "$ cd /angeforderte-seite",
     "cdError": "bash: cd: /angeforderte-seite: Datei oder Verzeichnis nicht gefunden",
