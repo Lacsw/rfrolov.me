@@ -3,7 +3,8 @@
     "viewAll": "View all",
     "backToBlog": "Back to blog",
     "linkCopied": "Link copied to clipboard",
-    "copyLink": "Copy link to section"
+    "copyLink": "Copy link to section",
+    "skipToContent": "Skip to content"
   },
   "nav": {
     "home": "Home",

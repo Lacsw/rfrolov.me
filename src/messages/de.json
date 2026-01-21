@@ -3,7 +3,8 @@
     "viewAll": "Alle anzeigen",
     "backToBlog": "Zurück zum Blog",
     "linkCopied": "Link in Zwischenablage kopiert",
-    "copyLink": "Link zum Abschnitt kopieren"
+    "copyLink": "Link zum Abschnitt kopieren",
+    "skipToContent": "Zum Inhalt springen"
   },
   "nav": {
     "home": "Startseite",

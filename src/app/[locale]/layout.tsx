@@ -70,6 +70,7 @@ export default async function LocaleLayout({ children, params }: TProps) {
 
   setRequestLocale(locale);
   const messages = await getMessages();
+  const t = await getTranslations({ locale, namespace: "common" });
 
   return (
     <NextIntlClientProvider messages={messages}>
@@ -80,7 +81,7 @@ export default async function LocaleLayout({ children, params }: TProps) {
               href="#main-content"
               className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:shadow-lg focus:ring-2 focus:ring-foreground focus:ring-offset-2"
             >
-              Skip to content
+              {t("skipToContent")}
             </a>
             <Navbar />
             <div id="main-content">{children}</div>
