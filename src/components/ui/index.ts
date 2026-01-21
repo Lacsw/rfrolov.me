@@ -9,6 +9,7 @@ export { ExternalLink } from "./ExternalLink";
 export { IconButton } from "./IconButton";
 export { LinkButton } from "./LinkButton";
 export { ReadingProgress } from "./ReadingProgress";
+export { RelatedItemsList } from "./RelatedItemsList";
 export { ScrollToTop } from "./ScrollToTop";
 export { SearchInput } from "./SearchInput";
 export { SectionHeader } from "./SectionHeader";
