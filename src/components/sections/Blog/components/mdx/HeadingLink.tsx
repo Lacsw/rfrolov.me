@@ -40,14 +40,7 @@ export function HeadingLink({
       await navigator.clipboard.writeText(url);
       showToast(t("linkCopied"));
     } catch {
-      // Fallback for older browsers
-      const textArea = document.createElement("textarea");
-      textArea.value = url;
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand("copy");
-      document.body.removeChild(textArea);
-      showToast(t("linkCopied"));
+      // Clipboard API supported in all modern browsers
     }
   };
 
