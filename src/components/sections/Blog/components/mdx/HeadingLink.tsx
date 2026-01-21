@@ -1,6 +1,6 @@
 "use client";
 
-import { ComponentPropsWithoutRef, useState } from "react";
+import { ComponentPropsWithoutRef } from "react";
 
 import { Link2 } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -28,7 +28,6 @@ export function HeadingLink({
   children,
   ...props
 }: THeadingLinkProps) {
-  const [isHovered, setIsHovered] = useState(false);
   const { showToast } = useToast();
   const t = useTranslations("common");
 
@@ -56,8 +55,6 @@ export function HeadingLink({
     <Component
       id={id}
       className={cn(headingStyles[Component], "group relative", className)}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
       {...props}
     >
       {children}
@@ -67,8 +64,7 @@ export function HeadingLink({
           className={cn(
             "ml-2 inline-flex items-center justify-center align-middle",
             "cursor-pointer text-muted-foreground hover:text-foreground",
-            "transition-opacity duration-150",
-            isHovered ? "opacity-100" : "opacity-0",
+            "opacity-0 transition-opacity duration-150 group-hover:opacity-100",
             "focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground"
           )}
           aria-label={t("copyLink")}
