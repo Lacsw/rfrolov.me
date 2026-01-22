@@ -1,6 +1,8 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useEffect, useRef } from "react";
+
+import { useTranslations } from "next-intl";
 
 import { cn } from "@/lib/utils";
 
@@ -25,6 +27,7 @@ export function TerminalInput({
   onSubmit,
   onTabComplete,
 }: TTerminalInputProps) {
+  const t = useTranslations("notFound");
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -53,6 +56,7 @@ export function TerminalInput({
           onChange={(e) => onChange(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="cd /"
+          aria-label={t("terminalInput")}
           className="bg-transparent outline-none text-foreground w-full caret-transparent placeholder:text-muted-foreground/30"
           spellCheck={false}
           autoComplete="off"

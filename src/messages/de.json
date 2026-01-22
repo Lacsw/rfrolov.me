@@ -89,6 +89,7 @@
     "goHome": "Zur Startseite"
   },
   "notFound": {
+    "terminalInput": "Terminal-Befehlseingabe",
     "cdCommand": "$ cd /angeforderte-seite",
     "cdError": "bash: cd: /angeforderte-seite: Datei oder Verzeichnis nicht gefunden",
     "catCommand": "$ cat error.log",

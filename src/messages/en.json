@@ -89,6 +89,7 @@
     "goHome": "Go home"
   },
   "notFound": {
+    "terminalInput": "Terminal command input",
     "cdCommand": "$ cd /requested-page",
     "cdError": "bash: cd: /requested-page: No such file or directory",
     "catCommand": "$ cat error.log",
