@@ -89,6 +89,7 @@
     "goHome": "Go home"
   },
   "notFound": {
+    "terminalTitle": "terminal — 404",
     "terminalInput": "Terminal command input",
     "cdCommand": "$ cd /requested-page",
     "cdError": "bash: cd: /requested-page: No such file or directory",

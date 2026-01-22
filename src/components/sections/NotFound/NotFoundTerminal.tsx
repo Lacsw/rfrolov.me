@@ -59,7 +59,7 @@ export function NotFoundTerminal() {
 
   return (
     <div className="w-full max-w-2xl">
-      <TerminalWindow>
+      <TerminalWindow title={t("terminalTitle")}>
         <div ref={terminalRef}>
           {lines.map((line, index) => (
             <TerminalLine key={index} type={line.type} text={line.text} />
