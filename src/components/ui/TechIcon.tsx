@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 import { Code } from "lucide-react";
 import {
   siReact,
@@ -58,7 +60,7 @@ type TTechIconProps = {
   className?: string;
 };
 
-export function TechIcon({ slug, className }: TTechIconProps) {
+export const TechIcon = memo(function TechIcon({ slug, className }: TTechIconProps) {
   const icon = ICONS[slug];
   const label = ICON_LABELS[slug] || slug;
 
@@ -78,4 +80,4 @@ export function TechIcon({ slug, className }: TTechIconProps) {
       <path d={icon.path} />
     </svg>
   );
-}
+});
