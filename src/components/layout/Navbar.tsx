@@ -30,7 +30,7 @@ export function Navbar() {
     >
       <Container>
         <nav className="flex items-center justify-between h-16">
-          <Link href="/" className="font-semibold text-foreground">
+          <Link href="/" aria-label={t("home")} className="font-semibold text-foreground">
             RF
           </Link>
 
