@@ -1,5 +1,7 @@
 "use client";
 
+import { useCallback } from "react";
+
 import { useLocale, useTranslations } from "next-intl";
 
 import { HOVER_TEXT_COLOR } from "@/constants";
@@ -13,11 +15,14 @@ export function LanguageSwitcher() {
   const pathname = usePathname();
   const t = useTranslations("language");
 
-  const handleLocaleChange = (newLocale: TLocale) => {
-    if (newLocale !== locale) {
-      router.replace(pathname, { locale: newLocale });
-    }
-  };
+  const handleLocaleChange = useCallback(
+    (newLocale: TLocale) => {
+      if (newLocale !== locale) {
+        router.replace(pathname, { locale: newLocale });
+      }
+    },
+    [locale, pathname, router]
+  );
 
   return (
     <div
