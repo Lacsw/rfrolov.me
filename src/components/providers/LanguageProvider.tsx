@@ -11,5 +11,5 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     document.documentElement.lang = locale;
   }, [locale]);
 
-  return <>{children}</>;
+  return children;
 }
