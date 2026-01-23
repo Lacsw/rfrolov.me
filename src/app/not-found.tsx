@@ -1,20 +1,16 @@
-import { defaultLocale } from "@/i18n/config";
+"use client";
+
+import { NextIntlClientProvider } from "next-intl";
+
+import { NotFoundTerminal } from "@/components/sections/NotFound";
+import messages from "@/messages/en.json";
 
 export default function RootNotFound() {
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-
   return (
-    <html>
-      <head>
-        <meta httpEquiv="refresh" content={`0;url=${basePath}/${defaultLocale}`} />
-      </head>
-      <body>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.location.href="${basePath}/${defaultLocale}";`,
-          }}
-        />
-      </body>
-    </html>
+    <NextIntlClientProvider locale="en" messages={messages}>
+      <main className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-6">
+        <NotFoundTerminal />
+      </main>
+    </NextIntlClientProvider>
   );
 }
