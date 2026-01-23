@@ -10,10 +10,16 @@ export function SkillsGrid() {
       {SKILLS.map((skill) => (
         <div
           key={skill.name}
-          className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors cursor-default"
+          className="group flex items-center gap-1.5 text-muted-foreground transition-colors duration-200 cursor-default"
+          style={{ "--skill-color": skill.color } as React.CSSProperties}
         >
-          <TechIcon slug={skill.icon} className="h-3.5 w-3.5" />
-          <span className="text-xs">{skill.name}</span>
+          <TechIcon
+            slug={skill.icon}
+            className="h-3.5 w-3.5 transition-colors duration-200 group-hover:[color:var(--skill-color)]"
+          />
+          <span className="text-xs transition-colors duration-200 group-hover:[color:var(--skill-color)]">
+            {skill.name}
+          </span>
         </div>
       ))}
     </div>

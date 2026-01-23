@@ -22,6 +22,7 @@ export type TSocialLink = {
 export type TSkill = {
   name: string;
   icon: string;
+  color: string;
 };
 
 export type TExperience = {

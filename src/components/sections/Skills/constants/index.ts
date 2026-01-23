@@ -2,21 +2,21 @@ import { ANIMATION_DURATION, createStaggerAnimation } from "@/constants";
 import { TSkill } from "@/types";
 
 export const SKILLS: TSkill[] = [
-  { name: "React", icon: "react" },
-  { name: "TypeScript", icon: "typescript" },
-  { name: "Next.js", icon: "nextdotjs" },
-  { name: "Tailwind CSS", icon: "tailwindcss" },
-  { name: "Node.js", icon: "nodedotjs" },
-  { name: "GraphQL", icon: "graphql" },
-  { name: "Framer Motion", icon: "framer" },
-  { name: "Figma", icon: "figma" },
-  { name: "Git", icon: "git" },
-  { name: "Docker", icon: "docker" },
-  { name: "GitHub", icon: "github" },
-  { name: "Jest", icon: "jest" },
-  { name: "Vite", icon: "vite" },
-  { name: "Redux", icon: "redux" },
-  { name: "Bun", icon: "bun" },
+  { name: "React", icon: "react", color: "#61DAFB" },
+  { name: "TypeScript", icon: "typescript", color: "#3178C6" },
+  { name: "Next.js", icon: "nextdotjs", color: "#ffffff" },
+  { name: "Tailwind CSS", icon: "tailwindcss", color: "#06B6D4" },
+  { name: "Node.js", icon: "nodedotjs", color: "#339933" },
+  { name: "GraphQL", icon: "graphql", color: "#E10098" },
+  { name: "Framer Motion", icon: "framer", color: "#0055FF" },
+  { name: "Figma", icon: "figma", color: "#F24E1E" },
+  { name: "Git", icon: "git", color: "#F05032" },
+  { name: "Docker", icon: "docker", color: "#2496ED" },
+  { name: "GitHub", icon: "github", color: "#ffffff" },
+  { name: "Jest", icon: "jest", color: "#C21325" },
+  { name: "Vite", icon: "vite", color: "#646CFF" },
+  { name: "Redux", icon: "redux", color: "#764ABC" },
+  { name: "Bun", icon: "bun", color: "#FBF0DF" },
 ];
 
 export const SKILLS_ANIMATION = createStaggerAnimation({
