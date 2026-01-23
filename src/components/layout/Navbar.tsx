@@ -1,19 +1,22 @@
 "use client";
 
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 
-import { Container, ThemeToggle } from "@/components/ui";
+import { Container, HamburgerIcon, ThemeToggle } from "@/components/ui";
 import { HOVER_TEXT_COLOR } from "@/constants";
 import { useScrolled } from "@/hooks";
 import { Link, usePathname } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { MobileMenu } from "./MobileMenu";
 
 export function Navbar() {
   const t = useTranslations("nav");
   const pathname = usePathname();
   const scrolled = useScrolled(50);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
     { name: t("home"), href: "/" as const },
@@ -34,7 +37,8 @@ export function Navbar() {
             RF
           </Link>
 
-          <div className="flex items-center gap-6">
+          {/* Desktop nav */}
+          <div className="hidden sm:flex items-center gap-6">
             <ul className="flex items-center gap-8">
               {navLinks.map((link) => {
                 const isActive =
@@ -59,8 +63,21 @@ export function Navbar() {
             <LanguageSwitcher />
             <ThemeToggle />
           </div>
+
+          {/* Mobile hamburger button */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="sm:hidden p-2 cursor-pointer"
+            aria-label={isMenuOpen ? t("closeMenu") : t("openMenu")}
+            aria-expanded={isMenuOpen}
+          >
+            <HamburgerIcon isOpen={isMenuOpen} />
+          </button>
         </nav>
       </Container>
+
+      {/* Mobile menu */}
+      <MobileMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
     </header>
   );
 }
