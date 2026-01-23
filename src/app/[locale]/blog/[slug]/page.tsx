@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 
-import { getLocale } from "next-intl/server";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
@@ -44,8 +43,8 @@ const rehypePrettyCodeOptions = {
 };
 
 export default async function BlogPostPage({ params }: TProps) {
-  const { slug } = await params;
-  const locale = (await getLocale()) as TLocale;
+  const { slug, locale: localeParam } = await params;
+  const locale = localeParam as TLocale;
   const post = getPostBySlug(slug, locale);
 
   if (!post) {

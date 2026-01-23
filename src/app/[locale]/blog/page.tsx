@@ -1,12 +1,19 @@
-import { getLocale } from "next-intl/server";
-
-import { TLocale } from "@/i18n/config";
+import { locales, TLocale } from "@/i18n/config";
 import { getAllPosts, getAllTags } from "@/lib/blog";
 
 import { BlogPageClient } from "./BlogPageClient";
 
-export default async function BlogPage() {
-  const locale = (await getLocale()) as TLocale;
+type TProps = {
+  params: Promise<{ locale: string }>;
+};
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
+export default async function BlogPage({ params }: TProps) {
+  const { locale: localeParam } = await params;
+  const locale = localeParam as TLocale;
   const posts = getAllPosts(locale);
   const tags = getAllTags(locale);
 
