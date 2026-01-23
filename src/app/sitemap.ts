@@ -1,11 +1,11 @@
 import { MetadataRoute } from "next";
 
 import { SITE_URL } from "@/constants";
-
-export const dynamic = "force-static";
 import { locales } from "@/i18n/config";
 import { getAllPosts } from "@/lib/blog";
 import { getAllProjectsWithContent } from "@/lib/projects";
+
+export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = ["", "/blog", "/projects"];

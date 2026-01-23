@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 
 import { BlogPostListItem } from "@/components/sections/Blog";
 import { BackLink, Container } from "@/components/ui";
@@ -21,8 +21,8 @@ export function generateStaticParams() {
 }
 
 export default async function TagPage({ params }: TProps) {
-  const { tag } = await params;
-  const locale = (await getLocale()) as TLocale;
+  const { tag, locale: localeParam } = await params;
+  const locale = localeParam as TLocale;
   const t = await getTranslations("blog");
   const tCommon = await getTranslations("common");
   const posts = getPostsByTag(tag, locale);

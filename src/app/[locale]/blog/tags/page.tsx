@@ -1,16 +1,25 @@
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 
 import { getTagColor } from "@/components/sections/Blog/constants";
 import { BackLink, Container } from "@/components/ui";
 import { HOVER_OPACITY } from "@/constants";
-import { TLocale } from "@/i18n/config";
+import { locales, TLocale } from "@/i18n/config";
 import { Link } from "@/i18n/routing";
 import { getTagsWithCounts } from "@/lib/blog";
 import { getTagUrl } from "@/lib/urls";
 import { cn } from "@/lib/utils";
 
-export default async function TagsPage() {
-  const locale = (await getLocale()) as TLocale;
+type TProps = {
+  params: Promise<{ locale: string }>;
+};
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
+export default async function TagsPage({ params }: TProps) {
+  const { locale: localeParam } = await params;
+  const locale = localeParam as TLocale;
   const t = await getTranslations("blog");
   const tCommon = await getTranslations("common");
   const tagsWithCounts = getTagsWithCounts(locale);
