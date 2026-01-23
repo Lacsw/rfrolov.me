@@ -20,8 +20,8 @@ export function generateStaticParams() {
 export default async function TagsPage({ params }: TProps) {
   const { locale: localeParam } = await params;
   const locale = localeParam as TLocale;
-  const t = await getTranslations("blog");
-  const tCommon = await getTranslations("common");
+  const t = await getTranslations({ locale, namespace: "blog" });
+  const tCommon = await getTranslations({ locale, namespace: "common" });
   const tagsWithCounts = getTagsWithCounts(locale);
 
   return (
