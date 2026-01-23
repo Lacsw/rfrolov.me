@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 
 import { ANIMATION_CONFIG } from "../../constants";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export function FloatingImage() {
   const { floatingImage } = ANIMATION_CONFIG;
 
@@ -21,7 +23,11 @@ export function FloatingImage() {
       className="absolute inset-8 sm:inset-10 lg:inset-12"
     >
       <div className="relative w-full h-full rounded-full overflow-hidden shadow-2xl ring-4 ring-background">
-        <Image src="/images/hero.png" alt="Roman Frolov" fill priority className="object-cover" />
+        <img
+          src={`${basePath}/images/hero.png`}
+          alt="Roman Frolov"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
       </div>
     </motion.div>
   );
