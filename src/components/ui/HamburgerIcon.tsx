@@ -9,15 +9,8 @@ type THamburgerIconProps = {
 };
 
 export function HamburgerIcon({ isOpen }: THamburgerIconProps) {
-  const lineProps = {
-    strokeWidth: 2,
-    vectorEffect: "non-scaling-stroke" as const,
-    initial: false,
-    transition: { duration: ANIMATION_DURATION.fast },
-  };
-
   return (
-    <motion.svg
+    <svg
       width="24"
       height="24"
       viewBox="0 0 24 24"
@@ -25,32 +18,45 @@ export function HamburgerIcon({ isOpen }: THamburgerIconProps) {
       stroke="currentColor"
       className="text-foreground"
     >
+      {/* Top line - moves down and rotates to form \ */}
       <motion.line
         x1="4"
-        y1="6"
         x2="20"
-        y2="6"
-        animate={isOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-        style={{ originX: "12px", originY: "6px" }}
-        {...lineProps}
+        strokeWidth={2}
+        strokeLinecap="round"
+        animate={{
+          y1: isOpen ? 12 : 6,
+          y2: isOpen ? 12 : 6,
+          rotate: isOpen ? 45 : 0,
+        }}
+        transition={{ duration: ANIMATION_DURATION.fast }}
+        style={{ transformOrigin: "center" }}
       />
+      {/* Middle line - fades out */}
       <motion.line
         x1="4"
         y1="12"
         x2="20"
         y2="12"
-        animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-        {...lineProps}
+        strokeWidth={2}
+        strokeLinecap="round"
+        animate={{ opacity: isOpen ? 0 : 1 }}
+        transition={{ duration: ANIMATION_DURATION.fast }}
       />
+      {/* Bottom line - moves up and rotates to form / */}
       <motion.line
         x1="4"
-        y1="18"
         x2="20"
-        y2="18"
-        animate={isOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
-        style={{ originX: "12px", originY: "18px" }}
-        {...lineProps}
+        strokeWidth={2}
+        strokeLinecap="round"
+        animate={{
+          y1: isOpen ? 12 : 18,
+          y2: isOpen ? 12 : 18,
+          rotate: isOpen ? -45 : 0,
+        }}
+        transition={{ duration: ANIMATION_DURATION.fast }}
+        style={{ transformOrigin: "center" }}
       />
-    </motion.svg>
+    </svg>
   );
 }

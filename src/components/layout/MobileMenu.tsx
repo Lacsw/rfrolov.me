@@ -29,24 +29,14 @@ export function MobileMenu({ isOpen, onClose }: TMobileMenuProps) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <>
-          {/* Backdrop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: ANIMATION_DURATION.fast }}
-            className="fixed inset-0 bg-background/80 backdrop-blur-sm z-40 sm:hidden"
-            onClick={onClose}
-          />
-
-          {/* Menu */}
+        <div className="mobile-menu-open fixed inset-0 z-40 bg-background sm:hidden">
+          {/* Menu content */}
           <motion.nav
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: ANIMATION_DURATION.normal }}
-            className="fixed top-16 left-0 right-0 bottom-0 z-40 bg-background sm:hidden"
+            className="pt-16 h-full"
           >
             <motion.ul
               variants={container}
@@ -81,7 +71,7 @@ export function MobileMenu({ isOpen, onClose }: TMobileMenuProps) {
               </motion.li>
             </motion.ul>
           </motion.nav>
-        </>
+        </div>
       )}
     </AnimatePresence>
   );

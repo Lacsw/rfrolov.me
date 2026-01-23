@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import { useTranslations } from "next-intl";
 
 import { Container, HamburgerIcon, ThemeToggle } from "@/components/ui";
@@ -29,16 +30,9 @@ export function Navbar() {
       if (e.key === "Escape") setIsMenuOpen(false);
     };
     document.addEventListener("keydown", handleEscape);
+
     return () => document.removeEventListener("keydown", handleEscape);
   }, []);
-
-  // Prevent body scroll when menu is open
-  useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isMenuOpen]);
 
   const navLinks = [
     { name: t("home"), href: "/" as const },
@@ -47,59 +41,63 @@ export function Navbar() {
   ];
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled ? "bg-background/80 backdrop-blur-sm border-b border-muted" : "bg-transparent"
-      )}
-    >
-      <Container>
-        <nav className="flex items-center justify-between h-16">
-          <Link href="/" aria-label={t("home")} className="font-semibold text-foreground">
-            RF
-          </Link>
+    <>
+      <header
+        className={cn(
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          scrolled || isMenuOpen
+            ? "bg-background/80 backdrop-blur-sm border-b border-muted"
+            : "bg-transparent"
+        )}
+      >
+        <Container>
+          <nav className="flex items-center justify-between h-16">
+            <Link href="/" aria-label={t("home")} className="font-semibold text-foreground">
+              RF
+            </Link>
 
-          {/* Desktop nav */}
-          <div className="hidden sm:flex items-center gap-6">
-            <ul className="flex items-center gap-8">
-              {navLinks.map((link) => {
-                const isActive =
-                  link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+            {/* Desktop nav */}
+            <div className="hidden sm:flex items-center gap-6">
+              <ul className="flex items-center gap-8">
+                {navLinks.map((link) => {
+                  const isActive =
+                    link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
 
-                return (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      aria-current={isActive ? "page" : undefined}
-                      className={cn(
-                        "text-sm transition-colors duration-300",
-                        isActive ? "text-foreground" : HOVER_TEXT_COLOR
-                      )}
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-            <LanguageSwitcher />
-            <ThemeToggle />
-          </div>
+                  return (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        aria-current={isActive ? "page" : undefined}
+                        className={cn(
+                          "text-sm transition-colors duration-300",
+                          isActive ? "text-foreground" : HOVER_TEXT_COLOR
+                        )}
+                      >
+                        {link.name}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+              <LanguageSwitcher />
+              <ThemeToggle />
+            </div>
 
-          {/* Mobile hamburger button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="sm:hidden p-2 cursor-pointer"
-            aria-label={isMenuOpen ? t("closeMenu") : t("openMenu")}
-            aria-expanded={isMenuOpen}
-          >
-            <HamburgerIcon isOpen={isMenuOpen} />
-          </button>
-        </nav>
-      </Container>
+            {/* Mobile hamburger button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="sm:hidden p-2 cursor-pointer"
+              aria-label={isMenuOpen ? t("closeMenu") : t("openMenu")}
+              aria-expanded={isMenuOpen}
+            >
+              <HamburgerIcon isOpen={isMenuOpen} />
+            </button>
+          </nav>
+        </Container>
+      </header>
 
-      {/* Mobile menu */}
+      {/* Mobile menu - outside header to avoid fixed positioning issues */}
       <MobileMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
-    </header>
+    </>
   );
 }
