@@ -9,7 +9,9 @@
   "nav": {
     "home": "Startseite",
     "projects": "Projekte",
-    "blog": "Blog"
+    "blog": "Blog",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen"
   },
   "hero": {
     "greeting": "Hallo, mein Name ist",
