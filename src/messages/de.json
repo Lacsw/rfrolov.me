@@ -125,5 +125,8 @@
   "metadata": {
     "title": "Roman Frolov - Frontend-Entwickler",
     "description": "Persönliche Website von Roman Frolov, einem Frontend-Entwickler spezialisiert auf React, TypeScript und moderne Webtechnologien."
+  },
+  "footer": {
+    "copyright": "© {year} Roman Frolov"
   }
 }

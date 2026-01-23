@@ -125,5 +125,8 @@
   "metadata": {
     "title": "Roman Frolov - Frontend Developer",
     "description": "Personal website of Roman Frolov, a frontend developer specializing in React, TypeScript, and modern web technologies."
+  },
+  "footer": {
+    "copyright": "© {year} Roman Frolov"
   }
 }

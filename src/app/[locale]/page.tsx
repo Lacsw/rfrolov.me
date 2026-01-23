@@ -1,5 +1,4 @@
 import { BlogList } from "@/components/sections/Blog";
-import { Contact } from "@/components/sections/Contact";
 import { Experience } from "@/components/sections/Experience";
 import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
 import { Hero } from "@/components/sections/Hero";
@@ -37,7 +36,6 @@ export default async function Home({ params }: TProps) {
       <Experience experiences={experiences} />
       <FeaturedProjects projects={featuredProjects} projectsWithDetails={projectsWithDetails} />
       <BlogList posts={featuredPosts} />
-      <Contact />
     </main>
   );
 }

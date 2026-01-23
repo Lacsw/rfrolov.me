@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 
-import { Navbar } from "@/components/layout/Navbar";
+import { Footer, Navbar } from "@/components/layout";
 import { LanguageProvider, ThemeProvider } from "@/components/providers";
 import { ScrollToTop, ToastProvider } from "@/components/ui";
 import { SITE_URL } from "@/constants";
@@ -85,6 +85,7 @@ export default async function LocaleLayout({ children, params }: TProps) {
             </a>
             <Navbar />
             <div id="main-content">{children}</div>
+            <Footer />
             <ScrollToTop />
           </ToastProvider>
         </ThemeProvider>
