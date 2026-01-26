@@ -14,7 +14,7 @@ import {
   SeriesNavigation,
   TableOfContents,
 } from "@/components/sections/Blog";
-import { Breadcrumbs, Container, ReadingProgress, TBreadcrumb } from "@/components/ui";
+import { Breadcrumbs, Container, TBreadcrumb } from "@/components/ui";
 import { ANIMATION_DURATION } from "@/constants";
 import { TAdjacentPosts, TSeriesInfo } from "@/lib/blog";
 import { formatDate } from "@/lib/date";
@@ -48,7 +48,6 @@ export function BlogPostLayout({
 
   return (
     <>
-      <ReadingProgress showPercentage />
       <section className="py-12 lg:py-16">
         <Container>
           <div className="relative lg:grid lg:grid-cols-[1fr_200px] lg:gap-10 xl:grid-cols-[1fr_250px]">
