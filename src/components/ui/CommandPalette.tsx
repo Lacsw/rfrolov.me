@@ -109,7 +109,7 @@ export function CommandPalette() {
     ];
 
     return [...navCommands, ...actionCommands];
-  }, [t, router, pathname, locale, otherLocale, isDark, setTheme, close]);
+  }, [t, router, pathname, otherLocale, isDark, setTheme, close]);
 
   const filteredCommands = useMemo(() => {
     if (!query) return commands;
