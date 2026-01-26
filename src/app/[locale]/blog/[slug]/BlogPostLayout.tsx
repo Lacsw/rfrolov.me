@@ -4,6 +4,7 @@ import { ReactNode } from "react";
 
 import { motion } from "framer-motion";
 import { Clock } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import {
   BlogTag,
@@ -13,7 +14,7 @@ import {
   SeriesNavigation,
   TableOfContents,
 } from "@/components/sections/Blog";
-import { BackLink, Container, ReadingProgress } from "@/components/ui";
+import { Breadcrumbs, Container, ReadingProgress, TBreadcrumb } from "@/components/ui";
 import { ANIMATION_DURATION } from "@/constants";
 import { TAdjacentPosts, TSeriesInfo } from "@/lib/blog";
 import { formatDate } from "@/lib/date";
@@ -36,7 +37,14 @@ export function BlogPostLayout({
   seriesInfo,
   children,
 }: TBlogPostLayoutProps) {
+  const t = useTranslations("nav");
   const formattedDate = formatDate(post.date, { month: "long" });
+
+  const breadcrumbs: TBreadcrumb[] = [
+    { label: t("home"), href: "/" },
+    { label: t("blog"), href: "/blog" },
+    { label: post.title },
+  ];
 
   return (
     <>
@@ -50,7 +58,7 @@ export function BlogPostLayout({
               transition={{ duration: ANIMATION_DURATION.slower }}
               className="max-w-2xl"
             >
-              <BackLink href="/blog">Back to blog</BackLink>
+              <Breadcrumbs items={breadcrumbs} />
 
               <header className="mb-8 space-y-4">
                 <div className="flex items-center gap-3 text-sm text-muted-foreground">
