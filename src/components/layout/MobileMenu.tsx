@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 import { ThemeToggle } from "@/components/ui";
-import { ANIMATION_DURATION, createStaggerAnimation, HOVER_TEXT_COLOR } from "@/constants";
+import { HOVER_TEXT_COLOR } from "@/constants";
 import { Link, usePathname } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
@@ -18,7 +18,6 @@ type TMobileMenuProps = {
 export function MobileMenu({ isOpen, onClose }: TMobileMenuProps) {
   const t = useTranslations("nav");
   const pathname = usePathname();
-  const { container, item } = createStaggerAnimation({ offset: 30 });
 
   const navLinks = [
     { name: t("home"), href: "/" as const },
@@ -29,47 +28,56 @@ export function MobileMenu({ isOpen, onClose }: TMobileMenuProps) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="mobile-menu-open fixed inset-0 z-40 bg-background sm:hidden">
+        <div className="fixed top-16 inset-x-0 z-40 sm:hidden">
+          {/* Backdrop overlay for click-outside */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 bg-black/20 -z-10"
+            onClick={onClose}
+          />
+
           {/* Menu content */}
           <motion.nav
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: ANIMATION_DURATION.normal }}
-            className="pt-16 h-full"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="relative overflow-hidden bg-background/95 backdrop-blur-sm border-b border-muted"
           >
-            <motion.ul
-              variants={container}
-              initial="hidden"
-              animate="show"
-              className="flex flex-col items-center justify-center gap-8 h-full"
-            >
+            <ul className="flex flex-col py-2">
               {navLinks.map((link) => {
                 const isActive =
                   link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
 
                 return (
-                  <motion.li key={link.href} variants={item}>
+                  <li key={link.href}>
                     <Link
                       href={link.href}
                       onClick={onClose}
                       aria-current={isActive ? "page" : undefined}
                       className={cn(
-                        "text-2xl transition-colors duration-300",
+                        "block px-6 py-3 text-base transition-colors duration-300",
                         isActive ? "text-foreground" : HOVER_TEXT_COLOR
                       )}
                     >
                       {link.name}
                     </Link>
-                  </motion.li>
+                  </li>
                 );
               })}
 
-              <motion.li variants={item} className="flex items-center gap-4 pt-4">
+              {/* Divider */}
+              <li className="border-t border-muted my-2 mx-6" />
+
+              {/* Controls */}
+              <li className="flex items-center gap-4 px-6 py-2">
                 <LanguageSwitcher />
                 <ThemeToggle />
-              </motion.li>
-            </motion.ul>
+              </li>
+            </ul>
           </motion.nav>
         </div>
       )}

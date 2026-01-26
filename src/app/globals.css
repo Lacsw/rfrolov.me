@@ -35,12 +35,6 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Mobile menu scroll lock */
-html:has(.mobile-menu-open),
-html:has(.mobile-menu-open) body {
-  overflow: hidden;
-  touch-action: none;
-}
 
 @keyframes spin-slow {
   from {
