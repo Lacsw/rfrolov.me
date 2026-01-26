@@ -1,3 +1,4 @@
+export { useCommandPalette } from "./useCommandPalette";
 export { useHydrated } from "./useHydrated";
 export { usePersistedState } from "./usePersistedState";
 export { useReadingProgress } from "./useReadingProgress";
