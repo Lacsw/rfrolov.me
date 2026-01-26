@@ -130,5 +130,13 @@
   },
   "footer": {
     "copyright": "© {year} Roman Frolov"
+  },
+  "commandPalette": {
+    "placeholder": "Search commands...",
+    "noResults": "No commands found",
+    "navigation": "Navigation",
+    "actions": "Actions",
+    "toNavigate": "to navigate",
+    "toSelect": "to select"
   }
 }

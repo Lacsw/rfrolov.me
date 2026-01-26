@@ -2,6 +2,7 @@ export { AnimatedCard } from "./AnimatedCard";
 export { AnimatedSection } from "./AnimatedSection";
 export { BackLink } from "./BackLink";
 export { Breadcrumbs, type TBreadcrumb } from "./Breadcrumbs";
+export { CommandPalette } from "./CommandPalette";
 export { HamburgerIcon } from "./HamburgerIcon";
 export { Tag } from "./Tag";
 export { TagList } from "./TagList";
