@@ -3,9 +3,10 @@
 import { ReactNode } from "react";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 import { TableOfContents } from "@/components/sections/Blog";
-import { Container } from "@/components/ui";
+import { Breadcrumbs, Container, TBreadcrumb } from "@/components/ui";
 import { ANIMATION_DURATION } from "@/constants";
 import { THeading, TProject, TProjectDetailMeta } from "@/types";
 
@@ -21,9 +22,18 @@ type TProps = {
 };
 
 export function ProjectDetailLayout({ project, relatedProjects, headings, children }: TProps) {
+  const t = useTranslations("nav");
+
+  const breadcrumbs: TBreadcrumb[] = [
+    { label: t("home"), href: "/" },
+    { label: t("projects"), href: "/projects" },
+    { label: project.title },
+  ];
+
   return (
     <section className="py-12 lg:py-16">
       <Container>
+        <Breadcrumbs items={breadcrumbs} />
         <div className="lg:grid lg:grid-cols-[1fr_200px] lg:gap-10 xl:grid-cols-[1fr_250px]">
           <motion.article
             initial={{ opacity: 0, y: 20 }}
