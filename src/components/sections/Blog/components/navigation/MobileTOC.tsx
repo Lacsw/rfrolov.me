@@ -63,7 +63,16 @@ export function MobileTOC({ headings }: TMobileTOCProps) {
     const element = document.getElementById(id);
 
     if (element) {
-      element.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth" });
+      const headerOffset = 96;
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: prefersReducedMotion ? "auto" : "smooth",
+      });
+
+      history.pushState(null, "", `#${id}`);
     }
   };
 
