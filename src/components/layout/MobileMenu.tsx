@@ -28,7 +28,7 @@ export function MobileMenu({ isOpen, onClose }: TMobileMenuProps) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed top-16 inset-x-0 z-40 sm:hidden">
+        <div className="mobile-menu-open fixed top-16 inset-x-0 z-40 sm:hidden">
           {/* Backdrop overlay for click-outside */}
           <motion.div
             initial={{ opacity: 0 }}
