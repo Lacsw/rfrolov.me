@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import { useTranslations } from "next-intl";
 
+import { useReadingProgress, useReducedMotion } from "@/hooks";
 import { cn } from "@/lib/utils";
 import { THeading } from "@/types";
 
@@ -16,6 +17,8 @@ type TTableOfContentsProps = {
 export function TableOfContents({ headings }: TTableOfContentsProps) {
   const t = useTranslations("blog");
   const [activeId, setActiveId] = useState<string>("");
+  const progress = useReadingProgress();
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -41,15 +44,44 @@ export function TableOfContents({ headings }: TTableOfContentsProps) {
     return () => observer.disconnect();
   }, [headings]);
 
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+
+    if (element) {
+      const headerOffset = 96;
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: prefersReducedMotion ? "auto" : "smooth",
+      });
+
+      history.pushState(null, "", `#${id}`);
+    }
+  };
+
   if (headings.length === 0) {
     return null;
   }
 
   return (
     <nav aria-label="Table of contents">
-      <p className="mb-3 text-xs font-medium uppercase tracking-wider text-muted-foreground">
-        {t("onThisPage")}
-      </p>
+      <div className="mb-3 flex items-center justify-between">
+        <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+          {t("onThisPage")}
+        </p>
+        <span className="text-xs text-muted-foreground">{Math.round(progress)}%</span>
+      </div>
+
+      <div className="mb-3 h-1 w-full overflow-hidden rounded-full bg-muted">
+        <div
+          className="h-full bg-foreground transition-all duration-150 ease-out"
+          style={{ width: `${progress}%` }}
+        />
+      </div>
+
       <ul className="border-l border-muted">
         {headings.map(({ id, text, level }) => {
           const isActive = activeId === id;
@@ -58,13 +90,14 @@ export function TableOfContents({ headings }: TTableOfContentsProps) {
             <li key={id}>
               <a
                 href={`#${id}`}
+                onClick={(e) => handleClick(e, id)}
                 className={cn(
-                  "block -ml-px border-l-2 py-1.5 text-sm transition-colors duration-150 cursor-pointer",
+                  "block -ml-px border-l-2 py-1.5 text-sm transition-all duration-150 cursor-pointer rounded-r-sm",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-                  level === 2 ? "pl-4" : "pl-7",
+                  level === 2 ? "pl-4 pr-2" : "pl-7 pr-2",
                   isActive
-                    ? "border-foreground text-foreground font-medium"
-                    : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted-foreground/50"
+                    ? "border-foreground text-foreground font-medium bg-muted/50"
+                    : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted-foreground/50 hover:bg-muted/30"
                 )}
               >
                 {text}
