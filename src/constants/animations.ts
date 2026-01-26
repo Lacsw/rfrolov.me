@@ -16,6 +16,14 @@ export const FADE_IN_TRANSITION = {
   duration: ANIMATION_DURATION.slower,
 };
 
+export const PAGE_TRANSITION = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
+};
+
+export const PAGE_TRANSITION_DURATION = ANIMATION_DURATION.normal;
+
 type TStaggerOptions = {
   y?: number;
   delayMultiplier?: number;
