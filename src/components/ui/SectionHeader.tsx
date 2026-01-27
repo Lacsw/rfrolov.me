@@ -1,6 +1,5 @@
-import Link from "next/link";
-
 import { HOVER_OPACITY, TEXT_SIZE } from "@/constants";
+import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
 type TSectionHeaderProps = {
