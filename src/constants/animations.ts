@@ -5,6 +5,12 @@ export const ANIMATION_DURATION = {
   slower: 0.5,
 } as const;
 
+export const SPRING_TRANSITION = {
+  type: "spring",
+  stiffness: 300,
+  damping: 20,
+} as const;
+
 export const TOAST_DURATION_MS = 2000;
 
 export const FADE_IN = {
