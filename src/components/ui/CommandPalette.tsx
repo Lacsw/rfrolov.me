@@ -230,7 +230,7 @@ export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: animationDuration }}
-            className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm"
+            className="fixed inset-0 z-50 overflow-hidden overscroll-contain bg-background/80 backdrop-blur-sm"
             onClick={close}
           />
 
