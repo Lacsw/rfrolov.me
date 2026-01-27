@@ -9,6 +9,7 @@ import { Footer, Navbar } from "@/components/layout";
 import { LanguageProvider, ThemeProvider } from "@/components/providers";
 import { CommandPalette, ScrollToTop, ToastProvider } from "@/components/ui";
 import { SITE_URL } from "@/constants";
+import { CommandPaletteProvider } from "@/contexts";
 import { TLocale } from "@/i18n/config";
 import { routing } from "@/i18n/routing";
 import { getAllPosts } from "@/lib/blog";
@@ -86,8 +87,10 @@ export default async function LocaleLayout({ children, params }: TProps) {
             >
               {t("skipToContent")}
             </a>
-            <Navbar />
-            <CommandPalette blogPosts={blogPosts} />
+            <CommandPaletteProvider>
+              <Navbar />
+              <CommandPalette blogPosts={blogPosts} />
+            </CommandPaletteProvider>
             <div id="main-content">{children}</div>
             <Footer />
             <ScrollToTop />
