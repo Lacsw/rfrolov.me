@@ -6,6 +6,7 @@ export {
   getStaggeredAnimation,
   PAGE_TRANSITION,
   PAGE_TRANSITION_DURATION,
+  SPRING_TRANSITION,
   TOAST_DURATION_MS,
 } from "./animations";
 export { CATEGORY_COLORS, CATEGORY_KEYS } from "./categories";
