@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
   BookOpen,
   Command,
+  FileText,
   FolderKanban,
   Home,
   Languages,
@@ -21,6 +22,11 @@ import { useCommandPalette, useHydrated, useReducedMotion } from "@/hooks";
 import { TLocale } from "@/i18n/config";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
+import { TBlogPostMeta } from "@/types";
+
+type TCommandPaletteProps = {
+  blogPosts?: TBlogPostMeta[];
+};
 
 type TCommand = {
   id: string;
@@ -31,7 +37,7 @@ type TCommand = {
   group: "navigation" | "actions" | "blog";
 };
 
-export function CommandPalette() {
+export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
   const t = useTranslations();
   const router = useRouter();
   const pathname = usePathname();
