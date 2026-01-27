@@ -9,7 +9,9 @@ import { Footer, Navbar } from "@/components/layout";
 import { LanguageProvider, ThemeProvider } from "@/components/providers";
 import { CommandPalette, ScrollToTop, ToastProvider } from "@/components/ui";
 import { SITE_URL } from "@/constants";
+import { TLocale } from "@/i18n/config";
 import { routing } from "@/i18n/routing";
+import { getAllPosts } from "@/lib/blog";
 
 type TProps = {
   children: React.ReactNode;
@@ -71,6 +73,7 @@ export default async function LocaleLayout({ children, params }: TProps) {
   setRequestLocale(locale);
   const messages = await getMessages();
   const t = await getTranslations({ locale, namespace: "common" });
+  const blogPosts = getAllPosts(locale as TLocale);
 
   return (
     <NextIntlClientProvider messages={messages}>
@@ -84,7 +87,7 @@ export default async function LocaleLayout({ children, params }: TProps) {
               {t("skipToContent")}
             </a>
             <Navbar />
-            <CommandPalette />
+            <CommandPalette blogPosts={blogPosts} />
             <div id="main-content">{children}</div>
             <Footer />
             <ScrollToTop />
