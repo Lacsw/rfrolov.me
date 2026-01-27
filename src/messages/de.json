@@ -4,7 +4,8 @@
     "backToBlog": "Zurück zum Blog",
     "linkCopied": "Link in Zwischenablage kopiert",
     "copyLink": "Link zum Abschnitt kopieren",
-    "skipToContent": "Zum Inhalt springen"
+    "skipToContent": "Zum Inhalt springen",
+    "scrollToTop": "Nach oben scrollen"
   },
   "nav": {
     "home": "Startseite",

@@ -4,7 +4,8 @@
     "backToBlog": "Back to blog",
     "linkCopied": "Link copied to clipboard",
     "copyLink": "Copy link to section",
-    "skipToContent": "Skip to content"
+    "skipToContent": "Skip to content",
+    "scrollToTop": "Scroll to top"
   },
   "nav": {
     "home": "Home",
