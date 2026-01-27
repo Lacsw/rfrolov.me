@@ -137,12 +137,13 @@ export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
   const groupedCommands = useMemo(() => {
     const navigation = filteredCommands.filter((cmd) => cmd.group === "navigation");
     const actions = filteredCommands.filter((cmd) => cmd.group === "actions");
+    const blog = filteredCommands.filter((cmd) => cmd.group === "blog");
 
-    return { navigation, actions };
+    return { navigation, actions, blog };
   }, [filteredCommands]);
 
   const flatCommands = useMemo(
-    () => [...groupedCommands.navigation, ...groupedCommands.actions],
+    () => [...groupedCommands.navigation, ...groupedCommands.actions, ...groupedCommands.blog],
     [groupedCommands]
   );
 
@@ -291,6 +292,34 @@ export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
                           {t("commandPalette.actions")}
                         </li>
                         {groupedCommands.actions.map((cmd) => {
+                          const globalIndex = flatCommands.indexOf(cmd);
+
+                          return (
+                            <CommandItem
+                              key={cmd.id}
+                              command={cmd}
+                              isSelected={selectedIndex === globalIndex}
+                              onSelect={() => executeCommand(globalIndex)}
+                              onHover={() => setSelectedIndex(globalIndex)}
+                            />
+                          );
+                        })}
+                      </>
+                    )}
+
+                    {groupedCommands.blog.length > 0 && (
+                      <>
+                        <li
+                          className={cn(
+                            "px-2 py-1.5 text-xs font-medium text-muted-foreground",
+                            (groupedCommands.navigation.length > 0 ||
+                              groupedCommands.actions.length > 0) &&
+                              "mt-2"
+                          )}
+                        >
+                          {t("commandPalette.blog")}
+                        </li>
+                        {groupedCommands.blog.map((cmd) => {
                           const globalIndex = flatCommands.indexOf(cmd);
 
                           return (
