@@ -363,10 +363,13 @@ export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
                     {t("commandPalette.toSelect")}
                   </span>
                 </div>
-                <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                <button
+                  onClick={close}
+                  className="flex items-center gap-1 rounded border border-muted bg-muted/50 px-2 py-1 text-xs text-muted-foreground cursor-pointer transition-colors hover:bg-muted hover:text-foreground"
+                >
                   <Command className="h-3 w-3" />
                   <span>K</span>
-                </div>
+                </button>
               </div>
             </div>
           </motion.div>
