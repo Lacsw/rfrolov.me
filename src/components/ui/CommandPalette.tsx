@@ -28,7 +28,7 @@ type TCommand = {
   icon: React.ReactNode;
   shortcut?: string;
   action: () => void;
-  group: "navigation" | "actions";
+  group: "navigation" | "actions" | "blog";
 };
 
 export function CommandPalette() {
