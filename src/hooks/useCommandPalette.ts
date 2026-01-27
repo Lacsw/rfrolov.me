@@ -1,43 +1,15 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useContext } from "react";
+
+import { CommandPaletteContext } from "@/contexts";
 
 export function useCommandPalette() {
-  const [isOpen, setIsOpen] = useState(false);
+  const context = useContext(CommandPaletteContext);
 
-  const open = useCallback(() => setIsOpen(true), []);
-  const close = useCallback(() => setIsOpen(false), []);
-  const toggle = useCallback(() => setIsOpen((prev) => !prev), []);
+  if (!context) {
+    throw new Error("useCommandPalette must be used within a CommandPaletteProvider");
+  }
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-        e.preventDefault();
-        toggle();
-      }
-
-      if (e.key === "Escape" && isOpen) {
-        e.preventDefault();
-        close();
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, toggle, close]);
-
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
-
-  return { isOpen, open, close, toggle };
+  return context;
 }
