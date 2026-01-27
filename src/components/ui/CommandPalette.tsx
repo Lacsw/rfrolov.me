@@ -114,8 +114,19 @@ export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
       },
     ];
 
-    return [...navCommands, ...actionCommands];
-  }, [t, router, pathname, otherLocale, isDark, setTheme, close]);
+    const blogCommands: TCommand[] = blogPosts.map((post) => ({
+      id: `blog-${post.slug}`,
+      label: post.title,
+      icon: <FileText className={ICON_SIZE.sm} />,
+      action: () => {
+        router.push(`/blog/${post.slug}`);
+        close();
+      },
+      group: "blog",
+    }));
+
+    return [...navCommands, ...actionCommands, ...blogCommands];
+  }, [t, router, pathname, otherLocale, isDark, setTheme, close, blogPosts]);
 
   const filteredCommands = useMemo(() => {
     if (!query) return commands;
