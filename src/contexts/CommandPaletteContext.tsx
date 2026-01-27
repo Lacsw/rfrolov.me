@@ -40,6 +40,18 @@ export function CommandPaletteProvider({ children }: TProps) {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, toggle, close]);
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   return (
     <CommandPaletteContext.Provider value={{ isOpen, open, close, toggle }}>
       {children}
