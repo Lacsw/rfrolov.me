@@ -256,9 +256,11 @@ export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
                   )}
                 />
                 <kbd
+                  onClick={close}
                   className={cn(
                     "hidden sm:inline-flex items-center gap-1 px-2 py-1",
-                    "rounded border border-muted bg-muted/50 text-xs text-muted-foreground"
+                    "rounded border border-muted bg-muted/50 text-xs text-muted-foreground",
+                    "cursor-pointer transition-colors hover:bg-muted hover:text-foreground"
                   )}
                 >
                   ESC
