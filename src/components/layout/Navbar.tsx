@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 
 import { useTranslations } from "next-intl";
 
+import { Command } from "lucide-react";
+
 import { Container, HamburgerIcon, ThemeToggle } from "@/components/ui";
 import { HOVER_TEXT_COLOR } from "@/constants";
-import { useScrolled } from "@/hooks";
+import { useCommandPalette, useScrolled } from "@/hooks";
 import { Link, usePathname } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
@@ -17,6 +19,7 @@ export function Navbar() {
   const t = useTranslations("nav");
   const pathname = usePathname();
   const scrolled = useScrolled(50);
+  const { open: openCommandPalette } = useCommandPalette();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Close menu on route change
@@ -81,6 +84,14 @@ export function Navbar() {
               </ul>
               <LanguageSwitcher />
               <ThemeToggle />
+              <button
+                onClick={openCommandPalette}
+                aria-label={t("openCommandPalette")}
+                className="hidden sm:inline-flex items-center gap-1 rounded border border-muted bg-muted/50 px-2 py-1 text-xs text-muted-foreground cursor-pointer transition-colors hover:bg-muted hover:text-foreground"
+              >
+                <Command className="h-3 w-3" />
+                <span>K</span>
+              </button>
             </div>
 
             {/* Mobile hamburger button */}
