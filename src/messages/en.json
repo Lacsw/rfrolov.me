@@ -11,7 +11,8 @@
     "projects": "Projects",
     "blog": "Blog",
     "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "openCommandPalette": "Open command palette"
   },
   "hero": {
     "greeting": "Hi, my name is",
