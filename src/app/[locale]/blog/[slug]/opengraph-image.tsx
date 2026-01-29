@@ -2,6 +2,13 @@ import { ImageResponse } from "next/og";
 
 import { locales, TLocale } from "@/i18n/config";
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
+import {
+  createNotFoundOgImage,
+  OG_COLORS,
+  OG_SIZE,
+  ogContentStyles,
+  ogTagStyles,
+} from "@/lib/og";
 
 export const dynamic = "force-static";
 
@@ -15,10 +22,7 @@ export function generateStaticParams() {
 }
 
 export const alt = "Blog post";
-export const size = {
-  width: 1200,
-  height: 630,
-};
+export const size = OG_SIZE;
 export const contentType = "image/png";
 
 type TProps = {
@@ -30,57 +34,22 @@ export default async function Image({ params }: TProps) {
   const post = getPostBySlug(slug, locale as TLocale);
 
   if (!post) {
-    return new ImageResponse(
-      <div
-        style={{
-          height: "100%",
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#0a0a0a",
-          color: "#fafafa",
-          fontFamily: "monospace",
-        }}
-      >
-        <span style={{ fontSize: 48 }}>Post not found</span>
-      </div>,
-      { ...size }
-    );
+    return createNotFoundOgImage("Post not found");
   }
 
   return new ImageResponse(
-    <div
-      style={{
-        height: "100%",
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        backgroundColor: "#0a0a0a",
-        color: "#fafafa",
-        fontFamily: "monospace",
-        padding: 60,
-      }}
-    >
+    <div style={ogContentStyles}>
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
         <div
           style={{
             display: "flex",
             gap: 12,
-            color: "#a1a1aa",
+            color: OG_COLORS.muted,
             fontSize: 24,
           }}
         >
           {post.tags.slice(0, 3).map((tag) => (
-            <span
-              key={tag}
-              style={{
-                backgroundColor: "#27272a",
-                padding: "8px 16px",
-                borderRadius: 8,
-              }}
-            >
+            <span key={tag} style={ogTagStyles}>
               {tag}
             </span>
           ))}
@@ -99,7 +68,7 @@ export default async function Image({ params }: TProps) {
         <p
           style={{
             fontSize: 28,
-            color: "#a1a1aa",
+            color: OG_COLORS.muted,
             marginTop: 16,
             maxWidth: "80%",
             lineHeight: 1.4,
@@ -113,7 +82,7 @@ export default async function Image({ params }: TProps) {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          color: "#71717a",
+          color: OG_COLORS.mutedForeground,
           fontSize: 24,
         }}
       >

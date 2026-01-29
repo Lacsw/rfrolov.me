@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 
 import { locales } from "@/i18n/config";
+import { OG_COLORS, OG_SIZE, ogBaseStyles, ogTagStyles } from "@/lib/og";
 
 export const dynamic = "force-static";
 
@@ -9,25 +10,17 @@ export function generateStaticParams() {
 }
 
 export const alt = "Roman Frolov - Frontend Developer";
-export const size = {
-  width: 1200,
-  height: 630,
-};
+export const size = OG_SIZE;
 export const contentType = "image/png";
 
 export default function Image() {
   return new ImageResponse(
     <div
       style={{
-        height: "100%",
-        width: "100%",
-        display: "flex",
+        ...ogBaseStyles,
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#0a0a0a",
-        color: "#fafafa",
-        fontFamily: "monospace",
       }}
     >
       <div
@@ -50,7 +43,7 @@ export default function Image() {
         <p
           style={{
             fontSize: 36,
-            color: "#a1a1aa",
+            color: OG_COLORS.muted,
             margin: 0,
           }}
         >
@@ -61,37 +54,13 @@ export default function Image() {
             display: "flex",
             gap: 16,
             marginTop: 24,
-            color: "#71717a",
+            color: OG_COLORS.mutedForeground,
             fontSize: 24,
           }}
         >
-          <span
-            style={{
-              backgroundColor: "#27272a",
-              padding: "8px 16px",
-              borderRadius: 8,
-            }}
-          >
-            React
-          </span>
-          <span
-            style={{
-              backgroundColor: "#27272a",
-              padding: "8px 16px",
-              borderRadius: 8,
-            }}
-          >
-            TypeScript
-          </span>
-          <span
-            style={{
-              backgroundColor: "#27272a",
-              padding: "8px 16px",
-              borderRadius: 8,
-            }}
-          >
-            Next.js
-          </span>
+          <span style={ogTagStyles}>React</span>
+          <span style={ogTagStyles}>TypeScript</span>
+          <span style={ogTagStyles}>Next.js</span>
         </div>
       </div>
       <p
@@ -99,7 +68,7 @@ export default function Image() {
           position: "absolute",
           bottom: 40,
           fontSize: 24,
-          color: "#71717a",
+          color: OG_COLORS.mutedForeground,
         }}
       >
         rfrolov.me

@@ -1,6 +1,14 @@
 import { ImageResponse } from "next/og";
 
 import { locales, TLocale } from "@/i18n/config";
+import {
+  createNotFoundOgImage,
+  OG_COLORS,
+  OG_SIZE,
+  ogContentStyles,
+  ogTagStyles,
+  truncateText,
+} from "@/lib/og";
 import { getAllProjectsWithContent, getProjectById } from "@/lib/projects";
 
 export const dynamic = "force-static";
@@ -14,17 +22,8 @@ export function generateStaticParams() {
   );
 }
 
-function truncate(text: string, maxLength: number): string {
-  if (text.length <= maxLength) return text;
-
-  return text.slice(0, maxLength - 3).trim() + "...";
-}
-
 export const alt = "Project";
-export const size = {
-  width: 1200,
-  height: 630,
-};
+export const size = OG_SIZE;
 export const contentType = "image/png";
 
 type TProps = {
@@ -36,57 +35,22 @@ export default async function Image({ params }: TProps) {
   const project = getProjectById(id, locale as TLocale);
 
   if (!project) {
-    return new ImageResponse(
-      <div
-        style={{
-          height: "100%",
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#0a0a0a",
-          color: "#fafafa",
-          fontFamily: "monospace",
-        }}
-      >
-        <span style={{ fontSize: 48 }}>Project not found</span>
-      </div>,
-      { ...size }
-    );
+    return createNotFoundOgImage("Project not found");
   }
 
   return new ImageResponse(
-    <div
-      style={{
-        height: "100%",
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        backgroundColor: "#0a0a0a",
-        color: "#fafafa",
-        fontFamily: "monospace",
-        padding: 60,
-      }}
-    >
+    <div style={ogContentStyles}>
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
         <div
           style={{
             display: "flex",
             gap: 12,
-            color: "#a1a1aa",
+            color: OG_COLORS.muted,
             fontSize: 24,
           }}
         >
           {project.technologies.slice(0, 4).map((tech) => (
-            <span
-              key={tech}
-              style={{
-                backgroundColor: "#27272a",
-                padding: "8px 16px",
-                borderRadius: 8,
-              }}
-            >
+            <span key={tech} style={ogTagStyles}>
               {tech}
             </span>
           ))}
@@ -105,13 +69,13 @@ export default async function Image({ params }: TProps) {
         <p
           style={{
             fontSize: 28,
-            color: "#a1a1aa",
+            color: OG_COLORS.muted,
             marginTop: 16,
             maxWidth: "80%",
             lineHeight: 1.4,
           }}
         >
-          {truncate(project.longDescription || project.description, 150)}
+          {truncateText(project.longDescription || project.description, 150)}
         </p>
       </div>
       <div
@@ -119,7 +83,7 @@ export default async function Image({ params }: TProps) {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          color: "#71717a",
+          color: OG_COLORS.mutedForeground,
           fontSize: 24,
         }}
       >
