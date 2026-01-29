@@ -255,7 +255,7 @@ export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
                 </kbd>
               </div>
 
-              <ul ref={listRef} className="max-h-80 overflow-y-auto p-2">
+              <ul ref={listRef} role="menu" className="max-h-80 overflow-y-auto p-2">
                 {flatCommands.length === 0 ? (
                   <li className="px-4 py-8 text-center text-sm text-muted-foreground">
                     {t("commandPalette.noResults")}
@@ -377,6 +377,8 @@ type TCommandItemProps = {
 function CommandItem({ command, isSelected, onSelect, onHover }: TCommandItemProps) {
   return (
     <li
+      role="menuitem"
+      tabIndex={-1}
       data-selected={isSelected}
       onMouseEnter={onHover}
       onClick={onSelect}
