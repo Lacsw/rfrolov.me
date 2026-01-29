@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ComponentProps, ReactNode } from "react";
 
 import { motion } from "framer-motion";
 
@@ -14,6 +14,8 @@ import {
 import { useReducedMotion } from "@/hooks";
 import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
+
+type TLinkHref = ComponentProps<typeof Link>["href"];
 
 type TAnimatedCardProps = {
   children: ReactNode;
@@ -48,7 +50,7 @@ export function AnimatedCard({
 
   if (href && internal) {
     return (
-      <Link href={href as "/projects"}>
+      <Link href={href as TLinkHref}>
         <motion.div {...animation} className={cn(baseClasses, "cursor-pointer")}>
           {children}
         </motion.div>
