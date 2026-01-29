@@ -1,14 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
 import { useTranslations } from "next-intl";
 
-import { useReadingProgress, useReducedMotion } from "@/hooks";
+import { useReadingProgress } from "@/hooks";
 import { cn } from "@/lib/utils";
 import { THeading } from "@/types";
 
-import { TOC_OBSERVER_MARGIN } from "../../constants";
+import { useHeadingObserver } from "./hooks";
 
 type TTableOfContentsProps = {
   headings: THeading[];
@@ -16,50 +14,12 @@ type TTableOfContentsProps = {
 
 export function TableOfContents({ headings }: TTableOfContentsProps) {
   const t = useTranslations("blog");
-  const [activeId, setActiveId] = useState<string>("");
   const progress = useReadingProgress();
-  const prefersReducedMotion = useReducedMotion();
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-            break;
-          }
-        }
-      },
-      { rootMargin: TOC_OBSERVER_MARGIN }
-    );
-
-    headings.forEach(({ id }) => {
-      const element = document.getElementById(id);
-
-      if (element) {
-        observer.observe(element);
-      }
-    });
-
-    return () => observer.disconnect();
-  }, [headings]);
+  const { activeId, scrollToHeading } = useHeadingObserver({ headings });
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
-    const element = document.getElementById(id);
-
-    if (element) {
-      const headerOffset = 96;
-      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-      const offsetPosition = elementPosition - headerOffset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: prefersReducedMotion ? "auto" : "smooth",
-      });
-
-      history.pushState(null, "", `#${id}`);
-    }
+    scrollToHeading(id);
   };
 
   if (headings.length === 0) {

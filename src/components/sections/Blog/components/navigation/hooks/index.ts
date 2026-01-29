@@ -1,0 +1,1 @@
+export { useHeadingObserver } from "./useHeadingObserver";
