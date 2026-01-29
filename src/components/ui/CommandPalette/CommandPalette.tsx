@@ -3,130 +3,28 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  BookOpen,
-  Command,
-  FileText,
-  FolderKanban,
-  Home,
-  Languages,
-  Moon,
-  Search,
-  Sun,
-} from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
-import { useTheme } from "next-themes";
+import { Command, Search } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-import { ANIMATION_DURATION, ICON_SIZE, TRANSITION } from "@/constants";
+import { ANIMATION_DURATION, ICON_SIZE } from "@/constants";
 import { useCommandPalette, useHydrated, useReducedMotion } from "@/hooks";
-import { TLocale } from "@/i18n/config";
-import { usePathname, useRouter } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
-import { TBlogPostMeta } from "@/types";
 
-type TCommandPaletteProps = {
-  blogPosts?: TBlogPostMeta[];
-};
-
-type TCommand = {
-  id: string;
-  label: string;
-  icon: React.ReactNode;
-  shortcut?: string;
-  action: () => void;
-  group: "navigation" | "actions" | "blog";
-};
+import { CommandItem } from "./CommandItem";
+import { TCommandPaletteProps } from "./types";
+import { useCommands } from "./useCommands";
 
 export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
   const t = useTranslations();
-  const router = useRouter();
-  const pathname = usePathname();
-  const locale = useLocale() as TLocale;
-  const { setTheme, resolvedTheme } = useTheme();
   const hydrated = useHydrated();
   const prefersReducedMotion = useReducedMotion();
   const { isOpen, close } = useCommandPalette();
+  const commands = useCommands(blogPosts);
 
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
-
-  const isDark = resolvedTheme === "dark";
-  const otherLocale = locale === "en" ? "de" : "en";
-
-  const commands = useMemo<TCommand[]>(() => {
-    const navCommands: TCommand[] = [
-      {
-        id: "home",
-        label: t("nav.home"),
-        icon: <Home className={ICON_SIZE.sm} />,
-        action: () => {
-          router.push("/");
-          close();
-        },
-        group: "navigation",
-      },
-      {
-        id: "projects",
-        label: t("nav.projects"),
-        icon: <FolderKanban className={ICON_SIZE.sm} />,
-        action: () => {
-          router.push("/projects");
-          close();
-        },
-        group: "navigation",
-      },
-      {
-        id: "blog",
-        label: t("nav.blog"),
-        icon: <BookOpen className={ICON_SIZE.sm} />,
-        action: () => {
-          router.push("/blog");
-          close();
-        },
-        group: "navigation",
-      },
-    ];
-
-    const actionCommands: TCommand[] = [
-      {
-        id: "theme",
-        label: isDark ? t("theme.switchToLight") : t("theme.switchToDark"),
-        icon: isDark ? <Sun className={ICON_SIZE.sm} /> : <Moon className={ICON_SIZE.sm} />,
-        shortcut: "T",
-        action: () => {
-          setTheme(isDark ? "light" : "dark");
-          close();
-        },
-        group: "actions",
-      },
-      {
-        id: "language",
-        label: t("language.switchTo", { language: t(`language.${otherLocale}`) }),
-        icon: <Languages className={ICON_SIZE.sm} />,
-        shortcut: "L",
-        action: () => {
-          router.replace(pathname, { locale: otherLocale });
-          close();
-        },
-        group: "actions",
-      },
-    ];
-
-    const blogCommands: TCommand[] = blogPosts.map((post) => ({
-      id: `blog-${post.slug}`,
-      label: post.title,
-      icon: <FileText className={ICON_SIZE.sm} />,
-      action: () => {
-        router.push(`/blog/${post.slug}`);
-        close();
-      },
-      group: "blog",
-    }));
-
-    return [...navCommands, ...actionCommands, ...blogCommands];
-  }, [t, router, pathname, otherLocale, isDark, setTheme, close, blogPosts]);
 
   const filteredCommands = useMemo(() => {
     if (!query) return commands;
@@ -364,39 +262,5 @@ export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
         </>
       )}
     </AnimatePresence>
-  );
-}
-
-type TCommandItemProps = {
-  command: TCommand;
-  isSelected: boolean;
-  onSelect: () => void;
-  onHover: () => void;
-};
-
-function CommandItem({ command, isSelected, onSelect, onHover }: TCommandItemProps) {
-  return (
-    <li
-      role="menuitem"
-      tabIndex={-1}
-      data-selected={isSelected}
-      onMouseEnter={onHover}
-      onClick={onSelect}
-      className={cn(
-        "flex items-center justify-between gap-3 rounded-md px-3 py-2 cursor-pointer",
-        TRANSITION.normal,
-        isSelected ? "bg-muted text-foreground" : "text-muted-foreground hover:bg-muted/50"
-      )}
-    >
-      <div className="flex items-center gap-3">
-        {command.icon}
-        <span className="text-sm">{command.label}</span>
-      </div>
-      {command.shortcut && (
-        <kbd className="rounded border border-muted bg-muted/50 px-1.5 py-0.5 text-xs">
-          {command.shortcut}
-        </kbd>
-      )}
-    </li>
   );
 }
