@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 
-import { SITE_URL } from "@/constants";
+import { SITE_URL, STATIC_ROUTES } from "@/constants";
 import { locales } from "@/i18n/config";
 import { getAllPosts } from "@/lib/blog";
 import { getAllProjectsWithContent } from "@/lib/projects";
@@ -8,15 +8,14 @@ import { getAllProjectsWithContent } from "@/lib/projects";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPages = ["", "/blog", "/projects"];
 
   // Generate URLs for static pages in all locales
   const staticUrls = locales.flatMap((locale) =>
-    staticPages.map((page) => ({
-      url: `${SITE_URL}/${locale}${page}`,
+    STATIC_ROUTES.map((route) => ({
+      url: `${SITE_URL}/${locale}${route}`,
       lastModified: new Date(),
-      changeFrequency: page === "" ? ("weekly" as const) : ("monthly" as const),
-      priority: page === "" ? 1 : 0.8,
+      changeFrequency: route === "" ? ("weekly" as const) : ("monthly" as const),
+      priority: route === "" ? 1 : 0.8,
     }))
   );
 

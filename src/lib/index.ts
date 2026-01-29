@@ -12,11 +12,11 @@ export {
   getTagsWithCounts,
 } from "./blog";
 export type { TAdjacentPosts, TSeriesInfo, TTagWithCount } from "./blog";
-export { getMDXFiles, parseMDXFile } from "./content";
-export { formatDate, formatDateRange, getRelativeTime } from "./date";
-export { extractTextFromMDX } from "./extract-text";
+export { fileExists, getMDXFiles, parseMDXFile } from "./content";
+export { formatDate } from "./date";
+export { extractTextFromChildren, getTextContent } from "./extract-text";
 export { useDebounce } from "./hooks";
-export { imageLoader } from "./imageLoader";
+export { default as imageLoader } from "./imageLoader";
 export {
   generateBlogPostSchema,
   generatePersonSchema,
@@ -36,12 +36,11 @@ export {
   truncateText,
 } from "./og";
 export {
-  getAllProjectIds,
   getAllProjectIdsWithContent,
-  getAllProjects,
   getAllProjectsWithContent,
   getProjectById,
   getRelatedProjects,
+  hasProjectDetail,
 } from "./projects";
-export { getCanonicalUrl, getLocalizedUrl } from "./urls";
+export { getTagUrl } from "./urls";
 export { cn, slugify } from "./utils";
