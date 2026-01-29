@@ -1,9 +1,10 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Search, X } from "lucide-react";
 
+import { useDebounce } from "@/lib/hooks";
 import { cn } from "@/lib/utils";
 
 type TSearchInputProps = {
@@ -23,32 +24,12 @@ export function SearchInput({
 }: TSearchInputProps) {
   const [localValue, setLocalValue] = useState(value);
   const inputRef = useRef<HTMLInputElement>(null);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   useEffect(() => {
     setLocalValue(value);
   }, [value]);
 
-  const debouncedOnChange = useCallback(
-    (newValue: string) => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-
-      timeoutRef.current = setTimeout(() => {
-        onChange(newValue);
-      }, debounceMs);
-    },
-    [onChange, debounceMs]
-  );
-
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
-  }, []);
+  const debouncedOnChange = useDebounce(onChange, debounceMs);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
