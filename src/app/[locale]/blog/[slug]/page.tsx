@@ -17,6 +17,7 @@ import {
   TSeriesInfo,
 } from "@/lib/blog";
 import { generateBlogPostSchema } from "@/lib/jsonld";
+import { rehypePrettyCodeOptions } from "@/lib/mdx";
 
 import { BlogPostLayout } from "./BlogPostLayout";
 
@@ -32,15 +33,6 @@ export function generateStaticParams() {
     }))
   );
 }
-
-const rehypePrettyCodeOptions = {
-  theme: {
-    dark: "github-dark",
-    light: "github-light",
-  },
-  keepBackground: false,
-  defaultLang: "plaintext",
-};
 
 export default async function BlogPostPage({ params }: TProps) {
   const { slug, locale: localeParam } = await params;

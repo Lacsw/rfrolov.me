@@ -14,6 +14,7 @@ import { SITE_URL } from "@/constants";
 import { locales, TLocale } from "@/i18n/config";
 import { extractHeadings } from "@/lib/blog";
 import { generateProjectJsonLd } from "@/lib/jsonld";
+import { rehypePrettyCodeOptions } from "@/lib/mdx";
 import { getAllProjectIdsWithContent, getProjectById, getRelatedProjects } from "@/lib/projects";
 
 type TProps = {
@@ -28,7 +29,6 @@ export async function generateStaticParams() {
     }))
   );
 }
-
 
 export async function generateMetadata({ params }: TProps): Promise<Metadata> {
   const { id, locale } = await params;
@@ -63,15 +63,6 @@ export async function generateMetadata({ params }: TProps): Promise<Metadata> {
     },
   };
 }
-
-const rehypePrettyCodeOptions = {
-  theme: {
-    dark: "github-dark",
-    light: "github-light",
-  },
-  keepBackground: false,
-  defaultLang: "plaintext",
-};
 
 export default async function ProjectDetailPage({ params }: TProps) {
   const { id, locale: localeParam } = await params;
