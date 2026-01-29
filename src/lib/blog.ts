@@ -2,7 +2,7 @@ import path from "path";
 
 import readingTime from "reading-time";
 
-import { CONTENT_PATHS } from "@/constants";
+import { CONTENT_PATHS, IS_PRODUCTION } from "@/constants";
 import { TLocale } from "@/i18n/config";
 import { TBlogPost, TBlogPostMeta, TBlogPostSeries, THeading } from "@/types";
 
@@ -10,7 +10,6 @@ import { getMDXFiles, parseMDXFile } from "./content";
 import { slugify } from "./utils";
 
 const BLOG_DIR = CONTENT_PATHS.blog;
-const IS_PRODUCTION = process.env.NODE_ENV === "production";
 
 // Filename format: 001_slug-name.en.mdx
 const FILENAME_REGEX = /^(\d+)_(.+)\.(en|de)\.mdx$/;
