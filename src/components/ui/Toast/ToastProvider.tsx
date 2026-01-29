@@ -1,22 +1,15 @@
 "use client";
 
-import { createContext, ReactNode, useCallback, useContext, useState } from "react";
+import { createContext, ReactNode, useCallback, useState } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
 import { Check } from "lucide-react";
 
 import { TOAST_DURATION_MS } from "@/constants";
 
-type TToast = {
-  id: number;
-  message: string;
-};
+import { TToast, TToastContext } from "./types";
 
-type TToastContext = {
-  showToast: (message: string) => void;
-};
-
-const ToastContext = createContext<TToastContext | null>(null);
+export const ToastContext = createContext<TToastContext | null>(null);
 
 export function ToastProvider({ children }: { children: ReactNode }) {
   const [toasts, setToasts] = useState<TToast[]>([]);
@@ -51,14 +44,4 @@ export function ToastProvider({ children }: { children: ReactNode }) {
       </div>
     </ToastContext.Provider>
   );
-}
-
-export function useToast() {
-  const context = useContext(ToastContext);
-
-  if (!context) {
-    throw new Error("useToast must be used within a ToastProvider");
-  }
-
-  return context;
 }

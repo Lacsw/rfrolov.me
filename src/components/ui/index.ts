@@ -20,7 +20,7 @@ export { CardSkeleton, Skeleton } from "./Skeleton";
 export { SocialLink } from "./SocialLink";
 export { TechIcon } from "./TechIcon";
 export { ThemeToggle } from "./ThemeToggle";
-export { ToastProvider, useToast } from "./Toast";
+export { ToastProvider, useToast, type TToast, type TToastContext } from "./Toast";
 export { ViewToggle } from "./ViewToggle";
 
 export { CategoryWithYear, ProjectHighlight, ProjectLinks, TechTags } from "./project";
