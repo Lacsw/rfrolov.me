@@ -10,6 +10,7 @@ import rehypeSlug from "rehype-slug";
 import { mdxComponents } from "@/components/sections/Blog";
 import { ProjectContent, ProjectDetailLayout } from "@/components/sections/Projects";
 import { JsonLd } from "@/components/seo";
+import { SITE_URL } from "@/constants";
 import { locales, TLocale } from "@/i18n/config";
 import { extractHeadings } from "@/lib/blog";
 import { generateProjectJsonLd } from "@/lib/jsonld";
@@ -28,7 +29,6 @@ export async function generateStaticParams() {
   );
 }
 
-const BASE_URL = "https://rfrolov.me";
 
 export async function generateMetadata({ params }: TProps): Promise<Metadata> {
   const { id, locale } = await params;
@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: TProps): Promise<Metadata> {
   }
 
   const description = project.longDescription || project.description;
-  const url = `${BASE_URL}/${locale}/projects/${id}`;
+  const url = `${SITE_URL}/${locale}/projects/${id}`;
 
   return {
     title: `${project.title} | Roman Frolov`,
@@ -57,8 +57,8 @@ export async function generateMetadata({ params }: TProps): Promise<Metadata> {
     alternates: {
       canonical: url,
       languages: {
-        en: `${BASE_URL}/en/projects/${id}`,
-        de: `${BASE_URL}/de/projects/${id}`,
+        en: `${SITE_URL}/en/projects/${id}`,
+        de: `${SITE_URL}/de/projects/${id}`,
       },
     },
   };
