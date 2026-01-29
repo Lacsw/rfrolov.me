@@ -8,13 +8,9 @@ import { useTranslations } from "next-intl";
 import { ANIMATION_DURATION } from "@/constants";
 import { useCommandPalette, useHydrated, useReducedMotion } from "@/hooks";
 
-import { CommandFooter } from "./CommandFooter";
-import { CommandGroup } from "./CommandGroup";
-import { CommandSearchInput } from "./CommandSearchInput";
+import { CommandFooter, CommandGroup, CommandSearchInput } from "./components";
+import { useCommandFilter, useCommands, useKeyboardNavigation } from "./hooks";
 import { TCommandPaletteProps } from "./types";
-import { useCommandFilter } from "./useCommandFilter";
-import { useCommands } from "./useCommands";
-import { useKeyboardNavigation } from "./useKeyboardNavigation";
 
 export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
   const t = useTranslations();

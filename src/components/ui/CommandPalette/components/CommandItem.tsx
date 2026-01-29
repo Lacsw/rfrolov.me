@@ -1,7 +1,7 @@
 import { TRANSITION } from "@/constants";
 import { cn } from "@/lib/utils";
 
-import { TCommandItemProps } from "./types";
+import { TCommandItemProps } from "../types";
 
 export function CommandItem({ command, isSelected, onSelect, onHover }: TCommandItemProps) {
   const { icon, label, shortcut } = command;

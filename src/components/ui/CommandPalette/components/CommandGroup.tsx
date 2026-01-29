@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
+import { TCommand } from "../types";
 import { CommandItem } from "./CommandItem";
-import { TCommand } from "./types";
 
 type TCommandGroupProps = {
   label: string;

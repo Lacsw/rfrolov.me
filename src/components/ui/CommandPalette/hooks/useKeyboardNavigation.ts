@@ -1,6 +1,6 @@
 import { RefObject, useCallback, useEffect, useState } from "react";
 
-import { TCommand } from "./types";
+import { TCommand } from "../types";
 
 type TUseKeyboardNavigationProps = {
   isOpen: boolean;

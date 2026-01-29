@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { TCommand } from "./types";
+import { TCommand } from "../types";
 
 export type TGroupedCommands = {
   navigation: TCommand[];

@@ -18,7 +18,7 @@ import { TLocale } from "@/i18n/config";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { TBlogPostMeta } from "@/types";
 
-import { TCommand } from "./types";
+import { TCommand } from "../types";
 
 export function useCommands(blogPosts: TBlogPostMeta[]) {
   const t = useTranslations();
