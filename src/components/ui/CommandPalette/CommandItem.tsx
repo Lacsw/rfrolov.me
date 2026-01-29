@@ -4,6 +4,8 @@ import { cn } from "@/lib/utils";
 import { TCommandItemProps } from "./types";
 
 export function CommandItem({ command, isSelected, onSelect, onHover }: TCommandItemProps) {
+  const { icon, label, shortcut } = command;
+
   return (
     <li
       role="menuitem"
@@ -18,12 +20,12 @@ export function CommandItem({ command, isSelected, onSelect, onHover }: TCommand
       )}
     >
       <div className="flex items-center gap-3">
-        {command.icon}
-        <span className="text-sm">{command.label}</span>
+        {icon}
+        <span className="text-sm">{label}</span>
       </div>
-      {command.shortcut && (
+      {shortcut && (
         <kbd className="rounded border border-muted bg-muted/50 px-1.5 py-0.5 text-xs">
-          {command.shortcut}
+          {shortcut}
         </kbd>
       )}
     </li>

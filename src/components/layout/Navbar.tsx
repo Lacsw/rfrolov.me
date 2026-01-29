@@ -2,9 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-import { useTranslations } from "next-intl";
-
 import { Command } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Container, HamburgerIcon, ThemeToggle } from "@/components/ui";
 import { HOVER_TEXT_COLOR } from "@/constants";
