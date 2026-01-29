@@ -1,11 +1,15 @@
+import { Metadata } from "next";
+
 import { notFound } from "next/navigation";
 
+import { getTranslations } from "next-intl/server";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 
 import { mdxComponents } from "@/components/sections/Blog";
 import { JsonLd } from "@/components/seo";
+import { SITE_URL } from "@/constants";
 import { locales, TLocale } from "@/i18n/config";
 import {
   extractHeadings,
@@ -32,6 +36,40 @@ export function generateStaticParams() {
       slug,
     }))
   );
+}
+
+export async function generateMetadata({ params }: TProps): Promise<Metadata> {
+  const { slug, locale } = await params;
+  const post = getPostBySlug(slug, locale as TLocale);
+  const t = await getTranslations({ locale, namespace: "metadata" });
+
+  if (!post) {
+    return {
+      title: t("title"),
+    };
+  }
+
+  const url = `${SITE_URL}/${locale}/blog/${slug}`;
+
+  return {
+    title: `${post.title} | Roman Frolov`,
+    description: post.description,
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      url,
+      type: "article",
+      locale: locale === "de" ? "de_DE" : "en_US",
+      publishedTime: post.date,
+    },
+    alternates: {
+      canonical: url,
+      languages: {
+        en: `${SITE_URL}/en/blog/${slug}`,
+        de: `${SITE_URL}/de/blog/${slug}`,
+      },
+    },
+  };
 }
 
 export default async function BlogPostPage({ params }: TProps) {
