@@ -7,6 +7,7 @@ import { TLocale } from "@/i18n/config";
 import { TBlogPost, TBlogPostMeta, TBlogPostSeries, THeading } from "@/types";
 
 import { getMDXFiles, parseMDXFile } from "./content";
+import { slugify } from "./utils";
 
 const BLOG_DIR = CONTENT_PATHS.blog;
 const IS_PRODUCTION = process.env.NODE_ENV === "production";
@@ -276,13 +277,6 @@ export function getRelatedPosts(
     .sort((a, b) => b.score - a.score);
 
   return scoredPosts.slice(0, limit).map(({ post }) => post);
-}
-
-function slugify(text: string): string {
-  return text
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, "")
-    .replace(/\s+/g, "-");
 }
 
 export function extractHeadings(content: string): THeading[] {
