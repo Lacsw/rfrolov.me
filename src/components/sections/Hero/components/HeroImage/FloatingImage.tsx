@@ -4,6 +4,8 @@ import Image from "next/image";
 
 import { motion } from "framer-motion";
 
+import { getImagePath } from "@/lib/utils";
+
 import { ANIMATION_CONFIG } from "../../constants";
 
 export function FloatingImage() {
@@ -22,7 +24,7 @@ export function FloatingImage() {
     >
       <div className="relative w-full h-full rounded-full overflow-hidden shadow-2xl ring-4 ring-background">
         <Image
-          src="/images/hero.png"
+          src={getImagePath("/images/hero.png")}
           alt="Roman Frolov"
           fill
           priority
