@@ -43,4 +43,4 @@ export {
   hasProjectDetail,
 } from "./projects";
 export { getTagUrl } from "./urls";
-export { cn, slugify } from "./utils";
+export { cn, getImagePath, slugify } from "./utils";
