@@ -12,8 +12,8 @@ export {
 export { CATEGORY_COLORS, CATEGORY_KEYS } from "./categories";
 export { IS_PRODUCTION } from "./env";
 export { CONTENT_PATHS } from "./paths";
-export { STATIC_ROUTES } from "./routes";
-export type { TStaticRoute } from "./routes";
+export { NAV_LINKS, STATIC_ROUTES } from "./routes";
+export type { TNavLink, TStaticRoute } from "./routes";
 export { SITE_URL } from "./urls";
 export {
   ARROW_HOVER,

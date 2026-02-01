@@ -6,7 +6,7 @@ import { Command } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { Container, HamburgerIcon, ThemeToggle } from "@/components/ui";
-import { HOVER_TEXT_COLOR } from "@/constants";
+import { HOVER_TEXT_COLOR, NAV_LINKS } from "@/constants";
 import { useCommandPalette, useScrolled } from "@/hooks";
 import { Link, usePathname } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
@@ -36,12 +36,6 @@ export function Navbar() {
     return () => document.removeEventListener("keydown", handleEscape);
   }, []);
 
-  const navLinks = [
-    { name: t("home"), href: "/" as const },
-    { name: t("projects"), href: "/projects" as const },
-    { name: t("blog"), href: "/blog" as const },
-  ];
-
   return (
     <>
       <header
@@ -61,7 +55,7 @@ export function Navbar() {
             {/* Desktop nav */}
             <div className="hidden sm:flex items-center gap-6">
               <ul className="flex items-center gap-8">
-                {navLinks.map((link) => {
+                {NAV_LINKS.map((link) => {
                   const isActive =
                     link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
 
@@ -75,7 +69,7 @@ export function Navbar() {
                           isActive ? "text-foreground" : HOVER_TEXT_COLOR
                         )}
                       >
-                        {link.name}
+                        {t(link.key)}
                       </Link>
                     </li>
                   );

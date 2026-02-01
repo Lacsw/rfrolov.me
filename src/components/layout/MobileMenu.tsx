@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 import { ThemeToggle } from "@/components/ui";
-import { HOVER_TEXT_COLOR } from "@/constants";
+import { HOVER_TEXT_COLOR, NAV_LINKS } from "@/constants";
 import { Link, usePathname } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
@@ -18,12 +18,6 @@ type TMobileMenuProps = {
 export function MobileMenu({ isOpen, onClose }: TMobileMenuProps) {
   const t = useTranslations("nav");
   const pathname = usePathname();
-
-  const navLinks = [
-    { name: t("home"), href: "/" as const },
-    { name: t("projects"), href: "/projects" as const },
-    { name: t("blog"), href: "/blog" as const },
-  ];
 
   return (
     <AnimatePresence>
@@ -48,7 +42,7 @@ export function MobileMenu({ isOpen, onClose }: TMobileMenuProps) {
             className="relative overflow-hidden bg-background/95 backdrop-blur-sm border-b border-muted"
           >
             <ul className="flex flex-col py-2">
-              {navLinks.map((link) => {
+              {NAV_LINKS.map((link) => {
                 const isActive =
                   link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
 
@@ -63,7 +57,7 @@ export function MobileMenu({ isOpen, onClose }: TMobileMenuProps) {
                         isActive ? "text-foreground" : HOVER_TEXT_COLOR
                       )}
                     >
-                      {link.name}
+                      {t(link.key)}
                     </Link>
                   </li>
                 );
