@@ -34,6 +34,7 @@ export type TExperience = {
   location: string;
   description: string;
   technologies: string[];
+  isCurrent?: boolean;
 };
 
 export type TBlogPostSeries = {

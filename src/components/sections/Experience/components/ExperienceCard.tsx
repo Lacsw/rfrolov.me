@@ -15,7 +15,7 @@ type TExperienceCardProps = {
 };
 
 export function ExperienceCard({ experience, isLast }: TExperienceCardProps) {
-  const isCurrentPosition = experience.endDate === "Present";
+  const isCurrentPosition = experience.isCurrent ?? false;
 
   return (
     <motion.div

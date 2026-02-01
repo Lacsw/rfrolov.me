@@ -11,6 +11,7 @@ export const experiences: TExperience[] = [
     description:
       "Entwicklung des Green+ Portals und interaktiver Tools für das ESG-Management von Immobilien. Entwicklung von Energiebewertungsrechnern und Portfolio-Dashboards, die Immobilienbesitzern helfen, Sanierungskosten um bis zu 35% zu senken.",
     technologies: ["React", "TypeScript", "Next.js"],
+    isCurrent: true,
   },
   {
     id: "happy-numbers",

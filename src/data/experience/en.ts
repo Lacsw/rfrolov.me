@@ -11,6 +11,7 @@ export const experiences: TExperience[] = [
     description:
       "Building the Green+ portal and interactive tools for real estate ESG management. Developing energy assessment calculators and portfolio dashboards that help property owners reduce refurbishment costs by up to 35%.",
     technologies: ["React", "TypeScript", "Next.js"],
+    isCurrent: true,
   },
   {
     id: "happy-numbers",
