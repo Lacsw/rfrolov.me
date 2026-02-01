@@ -64,12 +64,17 @@ export function useKeyboardNavigation({
           executeCommand(selectedIndex);
           break;
         default:
-          if (query === "" && e.key.length === 1) {
-            const command = shortcutMap.get(e.key.toLowerCase());
+          if (e.key.length === 1) {
+            const isTypingInInput =
+              e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement;
 
-            if (command) {
-              e.preventDefault();
-              command.action();
+            if (!isTypingInInput) {
+              const command = shortcutMap.get(e.key.toLowerCase());
+
+              if (command) {
+                e.preventDefault();
+                command.action();
+              }
             }
           }
           break;
