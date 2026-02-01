@@ -27,6 +27,7 @@ export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
   const { selectedIndex, setSelectedIndex, executeCommand } = useKeyboardNavigation({
     isOpen,
     flatCommands,
+    commands,
     listRef,
     query,
   });

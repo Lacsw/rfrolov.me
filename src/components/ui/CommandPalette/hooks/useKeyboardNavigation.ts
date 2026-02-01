@@ -1,10 +1,11 @@
-import { RefObject, useCallback, useEffect, useState } from "react";
+import { RefObject, useCallback, useEffect, useMemo, useState } from "react";
 
 import { TCommand } from "../types";
 
 type TUseKeyboardNavigationProps = {
   isOpen: boolean;
   flatCommands: TCommand[];
+  commands: TCommand[];
   listRef: RefObject<HTMLUListElement | null>;
   query: string;
 };
@@ -12,6 +13,7 @@ type TUseKeyboardNavigationProps = {
 export function useKeyboardNavigation({
   isOpen,
   flatCommands,
+  commands,
   listRef,
   query,
 }: TUseKeyboardNavigationProps) {
@@ -20,6 +22,18 @@ export function useKeyboardNavigation({
   useEffect(() => {
     setSelectedIndex(0);
   }, [query]);
+
+  const shortcutMap = useMemo(() => {
+    const map = new Map<string, TCommand>();
+
+    for (const command of commands) {
+      if (command.shortcut) {
+        map.set(command.shortcut.toLowerCase(), command);
+      }
+    }
+
+    return map;
+  }, [commands]);
 
   const executeCommand = useCallback(
     (index: number) => {
@@ -49,13 +63,23 @@ export function useKeyboardNavigation({
           e.preventDefault();
           executeCommand(selectedIndex);
           break;
+        default:
+          if (query === "" && e.key.length === 1) {
+            const command = shortcutMap.get(e.key.toLowerCase());
+
+            if (command) {
+              e.preventDefault();
+              command.action();
+            }
+          }
+          break;
       }
     };
 
     document.addEventListener("keydown", handleKeyDown);
 
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, selectedIndex, flatCommands.length, executeCommand]);
+  }, [isOpen, selectedIndex, flatCommands.length, executeCommand, query, shortcutMap]);
 
   useEffect(() => {
     if (listRef.current) {
