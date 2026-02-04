@@ -5,12 +5,13 @@ import { useCallback } from "react";
 import { useLocale, useTranslations } from "next-intl";
 
 import { HOVER_TEXT_COLOR } from "@/constants";
-import { locales, TLocale } from "@/i18n/config";
+import { defaultLocale, isLocale, locales, TLocale } from "@/i18n/config";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
 export function LanguageSwitcher() {
-  const locale = useLocale() as TLocale;
+  const localeRaw = useLocale();
+  const locale: TLocale = isLocale(localeRaw) ? localeRaw : defaultLocale;
   const router = useRouter();
   const pathname = usePathname();
   const t = useTranslations("language");

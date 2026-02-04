@@ -14,7 +14,7 @@ import { useTheme } from "next-themes";
 
 import { ICON_SIZE } from "@/constants";
 import { useCommandPalette } from "@/hooks";
-import { TLocale } from "@/i18n/config";
+import { defaultLocale, isLocale, TLocale } from "@/i18n/config";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { TBlogPostMeta } from "@/types";
 
@@ -24,7 +24,8 @@ export function useCommands(blogPosts: TBlogPostMeta[]) {
   const t = useTranslations();
   const router = useRouter();
   const pathname = usePathname();
-  const locale = useLocale() as TLocale;
+  const localeRaw = useLocale();
+  const locale: TLocale = isLocale(localeRaw) ? localeRaw : defaultLocale;
   const { setTheme, resolvedTheme } = useTheme();
   const { close } = useCommandPalette();
 
