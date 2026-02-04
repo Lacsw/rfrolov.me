@@ -3,7 +3,7 @@ import path from "path";
 import readingTime from "reading-time";
 
 import { CONTENT_PATHS, IS_PRODUCTION } from "@/constants";
-import { TLocale } from "@/i18n/config";
+import { isLocale, TLocale } from "@/i18n/config";
 import { TBlogPost, TBlogPostMeta, TBlogPostSeries, THeading } from "@/types";
 
 import { getMDXFiles, parseMDXFile } from "./content";
@@ -37,10 +37,16 @@ function parseFilename(filename: string): TParsedFilename | null {
     return null;
   }
 
+  const localeMatch = match[3];
+
+  if (!isLocale(localeMatch)) {
+    return null;
+  }
+
   return {
     order: parseInt(match[1], 10),
     slug: match[2],
-    locale: match[3] as TLocale,
+    locale: localeMatch,
   };
 }
 
