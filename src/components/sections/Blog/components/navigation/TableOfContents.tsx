@@ -51,6 +51,7 @@ export function TableOfContents({ headings }: TTableOfContentsProps) {
               <a
                 href={`#${id}`}
                 onClick={(e) => handleClick(e, id)}
+                aria-current={isActive ? "true" : undefined}
                 className={cn(
                   "block -ml-px border-l-2 py-1.5 text-sm transition-all duration-150 cursor-pointer rounded-r-sm",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background",
