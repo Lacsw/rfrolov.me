@@ -1,4 +1,6 @@
-import { locales, TLocale } from "@/i18n/config";
+import { notFound } from "next/navigation";
+
+import { isLocale, locales } from "@/i18n/config";
 import { getAllPosts, getAllTags } from "@/lib/blog";
 
 import { BlogPageClient } from "./BlogPageClient";
@@ -13,7 +15,12 @@ export function generateStaticParams() {
 
 export default async function BlogPage({ params }: TProps) {
   const { locale: localeParam } = await params;
-  const locale = localeParam as TLocale;
+
+  if (!isLocale(localeParam)) {
+    notFound();
+  }
+
+  const locale = localeParam;
   const posts = getAllPosts(locale);
   const tags = getAllTags(locale);
 

@@ -1,9 +1,11 @@
+import { notFound } from "next/navigation";
+
 import { getTranslations } from "next-intl/server";
 
 import { getTagColor } from "@/components/sections/Blog/constants";
 import { BackLink, Container } from "@/components/ui";
 import { HOVER_OPACITY } from "@/constants";
-import { locales, TLocale } from "@/i18n/config";
+import { isLocale, locales } from "@/i18n/config";
 import { Link } from "@/i18n/routing";
 import { getTagsWithCounts } from "@/lib/blog";
 import { getTagUrl } from "@/lib/urls";
@@ -19,7 +21,12 @@ export function generateStaticParams() {
 
 export default async function TagsPage({ params }: TProps) {
   const { locale: localeParam } = await params;
-  const locale = localeParam as TLocale;
+
+  if (!isLocale(localeParam)) {
+    notFound();
+  }
+
+  const locale = localeParam;
   const t = await getTranslations({ locale, namespace: "blog" });
   const tCommon = await getTranslations({ locale, namespace: "common" });
   const tagsWithCounts = getTagsWithCounts(locale);

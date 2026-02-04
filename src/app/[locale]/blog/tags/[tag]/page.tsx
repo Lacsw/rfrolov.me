@@ -4,7 +4,7 @@ import { getTranslations } from "next-intl/server";
 
 import { BlogPostListItem } from "@/components/sections/Blog";
 import { BackLink, Container } from "@/components/ui";
-import { locales, TLocale } from "@/i18n/config";
+import { isLocale, locales } from "@/i18n/config";
 import { getAllTags, getPostsByTag } from "@/lib/blog";
 
 type TProps = {
@@ -22,7 +22,12 @@ export function generateStaticParams() {
 
 export default async function TagPage({ params }: TProps) {
   const { tag, locale: localeParam } = await params;
-  const locale = localeParam as TLocale;
+
+  if (!isLocale(localeParam)) {
+    notFound();
+  }
+
+  const locale = localeParam;
   const t = await getTranslations({ locale, namespace: "blog" });
   const tCommon = await getTranslations({ locale, namespace: "common" });
   const posts = getPostsByTag(tag, locale);

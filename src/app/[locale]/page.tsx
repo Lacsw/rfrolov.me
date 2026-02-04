@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+
 import { BlogList } from "@/components/sections/Blog";
 import { Experience } from "@/components/sections/Experience";
 import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
@@ -6,7 +8,7 @@ import { Skills } from "@/components/sections/Skills";
 import { JsonLd } from "@/components/seo";
 import { getExperiences } from "@/data/experience";
 import { getFeaturedProjects } from "@/data/projects";
-import { locales, TLocale } from "@/i18n/config";
+import { isLocale, locales } from "@/i18n/config";
 import { getFeaturedPosts } from "@/lib/blog";
 import { generatePersonSchema, generateWebsiteSchema } from "@/lib/jsonld";
 import { getAllProjectIdsWithContent } from "@/lib/projects";
@@ -21,7 +23,12 @@ export function generateStaticParams() {
 
 export default async function Home({ params }: TProps) {
   const { locale: localeParam } = await params;
-  const locale = localeParam as TLocale;
+
+  if (!isLocale(localeParam)) {
+    notFound();
+  }
+
+  const locale = localeParam;
   const featuredPosts = getFeaturedPosts(locale, 2);
   const experiences = getExperiences(locale);
   const featuredProjects = getFeaturedProjects(locale);
