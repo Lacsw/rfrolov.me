@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { JetBrains_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 
 import { NextIntlClientProvider } from "next-intl";
@@ -13,6 +14,13 @@ import { CommandPaletteProvider } from "@/contexts";
 import { isLocale } from "@/i18n/config";
 import { routing } from "@/i18n/routing";
 import { getAllPosts } from "@/lib/blog";
+
+import "../globals.css";
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+});
 
 type TProps = {
   children: React.ReactNode;
@@ -77,26 +85,30 @@ export default async function LocaleLayout({ children, params }: TProps) {
   const blogPosts = getAllPosts(locale);
 
   return (
-    <NextIntlClientProvider messages={messages}>
-      <LanguageProvider>
-        <ThemeProvider>
-          <ToastProvider>
-            <a
-              href="#main-content"
-              className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:shadow-lg focus:ring-2 focus:ring-foreground focus:ring-offset-2"
-            >
-              {t("skipToContent")}
-            </a>
-            <CommandPaletteProvider>
-              <Navbar />
-              <CommandPalette blogPosts={blogPosts} />
-            </CommandPaletteProvider>
-            <div id="main-content">{children}</div>
-            <Footer />
-            <ScrollToTop />
-          </ToastProvider>
-        </ThemeProvider>
-      </LanguageProvider>
-    </NextIntlClientProvider>
+    <html lang={locale} className={jetbrainsMono.variable} suppressHydrationWarning>
+      <body className="min-h-screen bg-background font-mono antialiased" suppressHydrationWarning>
+        <NextIntlClientProvider messages={messages}>
+          <LanguageProvider>
+            <ThemeProvider>
+              <ToastProvider>
+                <a
+                  href="#main-content"
+                  className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:shadow-lg focus:ring-2 focus:ring-foreground focus:ring-offset-2"
+                >
+                  {t("skipToContent")}
+                </a>
+                <CommandPaletteProvider>
+                  <Navbar />
+                  <CommandPalette blogPosts={blogPosts} />
+                </CommandPaletteProvider>
+                <div id="main-content">{children}</div>
+                <Footer />
+                <ScrollToTop />
+              </ToastProvider>
+            </ThemeProvider>
+          </LanguageProvider>
+        </NextIntlClientProvider>
+      </body>
+    </html>
   );
 }
