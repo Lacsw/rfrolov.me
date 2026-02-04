@@ -35,7 +35,9 @@ export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
   useEffect(() => {
     if (isOpen) {
       setQuery("");
-      setTimeout(() => inputRef.current?.focus(), 0);
+      requestAnimationFrame(() => {
+        inputRef.current?.focus();
+      });
     }
   }, [isOpen]);
 
