@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
@@ -19,6 +21,39 @@ export function MobileMenu({ isOpen, onClose }: TMobileMenuProps) {
   const t = useTranslations("nav");
   const tCommon = useTranslations("common");
   const pathname = usePathname();
+  const menuRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const menu = menuRef.current;
+
+    if (!menu) return;
+
+    const focusableElements = menu.querySelectorAll<HTMLElement>(
+      'a[href], button, [tabindex]:not([tabindex="-1"])'
+    );
+    const firstEl = focusableElements[0];
+    const lastEl = focusableElements[focusableElements.length - 1];
+
+    firstEl?.focus();
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+
+      if (e.shiftKey && document.activeElement === firstEl) {
+        e.preventDefault();
+        lastEl?.focus();
+      } else if (!e.shiftKey && document.activeElement === lastEl) {
+        e.preventDefault();
+        firstEl?.focus();
+      }
+    };
+
+    menu.addEventListener("keydown", handleKeyDown);
+
+    return () => menu.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen]);
 
   return (
     <AnimatePresence>
@@ -36,6 +71,7 @@ export function MobileMenu({ isOpen, onClose }: TMobileMenuProps) {
 
           {/* Menu content */}
           <motion.nav
+            ref={menuRef}
             role="dialog"
             aria-modal="true"
             aria-label={tCommon("mobileMenu")}
