@@ -11,7 +11,7 @@ import { mdxComponents } from "@/components/sections/Blog";
 import { ProjectContent, ProjectDetailLayout } from "@/components/sections/Projects";
 import { JsonLd } from "@/components/seo";
 import { SITE_URL } from "@/constants";
-import { locales, TLocale } from "@/i18n/config";
+import { isLocale, locales } from "@/i18n/config";
 import { extractHeadings } from "@/lib/blog";
 import { generateProjectJsonLd } from "@/lib/jsonld";
 import { rehypePrettyCodeOptions } from "@/lib/mdx";
@@ -32,7 +32,12 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: TProps): Promise<Metadata> {
   const { id, locale } = await params;
-  const project = getProjectById(id, locale as TLocale);
+
+  if (!isLocale(locale)) {
+    return {};
+  }
+
+  const project = getProjectById(id, locale);
   const t = await getTranslations({ locale, namespace: "metadata" });
 
   if (!project) {
@@ -66,7 +71,12 @@ export async function generateMetadata({ params }: TProps): Promise<Metadata> {
 
 export default async function ProjectDetailPage({ params }: TProps) {
   const { id, locale: localeParam } = await params;
-  const locale = localeParam as TLocale;
+
+  if (!isLocale(localeParam)) {
+    notFound();
+  }
+
+  const locale = localeParam;
   const project = getProjectById(id, locale);
 
   if (!project) {

@@ -10,7 +10,7 @@ import rehypeSlug from "rehype-slug";
 import { mdxComponents } from "@/components/sections/Blog";
 import { JsonLd } from "@/components/seo";
 import { SITE_URL } from "@/constants";
-import { locales, TLocale } from "@/i18n/config";
+import { isLocale, locales } from "@/i18n/config";
 import {
   extractHeadings,
   getAdjacentPosts,
@@ -40,7 +40,12 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: TProps): Promise<Metadata> {
   const { slug, locale } = await params;
-  const post = getPostBySlug(slug, locale as TLocale);
+
+  if (!isLocale(locale)) {
+    return {};
+  }
+
+  const post = getPostBySlug(slug, locale);
   const t = await getTranslations({ locale, namespace: "metadata" });
 
   if (!post) {
@@ -74,7 +79,12 @@ export async function generateMetadata({ params }: TProps): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: TProps) {
   const { slug, locale: localeParam } = await params;
-  const locale = localeParam as TLocale;
+
+  if (!isLocale(localeParam)) {
+    notFound();
+  }
+
+  const locale = localeParam;
   const post = getPostBySlug(slug, locale);
 
   if (!post) {
