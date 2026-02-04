@@ -10,7 +10,7 @@ import { LanguageProvider, ThemeProvider } from "@/components/providers";
 import { CommandPalette, ScrollToTop, ToastProvider } from "@/components/ui";
 import { SITE_URL } from "@/constants";
 import { CommandPaletteProvider } from "@/contexts";
-import { TLocale } from "@/i18n/config";
+import { isLocale } from "@/i18n/config";
 import { routing } from "@/i18n/routing";
 import { getAllPosts } from "@/lib/blog";
 
@@ -67,14 +67,14 @@ export async function generateMetadata({
 export default async function LocaleLayout({ children, params }: TProps) {
   const { locale } = await params;
 
-  if (!routing.locales.includes(locale as (typeof routing.locales)[number])) {
+  if (!isLocale(locale)) {
     notFound();
   }
 
   setRequestLocale(locale);
   const messages = await getMessages();
   const t = await getTranslations({ locale, namespace: "common" });
-  const blogPosts = getAllPosts(locale as TLocale);
+  const blogPosts = getAllPosts(locale);
 
   return (
     <NextIntlClientProvider messages={messages}>
