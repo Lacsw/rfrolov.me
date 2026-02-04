@@ -19,6 +19,7 @@ const variantConfig = {
     iconClass: "text-blue-500",
     titleClass: "text-blue-600",
     defaultTitle: "Note",
+    role: "note" as const,
   },
   tip: {
     icon: Lightbulb,
@@ -26,6 +27,7 @@ const variantConfig = {
     iconClass: "text-green-500",
     titleClass: "text-green-600",
     defaultTitle: "Tip",
+    role: "note" as const,
   },
   warning: {
     icon: AlertTriangle,
@@ -33,6 +35,7 @@ const variantConfig = {
     iconClass: "text-amber-500",
     titleClass: "text-amber-600",
     defaultTitle: "Warning",
+    role: "alert" as const,
   },
 };
 
@@ -41,7 +44,7 @@ export function Callout({ variant = "note", title, children }: TProps) {
   const Icon = config.icon;
 
   return (
-    <div className={cn("my-6 rounded-lg border-l-4 p-4", config.containerClass)}>
+    <div role={config.role} className={cn("my-6 rounded-lg border-l-4 p-4", config.containerClass)}>
       <div className="flex items-center gap-2 mb-2">
         <Icon className={cn("size-5", config.iconClass)} />
         <span className={cn("font-semibold", config.titleClass)}>
