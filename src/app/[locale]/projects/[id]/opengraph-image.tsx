@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-import { locales, TLocale } from "@/i18n/config";
+import { isLocale, locales } from "@/i18n/config";
 import {
   createNotFoundOgImage,
   OG_COLORS,
@@ -32,7 +32,12 @@ type TProps = {
 
 export default async function Image({ params }: TProps) {
   const { id, locale } = await params;
-  const project = getProjectById(id, locale as TLocale);
+
+  if (!isLocale(locale)) {
+    return createNotFoundOgImage("Invalid locale");
+  }
+
+  const project = getProjectById(id, locale);
 
   if (!project) {
     return createNotFoundOgImage("Project not found");

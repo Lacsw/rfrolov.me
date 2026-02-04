@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-import { locales, TLocale } from "@/i18n/config";
+import { isLocale, locales } from "@/i18n/config";
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
 import {
   createNotFoundOgImage,
@@ -31,7 +31,12 @@ type TProps = {
 
 export default async function Image({ params }: TProps) {
   const { slug, locale } = await params;
-  const post = getPostBySlug(slug, locale as TLocale);
+
+  if (!isLocale(locale)) {
+    return createNotFoundOgImage("Invalid locale");
+  }
+
+  const post = getPostBySlug(slug, locale);
 
   if (!post) {
     return createNotFoundOgImage("Post not found");
