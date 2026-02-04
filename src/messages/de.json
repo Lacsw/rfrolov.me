@@ -5,7 +5,8 @@
     "linkCopied": "Link in Zwischenablage kopiert",
     "copyLink": "Link zum Abschnitt kopieren",
     "skipToContent": "Zum Inhalt springen",
-    "scrollToTop": "Nach oben scrollen"
+    "scrollToTop": "Nach oben scrollen",
+    "mobileMenu": "Mobile Navigationsmenü"
   },
   "nav": {
     "home": "Startseite",

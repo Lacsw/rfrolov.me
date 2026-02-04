@@ -17,6 +17,7 @@ type TMobileMenuProps = {
 
 export function MobileMenu({ isOpen, onClose }: TMobileMenuProps) {
   const t = useTranslations("nav");
+  const tCommon = useTranslations("common");
   const pathname = usePathname();
 
   return (
@@ -35,6 +36,9 @@ export function MobileMenu({ isOpen, onClose }: TMobileMenuProps) {
 
           {/* Menu content */}
           <motion.nav
+            role="dialog"
+            aria-modal="true"
+            aria-label={tCommon("mobileMenu")}
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}

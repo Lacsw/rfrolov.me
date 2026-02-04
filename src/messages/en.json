@@ -5,7 +5,8 @@
     "linkCopied": "Link copied to clipboard",
     "copyLink": "Copy link to section",
     "skipToContent": "Skip to content",
-    "scrollToTop": "Scroll to top"
+    "scrollToTop": "Scroll to top",
+    "mobileMenu": "Mobile navigation menu"
   },
   "nav": {
     "home": "Home",
