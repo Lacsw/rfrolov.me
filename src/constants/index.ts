@@ -10,6 +10,7 @@ export {
   TOAST_DURATION_MS,
 } from "./animations";
 export { CATEGORY_COLORS, CATEGORY_KEYS } from "./categories";
+export { SITE_LAST_MODIFIED } from "./dates";
 export { IS_PRODUCTION } from "./env";
 export { CONTENT_PATHS } from "./paths";
 export { NAV_LINKS, STATIC_ROUTES } from "./routes";
