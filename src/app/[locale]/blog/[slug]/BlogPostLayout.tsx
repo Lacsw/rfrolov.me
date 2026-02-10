@@ -55,7 +55,7 @@ export function BlogPostLayout({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: ANIMATION_DURATION.slower }}
-              className="max-w-2xl"
+              className="mx-auto max-w-2xl lg:mx-0"
             >
               <Breadcrumbs items={breadcrumbs} />
 
