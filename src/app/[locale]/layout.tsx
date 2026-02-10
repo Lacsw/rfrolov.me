@@ -7,7 +7,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Footer, Navbar } from "@/components/layout";
-import { LanguageProvider, ThemeProvider } from "@/components/providers";
+import { CronitorProvider, LanguageProvider, ThemeProvider } from "@/components/providers";
 import { CommandPalette, ScrollToTop, ToastProvider } from "@/components/ui";
 import { SITE_URL } from "@/constants";
 import { CommandPaletteProvider } from "@/contexts";
@@ -87,6 +87,7 @@ export default async function LocaleLayout({ children, params }: TProps) {
   return (
     <html lang={locale} className={jetbrainsMono.variable} suppressHydrationWarning>
       <body className="min-h-screen bg-background font-mono antialiased" suppressHydrationWarning>
+        <CronitorProvider />
         <NextIntlClientProvider messages={messages}>
           <LanguageProvider>
             <ThemeProvider>
