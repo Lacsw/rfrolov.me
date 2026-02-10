@@ -1,0 +1,192 @@
+---
+title: "5 Claude Code Features That Will Boost Your Workflow"
+description: "opusplan, 1M context windows, agent teams, fast mode, and effort levels — many arriving with Opus 4.6, these features make Claude Code a much sharper tool."
+date: "2026-02-10"
+tags: ["claude-code", "ai", "developer-tools", "productivity"]
+featured: true
+---
+
+Claude Code has been shipping features fast. Here are five that are worth setting up today — each one changes how you work with the tool in a meaningful way.
+
+## 1. opusplan — Smart Model Switching
+
+The `opusplan` alias automatically uses **Opus for planning and reasoning**, then switches to **Sonnet for code execution**. You get Opus-quality architecture decisions without paying Opus prices for every line of generated code.
+
+```bash
+# Start a session with opusplan
+claude --model opusplan
+
+# Or switch mid-session
+/model opusplan
+```
+
+When you enter plan mode (designing an approach, breaking down a task), Claude uses Opus. The moment it starts writing code, it drops to Sonnet. You don't have to manage the switch manually.
+
+<Callout variant="tip">
+  This is particularly useful for large refactors — Opus reasons through the architecture, Sonnet does the repetitive implementation work.
+</Callout>
+
+You can also set it permanently via environment variable or settings file:
+
+```bash
+# Environment variable
+export ANTHROPIC_MODEL=opusplan
+```
+
+```json
+// ~/.claude/settings.json
+{
+  "model": "opusplan"
+}
+```
+
+## 2. sonnet[1m] — 1 Million Token Context
+
+Standard context windows are 200K tokens. The `[1m]` suffix extends that to **1 million tokens** — useful for large codebases or long sessions where you don't want Claude to lose track of earlier context.
+
+```bash
+claude --model sonnet[1m]
+```
+
+The `[1m]` suffix works with aliases and full model names:
+
+```bash
+/model sonnet[1m]
+/model claude-sonnet-4-5-20250929[1m]
+```
+
+<Callout variant="warning">
+  Extended context models have [different pricing](https://platform.claude.com/docs/en/about-claude/pricing#long-context-pricing). The 1M context window is currently available only for organizations (API and pay-as-you-go users). Pro, Max, Teams, and Enterprise subscription users do not have access to Opus 1M context at launch.
+</Callout>
+
+When should you use this? If you're working across dozens of files, doing large migrations, or running sessions that last hours — the extended window keeps everything in scope.
+
+## 3. Agent Teams — Multiple Claudes Working Together
+
+This one is experimental, but it's already powerful. Agent teams let you spin up **multiple Claude Code instances** that coordinate with each other — one acts as a team lead, the others work on tasks in parallel.
+
+Enable it first:
+
+```json
+// ~/.claude/settings.json
+{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  }
+}
+```
+
+Then describe the team you want in natural language:
+
+```
+Create an agent team to refactor the auth module.
+Spawn three teammates:
+- One for the backend API changes
+- One for the frontend components
+- One for writing tests
+```
+
+Claude creates a shared task list, spawns teammates, and coordinates the work. Teammates communicate with each other, claim tasks, and report back to the lead.
+
+**Best use cases:**
+
+- **Parallel code review** — one reviewer for security, one for performance, one for test coverage
+- **Debugging competing hypotheses** — multiple agents investigate different theories simultaneously
+- **Cross-layer features** — frontend, backend, and tests each owned by a different teammate
+
+<Callout variant="note">
+  Agent teams use significantly more tokens than a single session. Start with research and review tasks to get a feel for how they work before using them for implementation.
+</Callout>
+
+Two display modes are available: **in-process** (all in one terminal, navigate with `Shift+Up/Down`) and **split panes** (each teammate in its own tmux/iTerm2 pane). Use `Shift+Tab` to enable delegate mode, which restricts the lead to coordination only.
+
+## 4. Fast Mode — Same Quality, Lower Latency
+
+<Callout variant="warning">
+  Fast mode requires extra usage to be enabled on your account and is billed separately from your subscription.
+</Callout>
+
+Fast mode delivers **faster Opus responses** using a different API configuration. Same model, same quality — just quicker output at a higher per-token cost.
+
+Toggle it with:
+
+```
+/fast
+```
+
+A <span style={{color: '#E07A2F'}}>↯</span> icon appears next to your prompt while fast mode is active. Run `/fast` again to toggle it off.
+
+| Mode                      | Input (per MTok) | Output (per MTok) |
+|---------------------------|------------------|--------------------|
+| Standard Opus             | $15              | $75                |
+| Fast Opus (under 200K)    | $30              | $150               |
+| Fast Opus (over 200K)     | $60              | $225               |
+
+**When to use it:**
+
+- Rapid iteration on code changes
+- Live debugging where you're waiting on every response
+- Time-sensitive work
+
+**When to skip it:**
+
+- Long autonomous tasks where latency doesn't matter
+- CI/CD pipelines or batch processing
+- When you're optimizing for cost
+
+<Callout variant="tip">
+  Enable fast mode at the start of a session rather than mid-conversation. Switching mid-session re-prices the entire context at fast mode rates.
+</Callout>
+
+## 5. Effort Levels — Control How Hard Claude Thinks
+
+The effort parameter controls how many tokens Claude spends on reasoning. Lower effort means faster, cheaper responses. Higher effort means deeper analysis.
+
+Four levels are available:
+
+| Level    | When to use it                                          |
+|----------|---------------------------------------------------------|
+| `max`    | Deepest reasoning, no token constraints (Opus only)    |
+| `high`   | Default — complex reasoning, difficult coding problems  |
+| `medium` | Balanced speed and quality for routine agentic tasks    |
+| `low`    | Simple tasks, quick lookups, maximum speed              |
+
+**Set it in Claude Code:**
+
+- Use the `/model` command and adjust with **left/right arrow keys**
+- Environment variable: `CLAUDE_CODE_EFFORT_LEVEL=low|medium|high`
+- Settings file: `"effortLevel": "medium"`
+
+Effort affects everything — text responses, tool calls, and extended thinking. At lower levels, Claude makes fewer tool calls, skips preamble, and gets straight to the point.
+
+You can combine effort with fast mode: use `low` effort + fast mode for maximum speed on straightforward tasks, or `high` effort + standard mode for deep analysis where you don't mind waiting.
+
+## Setting Everything Up
+
+All of these features can be configured in `~/.claude/settings.json`:
+
+```json
+{
+  "model": "opusplan",
+  "effortLevel": "high",
+  "fastMode": false,
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  }
+}
+```
+
+Or mix and match with flags and slash commands during a session:
+
+```bash
+claude --model sonnet[1m]    # Start with extended context
+/model opusplan              # Switch to hybrid mode
+/fast                        # Toggle fast mode
+```
+
+The official docs cover each feature in detail:
+
+- [Model configuration](https://code.claude.com/docs/en/model-config) — opusplan, extended context, effort levels
+- [Agent teams](https://code.claude.com/docs/en/agent-teams) — multi-instance orchestration
+- [Fast mode](https://code.claude.com/docs/en/fast-mode) — lower latency responses
+- [Effort](https://platform.claude.com/docs/en/build-with-claude/effort) — API-level effort parameter

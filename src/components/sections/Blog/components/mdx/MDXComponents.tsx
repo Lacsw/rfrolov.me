@@ -93,6 +93,26 @@ export const mdxComponents = {
       {...props}
     />
   ),
+  table: ({ className, ...props }: ComponentPropsWithoutRef<"table">) => (
+    <div className="my-6 overflow-x-auto">
+      <table className={cn("w-full text-sm border-collapse", className)} {...props} />
+    </div>
+  ),
+  thead: ({ className, ...props }: ComponentPropsWithoutRef<"thead">) => (
+    <thead className={cn("border-b border-muted-foreground/30", className)} {...props} />
+  ),
+  th: ({ className, ...props }: ComponentPropsWithoutRef<"th">) => (
+    <th
+      className={cn("text-left font-semibold text-foreground px-3 py-2", className)}
+      {...props}
+    />
+  ),
+  td: ({ className, ...props }: ComponentPropsWithoutRef<"td">) => (
+    <td
+      className={cn("text-muted-foreground px-3 py-2 border-b border-muted", className)}
+      {...props}
+    />
+  ),
   Callout,
   CollapsibleCode,
 };

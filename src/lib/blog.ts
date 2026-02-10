@@ -1,5 +1,6 @@
 import path from "path";
 
+import GithubSlugger from "github-slugger";
 import readingTime from "reading-time";
 
 import { CONTENT_PATHS, IS_PRODUCTION } from "@/constants";
@@ -7,7 +8,6 @@ import { isLocale, TLocale } from "@/i18n/config";
 import { TBlogPost, TBlogPostMeta, TBlogPostSeries, THeading } from "@/types";
 
 import { getMDXFiles, parseMDXFile } from "./content";
-import { slugify } from "./utils";
 
 const BLOG_DIR = CONTENT_PATHS.blog;
 
@@ -286,13 +286,14 @@ export function getRelatedPosts(
 
 export function extractHeadings(content: string): THeading[] {
   const headingRegex = /^(#{2,3})\s+(.+)$/gm;
+  const slugger = new GithubSlugger();
   const headings: THeading[] = [];
   let match;
 
   while ((match = headingRegex.exec(content)) !== null) {
     const level = match[1].length as 2 | 3;
     const text = match[2].trim();
-    const id = slugify(text);
+    const id = slugger.slug(text);
 
     headings.push({ id, text, level });
   }
