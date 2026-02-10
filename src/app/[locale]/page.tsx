@@ -40,9 +40,9 @@ export default async function Home({ params }: TProps) {
       <JsonLd data={generateWebsiteSchema()} />
       <Hero />
       <Skills />
+      <BlogList posts={featuredPosts} />
       <Experience experiences={experiences} />
       <FeaturedProjects projects={featuredProjects} projectsWithDetails={projectsWithDetails} />
-      <BlogList posts={featuredPosts} />
     </main>
   );
 }
