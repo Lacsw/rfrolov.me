@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { getTagColor } from "@/components/sections/Blog/constants";
 import { BackLink, Container } from "@/components/ui";
@@ -27,6 +27,7 @@ export default async function TagsPage({ params }: TProps) {
   }
 
   const locale = localeParam;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "blog" });
   const tCommon = await getTranslations({ locale, namespace: "common" });
   const tagsWithCounts = getTagsWithCounts(locale);

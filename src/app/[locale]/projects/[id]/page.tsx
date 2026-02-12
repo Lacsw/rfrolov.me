@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 import { notFound } from "next/navigation";
 
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
@@ -77,6 +77,7 @@ export default async function ProjectDetailPage({ params }: TProps) {
   }
 
   const locale = localeParam;
+  setRequestLocale(locale);
   const project = getProjectById(id, locale);
 
   if (!project) {
