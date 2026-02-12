@@ -8,6 +8,8 @@ featured: true
 
 Claude Code has been shipping features fast. Here are five that are worth setting up today — each one changes how you work with the tool in a meaningful way.
 
+→ [Skip to Setting Everything Up](#setting-everything-up)
+
 ## 1. opusplan — Smart Model Switching
 
 The `opusplan` alias automatically uses **Opus for planning and reasoning**, then switches to **Sonnet for code execution**. You get Opus-quality architecture decisions without paying Opus prices for every line of generated code.
@@ -40,28 +42,7 @@ export ANTHROPIC_MODEL=opusplan
 }
 ```
 
-## 2. sonnet[1m] — 1 Million Token Context
-
-Standard context windows are 200K tokens. The `[1m]` suffix extends that to **1 million tokens** — useful for large codebases or long sessions where you don't want Claude to lose track of earlier context.
-
-```bash
-claude --model sonnet[1m]
-```
-
-The `[1m]` suffix works with aliases and full model names:
-
-```bash
-/model sonnet[1m]
-/model claude-sonnet-4-5-20250929[1m]
-```
-
-<Callout variant="warning">
-  Extended context models have [different pricing](https://platform.claude.com/docs/en/about-claude/pricing#long-context-pricing). The 1M context window is currently available only for organizations (API and pay-as-you-go users). Pro, Max, Teams, and Enterprise subscription users do not have access to Opus 1M context at launch.
-</Callout>
-
-When should you use this? If you're working across dozens of files, doing large migrations, or running sessions that last hours — the extended window keeps everything in scope.
-
-## 3. Agent Teams — Multiple Claudes Working Together
+## 2. Agent Teams — Multiple Claudes Working Together
 
 This one is experimental, but it's already powerful. Agent teams let you spin up **multiple Claude Code instances** that coordinate with each other — one acts as a team lead, the others work on tasks in parallel.
 
@@ -100,7 +81,7 @@ Claude creates a shared task list, spawns teammates, and coordinates the work. T
 
 Two display modes are available: **in-process** (all in one terminal, navigate with `Shift+Up/Down`) and **split panes** (each teammate in its own tmux/iTerm2 pane). Use `Shift+Tab` to enable delegate mode, which restricts the lead to coordination only.
 
-## 4. Fast Mode — Same Quality, Lower Latency
+## 3. Fast Mode — Same Quality, Lower Latency
 
 <Callout variant="warning">
   Fast mode requires extra usage to be enabled on your account and is billed separately from your subscription.
@@ -138,7 +119,7 @@ A <span style={{color: '#E07A2F'}}>↯</span> icon appears next to your prompt w
   Enable fast mode at the start of a session rather than mid-conversation. Switching mid-session re-prices the entire context at fast mode rates.
 </Callout>
 
-## 5. Effort Levels — Control How Hard Claude Thinks
+## 4. Effort Levels — Control How Hard Claude Thinks
 
 The effort parameter controls how many tokens Claude spends on reasoning. Lower effort means faster, cheaper responses. Higher effort means deeper analysis.
 
@@ -160,6 +141,27 @@ Four levels are available:
 Effort affects everything — text responses, tool calls, and extended thinking. At lower levels, Claude makes fewer tool calls, skips preamble, and gets straight to the point.
 
 You can combine effort with fast mode: use `low` effort + fast mode for maximum speed on straightforward tasks, or `high` effort + standard mode for deep analysis where you don't mind waiting.
+
+## 5. sonnet[1m] — 1 Million Token Context
+
+Standard context windows are 200K tokens. The `[1m]` suffix extends that to **1 million tokens** — useful for large codebases or long sessions where you don't want Claude to lose track of earlier context.
+
+```bash
+claude --model sonnet[1m]
+```
+
+The `[1m]` suffix works with aliases and full model names:
+
+```bash
+/model sonnet[1m]
+/model claude-sonnet-4-5-20250929[1m]
+```
+
+<Callout variant="warning">
+  Extended context models have [different pricing](https://platform.claude.com/docs/en/about-claude/pricing#long-context-pricing). The 1M context window is currently available only for organizations (API and pay-as-you-go users). Pro, Max, Teams, and Enterprise subscription users do not have access to Opus 1M context at launch.
+</Callout>
+
+When should you use this? If you're working across dozens of files, doing large migrations, or running sessions that last hours — the extended window keeps everything in scope.
 
 ## Setting Everything Up
 
