@@ -1,19 +1,22 @@
-"use client";
+import { JetBrains_Mono } from "next/font/google";
 
-import { NextIntlClientProvider } from "next-intl";
+import { RootNotFoundContent } from "@/components/sections/NotFound";
 
-import { ThemeProvider } from "@/components/providers";
-import { NotFoundTerminal } from "@/components/sections/NotFound";
-import messages from "@/messages/en.json";
+import "./globals.css";
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+});
 
 export default function RootNotFound() {
   return (
-    <NextIntlClientProvider locale="en" messages={messages}>
-      <ThemeProvider>
-        <main className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-6 bg-background">
-          <NotFoundTerminal />
+    <html lang="en" className={jetbrainsMono.variable}>
+      <body className="min-h-screen bg-background font-mono antialiased">
+        <main className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-6">
+          <RootNotFoundContent />
         </main>
-      </ThemeProvider>
-    </NextIntlClientProvider>
+      </body>
+    </html>
   );
 }
