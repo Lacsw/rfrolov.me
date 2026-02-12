@@ -2,6 +2,8 @@
 
 import { NextIntlClientProvider } from "next-intl";
 
+import { ThemeProvider } from "@/components/providers";
+import { ThemeToggle } from "@/components/ui";
 import messages from "@/messages/en.json";
 
 import { NotFoundTerminal } from "./NotFoundTerminal";
@@ -9,7 +11,12 @@ import { NotFoundTerminal } from "./NotFoundTerminal";
 export function RootNotFoundContent() {
   return (
     <NextIntlClientProvider locale="en" messages={messages}>
-      <NotFoundTerminal />
+      <ThemeProvider>
+        <div className="w-full max-w-2xl flex flex-col items-end gap-2">
+          <ThemeToggle />
+          <NotFoundTerminal />
+        </div>
+      </ThemeProvider>
     </NextIntlClientProvider>
   );
 }
