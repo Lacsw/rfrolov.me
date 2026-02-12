@@ -8,6 +8,16 @@ featured: true
 
 Claude Code supports custom status lines via bash scripts. Here's how to build one that shows model, context usage, and git status at a glance.
 
+## Quick Start
+
+The fastest way — just run in Claude Code:
+
+```bash
+/statusline show model name and context percentage with a progress bar
+```
+
+Claude Code generates the script and updates settings automatically. For full control, read on.
+
 ## Result
 
 <div className="my-6 rounded-lg bg-[#1a1a1a] p-4 font-mono text-sm">
@@ -22,9 +32,9 @@ Claude Code supports custom status lines via bash scripts. Here's how to build o
   <span style={{color: '#FACC15'}}> ✗</span>
 </div>
 
-## Setup
+## Manual Setup
 
-Add to `~/.claude/settings.json`:
+**1.** Add to `~/.claude/settings.json`:
 
 ```json
 {
@@ -35,7 +45,7 @@ Add to `~/.claude/settings.json`:
 }
 ```
 
-Create `~/.claude/statusline.sh` and make it executable (`chmod +x`):
+**2.** Create `~/.claude/statusline.sh` and make it executable (`chmod +x`):
 
 <CollapsibleCode title="~/.claude/statusline.sh">
 ```bash showLineNumbers
@@ -100,24 +110,29 @@ echo "${CYAN}${short_model}${RESET} ${progress_bar} ${YELLOW}${used_pct}%${RESET
 
 ## Available Data
 
-Claude Code passes JSON to stdin with this structure:
+Claude Code pipes JSON to your script via stdin. Key fields:
 
-```json
-{
-  "model": { "id": "claude-opus-4-5-20251101", "display_name": "Claude Opus 4.5" },
-  "context_window": {
-    "used_percentage": 21.5,
-    "total_input_tokens": 42000,
-    "total_output_tokens": 8500,
-    "context_window_size": 200000
-  },
-  "cost": { "total_cost_usd": 0.42 },
-  "workspace": { "current_dir": "/path/to/project", "project_dir": "/path/to/project" }
-}
-```
+| Field | Description |
+|-------|-------------|
+| `model.id`, `model.display_name` | Current model identifier and name |
+| `context_window.used_percentage` | Pre-calculated % of context used |
+| `context_window.total_input_tokens` | Cumulative input token count |
+| `context_window.total_output_tokens` | Cumulative output token count |
+| `context_window.context_window_size` | Maximum context window size |
+| `cost.total_cost_usd` | Total session cost in USD |
+| `cost.total_duration_ms` | Wall-clock time since session start |
+| `cost.total_lines_added` / `removed` | Lines of code changed |
+| `workspace.current_dir` | Current working directory |
+| `workspace.project_dir` | Directory where Claude Code launched |
+| `vim.mode` | Current vim mode (`NORMAL` / `INSERT`) |
+| `session_id` | Unique session identifier |
+
+<Callout variant="note">
+  The script runs after each assistant message, debounced at 300ms. Keep it fast — avoid network calls.
+</Callout>
 
 <Callout variant="warning">
-  **Rate limits not available.** Hourly usage limits (Settings → Plan usage limits) aren't exposed to statusline scripts. [Feature request](https://github.com/anthropics/claude-code/issues/18121).
+  **Rate limits not available.** Hourly usage limits aren't exposed to statusline scripts. [Feature request](https://github.com/anthropics/claude-code/issues/18121).
 </Callout>
 
 ## Customization
@@ -149,9 +164,5 @@ cost=$(echo "$input" | jq -r '.cost.total_cost_usd // 0')
 ```
 
 <Callout variant="tip">
-  Keep scripts fast - they run on every status update. Avoid network calls.
+  To remove: run `/statusline delete` or remove the `statusLine` field from `settings.json`.
 </Callout>
-
-## Conclusion
-
-A custom status line transforms Claude Code from a black box into a transparent tool. You can see at a glance which model you're using, how much context remains, and whether you have uncommitted changes. The script is fully customizable - adjust colors, add metrics, or simplify to your liking.
