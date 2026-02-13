@@ -11,14 +11,14 @@
   --background: 0 0% 100%;
   --foreground: 0 0% 9%;
   --muted: 0 0% 96%;
-  --muted-foreground: 0 0% 45%;
+  --muted-foreground: 0 0% 38%;
 }
 
 .dark {
   --background: 0 0% 7%;
   --foreground: 0 0% 95%;
   --muted: 0 0% 15%;
-  --muted-foreground: 0 0% 60%;
+  --muted-foreground: 0 0% 65%;
 }
 
 html {
