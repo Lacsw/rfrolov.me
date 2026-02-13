@@ -3,10 +3,8 @@ import { RefObject } from "react";
 import { Search } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { ICON_SIZE } from "@/constants";
+import { ICON_SIZE, KBD_BASE } from "@/constants";
 import { cn } from "@/lib/utils";
-
-import { KBD_BASE } from "../styles";
 
 type TCommandSearchInputProps = {
   inputRef: RefObject<HTMLInputElement | null>;

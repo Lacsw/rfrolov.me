@@ -6,7 +6,7 @@ import { Command } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { Container, HamburgerIcon, ThemeToggle } from "@/components/ui";
-import { HOVER_TEXT_COLOR, NAV_LINKS } from "@/constants";
+import { HOVER_TEXT_COLOR, KBD_BASE, NAV_LINKS } from "@/constants";
 import { useCommandPalette, useScrolled } from "@/hooks";
 import { Link, usePathname } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
@@ -80,7 +80,11 @@ export function Navbar() {
               <button
                 onClick={openCommandPalette}
                 aria-label={t("openCommandPalette")}
-                className="hidden sm:inline-flex items-center gap-1 rounded border border-muted bg-muted/50 px-2 py-1 text-xs text-muted-foreground cursor-pointer transition-colors hover:bg-muted hover:text-foreground"
+                className={cn(
+                  KBD_BASE,
+                  "hidden sm:inline-flex items-center gap-1 px-2 py-1 text-xs text-muted-foreground",
+                  "cursor-pointer transition-colors hover:bg-muted hover:text-foreground"
+                )}
               >
                 <Command className="h-3 w-3" />
                 <span>K</span>

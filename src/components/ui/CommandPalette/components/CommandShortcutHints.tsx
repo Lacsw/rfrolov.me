@@ -1,4 +1,5 @@
-import { KBD_BASE } from "../styles";
+import { KBD_BASE } from "@/constants";
+
 import { TCommand } from "../types";
 
 type TCommandShortcutHintsProps = {

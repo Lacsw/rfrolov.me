@@ -47,6 +47,8 @@ export const ARROW_HOVER = {
   right: "transition-transform duration-200 group-hover:translate-x-1",
 } as const;
 
+export const KBD_BASE = "rounded border border-muted bg-muted/50";
+
 export const EXTERNAL_LINK_PROPS = {
   target: "_blank",
   rel: "noopener noreferrer",

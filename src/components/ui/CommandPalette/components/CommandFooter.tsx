@@ -1,9 +1,8 @@
 import { Command } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+import { KBD_BASE } from "@/constants";
 import { cn } from "@/lib/utils";
-
-import { KBD_BASE } from "../styles";
 
 type TCommandFooterProps = {
   onClose: () => void;
