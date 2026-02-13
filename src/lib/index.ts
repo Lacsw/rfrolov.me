@@ -19,6 +19,7 @@ export { useDebounce } from "./hooks";
 export { default as imageLoader } from "./imageLoader";
 export {
   generateBlogPostSchema,
+  generateExperiencePageSchema,
   generatePersonSchema,
   generateProjectJsonLd,
   generateWebsiteSchema,

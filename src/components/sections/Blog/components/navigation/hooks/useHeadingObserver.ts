@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useReducedMotion } from "@/hooks";
 import { THeading } from "@/types";
 
-import { TOC_OBSERVER_MARGIN } from "../../../constants";
+import { TOC_OBSERVER_MARGIN } from "@/components/sections/Blog/constants";
 
 const HEADER_OFFSET = 96;
 

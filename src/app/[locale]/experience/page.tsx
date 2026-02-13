@@ -13,7 +13,7 @@ import { SITE_URL, SPACING } from "@/constants";
 import { getEducation } from "@/data/education";
 import { getExperiences } from "@/data/experience";
 import { isLocale, locales } from "@/i18n/config";
-import { generateExperiencePageSchema } from "@/lib/jsonld";
+import { generateExperiencePageSchema } from "@/lib";
 
 type TProps = {
   params: Promise<{ locale: string }>;
