@@ -63,28 +63,37 @@ export function useKeyboardNavigation({
           e.preventDefault();
           executeCommand(selectedIndex);
           break;
-        default:
-          if (e.key.length === 1) {
-            const isTypingInInput =
-              e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement;
-
-            if (!isTypingInInput) {
-              const command = shortcutMap.get(e.key.toLowerCase());
-
-              if (command) {
-                e.preventDefault();
-                command.action();
-              }
-            }
-          }
-          break;
       }
     };
 
     document.addEventListener("keydown", handleKeyDown);
 
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, selectedIndex, flatCommands.length, executeCommand, query, shortcutMap]);
+  }, [isOpen, selectedIndex, flatCommands.length, executeCommand]);
+
+  useEffect(() => {
+    if (isOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      if (e.key.length !== 1) return;
+
+      const isTypingInInput =
+        e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement;
+      if (isTypingInInput) return;
+
+      const command = shortcutMap.get(e.key.toLowerCase());
+
+      if (command) {
+        e.preventDefault();
+        command.action();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, shortcutMap]);
 
   useEffect(() => {
     if (listRef.current) {
