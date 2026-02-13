@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslations } from "next-intl";
@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl";
 import { ANIMATION_DURATION } from "@/constants";
 import { useCommandPalette, useHydrated, useReducedMotion } from "@/hooks";
 
-import { CommandFooter, CommandGroup, CommandSearchInput } from "./components";
+import { CommandFooter, CommandGroup, CommandSearchInput, CommandShortcutHints } from "./components";
 import { useCommandFilter, useCommands, useKeyboardNavigation } from "./hooks";
 import { TCommandPaletteProps } from "./types";
 
@@ -23,6 +23,7 @@ export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
 
+  const shortcutCommands = useMemo(() => commands.filter((cmd) => cmd.shortcut), [commands]);
   const { groupedCommands, flatCommands } = useCommandFilter(commands, query);
   const { selectedIndex, setSelectedIndex, executeCommand } = useKeyboardNavigation({
     isOpen,
@@ -111,6 +112,8 @@ export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
 
               <CommandFooter onClose={close} />
             </div>
+
+            <CommandShortcutHints shortcuts={shortcutCommands} />
           </motion.div>
         </>
       )}

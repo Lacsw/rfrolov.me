@@ -160,6 +160,8 @@
     "actions": "Aktionen",
     "blog": "Blog-Beiträge",
     "toNavigate": "navigieren",
-    "toSelect": "auswählen"
+    "toSelect": "auswählen",
+    "shortcutTheme": "Thema",
+    "shortcutLanguage": "Sprache"
   }
 }

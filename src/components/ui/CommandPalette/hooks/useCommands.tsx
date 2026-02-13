@@ -83,6 +83,7 @@ export function useCommands(blogPosts: TBlogPostMeta[]) {
         label: isDark ? t("theme.switchToLight") : t("theme.switchToDark"),
         icon: isDark ? <Sun className={ICON_SIZE.sm} /> : <Moon className={ICON_SIZE.sm} />,
         shortcut: "T",
+        shortcutHint: t("commandPalette.shortcutTheme"),
         action: () => {
           setTheme(isDark ? "light" : "dark");
           close();
@@ -94,6 +95,7 @@ export function useCommands(blogPosts: TBlogPostMeta[]) {
         label: t("language.switchTo", { language: t(`language.${otherLocale}`) }),
         icon: <Languages className={ICON_SIZE.sm} />,
         shortcut: "L",
+        shortcutHint: t("commandPalette.shortcutLanguage"),
         action: () => {
           router.replace(pathname, { locale: otherLocale });
           close();

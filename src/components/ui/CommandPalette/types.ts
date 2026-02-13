@@ -5,6 +5,7 @@ export type TCommand = {
   label: string;
   icon: React.ReactNode;
   shortcut?: string;
+  shortcutHint?: string;
   action: () => void;
   group: "navigation" | "actions" | "blog";
 };
