@@ -6,6 +6,8 @@ import { useTranslations } from "next-intl";
 import { ICON_SIZE } from "@/constants";
 import { cn } from "@/lib/utils";
 
+import { KBD_BASE } from "../styles";
+
 type TCommandSearchInputProps = {
   inputRef: RefObject<HTMLInputElement | null>;
   query: string;
@@ -38,8 +40,9 @@ export function CommandSearchInput({
       <kbd
         onClick={onClose}
         className={cn(
+          KBD_BASE,
           "hidden sm:inline-flex items-center gap-1 px-2 py-1",
-          "rounded border border-muted bg-muted/50 text-xs text-muted-foreground",
+          "text-xs text-muted-foreground",
           "cursor-pointer transition-colors hover:bg-muted hover:text-foreground"
         )}
       >

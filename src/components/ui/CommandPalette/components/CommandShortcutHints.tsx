@@ -1,3 +1,4 @@
+import { KBD_BASE } from "../styles";
 import { TCommand } from "../types";
 
 type TCommandShortcutHintsProps = {
@@ -11,7 +12,7 @@ export function CommandShortcutHints({ shortcuts }: TCommandShortcutHintsProps) 
     <div className="mt-3 flex items-center justify-center gap-3 text-xs text-muted-foreground">
       {shortcuts.map((cmd) => (
         <span key={cmd.id} className="flex items-center gap-1.5">
-          <kbd className="rounded border border-muted bg-muted/50 px-1.5 py-0.5">
+          <kbd className={`${KBD_BASE} px-1.5 py-0.5`}>
             {cmd.shortcut}
           </kbd>
           <span>{cmd.shortcutHint}</span>
