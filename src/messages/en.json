@@ -12,6 +12,7 @@
     "home": "Home",
     "projects": "Projects",
     "blog": "Blog",
+    "experience": "Experience",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "openCommandPalette": "Open command palette"
@@ -84,6 +85,27 @@
     "openTableOfContents": "Open table of contents",
     "closeTableOfContents": "Close table of contents"
   },
+  "experiencePage": {
+    "title": "Experience",
+    "description": "My professional journey and technical expertise",
+    "stats": {
+      "yearsExperience": "Years of Experience",
+      "usersImpacted": "Users Impacted",
+      "companies": "Companies"
+    },
+    "skills": {
+      "title": "Skills",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "tools": "Tools"
+    },
+    "experience": {
+      "title": "Work Experience"
+    },
+    "education": {
+      "title": "Education"
+    }
+  },
   "contact": {
     "getInTouch": "Get in touch"
   },
@@ -129,7 +151,9 @@
   },
   "metadata": {
     "title": "Roman Frolov - Frontend Developer",
-    "description": "Personal website of Roman Frolov, a frontend developer specializing in React, TypeScript, and modern web technologies."
+    "description": "Personal website of Roman Frolov, a frontend developer specializing in React, TypeScript, and modern web technologies.",
+    "experienceTitle": "Experience - Roman Frolov",
+    "experienceDescription": "Professional experience, skills, and education of Roman Frolov, a frontend developer specializing in React, TypeScript, and modern web technologies."
   },
   "footer": {
     "copyright": "© {year} Roman Frolov"

@@ -70,6 +70,29 @@ export type TProjectScreenshot = {
   caption?: string;
 };
 
+export type TEducation = {
+  id: string;
+  institution: string;
+  degree: string;
+  field: string;
+  startDate: string;
+  endDate: string;
+  location: string;
+  description?: string;
+  isCurrent?: boolean;
+};
+
+export type TKeyStat = {
+  id: string;
+  value: string;
+  labelKey: string;
+};
+
+export type TSkillCategory = {
+  key: string;
+  skills: TSkill[];
+};
+
 export type TProjectDetailMeta = TProject & {
   longDescription?: string;
   role?: string;

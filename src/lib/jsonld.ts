@@ -57,6 +57,30 @@ export function generateWebsiteSchema() {
   };
 }
 
+export function generateExperiencePageSchema(locale: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    mainEntity: {
+      "@type": "Person",
+      name: "Roman Frolov",
+      url: SITE_URL,
+      jobTitle: "Frontend Developer",
+      hasOccupation: {
+        "@type": "Occupation",
+        name: "Frontend Developer",
+        occupationLocation: {
+          "@type": "City",
+          name: "Berlin",
+        },
+        skills: "React, TypeScript, Next.js, Tailwind CSS, Node.js",
+      },
+    },
+    url: `${SITE_URL}/${locale}/experience`,
+    inLanguage: locale === "de" ? "de-DE" : "en-US",
+  };
+}
+
 export function generateProjectJsonLd(project: TProjectDetailMeta, locale: string) {
   return {
     "@context": "https://schema.org",

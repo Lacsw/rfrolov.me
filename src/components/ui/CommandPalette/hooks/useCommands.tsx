@@ -2,6 +2,7 @@ import { useMemo } from "react";
 
 import {
   BookOpen,
+  Briefcase,
   FileText,
   FolderKanban,
   Home,
@@ -40,6 +41,16 @@ export function useCommands(blogPosts: TBlogPostMeta[]) {
         icon: <Home className={ICON_SIZE.sm} />,
         action: () => {
           router.push("/");
+          close();
+        },
+        group: "navigation",
+      },
+      {
+        id: "experience",
+        label: t("nav.experience"),
+        icon: <Briefcase className={ICON_SIZE.sm} />,
+        action: () => {
+          router.push("/experience");
           close();
         },
         group: "navigation",
