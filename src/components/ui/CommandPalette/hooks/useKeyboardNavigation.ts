@@ -8,6 +8,7 @@ type TUseKeyboardNavigationProps = {
   commands: TCommand[];
   listRef: RefObject<HTMLUListElement | null>;
   query: string;
+  close: () => void;
 };
 
 export function useKeyboardNavigation({
@@ -16,6 +17,7 @@ export function useKeyboardNavigation({
   commands,
   listRef,
   query,
+  close,
 }: TUseKeyboardNavigationProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -41,9 +43,10 @@ export function useKeyboardNavigation({
 
       if (command) {
         command.action();
+        close();
       }
     },
-    [flatCommands]
+    [flatCommands, close]
   );
 
   useEffect(() => {

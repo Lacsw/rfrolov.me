@@ -31,6 +31,7 @@ export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
     commands,
     listRef,
     query,
+    close,
   });
 
   useEffect(() => {
