@@ -2,9 +2,9 @@ export const HOVER_OPACITY = "hover:opacity-70 transition-opacity cursor-pointer
 
 export const HOVER_TEXT_COLOR = "text-muted-foreground hover:text-foreground";
 
-export const CARD_BASE = "rounded-lg border bg-background p-6 transition-all duration-300";
+export const CARD_BASE = "rounded-lg border bg-background p-6 shadow-xs transition-all duration-300";
 
-export const CARD_HOVER = "hover:shadow-sm hover:scale-[1.01]";
+export const CARD_HOVER = "hover:shadow-md hover:scale-[1.01]";
 
 export const CARD_BORDER = {
   featured: "border-muted-foreground/40 hover:border-muted-foreground/60",
