@@ -94,7 +94,7 @@ export function MobileMenu({ isOpen, onClose }: TMobileMenuProps) {
                       aria-current={isActive ? "page" : undefined}
                       className={cn(
                         "block px-6 py-3 text-base transition-colors duration-300",
-                        isActive ? "text-foreground" : HOVER_TEXT_COLOR
+                        isActive ? "text-accent-foreground" : HOVER_TEXT_COLOR
                       )}
                     >
                       {t(link.key)}

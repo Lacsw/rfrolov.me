@@ -29,7 +29,7 @@ export function SectionHeader({ title, description, link, as: Tag = "h2" }: TSec
       {link && (
         <Link
           href={link.href}
-          className={cn("text-muted-foreground", TEXT_SIZE.body, HOVER_OPACITY)}
+          className={cn("text-accent-foreground hover:text-accent", TEXT_SIZE.body, HOVER_OPACITY)}
         >
           {link.label}
         </Link>

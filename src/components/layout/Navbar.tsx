@@ -66,7 +66,7 @@ export function Navbar() {
                         aria-current={isActive ? "page" : undefined}
                         className={cn(
                           "text-sm transition-colors duration-300",
-                          isActive ? "text-foreground" : HOVER_TEXT_COLOR
+                          isActive ? "text-accent-foreground" : HOVER_TEXT_COLOR
                         )}
                       >
                         {t(link.key)}
