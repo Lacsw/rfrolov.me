@@ -28,5 +28,5 @@ export function useCommandFilter(commands: TCommand[], query: string) {
     [groupedCommands]
   );
 
-  return { filteredCommands, groupedCommands, flatCommands };
+  return { groupedCommands, flatCommands };
 }
