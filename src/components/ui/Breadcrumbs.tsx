@@ -16,12 +16,12 @@ type TProps = {
 export function Breadcrumbs({ items }: TProps) {
   return (
     <nav aria-label="Breadcrumb" className="mb-8">
-      <ol className="flex items-center gap-1 text-sm text-muted-foreground">
+      <ol className="flex items-center gap-1 text-sm text-muted-foreground overflow-hidden">
         {items.map((item, index) => {
           const isLast = index === items.length - 1;
 
           return (
-            <li key={index} className="flex items-center gap-1">
+            <li key={index} className={cn("flex items-center gap-1", isLast && "min-w-0")}>
               {index > 0 && (
                 <ChevronRight className={cn(ICON_SIZE.sm, "flex-shrink-0")} aria-hidden="true" />
               )}
