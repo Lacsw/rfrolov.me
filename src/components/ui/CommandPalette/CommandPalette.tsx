@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslations } from "next-intl";
@@ -23,7 +23,7 @@ export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
 
-  const shortcutCommands = useMemo(() => commands.filter((cmd) => cmd.shortcut), [commands]);
+  const shortcutCommands = commands.filter((cmd) => cmd.shortcut);
   const { groupedCommands, flatCommands } = useCommandFilter(commands, query);
   const { selectedIndex, setSelectedIndex, executeCommand } = useKeyboardNavigation({
     isOpen,
@@ -80,33 +80,18 @@ export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
                     {t("commandPalette.noResults")}
                   </li>
                 ) : (
-                  <>
+                  (["navigation", "actions", "blog"] as const).map((group, i) => (
                     <CommandGroup
-                      label={t("commandPalette.navigation")}
-                      commands={groupedCommands.navigation}
+                      key={group}
+                      label={t(`commandPalette.${group}`)}
+                      commands={groupedCommands[group]}
                       flatCommands={flatCommands}
                       selectedIndex={selectedIndex}
                       onSelect={executeCommand}
                       onHover={setSelectedIndex}
-                      isFirst
+                      isFirst={i === 0}
                     />
-                    <CommandGroup
-                      label={t("commandPalette.actions")}
-                      commands={groupedCommands.actions}
-                      flatCommands={flatCommands}
-                      selectedIndex={selectedIndex}
-                      onSelect={executeCommand}
-                      onHover={setSelectedIndex}
-                    />
-                    <CommandGroup
-                      label={t("commandPalette.blog")}
-                      commands={groupedCommands.blog}
-                      flatCommands={flatCommands}
-                      selectedIndex={selectedIndex}
-                      onSelect={executeCommand}
-                      onHover={setSelectedIndex}
-                    />
-                  </>
+                  ))
                 )}
               </ul>
 
