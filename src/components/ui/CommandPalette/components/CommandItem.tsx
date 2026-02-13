@@ -1,7 +1,14 @@
 import { TRANSITION } from "@/constants";
 import { cn } from "@/lib/utils";
 
-import { TCommandItemProps } from "../types";
+import { TCommand } from "../types";
+
+type TCommandItemProps = {
+  command: TCommand;
+  isSelected: boolean;
+  onSelect: () => void;
+  onHover: () => void;
+};
 
 export function CommandItem({ command, isSelected, onSelect, onHover }: TCommandItemProps) {
   const { icon, label } = command;

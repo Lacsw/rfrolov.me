@@ -13,10 +13,3 @@ export type TCommand = {
 export type TCommandPaletteProps = {
   blogPosts?: TBlogPostMeta[];
 };
-
-export type TCommandItemProps = {
-  command: TCommand;
-  isSelected: boolean;
-  onSelect: () => void;
-  onHover: () => void;
-};
