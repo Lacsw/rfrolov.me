@@ -7,8 +7,8 @@ export const CARD_BASE = "rounded-lg border bg-background p-6 transition-all dur
 export const CARD_HOVER = "hover:shadow-sm hover:scale-[1.01]";
 
 export const CARD_BORDER = {
-  featured: "border-muted-foreground/30 hover:border-muted-foreground/50",
-  default: "border-muted hover:border-muted-foreground/20",
+  featured: "border-muted-foreground/40 hover:border-muted-foreground/60",
+  default: "border-muted hover:border-muted-foreground/30",
 } as const;
 
 export const ICON_SIZE = {
