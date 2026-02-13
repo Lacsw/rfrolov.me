@@ -88,11 +88,6 @@
   "experiencePage": {
     "title": "Erfahrung",
     "description": "Mein beruflicher Werdegang und technische Expertise",
-    "stats": {
-      "yearsExperience": "Jahre Erfahrung",
-      "usersImpacted": "Erreichte Nutzer",
-      "companies": "Unternehmen"
-    },
     "skills": {
       "title": "Fähigkeiten",
       "frontend": "Frontend",

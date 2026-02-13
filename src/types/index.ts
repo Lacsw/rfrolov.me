@@ -82,12 +82,6 @@ export type TEducation = {
   isCurrent?: boolean;
 };
 
-export type TKeyStat = {
-  id: string;
-  value: string;
-  labelKey: string;
-};
-
 export type TSkillCategory = {
   key: string;
   skills: TSkill[];

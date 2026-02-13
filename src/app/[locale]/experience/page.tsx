@@ -6,7 +6,6 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Education } from "@/components/sections/Education";
 import { Experience } from "@/components/sections/Experience";
-import { KeyStats } from "@/components/sections/KeyStats";
 import { SkillsGrouped } from "@/components/sections/SkillsGrouped";
 import { JsonLd } from "@/components/seo";
 import { Container, SectionHeader } from "@/components/ui";
@@ -58,16 +57,16 @@ export default async function ExperiencePage({ params }: TProps) {
     <main className="pt-16">
       <JsonLd data={generateExperiencePageSchema(locale)} />
 
-      <section className={SPACING.section}>
+      <section className="pt-12 lg:pt-16">
         <Container>
           <SectionHeader title={t("title")} description={t("description")} as="h1" />
         </Container>
       </section>
 
-      <KeyStats />
       <SkillsGrouped />
       <Experience experiences={experiences} />
       <Education education={education} />
+      <div className="pb-12 lg:pb-16" />
     </main>
   );
 }

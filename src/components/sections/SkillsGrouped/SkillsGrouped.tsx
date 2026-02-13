@@ -12,7 +12,7 @@ export function SkillsGrouped() {
   const t = useTranslations("experiencePage");
 
   return (
-    <section className={SPACING.section}>
+    <section className="py-8 lg:py-10">
       <Container>
         <AnimatedSection className="space-y-8">
           <SectionHeader title={t("skills.title")} />

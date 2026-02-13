@@ -88,11 +88,6 @@
   "experiencePage": {
     "title": "Experience",
     "description": "My professional journey and technical expertise",
-    "stats": {
-      "yearsExperience": "Years of Experience",
-      "usersImpacted": "Users Impacted",
-      "companies": "Companies"
-    },
     "skills": {
       "title": "Skills",
       "frontend": "Frontend",

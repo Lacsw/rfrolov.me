@@ -18,7 +18,7 @@ export function Education({ education }: TProps) {
   const t = useTranslations("experiencePage");
 
   return (
-    <section className={SPACING.section}>
+    <section className="py-8 lg:py-10">
       <Container>
         <AnimatedSection className="space-y-6">
           <SectionHeader title={t("education.title")} />

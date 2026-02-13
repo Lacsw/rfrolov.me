@@ -18,7 +18,7 @@ export function Experience({ experiences }: TProps) {
   const t = useTranslations("experience");
 
   return (
-    <section className={SPACING.section}>
+    <section className="py-8 lg:py-10">
       <Container>
         <AnimatedSection className="space-y-6">
           <SectionHeader title={t("title")} />
