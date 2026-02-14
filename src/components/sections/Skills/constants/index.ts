@@ -4,7 +4,7 @@ import { TSkill } from "@/types";
 export const SKILLS: TSkill[] = [
   { name: "React", icon: "react", color: "#61DAFB" },
   { name: "TypeScript", icon: "typescript", color: "#3178C6" },
-  { name: "Next.js", icon: "nextdotjs", color: "#ffffff" },
+  { name: "Next.js", icon: "nextdotjs", color: "hsl(var(--foreground))" },
   { name: "Tailwind CSS", icon: "tailwindcss", color: "#06B6D4" },
   { name: "Node.js", icon: "nodedotjs", color: "#339933" },
   { name: "GraphQL", icon: "graphql", color: "#E10098" },
@@ -12,11 +12,11 @@ export const SKILLS: TSkill[] = [
   { name: "Figma", icon: "figma", color: "#F24E1E" },
   { name: "Git", icon: "git", color: "#F05032" },
   { name: "Docker", icon: "docker", color: "#2496ED" },
-  { name: "GitHub", icon: "github", color: "#ffffff" },
+  { name: "GitHub", icon: "github", color: "hsl(var(--foreground))" },
   { name: "Jest", icon: "jest", color: "#C21325" },
   { name: "Vite", icon: "vite", color: "#646CFF" },
   { name: "Redux", icon: "redux", color: "#764ABC" },
-  { name: "Bun", icon: "bun", color: "#FBF0DF" },
+  { name: "Bun", icon: "bun", color: "hsl(var(--foreground))" },
 ];
 
 export const SKILLS_ANIMATION = createStaggerAnimation({
