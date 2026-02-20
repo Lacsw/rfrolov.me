@@ -1,4 +1,4 @@
-export { Callout, CollapsibleCode, HeadingLink, mdxComponents } from "./mdx";
+export { Callout, Collapsible, CollapsibleCode, HeadingLink, mdxComponents } from "./mdx";
 export {
   MobileTOC,
   PostNavigation,

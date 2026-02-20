@@ -1,5 +1,6 @@
 export { Callout } from "./Callout";
 export { CodeBlock } from "./CodeBlock";
+export { Collapsible } from "./Collapsible";
 export { CollapsibleCode } from "./CollapsibleCode";
 export { CopyButton } from "./CopyButton";
 export { HeadingLink } from "./HeadingLink";

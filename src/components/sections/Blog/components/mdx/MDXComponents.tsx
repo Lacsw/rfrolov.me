@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 
 import { Callout } from "./Callout";
 import { CodeBlock } from "./CodeBlock";
+import { Collapsible } from "./Collapsible";
 import { CollapsibleCode } from "./CollapsibleCode";
 import { HeadingLink } from "./HeadingLink";
 
@@ -114,5 +115,6 @@ export const mdxComponents = {
     />
   ),
   Callout,
+  Collapsible,
   CollapsibleCode,
 };
