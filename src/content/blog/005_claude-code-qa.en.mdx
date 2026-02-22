@@ -1,13 +1,13 @@
 ---
 title: "Using MCP to Compare Figma Designs Against Your Frontend"
-description: "Using MCP tools — Figma, Playwright, and Chrome extension — to test frontend implementation against Figma designs directly in the browser."
-date: "2026-02-20"
+description: "Set up Figma, Playwright, and Chrome extension MCP servers in Claude Code to automatically compare your live frontend against Figma designs."
+date: "2026-02-22"
 tags: ["claude-code", "ai", "testing", "qa", "mcp", "figma"]
 featured: true
 draft: true
 ---
 
-Claude Code can read your Figma designs and control a browser. Combine both via MCP, and you get a QA assistant that compares your live implementation against the design — pixel by pixel, component by component.
+Claude Code can read your Figma designs and control a browser. Combine both via MCP, and you get a QA assistant that compares your live implementation against the design — spacing, colors, typography, layout, component by component.
 
 ## What You Need
 
@@ -98,27 +98,22 @@ If you prefer working with your actual Chrome browser — with your logged-in se
 - You're debugging layout issues interactively
 - You need access to Chrome DevTools, console logs, or network requests
 
-## The Workflow
+## Running a Comparison
 
-This is where it all comes together. The core loop is:
-
-1. Give Claude the Figma design reference and your running app URL
-2. Ask it to compare and give you feedback
-3. Have it create tasks to fix the issues it finds
-
-Here's an example prompt:
+The core loop is simple: give Claude a Figma link and your app URL, and ask it to compare.
 
 ```
-Here's the Figma design for the dashboard page:
-https://www.figma.com/design/ABC123/MyApp?node-id=42-1337
+Compare this Figma component against the live implementation:
 
-The implementation is running at http://localhost:3000/dashboard
+Figma: https://www.figma.com/design/ABC123/MyApp?node-id=85-2048
+Live: http://localhost:3000/pricing
 
-Compare them, give me feedback on any differences,
-and create tasks to fix each issue you find.
+Also check responsive behavior at 768px and 1024px.
+
+Give me feedback and create tasks for anything that doesn't match.
 ```
 
-That's it. You don't need to tell Claude what to check — it reads the Figma frame (spacing, colors, typography, layout, component structure) and figures out what to compare on its own. That's the whole point of using an AI for this instead of writing a manual checklist.
+You don't need to tell Claude what to check — it reads the Figma frame (spacing, colors, typography, layout, component structure) and figures out what to compare on its own. That's the whole point of using an AI for this instead of writing a manual checklist.
 
 Claude will:
 
@@ -132,22 +127,7 @@ Claude will:
   ![Side-by-side comparison](/images/blog/qa/side-by-side.png)
 </Collapsible>
 
-## Example: Review and Fix Cycle
-
-Let's say you want to check a pricing card component. The prompt is simple:
-
-```
-Compare this Figma component against the live implementation:
-
-Figma: https://www.figma.com/design/ABC123/MyApp?node-id=85-2048
-Live: http://localhost:3000/pricing
-
-Also check responsive behavior at 768px and 1024px.
-
-Give me feedback and create tasks for anything that doesn't match.
-```
-
-Claude reads the Figma design, extracts all the properties, inspects the live page, and compares everything automatically. You get back feedback like:
+You get back feedback like:
 
 ```
 Pricing Card — found 3 issues out of 9 checks:
