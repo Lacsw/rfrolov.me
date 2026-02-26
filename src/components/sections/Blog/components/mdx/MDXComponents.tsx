@@ -48,18 +48,21 @@ export const mdxComponents = {
   },
   ul: ({ className, ...props }: TListProps) => (
     <ul
-      className={cn("list-disc list-inside mb-4 text-muted-foreground space-y-1", className)}
+      className={cn("list-disc list-outside pl-5 mb-4 text-muted-foreground space-y-1", className)}
       {...props}
     />
   ),
   ol: ({ className, ...props }: TListProps) => (
     <ol
-      className={cn("list-decimal list-inside mb-4 text-muted-foreground space-y-1", className)}
+      className={cn(
+        "list-decimal list-outside pl-5 mb-4 text-muted-foreground space-y-1",
+        className
+      )}
       {...props}
     />
   ),
   li: ({ className, ...props }: TListItemProps) => (
-    <li className={cn("leading-relaxed [&>ul]:ml-5 [&>ul]:mt-1 [&>ol]:ml-5 [&>ol]:mt-1", className)} {...props} />
+    <li className={cn("leading-relaxed [&>ul]:mt-1 [&>ol]:mt-1", className)} {...props} />
   ),
   blockquote: ({ className, ...props }: TBlockquoteProps) => (
     <blockquote
@@ -103,10 +106,7 @@ export const mdxComponents = {
     <thead className={cn("border-b border-muted-foreground/30", className)} {...props} />
   ),
   th: ({ className, ...props }: ComponentPropsWithoutRef<"th">) => (
-    <th
-      className={cn("text-left font-semibold text-foreground px-3 py-2", className)}
-      {...props}
-    />
+    <th className={cn("text-left font-semibold text-foreground px-3 py-2", className)} {...props} />
   ),
   td: ({ className, ...props }: ComponentPropsWithoutRef<"td">) => (
     <td
