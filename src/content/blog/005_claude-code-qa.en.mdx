@@ -12,7 +12,7 @@ Claude Code can read your Figma designs and control a browser. Combine both via 
 ## What You Need
 
 - Claude Code CLI installed and working
-- A Figma account with a [personal access token](https://www.figma.com/developers/api#access-tokens)
+- A Figma account (any plan works with the remote MCP server)
 - A running frontend app (local dev server is fine)
 - One of these browser control tools:
   - **Playwright MCP** — headless browser automation
@@ -24,61 +24,32 @@ Claude Code can read your Figma designs and control a browser. Combine both via 
 
 ## Setting Up Figma MCP
 
-Install the Figma MCP server so Claude Code can read your design files.
+Add the [Figma MCP server](https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Figma-MCP-server) so Claude Code can read your design files.
 
-**1.** Generate a personal access token in Figma: **Settings → Security → Personal access tokens**.
+**1.** Add the remote server:
 
-**2.** Add the Figma MCP server to your Claude Code config (`~/.claude/settings.json`):
-
-```json
-{
-  "mcpServers": {
-    "figma": {
-      "command": "npx",
-      "args": ["-y", "@anthropic-ai/figma-mcp@latest"],
-      "env": {
-        "FIGMA_ACCESS_TOKEN": "your-figma-token-here"
-      }
-    }
-  }
-}
+```bash
+claude mcp add --scope user --transport http figma https://mcp.figma.com/mcp
 ```
 
-**3.** Restart Claude Code and verify the connection:
+**2.** Run `/mcp` in Claude Code and authenticate with your Figma account when prompted.
 
-```
-/mcp
-```
-
-You should see `figma` listed with its available tools — typically `get_figma_data` and `download_figma_images`.
+You should see `figma` listed with tools like `get_design_context`, `get_metadata`, and `get_screenshot`.
 
 ## Option A: Playwright MCP
 
-Playwright MCP gives Claude Code a headless (or headed) browser it can control programmatically — navigate, click, screenshot, inspect elements.
+[Playwright MCP](https://github.com/microsoft/playwright-mcp) gives Claude Code a headless (or headed) browser it can control programmatically. It navigates pages, clicks elements, takes screenshots, and reads page structure through accessibility snapshots. Runs its own browser instance, so it works in CI and doesn't require Chrome.
 
-**1.** Add Playwright MCP to your config:
+**1.** Add Playwright MCP:
 
-```json
-{
-  "mcpServers": {
-    "playwright": {
-      "command": "npx",
-      "args": ["-y", "@anthropic-ai/playwright-mcp@latest"]
-    }
-  }
-}
+```bash
+claude mcp add --transport stdio playwright -- npx @playwright/mcp@latest
 ```
 
-**2.** Restart Claude Code and verify:
-
-```
-/mcp
-```
-
-You should see `playwright` listed with tools like `browser_navigate`, `browser_screenshot`, `browser_click`, etc.
+**2.** Run `/mcp` and look for `playwright` with tools like `browser_navigate`, `browser_screenshot`, `browser_click`, etc.
 
 <Callout variant="tip">
-  Add `"--headed"` to the args array to watch the browser in real time. Useful for debugging, but slower. Default headless mode is better for automated checks.
+  Add `--headed` at the end of the command to watch the browser in real time. Useful for debugging, but slower. Default headless mode is better for automated checks.
 </Callout>
 
 ## Option B: Chrome Extension MCP (beta)
@@ -104,7 +75,7 @@ claude --chrome
 
 ## Running a Comparison
 
-The core loop is simple: give Claude a Figma link and your app URL, and ask it to compare.
+Give Claude a Figma link and your app URL, and ask it to compare.
 
 ```
 Compare this Figma component against the live implementation:
@@ -117,15 +88,15 @@ Also check responsive behavior at 768px and 1024px.
 Give me feedback and create tasks for anything that doesn't match.
 ```
 
-You don't need to tell Claude what to check — it reads the Figma frame (spacing, colors, typography, layout, component structure) and figures out what to compare on its own. That's the whole point of using an AI for this instead of writing a manual checklist.
+You don't need to tell Claude what to check — it reads the Figma frame and figures out what to compare on its own.
 
 Claude will:
 
-1. Fetch the Figma frame data and extract every design property
+1. Fetch the Figma frame data and extract design properties
 2. Navigate to your app in the browser
-3. Take screenshots and inspect the DOM
+3. Take snapshots and read the page structure
 4. Compare the two and report differences
-5. Create actionable tasks for each issue it found
+5. Create tasks for each mismatch
 
 <Collapsible title="Screenshot: Side-by-side comparison" defaultOpen>
   ![Side-by-side comparison](/images/blog/qa/side-by-side.png)
@@ -151,22 +122,22 @@ styles, colors, and 768px responsive layout all look correct.
 I've created 3 tasks to fix these issues.
 ```
 
-Claude creates the tasks as part of the same session, so you can immediately start fixing them — or hand them off to another Claude Code session. No context is lost between the review and the fix.
+Claude creates the tasks in the same session, so you can start fixing them right away — or hand them off to another Claude Code session.
 
 <Callout variant="tip">
-  This works even better with [agent teams](https://code.claude.com/docs/en/agent-teams). Have one agent do the QA review and create tasks, then spawn teammates to fix each issue in parallel.
+  This works even better with [agent teams](https://chemaclass.com/blog/build-your-own-team-of-agents/). Have one agent do the QA review and create tasks, then spawn teammates to fix each issue in parallel.
 </Callout>
 
 ## Tips for Better Results
 
-- **Reference specific Figma frames** — don't link the whole file. Use the `node-id` parameter to point at exactly the component or section you want checked. The more focused the reference, the better Claude's comparison.
-- **One component at a time** — smaller scope means more accurate comparisons. A full-page comparison will miss details that a per-component check catches.
+- **Reference specific Figma frames** — don't link the whole file. Use a [link to a specific section](https://help.figma.com/hc/en-us/articles/360045942953-Use-links-to-frames-and-pages) to point at the component you want checked.
+- **One component at a time** — a full-page comparison will miss details that a per-component check catches.
 - **Mention breakpoints explicitly** — responsive behavior isn't always visible from a single Figma frame. If you need viewport checks, specify the breakpoints (e.g., 1440px, 768px, 375px).
-- **Let Claude decide what to check** — don't list properties manually. Claude extracts everything from the Figma design automatically. Only add explicit instructions for things Figma can't express (interaction states, responsive behavior, dynamic content).
-- **Add project context via CLAUDE.md** — if your project uses a specific design system, spacing scale, or color tokens, document them in your `CLAUDE.md`. Claude will reference them in every QA session without you having to repeat it.
+- **Let Claude decide what to check** — don't list properties manually. Claude extracts what it needs from the Figma design. Only add instructions for things Figma can't express (interaction states, responsive behavior, dynamic content).
+- **Add project context via CLAUDE.md** — if your project uses a design system, spacing scale, or color tokens, document them in your `CLAUDE.md`. Claude will use them in every QA session.
 
 <Callout variant="tip">
-  Put a reusable QA prompt in your `CLAUDE.md` or a project-level prompt file. Something like: "When I ask you to QA a component, read the Figma frame, open the URL, compare everything, and create tasks for any issues." Then every QA session is just a Figma link and a URL.
+  Create a [skill](https://code.claude.com/docs/en/skills) for this. Add a markdown file to `.claude/skills/` with instructions like: "Read the Figma frame, open the URL, compare everything, and create tasks for any issues." Then invoke it with `/qa` — every session is just a Figma link and a URL.
 </Callout>
 
 ## Limitations
@@ -177,5 +148,10 @@ Claude creates the tasks as part of the same session, so you can immediately sta
 - **Performance** — each comparison involves multiple MCP calls (Figma fetch, navigation, screenshots, DOM inspection). Expect each check to take 30-60 seconds.
 
 <Callout variant="warning">
-  This approach complements — but does not replace — visual regression testing tools like Percy, Chromatic, or Playwright's built-in screenshot comparison. Use those for automated CI pipelines. Use Claude Code QA for exploratory checks, design reviews, and catching issues before they reach CI.
+  This doesn't replace visual regression tools like Percy, Chromatic, or Playwright's screenshot comparison — use those in CI. Claude Code QA is for exploratory checks, design reviews, and catching issues before they reach the pipeline.
 </Callout>
+
+## Further Reading
+
+- [Introducing the Model Context Protocol](https://www.anthropic.com/news/model-context-protocol) — Anthropic's announcement of MCP and the problem it solves.
+- [MCP: Giving Your AI Agent the Right Context](https://chemaclass.com/blog/mcp-giving-your-ai-agent-the-right-context/) — a deep dive into how MCP works and why it matters for AI-powered workflows.
