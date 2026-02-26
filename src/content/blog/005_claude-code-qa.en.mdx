@@ -4,7 +4,7 @@ description: "Set up Figma, Playwright, and Chrome extension MCP servers in Clau
 date: "2026-02-22"
 tags: ["claude-code", "ai", "testing", "qa", "mcp", "figma"]
 featured: true
-draft: true
+draft: false
 ---
 
 Claude Code can read your Figma designs and control a browser. Combine both via MCP, and you get a QA assistant that compares your live implementation against the design — spacing, colors, typography, layout, component by component.
@@ -19,7 +19,9 @@ Claude Code can read your Figma designs and control a browser. Combine both via 
   - **Chrome Extension MCP** (beta) — controls your actual Chrome browser
 
 <Callout variant="note">
-  You only need one browser control method. Playwright is better for CI and headless testing. The Chrome extension is better for interactive debugging and inspecting pages you're already looking at.
+  You only need one browser control method. Playwright is better for CI and headless testing. The
+  Chrome extension is better for interactive debugging and inspecting pages you're already looking
+  at.
 </Callout>
 
 ## Setting Up Figma MCP
@@ -49,7 +51,8 @@ claude mcp add --transport stdio playwright -- npx @playwright/mcp@latest
 **2.** Run `/mcp` and look for `playwright` with tools like `browser_navigate`, `browser_screenshot`, `browser_click`, etc.
 
 <Callout variant="tip">
-  Add `--headed` at the end of the command to watch the browser in real time. Useful for debugging, but slower. Default headless mode is better for automated checks.
+  Add `--headed` at the end of the command to watch the browser in real time. Useful for debugging,
+  but slower. Default headless mode is better for automated checks.
 </Callout>
 
 ## Option B: Chrome Extension MCP (beta)
@@ -125,7 +128,9 @@ I've created 3 tasks to fix these issues.
 Claude creates the tasks in the same session, so you can start fixing them right away — or hand them off to another Claude Code session.
 
 <Callout variant="tip">
-  This works even better with [agent teams](https://chemaclass.com/blog/build-your-own-team-of-agents/). Have one agent do the QA review and create tasks, then spawn teammates to fix each issue in parallel.
+  This works even better with [agent
+  teams](https://chemaclass.com/blog/build-your-own-team-of-agents/). Have one agent do the QA
+  review and create tasks, then spawn teammates to fix each issue in parallel.
 </Callout>
 
 ## Tips for Better Results
@@ -137,7 +142,10 @@ Claude creates the tasks in the same session, so you can start fixing them right
 - **Add project context via CLAUDE.md** — if your project uses a design system, spacing scale, or color tokens, document them in your `CLAUDE.md`. Claude will use them in every QA session.
 
 <Callout variant="tip">
-  Create a [skill](https://code.claude.com/docs/en/skills) for this. Add a markdown file to `.claude/skills/` with instructions like: "Read the Figma frame, open the URL, compare everything, and create tasks for any issues." Then invoke it with `/qa` — every session is just a Figma link and a URL.
+  Create a [skill](https://code.claude.com/docs/en/skills) for this. Add a markdown file to
+  `.claude/skills/` with instructions like: "Read the Figma frame, open the URL, compare everything,
+  and create tasks for any issues." Then invoke it with `/qa` — every session is just a Figma link
+  and a URL.
 </Callout>
 
 ## Limitations
@@ -148,7 +156,9 @@ Claude creates the tasks in the same session, so you can start fixing them right
 - **Performance** — each comparison involves multiple MCP calls (Figma fetch, navigation, screenshots, DOM inspection). Expect each check to take 30-60 seconds.
 
 <Callout variant="warning">
-  This doesn't replace visual regression tools like Percy, Chromatic, or Playwright's screenshot comparison — use those in CI. Claude Code QA is for exploratory checks, design reviews, and catching issues before they reach the pipeline.
+  This doesn't replace visual regression tools like Percy, Chromatic, or Playwright's screenshot
+  comparison — use those in CI. Claude Code QA is for exploratory checks, design reviews, and
+  catching issues before they reach the pipeline.
 </Callout>
 
 ## Further Reading
