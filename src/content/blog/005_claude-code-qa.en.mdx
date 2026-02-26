@@ -16,7 +16,7 @@ Claude Code can read your Figma designs and control a browser. Combine both via 
 - A running frontend app (local dev server is fine)
 - One of these browser control tools:
   - **Playwright MCP** — headless browser automation
-  - **Chrome Extension MCP** — controls your actual Chrome browser
+  - **Chrome Extension MCP** (beta) — controls your actual Chrome browser
 
 <Callout variant="note">
   You only need one browser control method. Playwright is better for CI and headless testing. The Chrome extension is better for interactive debugging and inspecting pages you're already looking at.
@@ -81,22 +81,26 @@ You should see `playwright` listed with tools like `browser_navigate`, `browser_
   Add `"--headed"` to the args array to watch the browser in real time. Useful for debugging, but slower. Default headless mode is better for automated checks.
 </Callout>
 
-## Option B: Chrome Extension MCP
+## Option B: Chrome Extension MCP (beta)
 
-If you prefer working with your actual Chrome browser — with your logged-in sessions, extensions, and DevTools — use the Chrome extension MCP instead.
+[Chrome integration](https://code.claude.com/docs/en/chrome) lets Claude Code control your actual Chrome browser — with your logged-in sessions, extensions, and DevTools. Browser actions run in a visible Chrome window in real time. No JSON config needed.
 
-**1.** Install the [Claude in Chrome](https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn) extension from the Chrome Web Store.
+**1.** Install the [Claude in Chrome](https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn) extension from the Chrome Web Store (works with Chrome and Edge).
 
-**2.** Open the extension and verify the connection status shows "Connected".
+**2.** Start Claude Code with the `--chrome` flag, or run `/chrome` inside an existing session:
 
-**3.** Claude Code automatically detects the extension — no manual config needed.
+```bash
+claude --chrome
+```
+
+**3.** Run `/chrome` to check the connection status. You can also enable Chrome by default so you don't need the flag every time.
 
 **When to prefer the Chrome extension over Playwright:**
 
 - You need to test authenticated pages (already logged in via Chrome)
 - You want to inspect the same page you're looking at
 - You're debugging layout issues interactively
-- You need access to Chrome DevTools, console logs, or network requests
+- You need access to console logs, network requests, or DOM state
 
 ## Running a Comparison
 
