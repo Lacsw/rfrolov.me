@@ -59,7 +59,7 @@ export const mdxComponents = {
     />
   ),
   li: ({ className, ...props }: TListItemProps) => (
-    <li className={cn("leading-relaxed", className)} {...props} />
+    <li className={cn("leading-relaxed [&>ul]:ml-5 [&>ul]:mt-1 [&>ol]:ml-5 [&>ol]:mt-1", className)} {...props} />
   ),
   blockquote: ({ className, ...props }: TBlockquoteProps) => (
     <blockquote
