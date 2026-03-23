@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 
 import { motion } from "framer-motion";
 import { Clock } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 import {
   BlogTag,
@@ -38,7 +38,8 @@ export function BlogPostLayout({
   children,
 }: TBlogPostLayoutProps) {
   const t = useTranslations("nav");
-  const formattedDate = formatDate(post.date, { month: "long" });
+  const locale = useLocale();
+  const formattedDate = formatDate(post.date, { month: "long", locale });
 
   const breadcrumbs: TBreadcrumb[] = [
     { label: t("home"), href: "/" },
