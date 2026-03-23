@@ -3,9 +3,9 @@ import { ANIMATION_DURATION } from "@/constants";
 export const HERO_CONTENT = {
   greeting: "Hi, my name is",
   name: "Roman Frolov",
-  role: "Frontend Developer",
+  role: "Software Engineer",
   description:
-    "I build exceptional digital experiences with modern web technologies. Focused on creating clean, performant, and accessible interfaces.",
+    "Engineer based in Berlin. I build clean, performant web applications with a focus on UX that actually works.",
 } as const;
 
 export const ANIMATION_CONFIG = {
