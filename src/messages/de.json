@@ -99,6 +99,22 @@
     },
     "education": {
       "title": "Ausbildung"
+    },
+    "about": {
+      "title": "Über mich"
+    },
+    "openSource": {
+      "title": "Open Source",
+      "repo": "Repository",
+      "live": "Live"
+    },
+    "languages": {
+      "title": "Sprachen"
+    },
+    "contact": {
+      "downloadCV": "Lebenslauf herunterladen",
+      "github": "GitHub",
+      "linkedin": "LinkedIn"
     }
   },
   "contact": {

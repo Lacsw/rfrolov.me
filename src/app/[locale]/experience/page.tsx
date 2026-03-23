@@ -6,10 +6,11 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Education } from "@/components/sections/Education";
 import { Experience } from "@/components/sections/Experience";
+import { CVAbout, CVHeader, CVLanguages, CVOpenSource } from "@/components/sections/Experience/components";
 import { SkillsGrouped } from "@/components/sections/SkillsGrouped";
 import { JsonLd } from "@/components/seo";
-import { Container, SectionHeader } from "@/components/ui";
-import { SITE_URL, SPACING } from "@/constants";
+import { Container } from "@/components/ui";
+import { SITE_URL } from "@/constants";
 import { getEducation } from "@/data/education";
 import { getExperiences } from "@/data/experience";
 import { isLocale, locales } from "@/i18n/config";
@@ -49,7 +50,6 @@ export default async function ExperiencePage({ params }: TProps) {
 
   const locale = localeParam;
   setRequestLocale(locale);
-  const t = await getTranslations({ locale, namespace: "experiencePage" });
   const experiences = getExperiences(locale);
   const education = getEducation(locale);
 
@@ -57,16 +57,19 @@ export default async function ExperiencePage({ params }: TProps) {
     <main className="pt-16">
       <JsonLd data={generateExperiencePageSchema(locale)} />
 
-      <section className="pt-12 lg:pt-16">
+      <section className="py-12 lg:py-16">
         <Container>
-          <SectionHeader title={t("title")} description={t("description")} as="h1" />
+          <div className="space-y-8 max-w-3xl mx-auto">
+            <CVHeader />
+            <CVAbout />
+            <SkillsGrouped />
+            <Experience experiences={experiences} />
+            <Education education={education} />
+            <CVOpenSource />
+            <CVLanguages />
+          </div>
         </Container>
       </section>
-
-      <SkillsGrouped />
-      <Experience experiences={experiences} />
-      <Education education={education} />
-      <div className="pb-12 lg:pb-16" />
     </main>
   );
 }
