@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { Moon, Sun } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 
 import { ANIMATION_DURATION, ICON_SIZE } from "@/constants";
@@ -12,6 +13,7 @@ import { IconButton } from "./IconButton";
 export function ThemeToggle() {
   const { setTheme, resolvedTheme } = useTheme();
   const hydrated = useHydrated();
+  const t = useTranslations("theme");
 
   if (!hydrated) {
     return (
@@ -26,7 +28,7 @@ export function ThemeToggle() {
   return (
     <IconButton
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
+      aria-label={isDark ? t("switchToLight") : t("switchToDark")}
     >
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
