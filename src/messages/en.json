@@ -20,8 +20,8 @@
   "hero": {
     "greeting": "Hi, my name is",
     "name": "Roman Frolov",
-    "role": "Frontend Developer",
-    "description": "Frontend developer based in Berlin. I build clean, performant web applications with React and TypeScript — with a focus on UX that actually works."
+    "role": "Software Engineer",
+    "description": "Engineer based in Berlin. I build clean, performant web applications with a focus on UX that actually works."
   },
   "experience": {
     "title": "Experience",
@@ -145,10 +145,10 @@
     "de": "German"
   },
   "metadata": {
-    "title": "Roman Frolov - Frontend Developer",
-    "description": "Roman Frolov — Frontend Developer in Berlin. Building clean, performant web apps with React, TypeScript, and a focus on real UX.",
+    "title": "Roman Frolov - Software Engineer",
+    "description": "Roman Frolov — Software Engineer based in Berlin. Building clean, performant web applications with a focus on real UX.",
     "experienceTitle": "Experience - Roman Frolov",
-    "experienceDescription": "Professional experience, skills, and education of Roman Frolov, a frontend developer specializing in React, TypeScript, and modern web technologies."
+    "experienceDescription": "Professional experience, skills, and background of Roman Frolov, a software engineer based in Berlin."
   },
   "footer": {
     "copyright": "© {year} Roman Frolov"
