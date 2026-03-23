@@ -14,6 +14,7 @@ import {
   ICON_SIZE,
 } from "@/constants";
 import { Link } from "@/i18n/routing";
+import { useLocale } from "next-intl";
 import { formatDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";
@@ -27,7 +28,8 @@ type TBlogPostCardProps = {
 };
 
 export const BlogPostCard = memo(function BlogPostCard({ post, index }: TBlogPostCardProps) {
-  const formattedDate = formatDate(post.date);
+  const locale = useLocale();
+  const formattedDate = formatDate(post.date, { locale });
 
   return (
     <motion.div {...getStaggeredAnimation(index)} className="h-full">

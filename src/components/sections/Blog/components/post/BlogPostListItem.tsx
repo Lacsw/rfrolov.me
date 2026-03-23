@@ -7,6 +7,7 @@ import { ArrowRight } from "lucide-react";
 
 import { ANIMATION_DURATION, ARROW_HOVER, getStaggeredAnimation, ICON_SIZE } from "@/constants";
 import { Link } from "@/i18n/routing";
+import { useLocale } from "next-intl";
 import { formatDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";
@@ -20,7 +21,8 @@ type TBlogPostListItemProps = {
 };
 
 export const BlogPostListItem = memo(function BlogPostListItem({ post, index }: TBlogPostListItemProps) {
-  const formattedDate = formatDate(post.date);
+  const locale = useLocale();
+  const formattedDate = formatDate(post.date, { locale });
 
   return (
     <motion.div
