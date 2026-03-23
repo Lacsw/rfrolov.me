@@ -12,7 +12,7 @@ export function useReadingProgress() {
       }
     };
 
-    window.addEventListener("scroll", updateProgress);
+    window.addEventListener("scroll", updateProgress, { passive: true });
     updateProgress();
 
     return () => window.removeEventListener("scroll", updateProgress);
