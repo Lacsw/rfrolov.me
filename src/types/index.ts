@@ -87,6 +87,20 @@ export type TSkillCategory = {
   skills: TSkill[];
 };
 
+export type TOpenSourceProject = {
+  id: string;
+  name: string;
+  description: string;
+  url: string;
+  repoUrl: string;
+  tech: string;
+};
+
+export type TLanguage = {
+  name: string;
+  level: string;
+};
+
 export type TProjectDetailMeta = TProject & {
   longDescription?: string;
   role?: string;

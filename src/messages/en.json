@@ -99,6 +99,22 @@
     },
     "education": {
       "title": "Education"
+    },
+    "about": {
+      "title": "About"
+    },
+    "openSource": {
+      "title": "Open Source",
+      "repo": "Repository",
+      "live": "Live"
+    },
+    "languages": {
+      "title": "Languages"
+    },
+    "contact": {
+      "downloadCV": "Download CV",
+      "github": "GitHub",
+      "linkedin": "LinkedIn"
     }
   },
   "contact": {
