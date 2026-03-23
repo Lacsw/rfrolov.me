@@ -9,7 +9,6 @@ import { Experience } from "@/components/sections/Experience";
 import { CVAbout, CVHeader, CVLanguages, CVOpenSource } from "@/components/sections/Experience/components";
 import { SkillsGrouped } from "@/components/sections/SkillsGrouped";
 import { JsonLd } from "@/components/seo";
-import { Container } from "@/components/ui";
 import { SITE_URL } from "@/constants";
 import { getEducation } from "@/data/education";
 import { getExperiences } from "@/data/experience";
@@ -56,20 +55,14 @@ export default async function ExperiencePage({ params }: TProps) {
   return (
     <main className="pt-16">
       <JsonLd data={generateExperiencePageSchema(locale)} />
-
-      <section className="py-12 lg:py-16">
-        <Container>
-          <div className="space-y-8 max-w-3xl mx-auto">
-            <CVHeader />
-            <CVAbout />
-            <SkillsGrouped />
-            <Experience experiences={experiences} />
-            <Education education={education} />
-            <CVOpenSource />
-            <CVLanguages />
-          </div>
-        </Container>
-      </section>
+      <CVHeader />
+      <CVAbout />
+      <SkillsGrouped />
+      <Experience experiences={experiences} />
+      <Education education={education} />
+      <CVOpenSource />
+      <CVLanguages />
+      <div className="pb-12 lg:pb-16" />
     </main>
   );
 }

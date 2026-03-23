@@ -1,21 +1,26 @@
 import { useTranslations } from "next-intl";
 
+import { AnimatedSection, Container, SectionHeader } from "@/components/ui";
 import { languages } from "@/data/languages";
 
 export function CVLanguages() {
   const t = useTranslations("experiencePage.languages");
 
   return (
-    <div className="space-y-3">
-      <h2 className="text-sm font-medium tracking-wider uppercase text-muted-foreground">{t("title")}</h2>
-      <div className="space-y-1.5">
-        {languages.map((lang) => (
-          <div key={lang.name} className="flex items-center justify-between text-sm">
-            <span>{lang.name}</span>
-            <span className="text-muted-foreground">{lang.level}</span>
+    <section className="py-8 lg:py-10">
+      <Container>
+        <AnimatedSection className="space-y-6">
+          <SectionHeader title={t("title")} />
+          <div className="space-y-2">
+            {languages.map((lang) => (
+              <div key={lang.name} className="flex items-center justify-between text-sm max-w-xs">
+                <span>{lang.name}</span>
+                <span className="text-muted-foreground">{lang.level}</span>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
+        </AnimatedSection>
+      </Container>
+    </section>
   );
 }
