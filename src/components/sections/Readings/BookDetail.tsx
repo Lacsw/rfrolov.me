@@ -33,7 +33,7 @@ export function BookDetail({ book, children }: TProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: ANIMATION_DURATION.slower }}
-          className="max-w-2xl space-y-8"
+          className="mx-auto max-w-2xl space-y-8"
         >
           <BackLink href="/readings">{t("backToReadings")}</BackLink>
 
