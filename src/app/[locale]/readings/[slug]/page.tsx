@@ -10,8 +10,8 @@ import { mdxComponents } from "@/components/sections/Blog";
 import { BookDetail } from "@/components/sections/Readings";
 import { JsonLd } from "@/components/seo";
 import { SITE_URL } from "@/constants";
-import { generateBookReviewSchema } from "@/lib/jsonld";
 import { isLocale, locales } from "@/i18n/config";
+import { generateBookReviewSchema } from "@/lib/jsonld";
 import { getAllBookSlugs, getBookBySlug, getBookReflection } from "@/lib/readings";
 
 type TProps = {

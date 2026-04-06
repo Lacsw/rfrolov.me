@@ -3,9 +3,9 @@
 import { ReactNode } from "react";
 
 import Image from "next/image";
-import { useTranslations } from "next-intl";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 import { BackLink, Container, Tag } from "@/components/ui";
 import { ANIMATION_DURATION, TEXT_SIZE } from "@/constants";

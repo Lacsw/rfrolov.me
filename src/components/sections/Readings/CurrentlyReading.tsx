@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useTranslations } from "next-intl";
 
 import { ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { CARD_BASE, CARD_BORDER, CARD_HOVER, ICON_SIZE } from "@/constants";
 import { Link } from "@/i18n/routing";

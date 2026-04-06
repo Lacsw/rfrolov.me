@@ -44,5 +44,6 @@ export function getBookReflection(slug: string): string | null {
   }
 
   const { content } = parseMDXFile(filePath);
+
   return content;
 }
