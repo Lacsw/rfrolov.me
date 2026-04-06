@@ -5,7 +5,7 @@ import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
 type TProps = {
-  href: "/blog" | "/projects" | "/";
+  href: "/blog" | "/projects" | "/readings" | "/";
   children: string;
 };
 

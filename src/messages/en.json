@@ -13,6 +13,7 @@
     "projects": "Projects",
     "blog": "Blog",
     "experience": "Experience",
+    "readings": "Readings",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "openCommandPalette": "Open command palette"
@@ -117,6 +118,14 @@
       "linkedin": "LinkedIn"
     }
   },
+  "readings": {
+    "title": "Readings",
+    "description": "Books that shaped my thinking",
+    "currentlyReading": "Currently Reading",
+    "books": "{count} {count, plural, one {book} other {books}}",
+    "backToReadings": "Back to Readings",
+    "myThoughts": "My Thoughts"
+  },
   "contact": {
     "getInTouch": "Get in touch"
   },
@@ -164,7 +173,9 @@
     "title": "Roman Frolov - Software Engineer",
     "description": "Roman Frolov — Software Engineer based in Berlin. Building clean, performant web applications with a focus on real UX.",
     "experienceTitle": "Experience - Roman Frolov",
-    "experienceDescription": "Professional experience, skills, and background of Roman Frolov, a software engineer based in Berlin."
+    "experienceDescription": "Professional experience, skills, and background of Roman Frolov, a software engineer based in Berlin.",
+    "readingsTitle": "Readings - Roman Frolov",
+    "readingsDescription": "Books I've read with personal reflections."
   },
   "footer": {
     "copyright": "© {year} Roman Frolov"

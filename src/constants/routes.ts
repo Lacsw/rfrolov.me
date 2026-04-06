@@ -1,4 +1,4 @@
-export const STATIC_ROUTES = ["", "/experience", "/blog", "/projects"] as const;
+export const STATIC_ROUTES = ["", "/experience", "/blog", "/projects", "/readings"] as const;
 
 export type TStaticRoute = (typeof STATIC_ROUTES)[number];
 
@@ -7,6 +7,7 @@ export const NAV_LINKS = [
   { key: "blog", href: "/blog" },
   { key: "experience", href: "/experience" },
   { key: "projects", href: "/projects" },
+  { key: "readings", href: "/readings" },
 ] as const;
 
 export type TNavLink = (typeof NAV_LINKS)[number];

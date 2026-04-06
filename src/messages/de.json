@@ -13,6 +13,7 @@
     "projects": "Projekte",
     "blog": "Blog",
     "experience": "Erfahrung",
+    "readings": "Readings",
     "openMenu": "Menü öffnen",
     "closeMenu": "Menü schließen",
     "openCommandPalette": "Befehlspalette öffnen"
@@ -117,6 +118,14 @@
       "linkedin": "LinkedIn"
     }
   },
+  "readings": {
+    "title": "Readings",
+    "description": "Books that shaped my thinking",
+    "currentlyReading": "Currently Reading",
+    "books": "{count} {count, plural, one {book} other {books}}",
+    "backToReadings": "Back to Readings",
+    "myThoughts": "My Thoughts"
+  },
   "contact": {
     "getInTouch": "Kontakt aufnehmen"
   },
@@ -164,7 +173,9 @@
     "title": "Roman Frolov - Software Engineer",
     "description": "Roman Frolov — Software Engineer in Berlin. Entwickelt saubere, performante Webanwendungen mit echtem UX-Fokus.",
     "experienceTitle": "Erfahrung - Roman Frolov",
-    "experienceDescription": "Berufserfahrung, Fähigkeiten und Ausbildung von Roman Frolov, einem Frontend-Entwickler spezialisiert auf React, TypeScript und moderne Webtechnologien."
+    "experienceDescription": "Berufserfahrung, Fähigkeiten und Ausbildung von Roman Frolov, einem Frontend-Entwickler spezialisiert auf React, TypeScript und moderne Webtechnologien.",
+    "readingsTitle": "Readings - Roman Frolov",
+    "readingsDescription": "Books I've read with personal reflections."
   },
   "footer": {
     "copyright": "© {year} Roman Frolov"
