@@ -1,5 +1,5 @@
 import { SITE_URL } from "@/constants";
-import { TBlogPostMeta, TProjectDetailMeta } from "@/types";
+import { TBlogPostMeta, TBook, TProjectDetailMeta } from "@/types";
 
 export function generatePersonSchema() {
   return {
@@ -98,5 +98,27 @@ export function generateProjectJsonLd(project: TProjectDetailMeta, locale: strin
     ...(project.github && { codeRepository: project.github }),
     keywords: project.technologies.join(", "),
     inLanguage: locale === "de" ? "de-DE" : "en-US",
+  };
+}
+
+export function generateBookReviewSchema(book: TBook, locale: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    itemReviewed: {
+      "@type": "Book",
+      name: book.title,
+      author: {
+        "@type": "Person",
+        name: book.author,
+      },
+    },
+    author: {
+      "@type": "Person",
+      name: "Roman Frolov",
+      url: SITE_URL,
+    },
+    url: `${SITE_URL}/${locale}/readings/${book.slug}`,
+    inLanguage: "en-US",
   };
 }

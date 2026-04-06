@@ -8,7 +8,9 @@ import remarkGfm from "remark-gfm";
 
 import { mdxComponents } from "@/components/sections/Blog";
 import { BookDetail } from "@/components/sections/Readings";
+import { JsonLd } from "@/components/seo";
 import { SITE_URL } from "@/constants";
+import { generateBookReviewSchema } from "@/lib/jsonld";
 import { isLocale, locales } from "@/i18n/config";
 import { getAllBookSlugs, getBookBySlug, getBookReflection } from "@/lib/readings";
 
@@ -75,6 +77,7 @@ export default async function BookDetailPage({ params }: TProps) {
 
   return (
     <main className="pt-16">
+      <JsonLd data={generateBookReviewSchema(book, locale)} />
       <BookDetail book={book}>
         {reflection ? (
           <MDXRemote
