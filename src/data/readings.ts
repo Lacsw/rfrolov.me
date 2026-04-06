@@ -2,6 +2,18 @@ import { TBook } from "@/types";
 
 export const books: TBook[] = [
   {
+    slug: "the-internet-of-money-two",
+    title: "The Internet of Money Volume Two",
+    author: "Andreas M. Antonopoulos",
+    cover: "/books/the-internet-of-money-two.jpg",
+    description:
+      "A collection of talks exploring the why of Bitcoin and open blockchains, covering their philosophical, social, and historical implications.",
+    dateRead: "2026-04",
+    tags: ["crypto", "technology"],
+    rating: 0,
+    status: "reading",
+  },
+  {
     slug: "atomic-habits",
     title: "Atomic Habits",
     author: "James Clear",
