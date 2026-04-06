@@ -4,6 +4,7 @@ import { SITE_LAST_MODIFIED, SITE_URL, STATIC_ROUTES } from "@/constants";
 import { locales } from "@/i18n/config";
 import { getAllPosts } from "@/lib/blog";
 import { getAllProjectsWithContent } from "@/lib/projects";
+import { getBooks } from "@/lib/readings";
 
 export const dynamic = "force-static";
 
@@ -38,5 +39,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   );
 
-  return [...staticUrls, ...blogUrls, ...projectUrls];
+  const readingUrls = locales.flatMap((locale) =>
+    getBooks()
+      .filter((book) => book.status === "finished")
+      .map((book) => ({
+        url: `${SITE_URL}/${locale}/readings/${book.slug}`,
+        lastModified: SITE_LAST_MODIFIED,
+        changeFrequency: "monthly" as const,
+        priority: 0.5,
+      }))
+  );
+
+  return [...staticUrls, ...blogUrls, ...projectUrls, ...readingUrls];
 }
