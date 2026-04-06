@@ -11,7 +11,8 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,js,json}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,js,json}\"",
     "blog:new": "bun run scripts/blog-new.ts",
-    "blog:check": "bun run scripts/blog-check.ts"
+    "blog:check": "bun run scripts/blog-check.ts",
+    "covers:fetch": "bun run scripts/fetch-covers.ts"
   },
   "repository": {
     "type": "git",

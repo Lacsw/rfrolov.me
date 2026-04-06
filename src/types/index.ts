@@ -117,6 +117,7 @@ export type TBook = {
   slug: string;
   title: string;
   author: string;
+  isbn: string;
   cover: string;
   description: string;
   dateRead: string;
