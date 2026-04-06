@@ -112,3 +112,15 @@ export type TProjectDetailMeta = TProject & {
 export type TProjectDetail = TProjectDetailMeta & {
   content: string;
 };
+
+export type TBook = {
+  slug: string;
+  title: string;
+  author: string;
+  cover: string;
+  description: string;
+  dateRead: string;
+  tags: string[];
+  rating: number;
+  status: "reading" | "finished";
+};
