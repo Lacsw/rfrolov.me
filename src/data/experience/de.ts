@@ -34,6 +34,7 @@ export const experiences: TExperience[] = [
       "Neue Entwickler im Team eingearbeitet und betreut",
     ],
     metrics: ["2M+ Schüler"],
+    transition: "Vollständig remote, Fokus auf Ed-Tech",
   },
   {
     id: "designforall",
@@ -49,6 +50,7 @@ export const experiences: TExperience[] = [
       "Frontend nach Feature-Sliced Design Methodik architekturiert",
       "Build-Konfiguration und CI-Pipeline vollständig verantwortet",
     ],
+    transition: "Erste reine Frontend-Rolle nach dem Wechsel aus der Security",
   },
   {
     id: "ciogd",
@@ -64,6 +66,7 @@ export const experiences: TExperience[] = [
       "Interne Zertifikatsverwaltungsanwendung in Django entwickelt",
       "Arbeitsabläufe für digitale Signaturen organisationsweit optimiert",
     ],
+    transition: "Wechsel von Netzwerktechnik zu Security Engineering",
   },
   {
     id: "er-telecom",

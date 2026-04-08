@@ -37,6 +37,7 @@ export type TExperience = {
   isCurrent?: boolean;
   highlights?: string[];
   metrics?: string[];
+  transition?: string;
 };
 
 export type TBlogPostSeries = {

@@ -34,6 +34,7 @@ export const experiences: TExperience[] = [
       "Onboarded and mentored new engineers joining the team",
     ],
     metrics: ["2M+ students"],
+    transition: "Went fully remote, focused on ed-tech",
   },
   {
     id: "designforall",
@@ -49,6 +50,7 @@ export const experiences: TExperience[] = [
       "Architected frontend using Feature-Sliced Design methodology",
       "Owned build tooling configuration and CI pipeline end to end",
     ],
+    transition: "First pure frontend role after pivoting from security",
   },
   {
     id: "ciogd",
@@ -64,6 +66,7 @@ export const experiences: TExperience[] = [
       "Built internal certificate management app in Django",
       "Streamlined digital signature workflows across the organization",
     ],
+    transition: "Transitioned from networking to security engineering",
   },
   {
     id: "er-telecom",

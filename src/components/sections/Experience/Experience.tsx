@@ -25,11 +25,20 @@ export function Experience({ experiences }: TProps) {
 
           <motion.div variants={EXPERIENCE_ANIMATION.container} initial="hidden" animate="show">
             {experiences.map((exp, index) => (
-              <ExperienceCard
-                key={exp.id}
-                experience={exp}
-                isLast={index === experiences.length - 1}
-              />
+              <div key={exp.id}>
+                {exp.transition && (
+                  <div className="relative pl-6 pb-4">
+                    <div className="absolute left-[3px] top-0 bottom-0 w-px bg-muted" />
+                    <p className="text-xs italic text-muted-foreground/60 pl-2 border-l border-muted-foreground/20">
+                      {exp.transition}
+                    </p>
+                  </div>
+                )}
+                <ExperienceCard
+                  experience={exp}
+                  isLast={index === experiences.length - 1}
+                />
+              </div>
             ))}
           </motion.div>
         </AnimatedSection>
