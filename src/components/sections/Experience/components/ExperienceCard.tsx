@@ -27,6 +27,7 @@ export function ExperienceCard({ experience, isLast }: TExperienceCardProps) {
   return (
     <motion.div
       variants={EXPERIENCE_ANIMATION.item}
+      data-experience-card
       className={cn("relative pl-6", isLast ? "pb-0" : "pb-8")}
     >
       <LiveIndicator isLive={isCurrentPosition} />

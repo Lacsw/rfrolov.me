@@ -9,6 +9,7 @@ import { TExperience } from "@/types";
 
 import { ExperienceCard, ScrollTimeline } from "./components";
 import { EXPERIENCE_ANIMATION } from "./constants";
+import { useKeyboardNavigation } from "./hooks/useKeyboardNavigation";
 
 type TProps = {
   experiences: TExperience[];
@@ -17,6 +18,11 @@ type TProps = {
 
 export function Experience({ experiences, id }: TProps) {
   const t = useTranslations("experience");
+
+  useKeyboardNavigation({
+    itemCount: experiences.length,
+    sectionId: "experience",
+  });
 
   const careerYears = Math.floor(
     (Date.now() - new Date("2018-12-01").getTime()) / (365.25 * 24 * 60 * 60 * 1000)
