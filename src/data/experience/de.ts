@@ -12,6 +12,11 @@ export const experiences: TExperience[] = [
       "Aufbau des Green+ Portals — interaktive Tools für das ESG-Management von Immobilien. Energiebewertungsrechner und Portfolio-Dashboards, die Immobilienbesitzern helfen, Sanierungskosten um bis zu 35% zu senken.",
     technologies: ["React", "TypeScript", "Next.js"],
     isCurrent: true,
+    highlights: [
+      "Interaktive ESG-Bewertungsrechner von Grund auf architekturiert",
+      "Portfolio-Dashboards für Enterprise-Immobilienkunden entwickelt",
+    ],
+    metrics: ["35% Kostensenkung"],
   },
   {
     id: "happy-numbers",
@@ -23,6 +28,12 @@ export const experiences: TExperience[] = [
     description:
       "Interaktive Mathematik-Lernerfahrungen für 2M+ Schüler entwickelt. Adaptive Spielmechaniken entworfen, die Lehrern die Erstellung personalisierter Inhalte ermöglichen. Testabdeckung gepflegt und neue Entwickler eingearbeitet.",
     technologies: ["JavaScript", "TypeScript", "React", "Figma"],
+    highlights: [
+      "Adaptive Spielmechaniken für personalisierte Mathe-Inhalte entworfen",
+      "Hohe Testabdeckung über alle Lernmodule hinweg gepflegt",
+      "Neue Entwickler im Team eingearbeitet und betreut",
+    ],
+    metrics: ["2M+ Schüler"],
   },
   {
     id: "designforall",
@@ -34,6 +45,10 @@ export const experiences: TExperience[] = [
     description:
       "Eine Design-Wissensdatenbank von Grund auf aufgebaut. Frontend nach Feature-Sliced Design Methodik architekturiert, Zustandsverwaltung implementiert und die Build-Konfiguration vollständig verantwortet.",
     technologies: ["React", "TypeScript", "SCSS", "React Query", "Redux", "Vite"],
+    highlights: [
+      "Frontend nach Feature-Sliced Design Methodik architekturiert",
+      "Build-Konfiguration und CI-Pipeline vollständig verantwortet",
+    ],
   },
   {
     id: "ciogd",
@@ -45,6 +60,10 @@ export const experiences: TExperience[] = [
     description:
       "Unternehmenssicherheitsinfrastruktur verwaltet: DLP-Systeme, Cisco ASA Firewalls und kryptographische Gateways. Eine interne Zertifikatsverwaltungsanwendung in Django entwickelt, die Arbeitsabläufe für digitale Signaturen optimierte.",
     technologies: ["Python", "Django", "PostgreSQL", "Docker", "Nginx"],
+    highlights: [
+      "Interne Zertifikatsverwaltungsanwendung in Django entwickelt",
+      "Arbeitsabläufe für digitale Signaturen organisationsweit optimiert",
+    ],
   },
   {
     id: "er-telecom",
@@ -56,5 +75,9 @@ export const experiences: TExperience[] = [
     description:
       "Enterprise-Support beim zweitgrößten ISP Russlands. Komplexe L2/L3-VPN-Probleme diagnostiziert, OSPF- und BGP-Routing konfiguriert und eine Wissensdatenbank aufgebaut, die zum Onboarding-Standard des Teams wurde.",
     technologies: ["Networking", "OSPF", "BGP", "MPLS", "Bash"],
+    highlights: [
+      "Wissensdatenbank aufgebaut, die zum Onboarding-Standard wurde",
+      "Komplexe L2/L3-VPN-Probleme für Enterprise-Kunden diagnostiziert",
+    ],
   },
 ];

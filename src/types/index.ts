@@ -35,6 +35,8 @@ export type TExperience = {
   description: string;
   technologies: string[];
   isCurrent?: boolean;
+  highlights?: string[];
+  metrics?: string[];
 };
 
 export type TBlogPostSeries = {
