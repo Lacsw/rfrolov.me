@@ -28,7 +28,8 @@
     "title": "Erfahrung",
     "showMore": "{count} weitere anzeigen",
     "showLess": "Weniger anzeigen",
-    "present": "Aktuell"
+    "present": "Aktuell",
+    "careerSummary": "{years}+ Jahre in {roles} Positionen"
   },
   "projects": {
     "title": "Projekte",

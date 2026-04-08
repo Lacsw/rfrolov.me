@@ -17,11 +17,20 @@ type TProps = {
 export function Experience({ experiences }: TProps) {
   const t = useTranslations("experience");
 
+  const careerYears = Math.floor(
+    (Date.now() - new Date("2018-12-01").getTime()) / (365.25 * 24 * 60 * 60 * 1000)
+  );
+
   return (
     <section className="py-8 lg:py-10">
       <Container>
         <AnimatedSection className="space-y-6">
-          <SectionHeader title={t("title")} />
+          <div className="space-y-2">
+            <SectionHeader title={t("title")} />
+            <p className="text-xs text-muted-foreground">
+              {t("careerSummary", { years: careerYears, roles: experiences.length })}
+            </p>
+          </div>
 
           <motion.div variants={EXPERIENCE_ANIMATION.container} initial="hidden" animate="show">
             {experiences.map((exp, index) => (
