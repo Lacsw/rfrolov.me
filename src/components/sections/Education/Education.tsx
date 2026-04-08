@@ -12,13 +12,14 @@ import { EducationCard } from "./EducationCard";
 
 type TProps = {
   education: TEducation[];
+  id?: string;
 };
 
-export function Education({ education }: TProps) {
+export function Education({ education, id }: TProps) {
   const t = useTranslations("experiencePage");
 
   return (
-    <section className="py-8 lg:py-10">
+    <section id={id} className="py-8 lg:py-10">
       <Container>
         <AnimatedSection className="space-y-6">
           <SectionHeader title={t("education.title")} />

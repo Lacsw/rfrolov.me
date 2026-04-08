@@ -6,11 +6,15 @@ import { EXTERNAL_LINK_PROPS, HOVER_TEXT_COLOR } from "@/constants";
 import { openSourceProjects } from "@/data/open-source";
 import { cn } from "@/lib/utils";
 
-export function CVOpenSource() {
+type TProps = {
+  id?: string;
+};
+
+export function CVOpenSource({ id }: TProps) {
   const t = useTranslations("experiencePage.openSource");
 
   return (
-    <section className="py-8 lg:py-10">
+    <section id={id} className="py-8 lg:py-10">
       <Container>
         <AnimatedSection className="space-y-6">
           <SectionHeader title={t("title")} />

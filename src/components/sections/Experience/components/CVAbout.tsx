@@ -2,11 +2,15 @@ import { useTranslations } from "next-intl";
 
 import { AnimatedSection, Container, SectionHeader } from "@/components/ui";
 
-export function CVAbout() {
+type TProps = {
+  id?: string;
+};
+
+export function CVAbout({ id }: TProps) {
   const t = useTranslations("experiencePage.about");
 
   return (
-    <section className="py-8 lg:py-10">
+    <section id={id} className="py-8 lg:py-10">
       <Container>
         <AnimatedSection className="space-y-6">
           <SectionHeader title={t("title")} />

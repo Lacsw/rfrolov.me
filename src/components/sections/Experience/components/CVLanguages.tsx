@@ -3,11 +3,15 @@ import { useTranslations } from "next-intl";
 import { AnimatedSection, Container, SectionHeader } from "@/components/ui";
 import { languages } from "@/data/languages";
 
-export function CVLanguages() {
+type TProps = {
+  id?: string;
+};
+
+export function CVLanguages({ id }: TProps) {
   const t = useTranslations("experiencePage.languages");
 
   return (
-    <section className="py-8 lg:py-10">
+    <section id={id} className="py-8 lg:py-10">
       <Container>
         <AnimatedSection className="space-y-6">
           <SectionHeader title={t("title")} />

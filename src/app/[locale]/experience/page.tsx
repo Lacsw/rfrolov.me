@@ -6,7 +6,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Education } from "@/components/sections/Education";
 import { Experience } from "@/components/sections/Experience";
-import { CVAbout, CVHeader, CVLanguages, CVOpenSource } from "@/components/sections/Experience/components";
+import { CVAbout, CVHeader, CVLanguages, CVOpenSource, SectionNav } from "@/components/sections/Experience/components";
 import { SkillsGrouped } from "@/components/sections/SkillsGrouped";
 import { JsonLd } from "@/components/seo";
 import { SITE_URL } from "@/constants";
@@ -51,17 +51,28 @@ export default async function ExperiencePage({ params }: TProps) {
   setRequestLocale(locale);
   const experiences = getExperiences(locale);
   const education = getEducation(locale);
+  const t = await getTranslations({ locale, namespace: "experiencePage" });
+
+  const navItems = [
+    { id: "about", label: t("about.title") },
+    { id: "skills", label: t("skills.title") },
+    { id: "experience", label: t("experience.title") },
+    { id: "education", label: t("education.title") },
+    { id: "open-source", label: t("openSource.title") },
+    { id: "languages", label: t("languages.title") },
+  ];
 
   return (
     <main className="pt-16">
       <JsonLd data={generateExperiencePageSchema(locale)} />
       <CVHeader />
-      <CVAbout />
-      <SkillsGrouped />
-      <Experience experiences={experiences} />
-      <Education education={education} />
-      <CVOpenSource />
-      <CVLanguages />
+      <SectionNav items={navItems} />
+      <CVAbout id="about" />
+      <SkillsGrouped id="skills" />
+      <Experience experiences={experiences} id="experience" />
+      <Education education={education} id="education" />
+      <CVOpenSource id="open-source" />
+      <CVLanguages id="languages" />
       <div className="pb-12 lg:pb-16" />
     </main>
   );

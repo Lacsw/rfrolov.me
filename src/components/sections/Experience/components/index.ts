@@ -4,3 +4,4 @@ export { CVLanguages } from "./CVLanguages";
 export { CVOpenSource } from "./CVOpenSource";
 export { ExperienceCard } from "./ExperienceCard";
 export { LiveIndicator } from "./LiveIndicator";
+export { SectionNav } from "./SectionNav";

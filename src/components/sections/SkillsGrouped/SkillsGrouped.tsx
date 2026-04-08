@@ -8,11 +8,15 @@ import { SPACING } from "@/constants";
 import { SKILL_CATEGORIES } from "./constants";
 import { SkillCategoryCard } from "./SkillCategoryCard";
 
-export function SkillsGrouped() {
+type TProps = {
+  id?: string;
+};
+
+export function SkillsGrouped({ id }: TProps) {
   const t = useTranslations("experiencePage");
 
   return (
-    <section className="py-8 lg:py-10">
+    <section id={id} className="py-8 lg:py-10">
       <Container>
         <AnimatedSection className="space-y-8">
           <SectionHeader title={t("skills.title")} />

@@ -12,9 +12,10 @@ import { EXPERIENCE_ANIMATION } from "./constants";
 
 type TProps = {
   experiences: TExperience[];
+  id?: string;
 };
 
-export function Experience({ experiences }: TProps) {
+export function Experience({ experiences, id }: TProps) {
   const t = useTranslations("experience");
 
   const careerYears = Math.floor(
@@ -22,7 +23,7 @@ export function Experience({ experiences }: TProps) {
   );
 
   return (
-    <section className="py-8 lg:py-10">
+    <section id={id} className="py-8 lg:py-10">
       <Container>
         <AnimatedSection className="space-y-6">
           <div className="space-y-2">
