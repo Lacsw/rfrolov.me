@@ -38,6 +38,7 @@ export type TExperience = {
   highlights?: string[];
   metrics?: string[];
   transition?: string;
+  logo?: string;
 };
 
 export type TBlogPostSeries = {

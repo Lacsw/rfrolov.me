@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import Image from "next/image";
+
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
@@ -37,7 +39,16 @@ export function ExperienceCard({ experience, isLast }: TExperienceCardProps) {
           </span>
         </div>
 
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-muted-foreground flex items-center gap-1.5">
+          {experience.logo && (
+            <Image
+              src={experience.logo}
+              alt={`${experience.company} logo`}
+              width={16}
+              height={16}
+              className="rounded-sm"
+            />
+          )}
           {experience.company} · {experience.location}
         </p>
 

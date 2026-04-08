@@ -3,6 +3,7 @@ import { TExperience } from "@/types";
 export const experiences: TExperience[] = [
   {
     id: "purpose-green",
+    logo: "/companies/purpose-green.png",
     company: "Purpose Green",
     position: "Software Engineer",
     startDate: "Jul 2025",
@@ -20,6 +21,7 @@ export const experiences: TExperience[] = [
   },
   {
     id: "happy-numbers",
+    logo: "/companies/happy-numbers.png",
     company: "Happy Numbers",
     position: "Software Engineer",
     startDate: "Nov 2023",
@@ -38,6 +40,7 @@ export const experiences: TExperience[] = [
   },
   {
     id: "designforall",
+    logo: "/companies/designforall.png",
     company: "DesignForAll",
     position: "Software Engineer",
     startDate: "Dec 2022",
@@ -70,6 +73,7 @@ export const experiences: TExperience[] = [
   },
   {
     id: "er-telecom",
+    logo: "/companies/er-telecom.png",
     company: "ER-Telecom",
     position: "Senior Technical Support Engineer",
     startDate: "Dec 2018",
