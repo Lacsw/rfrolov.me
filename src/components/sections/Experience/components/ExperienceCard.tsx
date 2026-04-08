@@ -44,6 +44,19 @@ export function ExperienceCard({ experience, isLast }: TExperienceCardProps) {
 
         <p className="text-xs text-muted-foreground pt-1">{experience.description}</p>
 
+        {experience.metrics && experience.metrics.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 pt-1">
+            {experience.metrics.map((metric) => (
+              <span
+                key={metric}
+                className="inline-flex items-center rounded-full border border-muted-foreground/20 bg-muted/50 px-2 py-0.5 text-xs font-medium text-foreground"
+              >
+                {metric}
+              </span>
+            ))}
+          </div>
+        )}
+
         <TechTags technologies={experience.technologies} limit={4} size="sm" className="pt-2" />
 
         {hasHighlights && (
