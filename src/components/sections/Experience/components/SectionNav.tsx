@@ -17,6 +17,17 @@ export function SectionNav({ items }: TProps) {
   const [activeId, setActiveId] = useState(items[0]?.id ?? "");
 
   useEffect(() => {
+    const lastId = items[items.length - 1]?.id;
+
+    function handleScroll() {
+      const atBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
+
+      if (atBottom && lastId) {
+        setActiveId(lastId);
+      }
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries.find((e) => e.isIntersecting);
@@ -33,7 +44,12 @@ export function SectionNav({ items }: TProps) {
       if (el) observer.observe(el);
     }
 
-    return () => observer.disconnect();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [items]);
 
   function scrollToSection(id: string) {
