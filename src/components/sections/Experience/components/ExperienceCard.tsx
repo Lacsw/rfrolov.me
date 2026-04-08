@@ -28,7 +28,6 @@ export function ExperienceCard({ experience, isLast }: TExperienceCardProps) {
       className={cn("relative pl-6", isLast ? "pb-0" : "pb-8")}
     >
       <LiveIndicator isLive={isCurrentPosition} />
-      <div className="absolute left-[3px] top-4 bottom-0 w-px bg-muted last:hidden" />
 
       <div className="space-y-1">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
