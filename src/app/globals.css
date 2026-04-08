@@ -142,29 +142,45 @@ code[data-line-numbers] > [data-line]::before {
 }
 
 @media print {
-  header,
-  footer,
+  /* Hide non-essential UI elements */
   nav,
-  .no-print {
+  footer,
+  .sticky {
     display: none !important;
   }
 
+  /* Remove animations and transitions */
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Reset backgrounds for clean printing */
   body {
     background: white !important;
     color: black !important;
-    font-size: 12px;
   }
 
+  /* Ensure content takes full width */
   main {
     padding-top: 0 !important;
   }
 
-  a {
-    color: inherit !important;
-    text-decoration: none !important;
+  section {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    break-inside: avoid;
   }
 
-  .border {
-    border-color: #e5e7eb !important;
+  /* Make links show their URL */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.7em;
+    color: #666;
+  }
+
+  /* Hide expand buttons in print */
+  button {
+    display: none !important;
   }
 }
