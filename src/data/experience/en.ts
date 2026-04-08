@@ -3,7 +3,7 @@ import { TExperience } from "@/types";
 export const experiences: TExperience[] = [
   {
     id: "purpose-green",
-    logo: "/companies/purpose-green.png",
+    logo: "/companies/purpose-green.svg",
     company: "Purpose Green",
     position: "Software Engineer",
     startDate: "Jul 2025",
@@ -40,7 +40,6 @@ export const experiences: TExperience[] = [
   },
   {
     id: "designforall",
-    logo: "/companies/designforall.png",
     company: "DesignForAll",
     position: "Software Engineer",
     startDate: "Dec 2022",

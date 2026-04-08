@@ -25,7 +25,7 @@ export function SectionNav({ items }: TProps) {
           setActiveId(visible.target.id);
         }
       },
-      { rootMargin: "-20% 0px -70% 0px" }
+      { rootMargin: "-120px 0px -60% 0px" }
     );
 
     for (const item of items) {
@@ -36,8 +36,20 @@ export function SectionNav({ items }: TProps) {
     return () => observer.disconnect();
   }, [items]);
 
+  function scrollToSection(id: string) {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    const navbarHeight = 64;
+    const sectionNavHeight = 44;
+    const offset = navbarHeight + sectionNavHeight;
+    const top = el.getBoundingClientRect().top + window.scrollY - offset;
+
+    window.scrollTo({ top, behavior: "smooth" });
+  }
+
   return (
-    <nav className="sticky top-16 z-10 -mx-6 mb-2 overflow-x-auto border-b border-muted bg-background/80 px-6 backdrop-blur-sm lg:-mx-8 lg:px-8">
+    <nav className="sticky top-16 z-10 -mx-6 overflow-x-auto border-b border-muted bg-background/80 px-6 backdrop-blur-sm lg:-mx-8 lg:px-8">
       <div className="mx-auto flex max-w-5xl gap-4">
         {items.map((item) => (
           <a
@@ -45,7 +57,7 @@ export function SectionNav({ items }: TProps) {
             href={`#${item.id}`}
             onClick={(e) => {
               e.preventDefault();
-              document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth" });
+              scrollToSection(item.id);
             }}
             className={cn(
               "shrink-0 border-b-2 py-2.5 text-xs transition-colors duration-200",
