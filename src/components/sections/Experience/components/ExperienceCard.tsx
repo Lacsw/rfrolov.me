@@ -1,6 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 
 import { TechTags } from "@/components/ui";
 import { cn } from "@/lib/utils";
@@ -16,6 +19,8 @@ type TExperienceCardProps = {
 
 export function ExperienceCard({ experience, isLast }: TExperienceCardProps) {
   const isCurrentPosition = experience.isCurrent ?? false;
+  const hasHighlights = experience.highlights && experience.highlights.length > 0;
+  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
     <motion.div
@@ -40,6 +45,42 @@ export function ExperienceCard({ experience, isLast }: TExperienceCardProps) {
         <p className="text-xs text-muted-foreground pt-1">{experience.description}</p>
 
         <TechTags technologies={experience.technologies} limit={4} size="sm" className="pt-2" />
+
+        {hasHighlights && (
+          <>
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="flex items-center gap-1 pt-2 text-xs text-muted-foreground hover:text-foreground transition-colors duration-200 cursor-pointer"
+            >
+              <ChevronDown
+                className={cn(
+                  "h-3 w-3 transition-transform duration-200",
+                  isExpanded && "rotate-180"
+                )}
+              />
+              <span>{isExpanded ? "Less" : "Key achievements"}</span>
+            </button>
+
+            <AnimatePresence>
+              {isExpanded && (
+                <motion.ul
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="overflow-hidden space-y-1 pt-1"
+                >
+                  {experience.highlights!.map((highlight, i) => (
+                    <li key={i} className="text-xs text-muted-foreground flex items-start gap-2">
+                      <span className="mt-1.5 h-1 w-1 rounded-full bg-muted-foreground/50 shrink-0" />
+                      {highlight}
+                    </li>
+                  ))}
+                </motion.ul>
+              )}
+            </AnimatePresence>
+          </>
+        )}
       </div>
     </motion.div>
   );
