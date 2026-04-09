@@ -6,7 +6,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Education } from "@/components/sections/Education";
 import { Experience } from "@/components/sections/Experience";
-import { CVAbout, CVHeader, CVLanguages, CVOpenSource, ScrollIndicator } from "@/components/sections/Experience/components";
+import { CVAbout, CVHeader, CVLanguages, CVOpenSource, ScrollDots } from "@/components/sections/Experience/components";
 import { SkillsGrouped } from "@/components/sections/SkillsGrouped";
 import { JsonLd } from "@/components/seo";
 import { SITE_URL } from "@/constants";
@@ -66,7 +66,7 @@ export default async function ExperiencePage({ params }: TProps) {
     <main className="pt-16">
       <JsonLd data={generateExperiencePageSchema(locale)} />
       <CVHeader />
-      <ScrollIndicator items={navItems} />
+      <ScrollDots items={navItems} />
       <CVAbout id="about" />
       <SkillsGrouped id="skills" />
       <Experience experiences={experiences} id="experience" />

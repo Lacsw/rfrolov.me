@@ -4,6 +4,8 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import { cn } from "@/lib/utils";
 
+import { useScrollSpy } from "../hooks/useScrollSpy";
+
 type TNavItem = {
   id: string;
   label: string;
@@ -11,11 +13,12 @@ type TNavItem = {
 
 type TProps = {
   items: TNavItem[];
-  activeId: string;
-  hasScrolled: boolean;
 };
 
-export function ScrollDots({ items, activeId, hasScrolled }: TProps) {
+export function ScrollDots({ items }: TProps) {
+  const sectionIds = items.map((item) => item.id);
+  const { activeId, hasScrolled } = useScrollSpy(sectionIds);
+
   function scrollToSection(id: string) {
     const el = document.getElementById(id);
     if (!el) return;
@@ -24,6 +27,8 @@ export function ScrollDots({ items, activeId, hasScrolled }: TProps) {
     const top = el.getBoundingClientRect().top + window.scrollY - navbarHeight - 16;
     window.scrollTo({ top, behavior: "smooth" });
   }
+
+  const activeIndex = items.findIndex((item) => item.id === activeId);
 
   return (
     <AnimatePresence>
@@ -36,30 +41,37 @@ export function ScrollDots({ items, activeId, hasScrolled }: TProps) {
           className="fixed right-4 top-1/2 z-10 hidden -translate-y-1/2 lg:flex"
           aria-label="Section navigation"
         >
-          <div className="flex flex-col items-center gap-3">
-            {items.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className="group relative flex cursor-pointer items-center"
-                aria-label={item.label}
-                aria-current={activeId === item.id ? "true" : undefined}
-              >
-                <span
-                  className="pointer-events-none absolute right-full mr-3 whitespace-nowrap rounded bg-foreground px-2 py-1 text-xs text-background opacity-0 transition-opacity group-hover:opacity-100"
+          <div className="flex flex-col items-center gap-1.5">
+            {items.map((item, index) => {
+              const isActive = item.id === activeId;
+              const isPassed = index < activeIndex;
+
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className="group relative flex cursor-pointer items-center justify-center px-1 py-0.5"
+                  aria-label={item.label}
+                  aria-current={isActive ? "true" : undefined}
                 >
-                  {item.label}
-                </span>
-                <span
-                  className={cn(
-                    "block rounded-full transition-all duration-200",
-                    activeId === item.id
-                      ? "h-3 w-3 bg-foreground"
-                      : "h-2 w-2 bg-muted-foreground/40 group-hover:bg-muted-foreground"
-                  )}
-                />
-              </button>
-            ))}
+                  <span className="pointer-events-none absolute right-full mr-3 whitespace-nowrap rounded bg-foreground px-2 py-1 text-xs text-background opacity-0 transition-opacity group-hover:opacity-100">
+                    {item.label}
+                  </span>
+                  <motion.span
+                    className={cn(
+                      "block w-[3px] rounded-full transition-colors duration-200",
+                      isActive
+                        ? "bg-foreground"
+                        : isPassed
+                          ? "bg-foreground/50 group-hover:bg-foreground/70"
+                          : "bg-muted-foreground/30 group-hover:bg-muted-foreground/50"
+                    )}
+                    animate={{ height: isActive ? 28 : 12 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                  />
+                </button>
+              );
+            })}
           </div>
         </motion.nav>
       )}
