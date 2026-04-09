@@ -5,4 +5,4 @@ export { CVOpenSource } from "./CVOpenSource";
 export { ExperienceCard } from "./ExperienceCard";
 export { LiveIndicator } from "./LiveIndicator";
 export { ScrollTimeline } from "./ScrollTimeline";
-export { SectionNav } from "./SectionNav";
+export { ScrollIndicator } from "./ScrollIndicator";
