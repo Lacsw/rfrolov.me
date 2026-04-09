@@ -21,7 +21,6 @@ export function MorphingBlob() {
 
   return (
     <motion.div
-      initial={false}
       animate={{
         borderRadius: morphingBlob.borderRadius,
         rotate: morphingBlob.rotate,
@@ -29,6 +28,7 @@ export function MorphingBlob() {
       transition={{
         duration: morphingBlob.duration,
         repeat: Infinity,
+        repeatType: "loop",
         ease: "linear",
       }}
       className="absolute inset-4 bg-linear-to-br from-neutral-200 via-neutral-100 to-neutral-300 opacity-60"
