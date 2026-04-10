@@ -37,12 +37,16 @@ type TStaggerOptions = {
 };
 
 export function getStaggeredAnimation(index: number, options: TStaggerOptions = {}) {
-  const { y = 20, delayMultiplier = 0.1, duration = ANIMATION_DURATION.slower } = options;
+  const { y = 24, delayMultiplier = 0.08, duration = ANIMATION_DURATION.slower } = options;
 
   return {
-    initial: { opacity: 0, y },
-    animate: { opacity: 1, y: 0 },
-    transition: { delay: index * delayMultiplier, duration },
+    initial: { opacity: 0, y, scale: 0.96, filter: "blur(6px)" },
+    animate: { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" },
+    transition: {
+      delay: index * delayMultiplier,
+      duration,
+      ease: [0.22, 1, 0.36, 1] as const,
+    },
   };
 }
 
