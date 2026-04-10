@@ -3,24 +3,28 @@
 import { ReactNode } from "react";
 
 import { motion } from "framer-motion";
-import { useLocale } from "next-intl";
 
-import { PAGE_TRANSITION, PAGE_TRANSITION_DURATION } from "@/constants";
+import { useReducedMotion } from "@/hooks";
 
 type TProps = {
   children: ReactNode;
 };
 
 export function PageTransition({ children }: TProps) {
-  const locale = useLocale();
+  const prefersReducedMotion = useReducedMotion();
+
+  if (prefersReducedMotion) {
+    return <>{children}</>;
+  }
 
   return (
     <motion.div
-      key={locale}
-      initial={PAGE_TRANSITION.initial}
-      animate={PAGE_TRANSITION.animate}
-      exit={PAGE_TRANSITION.exit}
-      transition={{ duration: PAGE_TRANSITION_DURATION }}
+      initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
+      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      transition={{
+        duration: 0.45,
+        ease: [0.22, 1, 0.36, 1] as const,
+      }}
     >
       {children}
     </motion.div>
