@@ -67,10 +67,10 @@ type TProps = {
 
 export function TactileProvider({ children }: TProps) {
   const [tactile, setTactileState] = useState(false);
-  const [storageDisabled, setStorageDisabled] = useState<Set<string>>(() => new Set());
-  const [urlDisabled, setUrlDisabled] = useState<Set<string>>(() => new Set());
+  const [storageDisabled, setStorageDisabled] = useState<Set<string>>(readDisabledFromStorage);
+  const [urlDisabled] = useState<Set<string>>(readDisabledFromUrl);
 
-  // Hydrate from localStorage and URL on mount.
+  // Hydrate the tactile boolean on mount. The disabled sets are lazy-initialized above.
   useEffect(() => {
     try {
       const saved = window.localStorage.getItem(STORAGE_KEY);
@@ -82,12 +82,9 @@ export function TactileProvider({ children }: TProps) {
     } catch {
       /* ignore */
     }
-    setStorageDisabled(readDisabledFromStorage());
-    setUrlDisabled(readDisabledFromUrl());
   }, []);
 
-  const setTactile = useCallback((value: boolean) => {
-    setTactileState(value);
+  const persistTactile = useCallback((value: boolean) => {
     syncDocumentAttribute(value);
 
     try {
@@ -101,9 +98,20 @@ export function TactileProvider({ children }: TProps) {
     }
   }, []);
 
+  const setTactile = useCallback((value: boolean) => {
+    setTactileState(value);
+    persistTactile(value);
+  }, [persistTactile]);
+
   const toggleTactile = useCallback(() => {
-    setTactile(!tactile);
-  }, [tactile, setTactile]);
+    setTactileState((prev) => {
+      const next = !prev;
+
+      persistTactile(next);
+
+      return next;
+    });
+  }, [persistTactile]);
 
   const disableSurface = useCallback((surfaceId: string) => {
     setStorageDisabled((prev) => {
