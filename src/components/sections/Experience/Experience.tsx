@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
-import { AnimatedSection, Container, SectionHeader } from "@/components/ui";
+import { AnimatedSection, Container, CountUp, SectionHeader } from "@/components/ui";
 import { SPACING } from "@/constants";
 import { TExperience } from "@/types";
 
@@ -35,7 +35,10 @@ export function Experience({ experiences, id }: TProps) {
           <div className="space-y-2">
             <SectionHeader title={t("title")} />
             <p className="text-xs text-muted-foreground">
-              {t("careerSummary", { years: careerYears, roles: experiences.length })}
+              {t.rich("careerSummary", {
+                years: () => <CountUp value={careerYears} />,
+                roles: () => <CountUp value={experiences.length} />,
+              })}
             </p>
           </div>
 

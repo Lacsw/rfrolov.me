@@ -29,7 +29,7 @@
     "showMore": "{count} weitere anzeigen",
     "showLess": "Weniger anzeigen",
     "present": "Aktuell",
-    "careerSummary": "{years}+ Jahre in {roles} Positionen"
+    "careerSummary": "<years></years>+ Jahre in <roles></roles> Positionen"
   },
   "projects": {
     "title": "Projekte",
