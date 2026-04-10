@@ -2,19 +2,11 @@
 
 import { memo } from "react";
 
-import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useLocale } from "next-intl";
 
-import {
-  ARROW_HOVER,
-  CARD_BASE,
-  CARD_BORDER,
-  CARD_HOVER,
-  getStaggeredAnimation,
-  ICON_SIZE,
-} from "@/constants";
-import { Link } from "@/i18n/routing";
+import { AnimatedCard } from "@/components/ui";
+import { ARROW_HOVER, ICON_SIZE } from "@/constants";
 import { formatDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";
@@ -32,16 +24,13 @@ export const BlogPostCard = memo(function BlogPostCard({ post, index }: TBlogPos
   const formattedDate = formatDate(post.date, { locale });
 
   return (
-    <motion.div {...getStaggeredAnimation(index)} className="h-full">
-      <Link
-        href={`/blog/${post.slug}` as "/blog"}
-        className={cn(
-          "group flex flex-col h-full cursor-pointer",
-          CARD_BASE,
-          CARD_HOVER,
-          post.featured ? CARD_BORDER.featured : CARD_BORDER.default
-        )}
-      >
+    <AnimatedCard
+      index={index}
+      href={`/blog/${post.slug}`}
+      internal
+      featured={post.featured}
+    >
+      <div className="flex flex-col h-full">
         <div className="flex items-start justify-between gap-4">
           <div className="space-y-1.5">
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -66,7 +55,7 @@ export const BlogPostCard = memo(function BlogPostCard({ post, index }: TBlogPos
         <div className="mt-4">
           <BlogTags tags={post.tags} limit={3} wrap insideCard />
         </div>
-      </Link>
-    </motion.div>
+      </div>
+    </AnimatedCard>
   );
 });
