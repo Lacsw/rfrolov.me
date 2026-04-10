@@ -1,5 +1,6 @@
 export { useCommandPalette } from "./useCommandPalette";
 export { useHydrated } from "./useHydrated";
+export { useMagnetic } from "./useMagnetic";
 export { useMousePosition } from "./useMousePosition";
 export { usePersistedState } from "./usePersistedState";
 export { useReadingProgress } from "./useReadingProgress";

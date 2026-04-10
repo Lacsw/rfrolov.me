@@ -10,6 +10,7 @@ export { EmptyState } from "./EmptyState";
 export { ExternalLink } from "./ExternalLink";
 export { IconButton } from "./IconButton";
 export { LinkButton } from "./LinkButton";
+export { MagneticLink } from "./MagneticLink";
 export { PageTransition } from "./PageTransition";
 export { ReadingProgress } from "./ReadingProgress";
 export { RelatedItemsList } from "./RelatedItemsList";

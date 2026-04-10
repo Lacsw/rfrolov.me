@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 
-import { SocialLink } from "@/components/ui";
+import { MagneticLink, SocialLink } from "@/components/ui";
 import { socialLinks } from "@/data/social-links";
 
 export function HeroContent() {
@@ -20,7 +20,9 @@ export function HeroContent() {
 
       <div className="flex gap-4 pt-2">
         {socialLinks.map((link) => (
-          <SocialLink key={link.name} {...link} />
+          <MagneticLink key={link.name}>
+            <SocialLink {...link} />
+          </MagneticLink>
         ))}
       </div>
     </div>
