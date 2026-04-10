@@ -23,6 +23,7 @@ export { SocialLink } from "./SocialLink";
 export { TechIcon } from "./TechIcon";
 export { TextScramble } from "./TextScramble";
 export { ThemeToggle } from "./ThemeToggle";
+export { TiltCard } from "./TiltCard";
 export { ToastProvider, useToast, type TToast, type TToastContext } from "./Toast";
 export { ViewToggle } from "./ViewToggle";
 

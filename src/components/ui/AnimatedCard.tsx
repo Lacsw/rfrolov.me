@@ -15,6 +15,8 @@ import { useReducedMotion } from "@/hooks";
 import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
+import { TiltCard } from "./TiltCard";
+
 type TLinkHref = ComponentProps<typeof Link>["href"];
 
 type TAnimatedCardProps = {
@@ -47,33 +49,40 @@ export function AnimatedCard({
   );
 
   const animation = prefersReducedMotion ? {} : getStaggeredAnimation(index);
+  const outerClasses = cn("h-full", large && "md:col-span-2");
 
   if (href && internal) {
     return (
-      <Link href={href as TLinkHref}>
-        <motion.div {...animation} className={cn(baseClasses, "cursor-pointer")}>
-          {children}
-        </motion.div>
-      </Link>
+      <TiltCard className={outerClasses}>
+        <Link href={href as TLinkHref}>
+          <motion.div {...animation} className={cn(baseClasses, "cursor-pointer")}>
+            {children}
+          </motion.div>
+        </Link>
+      </TiltCard>
     );
   }
 
   if (href) {
     return (
-      <motion.a
-        href={href}
-        {...EXTERNAL_LINK_PROPS}
-        {...animation}
-        className={cn(baseClasses, "cursor-pointer")}
-      >
-        {children}
-      </motion.a>
+      <TiltCard className={outerClasses}>
+        <motion.a
+          href={href}
+          {...EXTERNAL_LINK_PROPS}
+          {...animation}
+          className={cn(baseClasses, "cursor-pointer")}
+        >
+          {children}
+        </motion.a>
+      </TiltCard>
     );
   }
 
   return (
-    <motion.div {...animation} className={baseClasses}>
-      {children}
-    </motion.div>
+    <TiltCard className={outerClasses}>
+      <motion.div {...animation} className={baseClasses}>
+        {children}
+      </motion.div>
+    </TiltCard>
   );
 }
