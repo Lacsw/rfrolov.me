@@ -20,6 +20,7 @@ export { SectionHeader } from "./SectionHeader";
 export { CardSkeleton, Skeleton } from "./Skeleton";
 export { SocialLink } from "./SocialLink";
 export { TechIcon } from "./TechIcon";
+export { TextScramble } from "./TextScramble";
 export { ThemeToggle } from "./ThemeToggle";
 export { ToastProvider, useToast, type TToast, type TToastContext } from "./Toast";
 export { ViewToggle } from "./ViewToggle";

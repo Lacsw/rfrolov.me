@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 
-import { MagneticLink, SocialLink } from "@/components/ui";
+import { MagneticLink, SocialLink, TextScramble } from "@/components/ui";
 import { socialLinks } from "@/data/social-links";
 
 export function HeroContent() {
@@ -12,7 +12,9 @@ export function HeroContent() {
     <div className="space-y-3 lg:max-w-lg">
       <p className="text-sm text-muted-foreground">{t("greeting")}</p>
 
-      <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight">{t("name")}</h1>
+      <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight">
+        <TextScramble text={t("name")} />
+      </h1>
 
       <p className="text-lg sm:text-xl text-muted-foreground">{t("role")}</p>
 
