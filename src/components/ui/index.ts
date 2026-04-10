@@ -6,7 +6,6 @@ export { CommandPalette } from "./CommandPalette";
 export { HamburgerIcon } from "./HamburgerIcon";
 export { Tag, TagList } from "./Tag";
 export { Container } from "./Container";
-export { CustomCursor } from "./CustomCursor";
 export { EmptyState } from "./EmptyState";
 export { ExternalLink } from "./ExternalLink";
 export { IconButton } from "./IconButton";
