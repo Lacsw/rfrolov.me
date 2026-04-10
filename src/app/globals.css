@@ -57,12 +57,15 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Global focus-visible style — consistent, visible, theme-aware */
-:focus-visible {
+/* Global focus-visible style — only for links, buttons, and custom interactive elements.
+   Form inputs (input, textarea, select) have their own focus styling per component. */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+[tabindex]:not([tabindex="-1"]):focus-visible {
   outline: 2px solid hsl(var(--foreground));
-  outline-offset: 3px;
+  outline-offset: 2px;
   border-radius: 4px;
-  transition: outline-offset 0.15s ease;
 }
 
 /* Mouse users: no outline on click */
