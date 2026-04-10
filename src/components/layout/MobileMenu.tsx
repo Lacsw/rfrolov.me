@@ -17,6 +17,44 @@ type TMobileMenuProps = {
   onClose: () => void;
 };
 
+const menuContainerVariants = {
+  hidden: { opacity: 0, height: 0 },
+  visible: {
+    opacity: 1,
+    height: "auto",
+    transition: {
+      height: { duration: 0.3, ease: [0.22, 1, 0.36, 1] as const },
+      opacity: { duration: 0.2 },
+      staggerChildren: 0.04,
+      delayChildren: 0.1,
+    },
+  },
+  exit: {
+    opacity: 0,
+    height: 0,
+    transition: {
+      height: { duration: 0.25, ease: [0.4, 0, 0.2, 1] as const },
+      opacity: { duration: 0.15 },
+      staggerChildren: 0.02,
+      staggerDirection: -1,
+    },
+  },
+};
+
+const linkVariants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] as const },
+  },
+  exit: {
+    opacity: 0,
+    x: -10,
+    transition: { duration: 0.15 },
+  },
+};
+
 export function MobileMenu({ isOpen, onClose }: TMobileMenuProps) {
   const t = useTranslations("nav");
   const tCommon = useTranslations("common");
@@ -75,10 +113,10 @@ export function MobileMenu({ isOpen, onClose }: TMobileMenuProps) {
             role="dialog"
             aria-modal="true"
             aria-label={tCommon("mobileMenu")}
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={menuContainerVariants}
             className="relative overflow-hidden bg-background/95 backdrop-blur-sm border-b border-muted"
           >
             <ul className="flex flex-col py-2">
@@ -87,7 +125,7 @@ export function MobileMenu({ isOpen, onClose }: TMobileMenuProps) {
                   link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
 
                 return (
-                  <li key={link.href}>
+                  <motion.li key={link.href} variants={linkVariants}>
                     <Link
                       href={link.href}
                       onClick={onClose}
@@ -99,18 +137,18 @@ export function MobileMenu({ isOpen, onClose }: TMobileMenuProps) {
                     >
                       {t(link.key)}
                     </Link>
-                  </li>
+                  </motion.li>
                 );
               })}
 
               {/* Divider */}
-              <li className="border-t border-muted my-2 mx-6" />
+              <motion.li variants={linkVariants} className="border-t border-muted my-2 mx-6" />
 
               {/* Controls */}
-              <li className="flex items-center gap-4 px-6 py-2">
+              <motion.li variants={linkVariants} className="flex items-center gap-4 px-6 py-2">
                 <LanguageSwitcher />
                 <ThemeToggle />
-              </li>
+              </motion.li>
             </ul>
           </motion.nav>
         </div>
