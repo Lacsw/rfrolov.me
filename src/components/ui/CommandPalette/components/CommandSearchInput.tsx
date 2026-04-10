@@ -30,8 +30,9 @@ export function CommandSearchInput({
         value={query}
         onChange={(e) => onQueryChange(e.target.value)}
         placeholder={t("commandPalette.placeholder")}
+        style={{ outline: "none", boxShadow: "none" }}
         className={cn(
-          "flex-1 bg-transparent py-4 text-sm outline-none",
+          "flex-1 bg-transparent py-4 text-sm",
           "placeholder:text-muted-foreground"
         )}
       />

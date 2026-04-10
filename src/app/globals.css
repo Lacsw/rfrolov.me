@@ -73,6 +73,17 @@ button:focus-visible,
   outline: none;
 }
 
+/* Form inputs: rely on per-component focus styling, never show default browser ring */
+input:focus,
+input:focus-visible,
+textarea:focus,
+textarea:focus-visible,
+select:focus,
+select:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
 /* Mobile menu scroll lock */
 html:has(.mobile-menu-open),
 html:has(.mobile-menu-open) body {
