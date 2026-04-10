@@ -84,7 +84,7 @@ export function AnimatedCard({
   })();
 
   return (
-    <TiltCard className={outerClasses}>
+    <TiltCard className={outerClasses} featured={featured}>
       <ShineCard className="h-full">{inner}</ShineCard>
     </TiltCard>
   );
