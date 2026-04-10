@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from "react";
 
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { Command } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { Container, HamburgerIcon, ThemeToggle } from "@/components/ui";
 import { HOVER_TEXT_COLOR, KBD_BASE, NAV_LINKS } from "@/constants";
-import { useCommandPalette, useScrolled } from "@/hooks";
+import { useCommandPalette, useReducedMotion, useScrolled } from "@/hooks";
 import { Link, usePathname } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
@@ -20,6 +21,11 @@ export function Navbar() {
   const scrolled = useScrolled(50);
   const { open: openCommandPalette } = useCommandPalette();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
+
+  const { scrollY } = useScroll();
+  const padding = useTransform(scrollY, [0, 120], [12, 0]);
+  const smoothPadding = useSpring(padding, { stiffness: 200, damping: 30 });
 
   // Close menu on route change
   useEffect(() => {
@@ -36,11 +42,16 @@ export function Navbar() {
     return () => document.removeEventListener("keydown", handleEscape);
   }, []);
 
+  const headerStyle = prefersReducedMotion
+    ? undefined
+    : { paddingTop: smoothPadding, paddingBottom: smoothPadding };
+
   return (
     <>
-      <header
+      <motion.header
+        style={headerStyle}
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          "fixed top-0 left-0 right-0 z-50 transition-colors duration-300",
           scrolled || isMenuOpen
             ? "bg-background/80 backdrop-blur-sm border-b border-muted"
             : "bg-transparent"
@@ -77,9 +88,21 @@ export function Navbar() {
               </ul>
               <LanguageSwitcher />
               <ThemeToggle />
-              <button
+              <motion.button
                 onClick={openCommandPalette}
                 aria-label={t("openCommandPalette")}
+                animate={
+                  prefersReducedMotion
+                    ? undefined
+                    : {
+                        boxShadow: [
+                          "0 0 0 0 rgba(127,127,127,0)",
+                          "0 0 0 4px rgba(127,127,127,0.08)",
+                          "0 0 0 0 rgba(127,127,127,0)",
+                        ],
+                      }
+                }
+                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
                 className={cn(
                   KBD_BASE,
                   "hidden sm:inline-flex items-center gap-1 px-2 py-1 text-xs text-muted-foreground",
@@ -88,7 +111,7 @@ export function Navbar() {
               >
                 <Command className="h-3 w-3" />
                 <span>K</span>
-              </button>
+              </motion.button>
             </div>
 
             {/* Mobile hamburger button */}
@@ -102,7 +125,7 @@ export function Navbar() {
             </button>
           </nav>
         </Container>
-      </header>
+      </motion.header>
 
       {/* Mobile menu - outside header to avoid fixed positioning issues */}
       <MobileMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
