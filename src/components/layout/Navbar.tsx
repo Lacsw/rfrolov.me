@@ -6,7 +6,7 @@ import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { Command } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { Container, HamburgerIcon, ThemeToggle } from "@/components/ui";
+import { Container, HamburgerIcon, MagneticLink, ThemeToggle } from "@/components/ui";
 import { HOVER_TEXT_COLOR, KBD_BASE, NAV_LINKS } from "@/constants";
 import { useCommandPalette, useReducedMotion, useScrolled } from "@/hooks";
 import { Link, usePathname } from "@/i18n/routing";
@@ -59,9 +59,11 @@ export function Navbar() {
       >
         <Container>
           <nav className="flex items-center justify-between h-16">
-            <Link href="/" aria-label={t("home")} className="font-semibold text-foreground">
-              RF
-            </Link>
+            <MagneticLink strength={0.3} range={60}>
+              <Link href="/" aria-label={t("home")} className="font-semibold text-foreground">
+                RF
+              </Link>
+            </MagneticLink>
 
             {/* Desktop nav */}
             <div className="hidden sm:flex items-center gap-6">
@@ -88,30 +90,32 @@ export function Navbar() {
               </ul>
               <LanguageSwitcher />
               <ThemeToggle />
-              <motion.button
-                onClick={openCommandPalette}
-                aria-label={t("openCommandPalette")}
-                animate={
-                  prefersReducedMotion
-                    ? undefined
-                    : {
-                        boxShadow: [
-                          "0 0 0 0 rgba(127,127,127,0)",
-                          "0 0 0 4px rgba(127,127,127,0.08)",
-                          "0 0 0 0 rgba(127,127,127,0)",
-                        ],
-                      }
-                }
-                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                className={cn(
-                  KBD_BASE,
-                  "hidden sm:inline-flex items-center gap-1 px-2 py-1 text-xs text-muted-foreground",
-                  "cursor-pointer transition-colors hover:bg-muted hover:text-foreground"
-                )}
-              >
-                <Command className="h-3 w-3" />
-                <span>K</span>
-              </motion.button>
+              <MagneticLink strength={0.3} range={60}>
+                <motion.button
+                  onClick={openCommandPalette}
+                  aria-label={t("openCommandPalette")}
+                  animate={
+                    prefersReducedMotion
+                      ? undefined
+                      : {
+                          boxShadow: [
+                            "0 0 0 0 rgba(127,127,127,0)",
+                            "0 0 0 4px rgba(127,127,127,0.08)",
+                            "0 0 0 0 rgba(127,127,127,0)",
+                          ],
+                        }
+                  }
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                  className={cn(
+                    KBD_BASE,
+                    "hidden sm:inline-flex items-center gap-1 px-2 py-1 text-xs text-muted-foreground",
+                    "cursor-pointer transition-colors hover:bg-muted hover:text-foreground"
+                  )}
+                >
+                  <Command className="h-3 w-3" />
+                  <span>K</span>
+                </motion.button>
+              </MagneticLink>
             </div>
 
             {/* Mobile hamburger button */}
