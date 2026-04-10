@@ -16,6 +16,7 @@ export { LinkButton } from "./LinkButton";
 export { MagneticLink } from "./MagneticLink";
 export { PageTransition } from "./PageTransition";
 export { ReadingProgress } from "./ReadingProgress";
+export { ScrollReveal } from "./ScrollReveal";
 export { RelatedItemsList } from "./RelatedItemsList";
 export { RevealText } from "./RevealText";
 export { ScrollToTop } from "./ScrollToTop";

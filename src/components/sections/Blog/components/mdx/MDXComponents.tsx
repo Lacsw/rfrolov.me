@@ -2,6 +2,7 @@ import { ComponentPropsWithoutRef } from "react";
 
 import Link from "next/link";
 
+import { ScrollReveal } from "@/components/ui";
 import { EXTERNAL_LINK_PROPS, HOVER_OPACITY } from "@/constants";
 import { cn } from "@/lib/utils";
 
@@ -85,7 +86,15 @@ export const mdxComponents = {
     return <code className={className} {...props} />;
   },
   pre: ({ className, children }: TPreProps) => (
-    <CodeBlock className={className}>{children}</CodeBlock>
+    <ScrollReveal>
+      <CodeBlock className={className}>{children}</CodeBlock>
+    </ScrollReveal>
+  ),
+  img: ({ className, alt, ...props }: ComponentPropsWithoutRef<"img">) => (
+    <ScrollReveal className="my-6">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img alt={alt ?? ""} className={cn("rounded-lg w-full", className)} {...props} />
+    </ScrollReveal>
   ),
   hr: () => <hr className="border-muted my-8" />,
   strong: ({ className, ...props }: ComponentPropsWithoutRef<"strong">) => (
