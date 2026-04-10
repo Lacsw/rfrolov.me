@@ -67,23 +67,37 @@ export function Navbar() {
 
             {/* Desktop nav */}
             <div className="hidden sm:flex items-center gap-6">
-              <ul className="flex items-center gap-8">
+              <ul className="flex items-center gap-2">
                 {NAV_LINKS.map((link) => {
                   const isActive =
                     link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
 
                   return (
-                    <li key={link.href}>
+                    <li key={link.href} className="relative">
                       <Link
                         href={link.href}
                         aria-current={isActive ? "page" : undefined}
                         className={cn(
-                          "text-sm transition-colors duration-300",
-                          isActive ? "text-accent-foreground" : HOVER_TEXT_COLOR
+                          "relative z-10 inline-block px-3 py-1.5 text-sm transition-colors duration-300",
+                          isActive ? "text-foreground" : HOVER_TEXT_COLOR
                         )}
                       >
                         {t(link.key)}
                       </Link>
+                      {isActive && !prefersReducedMotion && (
+                        <motion.span
+                          layoutId="navbar-active-pill"
+                          className="absolute inset-0 rounded-md bg-muted"
+                          transition={{ type: "spring", stiffness: 400, damping: 35 }}
+                          aria-hidden
+                        />
+                      )}
+                      {isActive && prefersReducedMotion && (
+                        <span
+                          className="absolute inset-0 rounded-md bg-muted"
+                          aria-hidden
+                        />
+                      )}
                     </li>
                   );
                 })}
