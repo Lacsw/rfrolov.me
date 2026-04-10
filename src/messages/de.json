@@ -24,6 +24,10 @@
     "role": "Software Engineer",
     "description": "Engineer in Berlin. Ich baue saubere, performante Webanwendungen mit Fokus auf UX, die wirklich funktioniert."
   },
+  "now": {
+    "title": "Jetzt",
+    "updated": "Aktualisiert"
+  },
   "experience": {
     "title": "Erfahrung",
     "showMore": "{count} weitere anzeigen",

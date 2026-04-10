@@ -24,6 +24,10 @@
     "role": "Software Engineer",
     "description": "Engineer based in Berlin. I build clean, performant web applications with a focus on UX that actually works."
   },
+  "now": {
+    "title": "Now",
+    "updated": "Updated"
+  },
   "experience": {
     "title": "Experience",
     "showMore": "Show {count} more",
