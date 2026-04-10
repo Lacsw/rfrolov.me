@@ -2,6 +2,8 @@ import { HOVER_OPACITY, TEXT_SIZE } from "@/constants";
 import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
+import { RevealText } from "./RevealText";
+
 type TSectionHeaderProps = {
   title: string;
   description?: string;
@@ -21,7 +23,7 @@ export function SectionHeader({ title, description, link, as: Tag = "h2" }: TSec
   return (
     <div className={link ? "flex items-center justify-between" : undefined}>
       <div>
-        <Tag className={titleClasses}>{title}</Tag>
+        <RevealText as={Tag} text={title} className={titleClasses} />
         {description && (
           <p className={cn("text-muted-foreground mt-2", TEXT_SIZE.body)}>{description}</p>
         )}

@@ -14,6 +14,7 @@ export { MagneticLink } from "./MagneticLink";
 export { PageTransition } from "./PageTransition";
 export { ReadingProgress } from "./ReadingProgress";
 export { RelatedItemsList } from "./RelatedItemsList";
+export { RevealText } from "./RevealText";
 export { ScrollToTop } from "./ScrollToTop";
 export { SearchInput } from "./SearchInput";
 export { SectionHeader } from "./SectionHeader";
