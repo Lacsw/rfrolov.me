@@ -1,3 +1,7 @@
+"use client";
+
+import { motion } from "framer-motion";
+
 import { TRANSITION } from "@/constants";
 import { cn } from "@/lib/utils";
 
@@ -8,18 +12,32 @@ type TCommandItemProps = {
   isSelected: boolean;
   onSelect: () => void;
   onHover: () => void;
+  index: number;
 };
 
-export function CommandItem({ command, isSelected, onSelect, onHover }: TCommandItemProps) {
+export function CommandItem({
+  command,
+  isSelected,
+  onSelect,
+  onHover,
+  index,
+}: TCommandItemProps) {
   const { icon, label } = command;
 
   return (
-    <li
+    <motion.li
       role="menuitem"
       tabIndex={-1}
       data-selected={isSelected}
       onMouseEnter={onHover}
       onClick={onSelect}
+      initial={{ opacity: 0, x: -8 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{
+        delay: Math.min(index * 0.02, 0.2),
+        duration: 0.2,
+        ease: [0.22, 1, 0.36, 1] as const,
+      }}
       className={cn(
         "flex items-center gap-3 rounded-md px-3 py-2 cursor-pointer",
         TRANSITION.normal,
@@ -28,6 +46,6 @@ export function CommandItem({ command, isSelected, onSelect, onHover }: TCommand
     >
       {icon}
       <span className="text-sm">{label}</span>
-    </li>
+    </motion.li>
   );
 }

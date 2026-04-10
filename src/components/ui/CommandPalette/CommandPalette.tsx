@@ -61,10 +61,14 @@ export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
           />
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: animationDuration }}
+            initial={{ opacity: 0, scale: 0.92, y: -12 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.96, y: -8 }}
+            transition={
+              prefersReducedMotion
+                ? { duration: 0 }
+                : { type: "spring", stiffness: 350, damping: 28, mass: 0.6 }
+            }
             className="fixed left-1/2 top-[20%] z-50 w-full max-w-lg -translate-x-1/2 px-4"
           >
             <div className="overflow-hidden rounded-lg border border-muted bg-background shadow-lg">

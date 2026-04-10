@@ -44,6 +44,7 @@ export function CommandGroup({
             isSelected={selectedIndex === globalIndex}
             onSelect={() => onSelect(globalIndex)}
             onHover={() => onHover(globalIndex)}
+            index={globalIndex}
           />
         );
       })}
