@@ -35,6 +35,7 @@ export const BlogPostCard = memo(function BlogPostCard({ post, index }: TBlogPos
     <motion.div {...getStaggeredAnimation(index)} className="h-full">
       <Link
         href={`/blog/${post.slug}` as "/blog"}
+        data-cursor="view"
         className={cn(
           "group relative flex flex-col h-full cursor-pointer overflow-hidden",
           CARD_BASE,

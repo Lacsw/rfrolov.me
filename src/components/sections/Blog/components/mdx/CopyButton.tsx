@@ -26,6 +26,7 @@ export const CopyButton = memo(function CopyButton({ text }: TCopyButtonProps) {
   return (
     <button
       onClick={handleCopy}
+      data-cursor="copy"
       className={cn(
         "p-1 rounded transition-all duration-200 cursor-pointer",
         "text-muted-foreground/60 hover:text-foreground"
