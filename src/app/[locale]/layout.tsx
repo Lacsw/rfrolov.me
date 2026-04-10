@@ -8,7 +8,7 @@ import { getMessages, getTranslations, setRequestLocale } from "next-intl/server
 
 import { Footer, Navbar } from "@/components/layout";
 import { CronitorProvider, LanguageProvider, ThemeProvider } from "@/components/providers";
-import { CommandPalette, ScrollToTop, ToastProvider } from "@/components/ui";
+import { CommandPalette, KeyboardShortcuts, ScrollToTop, ToastProvider } from "@/components/ui";
 import { SITE_URL } from "@/constants";
 import { CommandPaletteProvider } from "@/contexts";
 import { isLocale } from "@/i18n/config";
@@ -112,6 +112,7 @@ export default async function LocaleLayout({ children, params }: TProps) {
                   <Navbar />
                   <CommandPalette blogPosts={blogPosts} />
                 </CommandPaletteProvider>
+                <KeyboardShortcuts />
                 <div id="main-content">{children}</div>
                 <Footer />
                 <ScrollToTop />

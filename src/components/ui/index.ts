@@ -11,6 +11,7 @@ export { CountUp } from "./CountUp";
 export { EmptyState } from "./EmptyState";
 export { ExternalLink } from "./ExternalLink";
 export { IconButton } from "./IconButton";
+export { KeyboardShortcuts } from "./KeyboardShortcuts";
 export { LinkButton } from "./LinkButton";
 export { MagneticLink } from "./MagneticLink";
 export { PageTransition } from "./PageTransition";

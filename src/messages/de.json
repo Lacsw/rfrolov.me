@@ -28,6 +28,21 @@
     "title": "Jetzt",
     "updated": "Aktualisiert"
   },
+  "shortcuts": {
+    "title": "Tastenkürzel",
+    "close": "Schließen",
+    "showShortcuts": "Tastenkürzel anzeigen",
+    "openCommandPalette": "Befehlspalette öffnen",
+    "closeDialog": "Dialog schließen",
+    "focusSearch": "Suche fokussieren",
+    "nextItem": "Nächstes Element",
+    "previousItem": "Vorheriges Element",
+    "scope": {
+      "global": "Global",
+      "blog": "Blog",
+      "experience": "Erfahrung"
+    }
+  },
   "experience": {
     "title": "Erfahrung",
     "showMore": "{count} weitere anzeigen",

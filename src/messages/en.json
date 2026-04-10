@@ -28,6 +28,21 @@
     "title": "Now",
     "updated": "Updated"
   },
+  "shortcuts": {
+    "title": "Keyboard Shortcuts",
+    "close": "Close",
+    "showShortcuts": "Show shortcuts",
+    "openCommandPalette": "Open command palette",
+    "closeDialog": "Close dialog",
+    "focusSearch": "Focus search",
+    "nextItem": "Next item",
+    "previousItem": "Previous item",
+    "scope": {
+      "global": "Global",
+      "blog": "Blog",
+      "experience": "Experience"
+    }
+  },
   "experience": {
     "title": "Experience",
     "showMore": "Show {count} more",
