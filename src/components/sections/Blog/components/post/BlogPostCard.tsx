@@ -49,7 +49,12 @@ export const BlogPostCard = memo(function BlogPostCard({ post, index }: TBlogPos
               <span>·</span>
               <ReadingTime minutes={post.readingTime} showLabel />
             </div>
-            <h3 className="font-medium">{post.title}</h3>
+            <h3
+              className="font-medium"
+              style={{ viewTransitionName: `blog-title-${post.slug}` }}
+            >
+              {post.title}
+            </h3>
           </div>
           <ArrowUpRight
             className={cn(ICON_SIZE.sm, "shrink-0 text-muted-foreground", ARROW_HOVER.upRight)}

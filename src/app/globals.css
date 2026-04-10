@@ -201,3 +201,14 @@ code[data-line-numbers] > [data-line]::before {
     z-index: 2;
   }
 }
+
+/* Cross-document view transitions for shared elements between pages */
+@view-transition {
+  navigation: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+}

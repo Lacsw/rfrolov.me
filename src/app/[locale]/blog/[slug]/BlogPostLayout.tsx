@@ -70,7 +70,12 @@ export function BlogPostLayout({
                   </span>
                 </div>
 
-                <h1 className="text-3xl font-semibold tracking-tight">{post.title}</h1>
+                <h1
+                  className="text-3xl font-semibold tracking-tight"
+                  style={{ viewTransitionName: `blog-title-${post.slug}` }}
+                >
+                  {post.title}
+                </h1>
 
                 <p className="text-lg text-muted-foreground">{post.description}</p>
 
