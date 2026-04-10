@@ -3,8 +3,6 @@ import { notFound } from "next/navigation";
 import { BlogList } from "@/components/sections/Blog";
 import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
 import { Hero } from "@/components/sections/Hero";
-import { Now } from "@/components/sections/Now";
-import { SkillsMarquee } from "@/components/sections/SkillsMarquee";
 import { JsonLd } from "@/components/seo";
 import { getFeaturedProjects } from "@/data/projects";
 import { isLocale, locales } from "@/i18n/config";
@@ -37,8 +35,6 @@ export default async function Home({ params }: TProps) {
       <JsonLd data={generatePersonSchema()} />
       <JsonLd data={generateWebsiteSchema()} />
       <Hero />
-      <SkillsMarquee />
-      <Now />
       <BlogList posts={featuredPosts} />
       <FeaturedProjects projects={featuredProjects} projectsWithDetails={projectsWithDetails} />
     </main>
