@@ -57,6 +57,19 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Global focus-visible style — consistent, visible, theme-aware */
+:focus-visible {
+  outline: 2px solid hsl(var(--foreground));
+  outline-offset: 3px;
+  border-radius: 4px;
+  transition: outline-offset 0.15s ease;
+}
+
+/* Mouse users: no outline on click */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
 /* Mobile menu scroll lock */
 html:has(.mobile-menu-open),
 html:has(.mobile-menu-open) body {
