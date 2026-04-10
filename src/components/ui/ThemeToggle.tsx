@@ -33,10 +33,10 @@ export function ThemeToggle() {
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={isDark ? "dark" : "light"}
-          initial={{ opacity: 0, rotate: -90, scale: 0.8 }}
+          initial={{ opacity: 0, rotate: -180, scale: 0.5 }}
           animate={{ opacity: 1, rotate: 0, scale: 1 }}
-          exit={{ opacity: 0, rotate: 90, scale: 0.8 }}
-          transition={{ duration: ANIMATION_DURATION.fast }}
+          exit={{ opacity: 0, rotate: 180, scale: 0.5 }}
+          transition={{ duration: ANIMATION_DURATION.normal }}
         >
           {isDark ? <Sun className={ICON_SIZE.sm} /> : <Moon className={ICON_SIZE.sm} />}
         </motion.div>
