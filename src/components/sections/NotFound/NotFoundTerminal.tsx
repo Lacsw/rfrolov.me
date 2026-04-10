@@ -7,7 +7,7 @@ import { useTranslations } from "next-intl";
 
 import { useRouter } from "@/i18n/routing";
 
-import { NavigationLinks, TerminalInput, TerminalLine, TerminalWindow } from "./components";
+import { MatrixRain, NavigationLinks, TerminalInput, TerminalLine, TerminalWindow } from "./components";
 import { INITIAL_LINES, PROMPT } from "./constants";
 import { useBlinkingCursor, useTerminalInput, useTerminalTyping } from "./hooks";
 
@@ -59,6 +59,7 @@ export function NotFoundTerminal() {
 
   return (
     <div className="w-full max-w-2xl">
+      <MatrixRain />
       <TerminalWindow title={t("terminalTitle")}>
         <div ref={terminalRef}>
           {lines.map((line, index) => (
