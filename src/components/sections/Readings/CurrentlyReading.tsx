@@ -1,10 +1,9 @@
 "use client";
 
-import Image from "next/image";
-
 import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+import { BlurImage } from "@/components/ui";
 import { CARD_BASE, CARD_BORDER, CARD_HOVER, ICON_SIZE } from "@/constants";
 import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
@@ -31,15 +30,14 @@ export function CurrentlyReading({ book }: TProps) {
             CARD_BORDER.featured
           )}
         >
-          <div className="relative h-[86px] w-[60px] flex-shrink-0 overflow-hidden rounded-sm">
-            <Image
-              src={book.cover}
-              alt={`${book.title} cover`}
-              fill
-              className="object-cover"
-              sizes="60px"
-            />
-          </div>
+          <BlurImage
+            wrapperClassName="relative h-[86px] w-[60px] flex-shrink-0 rounded-sm"
+            src={book.cover}
+            alt={`${book.title} cover`}
+            fill
+            className="object-cover"
+            sizes="60px"
+          />
           <div className="flex-1">
             <h3 className="font-medium">{book.title}</h3>
             <p className="text-sm text-muted-foreground">{book.author}</p>

@@ -1,6 +1,7 @@
 export { AnimatedCard } from "./AnimatedCard";
 export { AnimatedSection } from "./AnimatedSection";
 export { BackLink } from "./BackLink";
+export { BlurImage } from "./BlurImage";
 export { Breadcrumbs, type TBreadcrumb } from "./Breadcrumbs";
 export { CommandPalette } from "./CommandPalette";
 export { HamburgerIcon } from "./HamburgerIcon";

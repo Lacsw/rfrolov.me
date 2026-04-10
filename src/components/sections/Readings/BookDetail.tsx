@@ -2,12 +2,10 @@
 
 import { ReactNode } from "react";
 
-import Image from "next/image";
-
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
-import { BackLink, Container, Tag } from "@/components/ui";
+import { BackLink, BlurImage, Container, Tag } from "@/components/ui";
 import { ANIMATION_DURATION, TEXT_SIZE } from "@/constants";
 import { cn } from "@/lib/utils";
 import { TBook } from "@/types";
@@ -38,15 +36,14 @@ export function BookDetail({ book, children }: TProps) {
           <BackLink href="/readings">{t("backToReadings")}</BackLink>
 
           <header className="flex gap-6">
-            <div className="relative h-[220px] w-[150px] flex-shrink-0 overflow-hidden rounded">
-              <Image
-                src={book.cover}
-                alt={`${book.title} cover`}
-                fill
-                className="object-cover"
-                sizes="150px"
-              />
-            </div>
+            <BlurImage
+              wrapperClassName="relative h-[220px] w-[150px] flex-shrink-0 rounded"
+              src={book.cover}
+              alt={`${book.title} cover`}
+              fill
+              className="object-cover"
+              sizes="150px"
+            />
             <div className="space-y-3">
               <h1 className={cn("font-semibold tracking-tight", TEXT_SIZE.title)}>{book.title}</h1>
               <p className="text-muted-foreground">{book.author}</p>
