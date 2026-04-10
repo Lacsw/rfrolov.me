@@ -17,6 +17,7 @@ export { RelatedItemsList } from "./RelatedItemsList";
 export { RevealText } from "./RevealText";
 export { ScrollToTop } from "./ScrollToTop";
 export { SearchInput } from "./SearchInput";
+export { ShineCard } from "./ShineCard";
 export { SectionHeader } from "./SectionHeader";
 export { CardSkeleton, Skeleton } from "./Skeleton";
 export { SocialLink } from "./SocialLink";
