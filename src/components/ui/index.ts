@@ -25,6 +25,8 @@ export { ShineCard } from "./ShineCard";
 export { SectionHeader } from "./SectionHeader";
 export { CardSkeleton, Skeleton } from "./Skeleton";
 export { SocialLink } from "./SocialLink";
+export { TactileFirstVisitHint } from "./TactileFirstVisitHint";
+export { TactileModeToggle } from "./TactileModeToggle";
 export { TechIcon } from "./TechIcon";
 export { TextScramble } from "./TextScramble";
 export { ThemeToggle } from "./ThemeToggle";

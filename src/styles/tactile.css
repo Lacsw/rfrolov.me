@@ -1,0 +1,176 @@
+/* Tactile mode — Sentry-style 3D button mechanism.
+ * Spec: docs/superpowers/specs/2026-04-10-tactile-mode-design.md
+ *
+ * The mechanism is three layers:
+ *   - .tactile-surface::before  → shadow (sits flush, dark)
+ *   - .tactile-surface::after   → raised face (translateY(-2px) by default)
+ *   - .tactile-surface > span   → label, rides the face
+ *
+ * Hover: face rises an extra 1px.
+ * Active / aria-pressed / aria-checked / aria-current="page" / data-selected:
+ *   face sinks flush with the shadow (translateY(0)).
+ * Selected states use `transition: none` so high-frequency keyboard nav
+ * doesn't lag.
+ */
+
+.tactile-surface {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 500;
+  color: var(--tactile-fg, hsl(var(--foreground)));
+  border-radius: 6px;
+
+  --tactile-elevation: 2px;
+  --tactile-hover-lift: 1px;
+  --tactile-face: hsl(var(--background));
+  --tactile-shadow: hsl(var(--muted-foreground));
+  --tactile-border: hsl(var(--muted-foreground));
+}
+
+/* shadow layer */
+.tactile-surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  height: calc(100% - var(--tactile-elevation));
+  top: var(--tactile-elevation);
+  transform: translateY(calc(-1 * var(--tactile-elevation)));
+  box-shadow: 0 var(--tactile-elevation) 0 0 var(--tactile-shadow);
+  background: var(--tactile-shadow);
+  border-radius: inherit;
+}
+
+/* raised face layer */
+.tactile-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--tactile-face);
+  border: 1px solid var(--tactile-border);
+  border-radius: inherit;
+  transform: translateY(calc(-1 * var(--tactile-elevation)));
+  transition: transform 140ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* label rides the face */
+.tactile-surface > span {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transform: translateY(calc(-1 * var(--tactile-elevation)));
+  transition: transform 140ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* ----- Size modifiers ----- */
+
+.tactile-surface--sm {
+  height: 28px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+.tactile-surface--md {
+  height: 36px;
+  padding: 0 14px;
+  font-size: 13px;
+}
+
+.tactile-surface--square {
+  padding: 0;
+  width: 32px;
+  height: 32px;
+}
+
+.tactile-surface--sm.tactile-surface--square {
+  width: 28px;
+  height: 28px;
+}
+
+.tactile-surface--md.tactile-surface--square {
+  width: 36px;
+  height: 36px;
+}
+
+/* ----- Color variants ----- */
+
+.tactile-surface--ghost {
+  --tactile-face: hsl(var(--background));
+  --tactile-shadow: hsl(var(--muted-foreground));
+  --tactile-border: hsl(var(--muted-foreground));
+  --tactile-fg: hsl(var(--foreground));
+}
+
+.tactile-surface--primary {
+  --tactile-face: hsl(var(--foreground));
+  --tactile-shadow: #000;
+  --tactile-border: #000;
+  --tactile-fg: hsl(var(--background));
+}
+
+.tactile-surface--outline {
+  --tactile-face: hsl(var(--background));
+  --tactile-shadow: hsl(var(--muted));
+  --tactile-border: hsl(var(--muted-foreground));
+  --tactile-fg: hsl(var(--foreground));
+}
+
+/* ----- HOVER — face rises an extra 1px ----- */
+
+.tactile-surface:hover::after,
+.tactile-surface:hover > span {
+  transform: translateY(calc(-1 * (var(--tactile-elevation) + var(--tactile-hover-lift))));
+}
+
+/* ----- ACTIVE / SELECTED — face sinks flush ----- */
+
+.tactile-surface:active::after,
+.tactile-surface:active > span,
+.tactile-surface[aria-current="page"]::after,
+.tactile-surface[aria-current="page"] > span,
+.tactile-surface[aria-pressed="true"]::after,
+.tactile-surface[aria-pressed="true"] > span,
+.tactile-surface[aria-checked="true"]::after,
+.tactile-surface[aria-checked="true"] > span,
+.tactile-surface[data-selected="true"]::after,
+.tactile-surface[data-selected="true"] > span {
+  transform: translateY(0);
+}
+
+/* SELECTED states skip the transition — instant snap */
+.tactile-surface[aria-current="page"]::after,
+.tactile-surface[aria-current="page"] > span,
+.tactile-surface[aria-pressed="true"]::after,
+.tactile-surface[aria-pressed="true"] > span,
+.tactile-surface[aria-checked="true"]::after,
+.tactile-surface[aria-checked="true"] > span,
+.tactile-surface[data-selected="true"]::after,
+.tactile-surface[data-selected="true"] > span {
+  transition: none;
+}
+
+/* ----- Focus ring (only when tactile mode is on) ----- */
+
+[data-tactile="on"] .tactile-surface:focus-visible {
+  outline: none;
+}
+
+[data-tactile="on"] .tactile-surface:focus-visible::after {
+  box-shadow: 0 0 0 2px hsl(var(--foreground));
+}
+
+/* ----- Reduced motion ----- */
+
+@media (prefers-reduced-motion: reduce) {
+  .tactile-surface::after,
+  .tactile-surface > span {
+    transition: none;
+  }
+}

@@ -22,6 +22,7 @@ function useShortcuts(): TShortcut[] {
     { keys: ["?"], label: t("showShortcuts"), scope: "global" },
     { keys: ["⌘", "K"], label: t("openCommandPalette"), scope: "global" },
     { keys: ["Esc"], label: t("closeDialog"), scope: "global" },
+    { keys: ["⇧", "T"], label: t("toggleTactile"), scope: "global" },
     { keys: ["/"], label: t("focusSearch"), scope: "blog" },
     { keys: ["J"], label: t("nextItem"), scope: "experience" },
     { keys: ["K"], label: t("previousItem"), scope: "experience" },

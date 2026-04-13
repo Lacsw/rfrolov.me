@@ -51,3 +51,34 @@ src/
 - `--foreground`: Primary text color
 - `--muted`: Muted background color
 - `--muted-foreground`: Secondary text color
+
+## Tactile Mode
+
+The site has an opt-in "tactile mode" gated by a footer toggle and `Shift+T`. Off by default; persisted in `localStorage["rf-tactile"]`. See `docs/superpowers/specs/2026-04-10-tactile-mode-design.md` for the full design.
+
+### Per-surface escape hatches (power-user)
+
+Some interactive surfaces opt in via `useTactileSurface(surfaceId)`. To temporarily disable a single surface without disabling the whole mode:
+
+- **Console:**
+  ```js
+  window.__rfTactile.disable("navbar");      // persistent in localStorage
+  window.__rfTactile.enable("navbar");       // remove from disabled set
+  window.__rfTactile.reset();                // clear all disabled surfaces
+  ```
+- **URL query param** (session-only, not persisted):
+  ```
+  ?tactile-off=navbar,link-button
+  ```
+
+### Surface IDs
+
+- `navbar`
+- `mobile-menu`
+- `language-switcher`
+- `view-toggle`
+- `link-button`
+- `icon-button`
+- `command-palette`
+
+The footer toggle button (`TactileModeToggle`) does not have a surface ID and cannot be disabled — it is the toggle itself.

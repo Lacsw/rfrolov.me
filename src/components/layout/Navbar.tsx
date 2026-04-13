@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl";
 
 import { Container, HamburgerIcon, MagneticLink, ThemeToggle } from "@/components/ui";
 import { HOVER_TEXT_COLOR, KBD_BASE, NAV_LINKS } from "@/constants";
-import { useCommandPalette, useReducedMotion, useScrolled } from "@/hooks";
+import { useCommandPalette, useReducedMotion, useScrolled, useTactileSurface } from "@/hooks";
 import { Link, usePathname } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
@@ -22,6 +22,7 @@ export function Navbar() {
   const { open: openCommandPalette } = useCommandPalette();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const prefersReducedMotion = useReducedMotion();
+  const isTactileNavbar = useTactileSurface("navbar");
 
   const { scrollY } = useScroll();
   const padding = useTransform(scrollY, [0, 120], [12, 0]);
@@ -67,41 +68,62 @@ export function Navbar() {
 
             {/* Desktop nav */}
             <div className="hidden sm:flex items-center gap-6">
-              <ul className="flex items-center gap-2">
-                {NAV_LINKS.map((link) => {
-                  const isActive =
-                    link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+              {isTactileNavbar ? (
+                <ul className="flex items-center gap-2">
+                  {NAV_LINKS.map((link) => {
+                    const isActive =
+                      link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
 
-                  return (
-                    <li key={link.href} className="relative">
-                      <Link
-                        href={link.href}
-                        aria-current={isActive ? "page" : undefined}
-                        className={cn(
-                          "relative z-10 inline-block px-3 py-1.5 text-sm transition-colors duration-300",
-                          isActive ? "text-foreground" : HOVER_TEXT_COLOR
+                    return (
+                      <li key={link.href}>
+                        <Link
+                          href={link.href}
+                          aria-current={isActive ? "page" : undefined}
+                          className="tactile-surface tactile-surface--ghost tactile-surface--sm"
+                        >
+                          <span>{t(link.key)}</span>
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              ) : (
+                <ul className="flex items-center gap-2">
+                  {NAV_LINKS.map((link) => {
+                    const isActive =
+                      link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+
+                    return (
+                      <li key={link.href} className="relative">
+                        <Link
+                          href={link.href}
+                          aria-current={isActive ? "page" : undefined}
+                          className={cn(
+                            "relative z-10 inline-block px-3 py-1.5 text-sm transition-colors duration-300",
+                            isActive ? "text-foreground" : HOVER_TEXT_COLOR
+                          )}
+                        >
+                          {t(link.key)}
+                        </Link>
+                        {isActive && !prefersReducedMotion && (
+                          <motion.span
+                            layoutId="navbar-active-pill"
+                            className="absolute inset-0 rounded-md bg-muted"
+                            transition={{ type: "spring", stiffness: 400, damping: 35 }}
+                            aria-hidden
+                          />
                         )}
-                      >
-                        {t(link.key)}
-                      </Link>
-                      {isActive && !prefersReducedMotion && (
-                        <motion.span
-                          layoutId="navbar-active-pill"
-                          className="absolute inset-0 rounded-md bg-muted"
-                          transition={{ type: "spring", stiffness: 400, damping: 35 }}
-                          aria-hidden
-                        />
-                      )}
-                      {isActive && prefersReducedMotion && (
-                        <span
-                          className="absolute inset-0 rounded-md bg-muted"
-                          aria-hidden
-                        />
-                      )}
-                    </li>
-                  );
-                })}
-              </ul>
+                        {isActive && prefersReducedMotion && (
+                          <span
+                            className="absolute inset-0 rounded-md bg-muted"
+                            aria-hidden
+                          />
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
               <LanguageSwitcher />
               <ThemeToggle />
               <MagneticLink strength={0.3} range={60}>

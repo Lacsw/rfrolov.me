@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 
 import { ThemeToggle } from "@/components/ui";
 import { HOVER_TEXT_COLOR, NAV_LINKS } from "@/constants";
+import { useTactileSurface } from "@/hooks";
 import { Link, usePathname } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
@@ -60,6 +61,7 @@ export function MobileMenu({ isOpen, onClose }: TMobileMenuProps) {
   const tCommon = useTranslations("common");
   const pathname = usePathname();
   const menuRef = useRef<HTMLElement>(null);
+  const isTactileMenu = useTactileSurface("mobile-menu");
 
   useEffect(() => {
     if (!isOpen) return;
@@ -126,17 +128,28 @@ export function MobileMenu({ isOpen, onClose }: TMobileMenuProps) {
 
                 return (
                   <motion.li key={link.href} variants={linkVariants}>
-                    <Link
-                      href={link.href}
-                      onClick={onClose}
-                      aria-current={isActive ? "page" : undefined}
-                      className={cn(
-                        "block px-6 py-3 text-base transition-colors duration-300",
-                        isActive ? "text-accent-foreground" : HOVER_TEXT_COLOR
-                      )}
-                    >
-                      {t(link.key)}
-                    </Link>
+                    {isTactileMenu ? (
+                      <Link
+                        href={link.href}
+                        onClick={onClose}
+                        aria-current={isActive ? "page" : undefined}
+                        className="tactile-surface tactile-surface--ghost tactile-surface--md mx-6 my-1 w-[calc(100%-3rem)] justify-start px-4"
+                      >
+                        <span>{t(link.key)}</span>
+                      </Link>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        onClick={onClose}
+                        aria-current={isActive ? "page" : undefined}
+                        className={cn(
+                          "block px-6 py-3 text-base transition-colors duration-300",
+                          isActive ? "text-accent-foreground" : HOVER_TEXT_COLOR
+                        )}
+                      >
+                        {t(link.key)}
+                      </Link>
+                    )}
                   </motion.li>
                 );
               })}

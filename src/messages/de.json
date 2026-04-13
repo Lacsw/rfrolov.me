@@ -33,10 +33,20 @@
     "focusSearch": "Suche fokussieren",
     "nextItem": "Nächstes Element",
     "previousItem": "Vorheriges Element",
+    "toggleTactile": "Taktilen Modus umschalten",
     "scope": {
       "global": "Global",
       "blog": "Blog",
       "experience": "Erfahrung"
+    }
+  },
+  "tactile": {
+    "label": "Taktil",
+    "enable": "Taktilen Modus aktivieren",
+    "disable": "Taktilen Modus deaktivieren",
+    "hint": {
+      "message": "Probiere den taktilen Modus — Schalter im Footer oder Shift+T drücken",
+      "dismiss": "Schließen"
     }
   },
   "experience": {

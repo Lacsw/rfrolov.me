@@ -6,4 +6,5 @@ export { usePersistedState } from "./usePersistedState";
 export { useReadingProgress } from "./useReadingProgress";
 export { useReducedMotion } from "./useReducedMotion";
 export { useScrolled } from "./useScrolled";
+export { useTactile, useTactileSurface } from "./useTactile";
 export { useToggle } from "./useToggle";
