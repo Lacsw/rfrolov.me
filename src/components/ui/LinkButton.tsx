@@ -1,5 +1,8 @@
+"use client";
+
 import { ReactNode } from "react";
 
+import { useTactileSurface } from "@/hooks";
 import { cn } from "@/lib/utils";
 
 import { ExternalLink } from "./ExternalLink";
@@ -12,6 +15,23 @@ type TLinkButtonProps = {
 };
 
 export function LinkButton({ href, variant = "solid", children, className }: TLinkButtonProps) {
+  const isTactile = useTactileSurface("link-button");
+
+  if (isTactile) {
+    const variantClass =
+      variant === "solid" ? "tactile-surface--primary" : "tactile-surface--outline";
+
+    return (
+      <ExternalLink
+        href={href}
+        className={cn("tactile-surface tactile-surface--md", variantClass, className)}
+      >
+        <span>{children}</span>
+      </ExternalLink>
+    );
+  }
+
+  // Legacy branch — untouched.
   return (
     <ExternalLink
       href={href}
