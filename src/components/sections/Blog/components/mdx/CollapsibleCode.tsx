@@ -4,6 +4,7 @@ import { ReactNode, useId, useMemo, useState } from "react";
 
 import { ChevronDown, ChevronRight } from "lucide-react";
 
+import { useTactileSurface } from "@/hooks";
 import { getTextContent } from "@/lib/extract-text";
 import { cn } from "@/lib/utils";
 
@@ -19,6 +20,7 @@ export function CollapsibleCode({ title, children, defaultOpen = false }: TColla
   const [isOpen, setIsOpen] = useState(defaultOpen);
   const codeContent = useMemo(() => getTextContent(children), [children]);
   const contentId = useId();
+  const isTactile = useTactileSurface("collapsible-code");
 
   return (
     <div className="my-4 rounded-lg border border-muted overflow-hidden">
@@ -33,14 +35,31 @@ export function CollapsibleCode({ title, children, defaultOpen = false }: TColla
           onClick={() => setIsOpen(!isOpen)}
           aria-expanded={isOpen}
           aria-controls={contentId}
-          className="flex items-center gap-2 text-left text-sm font-medium hover:opacity-70 transition-opacity cursor-pointer"
+          className={
+            isTactile
+              ? "tactile-surface tactile-surface--ghost tactile-surface--xs"
+              : "flex items-center gap-2 text-left text-sm font-medium hover:opacity-70 transition-opacity cursor-pointer"
+          }
         >
-          {isOpen ? (
-            <ChevronDown className="h-4 w-4 text-muted-foreground" />
+          {isTactile ? (
+            <span className="flex items-center gap-2">
+              {isOpen ? (
+                <ChevronDown className="h-4 w-4 text-muted-foreground" />
+              ) : (
+                <ChevronRight className="h-4 w-4 text-muted-foreground" />
+              )}
+              {title}
+            </span>
           ) : (
-            <ChevronRight className="h-4 w-4 text-muted-foreground" />
+            <>
+              {isOpen ? (
+                <ChevronDown className="h-4 w-4 text-muted-foreground" />
+              ) : (
+                <ChevronRight className="h-4 w-4 text-muted-foreground" />
+              )}
+              <span>{title}</span>
+            </>
           )}
-          <span>{title}</span>
         </button>
         <CopyButton text={codeContent} />
       </div>
