@@ -155,28 +155,31 @@ export function Navbar() {
               </MagneticLink>
             </div>
 
-            {/* Mobile hamburger button */}
-            {isTactileHamburger ? (
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="sm:hidden tactile-surface tactile-surface--ghost tactile-surface--sm tactile-surface--square"
-                aria-label={isMenuOpen ? t("closeMenu") : t("openMenu")}
-                aria-expanded={isMenuOpen}
-              >
-                <span>
+            {/* Mobile hamburger button — sm:hidden on wrapper to avoid
+                .tactile-surface display:inline-flex overriding it */}
+            <div className="sm:hidden">
+              {isTactileHamburger ? (
+                <button
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  className="tactile-surface tactile-surface--ghost tactile-surface--sm tactile-surface--square"
+                  aria-label={isMenuOpen ? t("closeMenu") : t("openMenu")}
+                  aria-expanded={isMenuOpen}
+                >
+                  <span>
+                    <HamburgerIcon isOpen={isMenuOpen} />
+                  </span>
+                </button>
+              ) : (
+                <button
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  className="p-2 cursor-pointer"
+                  aria-label={isMenuOpen ? t("closeMenu") : t("openMenu")}
+                  aria-expanded={isMenuOpen}
+                >
                   <HamburgerIcon isOpen={isMenuOpen} />
-                </span>
-              </button>
-            ) : (
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="sm:hidden p-2 cursor-pointer"
-                aria-label={isMenuOpen ? t("closeMenu") : t("openMenu")}
-                aria-expanded={isMenuOpen}
-              >
-                <HamburgerIcon isOpen={isMenuOpen} />
-              </button>
-            )}
+                </button>
+              )}
+            </div>
           </nav>
         </Container>
       </motion.header>
