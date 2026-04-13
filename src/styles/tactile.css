@@ -119,13 +119,30 @@
   width: 100%;
 }
 
-/* Card-scale surfaces — higher elevation for large interactive areas */
-.tactile-surface--card {
-  --tactile-elevation: 5px;
-  --tactile-hover-lift: 2px;
-  display: flex;
-  width: 100%;
-  transition: transform 180ms cubic-bezier(0.8, -0.4, 0.5, 1);
+/* Card-scale tactile — uses transform + box-shadow on the card itself,
+ * NOT pseudo-elements. Cards have complex content that can't be wrapped
+ * in a single <span>. This is a standalone class, NOT a --card modifier
+ * on .tactile-surface. */
+.tactile-card {
+  transition: transform 180ms cubic-bezier(0.8, -0.4, 0.5, 1),
+              box-shadow 180ms cubic-bezier(0.8, -0.4, 0.5, 1);
+  box-shadow: 0 4px 0 0 hsl(var(--muted-foreground) / 0.15);
+}
+
+.tactile-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 0 hsl(var(--muted-foreground) / 0.15);
+}
+
+.tactile-card:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 0 hsl(var(--muted-foreground) / 0.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tactile-card {
+    transition: none;
+  }
 }
 
 /* ----- Color variants ----- */

@@ -57,8 +57,8 @@ export function AnimatedCard({
   if (isTactile) {
     const tactileBaseClasses = cn(
       "group block h-full",
-      "tactile-surface tactile-surface--ghost tactile-surface--card",
-      "rounded-lg border",
+      "tactile-card",
+      "rounded-lg border bg-background p-6",
       large && "md:col-span-2",
       featured ? "border-foreground/20" : "border-muted",
       className
@@ -69,7 +69,7 @@ export function AnimatedCard({
         <div className={outerClasses}>
           <Link href={href as TLinkHref}>
             <motion.div {...animation} className={cn(tactileBaseClasses, "cursor-pointer")}>
-              <span className="block">{children}</span>
+              {children}
             </motion.div>
           </Link>
         </div>
@@ -80,7 +80,7 @@ export function AnimatedCard({
       return (
         <div className={outerClasses}>
           <motion.a href={href} {...EXTERNAL_LINK_PROPS} {...animation} className={cn(tactileBaseClasses, "cursor-pointer")}>
-            <span className="block">{children}</span>
+            {children}
           </motion.a>
         </div>
       );
@@ -89,7 +89,7 @@ export function AnimatedCard({
     return (
       <div className={outerClasses}>
         <motion.div {...animation} className={tactileBaseClasses}>
-          <span className="block">{children}</span>
+          {children}
         </motion.div>
       </div>
     );
