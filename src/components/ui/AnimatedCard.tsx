@@ -11,7 +11,7 @@ import {
   EXTERNAL_LINK_PROPS,
   getStaggeredAnimation,
 } from "@/constants";
-import { useReducedMotion } from "@/hooks";
+import { useReducedMotion, useTactileSurface } from "@/hooks";
 import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
@@ -40,6 +40,8 @@ export function AnimatedCard({
   internal = false,
 }: TAnimatedCardProps) {
   const prefersReducedMotion = useReducedMotion();
+  const isTactile = useTactileSurface("animated-card");
+
   const baseClasses = cn(
     "group block h-full",
     CARD_BASE,
@@ -51,6 +53,47 @@ export function AnimatedCard({
 
   const animation = prefersReducedMotion ? {} : getStaggeredAnimation(index);
   const outerClasses = cn("h-full", large && "md:col-span-2");
+
+  if (isTactile) {
+    const tactileBaseClasses = cn(
+      "group block h-full",
+      "tactile-surface tactile-surface--ghost tactile-surface--card",
+      "rounded-lg border",
+      large && "md:col-span-2",
+      featured ? "border-foreground/20" : "border-muted",
+      className
+    );
+
+    if (href && internal) {
+      return (
+        <div className={outerClasses}>
+          <Link href={href as TLinkHref}>
+            <motion.div {...animation} className={cn(tactileBaseClasses, "cursor-pointer")}>
+              <span className="block">{children}</span>
+            </motion.div>
+          </Link>
+        </div>
+      );
+    }
+
+    if (href) {
+      return (
+        <div className={outerClasses}>
+          <motion.a href={href} {...EXTERNAL_LINK_PROPS} {...animation} className={cn(tactileBaseClasses, "cursor-pointer")}>
+            <span className="block">{children}</span>
+          </motion.a>
+        </div>
+      );
+    }
+
+    return (
+      <div className={outerClasses}>
+        <motion.div {...animation} className={tactileBaseClasses}>
+          <span className="block">{children}</span>
+        </motion.div>
+      </div>
+    );
+  }
 
   const inner = (() => {
     if (href && internal) {
