@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { Search, X } from "lucide-react";
 
+import { useTactileSurface } from "@/hooks";
 import { useDebounce } from "@/lib/hooks";
 import { cn } from "@/lib/utils";
 
@@ -24,6 +25,7 @@ export function SearchInput({
 }: TSearchInputProps) {
   const [localValue, setLocalValue] = useState(value);
   const inputRef = useRef<HTMLInputElement>(null);
+  const isTactile = useTactileSurface("search-clear");
 
   useEffect(() => {
     setLocalValue(value);
@@ -85,10 +87,20 @@ export function SearchInput({
       {localValue ? (
         <button
           onClick={handleClear}
-          className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-muted-foreground hover:text-foreground"
+          className={
+            isTactile
+              ? "absolute right-3 top-1/2 -translate-y-1/2 tactile-surface tactile-surface--ghost tactile-surface--xs tactile-surface--square"
+              : "absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-muted-foreground hover:text-foreground"
+          }
           aria-label="Clear search"
         >
-          <X className="h-4 w-4" />
+          {isTactile ? (
+            <span>
+              <X className="h-4 w-4" />
+            </span>
+          ) : (
+            <X className="h-4 w-4" />
+          )}
         </button>
       ) : (
         <kbd className="pointer-events-none absolute right-3 top-1/2 hidden -translate-y-1/2 select-none rounded border border-muted bg-muted px-1.5 text-xs text-muted-foreground sm:block">
