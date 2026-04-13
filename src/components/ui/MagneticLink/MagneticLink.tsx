@@ -4,7 +4,7 @@ import { ReactNode, useRef } from "react";
 
 import { motion } from "framer-motion";
 
-import { useMagnetic, useReducedMotion } from "@/hooks";
+import { useMagnetic, useReducedMotion, useTactile } from "@/hooks";
 
 type TMagneticLinkProps = {
   children: ReactNode;
@@ -21,9 +21,10 @@ export function MagneticLink({
 }: TMagneticLinkProps) {
   const ref = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
+  const { tactile } = useTactile();
   const { x, y } = useMagnetic({ ref, strength, range });
 
-  if (prefersReducedMotion) {
+  if (prefersReducedMotion || tactile) {
     return <div className={className}>{children}</div>;
   }
 
