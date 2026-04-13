@@ -33,10 +33,20 @@
     "focusSearch": "Focus search",
     "nextItem": "Next item",
     "previousItem": "Previous item",
+    "toggleTactile": "Toggle tactile mode",
     "scope": {
       "global": "Global",
       "blog": "Blog",
       "experience": "Experience"
+    }
+  },
+  "tactile": {
+    "label": "Tactile",
+    "enable": "Enable tactile mode",
+    "disable": "Disable tactile mode",
+    "hint": {
+      "message": "Try tactile mode — toggle in the footer or press Shift+T",
+      "dismiss": "Dismiss"
     }
   },
   "experience": {
