@@ -8,6 +8,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
 import { TechTags } from "@/components/ui";
+import { useTactileSurface } from "@/hooks";
 import { cn } from "@/lib/utils";
 import { TExperience } from "@/types";
 
@@ -23,6 +24,7 @@ export function ExperienceCard({ experience, isLast }: TExperienceCardProps) {
   const isCurrentPosition = experience.isCurrent ?? false;
   const hasHighlights = experience.highlights && experience.highlights.length > 0;
   const [isExpanded, setIsExpanded] = useState(false);
+  const isTactile = useTactileSurface("experience-toggle");
 
   return (
     <motion.div
@@ -74,15 +76,34 @@ export function ExperienceCard({ experience, isLast }: TExperienceCardProps) {
           <>
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="flex items-center gap-1 pt-2 text-xs text-muted-foreground hover:text-foreground transition-colors duration-200 cursor-pointer"
+              aria-expanded={isExpanded}
+              className={
+                isTactile
+                  ? "tactile-surface tactile-surface--ghost tactile-surface--xs mt-2"
+                  : "flex items-center gap-1 pt-2 text-xs text-muted-foreground hover:text-foreground transition-colors duration-200 cursor-pointer"
+              }
             >
-              <ChevronDown
-                className={cn(
-                  "h-3 w-3 transition-transform duration-200",
-                  isExpanded && "rotate-180"
-                )}
-              />
-              <span>{isExpanded ? "Less" : "Key achievements"}</span>
+              {isTactile ? (
+                <span className="flex items-center gap-1">
+                  <ChevronDown
+                    className={cn(
+                      "h-3 w-3 transition-transform duration-200",
+                      isExpanded && "rotate-180"
+                    )}
+                  />
+                  {isExpanded ? "Less" : "Key achievements"}
+                </span>
+              ) : (
+                <>
+                  <ChevronDown
+                    className={cn(
+                      "h-3 w-3 transition-transform duration-200",
+                      isExpanded && "rotate-180"
+                    )}
+                  />
+                  <span>{isExpanded ? "Less" : "Key achievements"}</span>
+                </>
+              )}
             </button>
 
             <AnimatePresence>

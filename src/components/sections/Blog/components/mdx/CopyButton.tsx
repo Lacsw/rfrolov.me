@@ -5,6 +5,7 @@ import { memo, useCallback } from "react";
 import { Copy } from "lucide-react";
 
 import { useToast } from "@/components/ui";
+import { useTactileSurface } from "@/hooks";
 import { cn } from "@/lib/utils";
 
 type TCopyButtonProps = {
@@ -13,6 +14,7 @@ type TCopyButtonProps = {
 
 export const CopyButton = memo(function CopyButton({ text }: TCopyButtonProps) {
   const { showToast } = useToast();
+  const isTactile = useTactileSurface("copy-button");
 
   const handleCopy = useCallback(async () => {
     try {
@@ -26,13 +28,23 @@ export const CopyButton = memo(function CopyButton({ text }: TCopyButtonProps) {
   return (
     <button
       onClick={handleCopy}
-      className={cn(
-        "p-1 rounded transition-all duration-200 cursor-pointer",
-        "text-muted-foreground/60 hover:text-foreground"
-      )}
+      className={
+        isTactile
+          ? "tactile-surface tactile-surface--ghost tactile-surface--xs tactile-surface--square"
+          : cn(
+              "p-1 rounded transition-all duration-200 cursor-pointer",
+              "text-muted-foreground/60 hover:text-foreground"
+            )
+      }
       aria-label="Copy code"
     >
-      <Copy className="h-4 w-4" />
+      {isTactile ? (
+        <span>
+          <Copy className="h-4 w-4" />
+        </span>
+      ) : (
+        <Copy className="h-4 w-4" />
+      )}
     </button>
   );
 });

@@ -1,9 +1,12 @@
+"use client";
+
 import { RefObject } from "react";
 
 import { Search } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { ICON_SIZE, KBD_BASE } from "@/constants";
+import { useTactileSurface } from "@/hooks";
 import { cn } from "@/lib/utils";
 
 type TCommandSearchInputProps = {
@@ -20,6 +23,7 @@ export function CommandSearchInput({
   onClose,
 }: TCommandSearchInputProps) {
   const t = useTranslations();
+  const isTactile = useTactileSurface("command-palette");
 
   return (
     <div className="flex items-center gap-3 border-b border-muted px-4">
@@ -36,17 +40,26 @@ export function CommandSearchInput({
           "placeholder:text-muted-foreground"
         )}
       />
-      <kbd
-        onClick={onClose}
-        className={cn(
-          KBD_BASE,
-          "hidden sm:inline-flex items-center gap-1 px-2 py-1",
-          "text-xs text-muted-foreground",
-          "cursor-pointer transition-colors hover:bg-muted hover:text-foreground"
-        )}
-      >
-        ESC
-      </kbd>
+      {isTactile ? (
+        <button
+          onClick={onClose}
+          className="hidden sm:inline-flex tactile-surface tactile-surface--ghost tactile-surface--xs"
+        >
+          <span>ESC</span>
+        </button>
+      ) : (
+        <kbd
+          onClick={onClose}
+          className={cn(
+            KBD_BASE,
+            "hidden sm:inline-flex items-center gap-1 px-2 py-1",
+            "text-xs text-muted-foreground",
+            "cursor-pointer transition-colors hover:bg-muted hover:text-foreground"
+          )}
+        >
+          ESC
+        </kbd>
+      )}
     </div>
   );
 }

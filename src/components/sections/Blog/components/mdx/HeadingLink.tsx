@@ -6,6 +6,7 @@ import { Link2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { useToast } from "@/components/ui";
+import { useTactileSurface } from "@/hooks";
 import { cn } from "@/lib/utils";
 
 type THeadingLevel = "h1" | "h2" | "h3" | "h4";
@@ -30,6 +31,7 @@ export function HeadingLink({
 }: THeadingLinkProps) {
   const { showToast } = useToast();
   const t = useTranslations("common");
+  const isTactile = useTactileSurface("heading-link");
 
   const handleCopyLink = async () => {
     if (!id) return;
@@ -54,15 +56,30 @@ export function HeadingLink({
       {id && (
         <button
           onClick={handleCopyLink}
-          className={cn(
-            "ml-2 inline-flex items-center justify-center align-middle",
-            "cursor-pointer text-muted-foreground hover:text-foreground",
-            "opacity-0 transition-opacity duration-150 group-hover:opacity-100",
-            "focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground"
-          )}
+          className={
+            isTactile
+              ? cn(
+                  "ml-2 inline-flex items-center justify-center align-middle",
+                  "tactile-surface tactile-surface--ghost tactile-surface--xs tactile-surface--square",
+                  "opacity-0 transition-opacity duration-150 group-hover:opacity-100",
+                  "focus-visible:opacity-100"
+                )
+              : cn(
+                  "ml-2 inline-flex items-center justify-center align-middle",
+                  "cursor-pointer text-muted-foreground hover:text-foreground",
+                  "opacity-0 transition-opacity duration-150 group-hover:opacity-100",
+                  "focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground"
+                )
+          }
           aria-label={t("copyLink")}
         >
-          <Link2 className="h-4 w-4" />
+          {isTactile ? (
+            <span>
+              <Link2 className="h-4 w-4" />
+            </span>
+          ) : (
+            <Link2 className="h-4 w-4" />
+          )}
         </button>
       )}
     </Component>
