@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 
 import { EXTERNAL_LINK_PROPS, HOVER_TEXT_COLOR, ICON_SIZE } from "@/constants";
-import { useReducedMotion } from "@/hooks";
+import { useReducedMotion, useTactileSurface } from "@/hooks";
 import { cn } from "@/lib/utils";
 import { TSocialLink } from "@/types";
 
@@ -13,6 +13,22 @@ type TSocialLinkProps = TSocialLink & {
 
 export function SocialLink({ name, href, icon: Icon, className }: TSocialLinkProps) {
   const prefersReducedMotion = useReducedMotion();
+  const isTactile = useTactileSurface("social-link");
+
+  if (isTactile) {
+    return (
+      <a
+        href={href}
+        {...EXTERNAL_LINK_PROPS}
+        className={cn("tactile-surface tactile-surface--ghost tactile-surface--sm tactile-surface--square", className)}
+        aria-label={name}
+      >
+        <span>
+          <Icon className={ICON_SIZE.md} />
+        </span>
+      </a>
+    );
+  }
 
   return (
     <motion.a

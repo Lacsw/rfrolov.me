@@ -7,7 +7,7 @@ import { ArrowUp } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { SPRING_TRANSITION } from "@/constants";
-import { useReducedMotion } from "@/hooks";
+import { useReducedMotion, useTactile } from "@/hooks";
 import { cn } from "@/lib/utils";
 
 const SCROLL_THRESHOLD = 300;
@@ -16,6 +16,7 @@ export function ScrollToTop() {
   const t = useTranslations("common");
   const [isVisible, setIsVisible] = useState(false);
   const prefersReducedMotion = useReducedMotion();
+  const { tactile } = useTactile();
 
   const progress = useMotionValue(0);
   const smoothProgress = useSpring(progress, { stiffness: 150, damping: 20 });
@@ -54,8 +55,8 @@ export function ScrollToTop() {
           initial={{ opacity: 0, scale: 0.6, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.6, y: 20 }}
-          whileHover={prefersReducedMotion ? undefined : { scale: 1.1 }}
-          whileTap={prefersReducedMotion ? undefined : { scale: 0.9 }}
+          whileHover={prefersReducedMotion || tactile ? undefined : { scale: 1.1 }}
+          whileTap={prefersReducedMotion || tactile ? undefined : { scale: 0.9 }}
           transition={prefersReducedMotion ? { duration: 0 } : SPRING_TRANSITION}
           onClick={scrollToTop}
           className={cn(
