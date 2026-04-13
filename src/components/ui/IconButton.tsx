@@ -1,6 +1,9 @@
+"use client";
+
 import { ButtonHTMLAttributes, forwardRef, ReactNode } from "react";
 
 import { HOVER_TEXT_COLOR } from "@/constants";
+import { useTactileSurface } from "@/hooks";
 import { cn } from "@/lib/utils";
 
 type TIconButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -10,6 +13,25 @@ type TIconButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 export const IconButton = forwardRef<HTMLButtonElement, TIconButtonProps>(
   ({ children, className, active, ...props }, ref) => {
+    const isTactile = useTactileSurface("icon-button");
+
+    if (isTactile) {
+      return (
+        <button
+          ref={ref}
+          aria-pressed={active}
+          className={cn(
+            "tactile-surface tactile-surface--ghost tactile-surface--md tactile-surface--square",
+            className
+          )}
+          {...props}
+        >
+          <span>{children}</span>
+        </button>
+      );
+    }
+
+    // Legacy branch — untouched.
     return (
       <button
         ref={ref}

@@ -24,7 +24,9 @@ export function useTactile(): TTactileContextValue {
 }
 
 export function useTactileSurface(surfaceId: string): boolean {
-  const { tactile, disabledSurfaces } = useTactile();
+  const ctx = useContext(TactileContext);
 
-  return tactile && !disabledSurfaces.has(surfaceId);
+  if (!ctx) return false;
+
+  return ctx.tactile && !ctx.disabledSurfaces.has(surfaceId);
 }
