@@ -89,5 +89,7 @@ Some interactive surfaces opt in via `useTactileSurface(surfaceId)`. To temporar
 - `heading-link`
 - `experience-toggle`
 - `hamburger`
+- `social-link`
+- `animated-card`
 
 The footer toggle button (`TactileModeToggle`) does not have a surface ID and cannot be disabled — it is the toggle itself.

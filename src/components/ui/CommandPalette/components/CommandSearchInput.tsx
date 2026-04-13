@@ -37,7 +37,8 @@ export function CommandSearchInput({
         style={{ outline: "none", boxShadow: "none" }}
         className={cn(
           "flex-1 bg-transparent py-4 text-sm",
-          "placeholder:text-muted-foreground"
+          "placeholder:text-muted-foreground",
+          isTactile && "tactile-well"
         )}
       />
       {isTactile ? (

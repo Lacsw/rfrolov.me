@@ -81,7 +81,8 @@ export function SearchInput({
           "w-full rounded-lg border border-muted bg-background py-2 pl-10 pr-10 text-sm",
           "placeholder:text-muted-foreground",
           "focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background",
-          "transition-shadow"
+          "transition-shadow",
+          isTactile && "tactile-well"
         )}
       />
       {localValue ? (
