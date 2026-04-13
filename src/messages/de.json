@@ -24,6 +24,11 @@
     "role": "Software Engineer",
     "description": "Engineer in Berlin. Ich baue zuverlässige Software, die echte Probleme löst und Wert liefert — von der Idee bis zur Produktion, über den ganzen Stack."
   },
+  "talkBanner": {
+    "label": "Vortrag auf der webinale",
+    "title": "Human-Centered AI: Supporting, Not Replacing",
+    "meta": "2.–4. Jun, Berlin"
+  },
   "shortcuts": {
     "title": "Tastenkürzel",
     "close": "Schließen",
