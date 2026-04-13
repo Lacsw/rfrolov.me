@@ -23,6 +23,7 @@ export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const prefersReducedMotion = useReducedMotion();
   const isTactileNavbar = useTactileSurface("navbar");
+  const isTactileHamburger = useTactileSurface("hamburger");
 
   const { scrollY } = useScroll();
   const padding = useTransform(scrollY, [0, 120], [12, 0]);
@@ -155,14 +156,27 @@ export function Navbar() {
             </div>
 
             {/* Mobile hamburger button */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="sm:hidden p-2 cursor-pointer"
-              aria-label={isMenuOpen ? t("closeMenu") : t("openMenu")}
-              aria-expanded={isMenuOpen}
-            >
-              <HamburgerIcon isOpen={isMenuOpen} />
-            </button>
+            {isTactileHamburger ? (
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="sm:hidden tactile-surface tactile-surface--ghost tactile-surface--sm tactile-surface--square"
+                aria-label={isMenuOpen ? t("closeMenu") : t("openMenu")}
+                aria-expanded={isMenuOpen}
+              >
+                <span>
+                  <HamburgerIcon isOpen={isMenuOpen} />
+                </span>
+              </button>
+            ) : (
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="sm:hidden p-2 cursor-pointer"
+                aria-label={isMenuOpen ? t("closeMenu") : t("openMenu")}
+                aria-expanded={isMenuOpen}
+              >
+                <HamburgerIcon isOpen={isMenuOpen} />
+              </button>
+            )}
           </nav>
         </Container>
       </motion.header>
