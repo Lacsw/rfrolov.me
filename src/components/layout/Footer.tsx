@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 
-import { Container, SocialLink } from "@/components/ui";
+import { Container, SocialLink, TactileModeToggle } from "@/components/ui";
 import { socialLinks } from "@/data/social-links";
 import { Link } from "@/i18n/routing";
 
@@ -30,6 +30,7 @@ export function Footer() {
             {socialLinks.map((link) => (
               <SocialLink key={link.name} {...link} />
             ))}
+            <TactileModeToggle />
           </div>
         </div>
       </Container>
