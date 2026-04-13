@@ -9,7 +9,7 @@ import { BlogPostCard, BlogPostListItem } from "@/components/sections/Blog";
 import { Container, EmptyState, SearchInput, SectionHeader, ViewToggle } from "@/components/ui";
 import { type TViewMode } from "@/components/ui/ViewToggle";
 import { FADE_IN, FADE_IN_TRANSITION } from "@/constants";
-import { usePersistedState } from "@/hooks";
+import { usePersistedState, useTactileSurface } from "@/hooks";
 import { cn } from "@/lib/utils";
 import { TBlogPostMeta } from "@/types";
 
@@ -23,6 +23,7 @@ export function BlogPageClient({ posts, tags }: TProps) {
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [view, setView] = usePersistedState<TViewMode>("blog-view-mode", "grid");
   const [searchQuery, setSearchQuery] = useState("");
+  const isTactile = useTactileSurface("blog-filters");
 
   const filteredPosts = useMemo(() => {
     let result = posts;
@@ -67,31 +68,52 @@ export function BlogPageClient({ posts, tags }: TProps) {
 
             {tags.length > 0 && (
               <div className="flex flex-wrap items-center gap-2">
-                <button
-                  onClick={() => setSelectedTag(null)}
-                  className={cn(
-                    "text-xs px-3 py-1.5 rounded-full cursor-pointer transition-all",
-                    selectedTag === null
-                      ? "bg-foreground text-background"
-                      : "bg-muted text-muted-foreground hover:opacity-70"
-                  )}
-                >
-                  {t("filters.all")}
-                </button>
-                {tags.map((tag) => (
+                {isTactile ? (
                   <button
-                    key={tag}
-                    onClick={() => setSelectedTag(tag)}
+                    onClick={() => setSelectedTag(null)}
+                    aria-pressed={selectedTag === null}
+                    className="tactile-surface tactile-surface--ghost tactile-surface--sm"
+                  >
+                    <span>{t("filters.all")}</span>
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setSelectedTag(null)}
                     className={cn(
                       "text-xs px-3 py-1.5 rounded-full cursor-pointer transition-all",
-                      selectedTag === tag
+                      selectedTag === null
                         ? "bg-foreground text-background"
                         : "bg-muted text-muted-foreground hover:opacity-70"
                     )}
                   >
-                    {tag}
+                    {t("filters.all")}
                   </button>
-                ))}
+                )}
+                {tags.map((tag) =>
+                  isTactile ? (
+                    <button
+                      key={tag}
+                      onClick={() => setSelectedTag(tag)}
+                      aria-pressed={selectedTag === tag}
+                      className="tactile-surface tactile-surface--ghost tactile-surface--sm"
+                    >
+                      <span>{tag}</span>
+                    </button>
+                  ) : (
+                    <button
+                      key={tag}
+                      onClick={() => setSelectedTag(tag)}
+                      className={cn(
+                        "text-xs px-3 py-1.5 rounded-full cursor-pointer transition-all",
+                        selectedTag === tag
+                          ? "bg-foreground text-background"
+                          : "bg-muted text-muted-foreground hover:opacity-70"
+                      )}
+                    >
+                      {tag}
+                    </button>
+                  )
+                )}
                 {showFilterCount && (
                   <span className="text-xs text-muted-foreground ml-2">
                     {t("showingCount", { count: filteredPosts.length, total: posts.length })}

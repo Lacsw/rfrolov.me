@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 
 import { AnimatedSection, Container, EmptyState, SectionHeader } from "@/components/ui";
 import { CATEGORY_KEYS } from "@/constants";
+import { useTactileSurface } from "@/hooks";
 import { cn } from "@/lib/utils";
 import { TProject, TProjectCategory } from "@/types";
 
@@ -19,6 +20,7 @@ type TProps = {
 export function Projects({ projects, projectsWithDetails = [] }: TProps) {
   const t = useTranslations("projects");
   const [filter, setFilter] = useState<TProjectCategory | "all">("all");
+  const isTactile = useTactileSurface("project-filters");
 
   const detailIds = new Set(projectsWithDetails);
 
@@ -37,20 +39,31 @@ export function Projects({ projects, projectsWithDetails = [] }: TProps) {
             <SectionHeader title={t("title")} description={t("description")} as="h1" />
 
             <div className="flex flex-wrap items-center gap-2">
-              {CATEGORY_KEYS.map((key) => (
-                <button
-                  key={key}
-                  onClick={() => setFilter(key)}
-                  className={cn(
-                    "text-xs px-3 py-1.5 rounded-full cursor-pointer transition-all",
-                    filter === key
-                      ? "bg-foreground text-background"
-                      : "bg-muted text-muted-foreground hover:opacity-70"
-                  )}
-                >
-                  {t(`categories.${key}`)}
-                </button>
-              ))}
+              {CATEGORY_KEYS.map((key) =>
+                isTactile ? (
+                  <button
+                    key={key}
+                    onClick={() => setFilter(key)}
+                    aria-pressed={filter === key}
+                    className="tactile-surface tactile-surface--ghost tactile-surface--sm"
+                  >
+                    <span>{t(`categories.${key}`)}</span>
+                  </button>
+                ) : (
+                  <button
+                    key={key}
+                    onClick={() => setFilter(key)}
+                    className={cn(
+                      "text-xs px-3 py-1.5 rounded-full cursor-pointer transition-all",
+                      filter === key
+                        ? "bg-foreground text-background"
+                        : "bg-muted text-muted-foreground hover:opacity-70"
+                    )}
+                  >
+                    {t(`categories.${key}`)}
+                  </button>
+                )
+              )}
               {showFilterCount && (
                 <span className="text-xs text-muted-foreground ml-2">
                   {t("showingCount", { count: filteredProjects.length, total: projects.length })}
