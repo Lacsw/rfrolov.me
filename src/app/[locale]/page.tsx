@@ -19,6 +19,11 @@ type TProps = {
   params: Promise<{ locale: string }>;
 };
 
+// Webinale is Jun 2–4, 2026. Hide the banner on the next build after
+// Jun 5. A manual redeploy is already part of any content update, so
+// this is a fire-and-forget expiry rather than a manual cleanup task.
+const WEBINALE_BANNER_END = new Date("2026-06-05T00:00:00Z").getTime();
+
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
@@ -35,33 +40,36 @@ export default async function Home({ params }: TProps) {
   const featuredProjects = getFeaturedProjects(locale);
   const projectsWithDetails = getAllProjectIdsWithContent(locale);
   const t = await getTranslations({ locale, namespace: "talkBanner" });
+  const showWebinaleBanner = Date.now() < WEBINALE_BANNER_END;
 
   return (
     <main className="pt-16">
       <JsonLd data={generatePersonSchema()} />
       <JsonLd data={generateWebsiteSchema()} />
       <Hero />
-      <section className="pt-6 lg:pt-8">
-        <Container>
-          <a
-            href="https://webinale.com/generative-ai/human-centered-ai-frontend-development/"
-            {...EXTERNAL_LINK_PROPS}
-            className={cn(
-              "group flex items-start gap-2 rounded-lg bg-muted px-4 py-3 text-xs sm:items-center",
-              HOVER_OPACITY
-            )}
-          >
-            <MapPin className={cn(ICON_SIZE.sm, "mt-0.5 shrink-0 text-muted-foreground sm:mt-0")} />
-            <div className="flex min-w-0 flex-1 flex-col gap-0.5 sm:flex-row sm:items-center sm:gap-2">
-              <span className="font-medium">{t("label")}</span>
-              <span className="hidden text-muted-foreground sm:inline">·</span>
-              <span className="text-muted-foreground sm:truncate">{t("title")}</span>
-              <span className="shrink-0 text-muted-foreground sm:ml-auto">{t("meta")}</span>
-            </div>
-            <ArrowUpRight className={cn(ICON_SIZE.sm, "mt-0.5 shrink-0 text-muted-foreground sm:mt-0")} />
-          </a>
-        </Container>
-      </section>
+      {showWebinaleBanner && (
+        <section className="pt-6 lg:pt-8">
+          <Container>
+            <a
+              href="https://webinale.com/generative-ai/human-centered-ai-frontend-development/"
+              {...EXTERNAL_LINK_PROPS}
+              className={cn(
+                "group flex items-start gap-2 rounded-lg bg-muted px-4 py-3 text-xs sm:items-center",
+                HOVER_OPACITY
+              )}
+            >
+              <MapPin className={cn(ICON_SIZE.sm, "mt-0.5 shrink-0 text-muted-foreground sm:mt-0")} />
+              <div className="flex min-w-0 flex-1 flex-col gap-0.5 sm:flex-row sm:items-center sm:gap-2">
+                <span className="font-medium">{t("label")}</span>
+                <span className="hidden text-muted-foreground sm:inline">·</span>
+                <span className="text-muted-foreground sm:truncate">{t("title")}</span>
+                <span className="shrink-0 text-muted-foreground sm:ml-auto">{t("meta")}</span>
+              </div>
+              <ArrowUpRight className={cn(ICON_SIZE.sm, "mt-0.5 shrink-0 text-muted-foreground sm:mt-0")} />
+            </a>
+          </Container>
+        </section>
+      )}
       <BlogList posts={featuredPosts} />
       <FeaturedProjects projects={featuredProjects} projectsWithDetails={projectsWithDetails} />
     </main>
