@@ -52,11 +52,14 @@ export function AnimatedCard({
     className
   );
 
-  // Defer the entrance animation until after hydration. The server renders
-  // motion.div without initial/animate props, the first client render matches,
-  // then the effect flips `hydrated` and Framer Motion plays the stagger.
-  const animation = prefersReducedMotion || !hydrated ? {} : getStaggeredAnimation(index);
   const outerClasses = cn("h-full", large && "md:col-span-2");
+
+  // Until the client has hydrated, render plain HTML that matches the SSR
+  // output byte-for-byte — motion.* components emit an inline `style={}`
+  // on the client that server omits, which React treats as a hydration
+  // mismatch and tears the tree down. Once `useHydrated()` flips true we
+  // re-render with motion.* and Framer Motion plays the entrance animation.
+  const animation = prefersReducedMotion ? {} : getStaggeredAnimation(index);
 
   if (isTactile) {
     const tactileBaseClasses = cn(
@@ -72,9 +75,13 @@ export function AnimatedCard({
       return (
         <div className={outerClasses}>
           <Link href={href as TLinkHref}>
-            <motion.div {...animation} className={cn(tactileBaseClasses, "cursor-pointer")}>
-              {children}
-            </motion.div>
+            {hydrated && !prefersReducedMotion ? (
+              <motion.div {...animation} className={cn(tactileBaseClasses, "cursor-pointer")}>
+                {children}
+              </motion.div>
+            ) : (
+              <div className={cn(tactileBaseClasses, "cursor-pointer")}>{children}</div>
+            )}
           </Link>
         </div>
       );
@@ -83,18 +90,37 @@ export function AnimatedCard({
     if (href) {
       return (
         <div className={outerClasses}>
-          <motion.a href={href} {...EXTERNAL_LINK_PROPS} {...animation} className={cn(tactileBaseClasses, "cursor-pointer")}>
-            {children}
-          </motion.a>
+          {hydrated && !prefersReducedMotion ? (
+            <motion.a
+              href={href}
+              {...EXTERNAL_LINK_PROPS}
+              {...animation}
+              className={cn(tactileBaseClasses, "cursor-pointer")}
+            >
+              {children}
+            </motion.a>
+          ) : (
+            <a
+              href={href}
+              {...EXTERNAL_LINK_PROPS}
+              className={cn(tactileBaseClasses, "cursor-pointer")}
+            >
+              {children}
+            </a>
+          )}
         </div>
       );
     }
 
     return (
       <div className={outerClasses}>
-        <motion.div {...animation} className={tactileBaseClasses}>
-          {children}
-        </motion.div>
+        {hydrated && !prefersReducedMotion ? (
+          <motion.div {...animation} className={tactileBaseClasses}>
+            {children}
+          </motion.div>
+        ) : (
+          <div className={tactileBaseClasses}>{children}</div>
+        )}
       </div>
     );
   }
@@ -103,15 +129,19 @@ export function AnimatedCard({
     if (href && internal) {
       return (
         <Link href={href as TLinkHref}>
-          <motion.div {...animation} className={cn(baseClasses, "cursor-pointer")}>
-            {children}
-          </motion.div>
+          {hydrated && !prefersReducedMotion ? (
+            <motion.div {...animation} className={cn(baseClasses, "cursor-pointer")}>
+              {children}
+            </motion.div>
+          ) : (
+            <div className={cn(baseClasses, "cursor-pointer")}>{children}</div>
+          )}
         </Link>
       );
     }
 
     if (href) {
-      return (
+      return hydrated && !prefersReducedMotion ? (
         <motion.a
           href={href}
           {...EXTERNAL_LINK_PROPS}
@@ -120,13 +150,19 @@ export function AnimatedCard({
         >
           {children}
         </motion.a>
+      ) : (
+        <a href={href} {...EXTERNAL_LINK_PROPS} className={cn(baseClasses, "cursor-pointer")}>
+          {children}
+        </a>
       );
     }
 
-    return (
+    return hydrated && !prefersReducedMotion ? (
       <motion.div {...animation} className={baseClasses}>
         {children}
       </motion.div>
+    ) : (
+      <div className={baseClasses}>{children}</div>
     );
   })();
 

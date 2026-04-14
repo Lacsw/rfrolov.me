@@ -2,7 +2,7 @@
 
 import { ReactNode, useRef, useState, CSSProperties } from "react";
 
-import { useReducedMotion } from "@/hooks";
+import { useHydrated, useReducedMotion } from "@/hooks";
 import { cn } from "@/lib/utils";
 
 type TShineCardProps = {
@@ -24,6 +24,7 @@ export function ShineCard({ children, className }: TShineCardProps) {
     "--shine-opacity": 0,
   });
   const prefersReducedMotion = useReducedMotion();
+  const hydrated = useHydrated();
 
   function handleMouseMove(event: React.MouseEvent<HTMLDivElement>) {
     if (!ref.current) return;
@@ -37,7 +38,9 @@ export function ShineCard({ children, className }: TShineCardProps) {
     setStyle((prev) => ({ ...prev, "--shine-opacity": 0 }));
   }
 
-  if (prefersReducedMotion) {
+  // Pre-hydration + reduced-motion both skip the mousemove shine layer so
+  // SSR output and first client render are identical plain divs.
+  if (prefersReducedMotion || !hydrated) {
     return <div className={className}>{children}</div>;
   }
 

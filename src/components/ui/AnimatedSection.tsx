@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 import { motion } from "framer-motion";
 
 import { FADE_IN, FADE_IN_TRANSITION } from "@/constants";
-import { useReducedMotion } from "@/hooks";
+import { useHydrated, useReducedMotion } from "@/hooks";
 import { cn } from "@/lib/utils";
 
 type TProps = {
@@ -15,8 +15,11 @@ type TProps = {
 
 export function AnimatedSection({ children, className }: TProps) {
   const prefersReducedMotion = useReducedMotion();
+  const hydrated = useHydrated();
 
-  if (prefersReducedMotion) {
+  // Pre-hydration + reduced-motion skip the motion.div wrapper so the first
+  // client render matches SSR exactly.
+  if (prefersReducedMotion || !hydrated) {
     return <div className={cn(className)}>{children}</div>;
   }
 
