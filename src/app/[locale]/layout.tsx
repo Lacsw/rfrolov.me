@@ -7,7 +7,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Footer, Navbar } from "@/components/layout";
-import { CronitorProvider, LanguageProvider, TactileProvider, ThemeProvider } from "@/components/providers";
+import { CronitorProvider, LanguageProvider, MotionProvider, TactileProvider, ThemeProvider } from "@/components/providers";
 import { CommandPalette, KeyboardShortcuts, ScrollToTop, TactileFirstVisitHint, ToastProvider } from "@/components/ui";
 import { SITE_URL } from "@/constants";
 import { CommandPaletteProvider } from "@/contexts";
@@ -112,25 +112,27 @@ export default async function LocaleLayout({ children, params }: TProps) {
         <NextIntlClientProvider messages={messages}>
           <LanguageProvider>
             <ThemeProvider>
-              <TactileProvider>
-                <ToastProvider>
-                  <a
-                    href="#main-content"
-                    className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:shadow-lg focus:ring-2 focus:ring-foreground focus:ring-offset-2"
-                  >
-                    {t("skipToContent")}
-                  </a>
-                  <CommandPaletteProvider>
-                    <Navbar />
-                    <CommandPalette blogPosts={blogPosts} />
-                  </CommandPaletteProvider>
-                  <KeyboardShortcuts />
-                  <TactileFirstVisitHint />
-                  <div id="main-content">{children}</div>
-                  <Footer />
-                  <ScrollToTop />
-                </ToastProvider>
-              </TactileProvider>
+              <MotionProvider>
+                <TactileProvider>
+                  <ToastProvider>
+                    <a
+                      href="#main-content"
+                      className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:shadow-lg focus:ring-2 focus:ring-foreground focus:ring-offset-2"
+                    >
+                      {t("skipToContent")}
+                    </a>
+                    <CommandPaletteProvider>
+                      <Navbar />
+                      <CommandPalette blogPosts={blogPosts} />
+                    </CommandPaletteProvider>
+                    <KeyboardShortcuts />
+                    <TactileFirstVisitHint />
+                    <div id="main-content">{children}</div>
+                    <Footer />
+                    <ScrollToTop />
+                  </ToastProvider>
+                </TactileProvider>
+              </MotionProvider>
             </ThemeProvider>
           </LanguageProvider>
         </NextIntlClientProvider>
