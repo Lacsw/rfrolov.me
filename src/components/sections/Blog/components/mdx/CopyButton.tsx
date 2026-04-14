@@ -1,8 +1,9 @@
 "use client";
 
-import { memo, useCallback } from "react";
+import { memo, useCallback, useState } from "react";
 
-import { Copy } from "lucide-react";
+import { Check, Copy } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { useToast } from "@/components/ui";
 import { useTactileSurface } from "@/hooks";
@@ -12,18 +13,30 @@ type TCopyButtonProps = {
   text: string;
 };
 
+const COPIED_STATE_MS = 1500;
+
 export const CopyButton = memo(function CopyButton({ text }: TCopyButtonProps) {
   const { showToast } = useToast();
+  const t = useTranslations("copy");
   const isTactile = useTactileSurface("copy-button");
+  const [copied, setCopied] = useState(false);
 
   const handleCopy = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(text);
-      showToast("Copied to clipboard");
+      setCopied(true);
+      showToast(t("copied"));
+      setTimeout(() => setCopied(false), COPIED_STATE_MS);
     } catch {
-      showToast("Failed to copy");
+      showToast(t("copyFailed"));
     }
-  }, [text, showToast]);
+  }, [text, showToast, t]);
+
+  const icon = copied ? (
+    <Check className="h-4 w-4 text-green-500" />
+  ) : (
+    <Copy className="h-4 w-4" />
+  );
 
   return (
     <button
@@ -33,18 +46,12 @@ export const CopyButton = memo(function CopyButton({ text }: TCopyButtonProps) {
           ? "tactile-surface tactile-surface--ghost tactile-surface--xs tactile-surface--square"
           : cn(
               "p-1 rounded transition-all duration-200 cursor-pointer",
-              "text-muted-foreground/60 hover:text-foreground"
+              copied ? "text-green-500" : "text-muted-foreground/70 hover:text-foreground"
             )
       }
-      aria-label="Copy code"
+      aria-label={copied ? t("copied") : t("copyCode")}
     >
-      {isTactile ? (
-        <span>
-          <Copy className="h-4 w-4" />
-        </span>
-      ) : (
-        <Copy className="h-4 w-4" />
-      )}
+      {isTactile ? <span>{icon}</span> : icon}
     </button>
   );
 });

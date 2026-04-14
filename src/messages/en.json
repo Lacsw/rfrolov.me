@@ -187,7 +187,8 @@
   },
   "copy": {
     "copied": "Copied",
-    "copyCode": "Copy code"
+    "copyCode": "Copy code",
+    "copyFailed": "Failed to copy"
   },
   "theme": {
     "switchToLight": "Switch to light mode",
