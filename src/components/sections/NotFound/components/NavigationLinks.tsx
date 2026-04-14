@@ -13,7 +13,7 @@ export function NavigationLinks() {
   const t = useTranslations("notFound");
 
   return (
-    <div className="flex flex-wrap gap-3 text-sm">
+    <div className="flex flex-col gap-2 text-sm sm:flex-row sm:flex-wrap sm:gap-3">
       {ROUTES.map((route) => (
         <Link
           key={route.path}
