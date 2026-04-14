@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { useInView, useMotionValue, useSpring } from "framer-motion";
+import { animate, useInView } from "framer-motion";
 
 import { useReducedMotion } from "@/hooks";
 
@@ -16,12 +16,6 @@ export function CountUp({ value, duration = 1.5, className }: TCountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const prefersReducedMotion = useReducedMotion();
-
-  const motionValue = useMotionValue(0);
-  const smooth = useSpring(motionValue, {
-    duration: duration * 1000,
-    bounce: 0,
-  });
   const [displayValue, setDisplayValue] = useState(0);
 
   useEffect(() => {
@@ -32,14 +26,15 @@ export function CountUp({ value, duration = 1.5, className }: TCountUpProps) {
 
       return;
     }
-    motionValue.set(value);
-  }, [isInView, value, motionValue, prefersReducedMotion]);
 
-  useEffect(() => {
-    return smooth.on("change", (latest) => {
-      setDisplayValue(Math.round(latest));
+    const controls = animate(0, value, {
+      duration,
+      ease: "easeOut",
+      onUpdate: (latest) => setDisplayValue(Math.round(latest)),
     });
-  }, [smooth]);
+
+    return () => controls.stop();
+  }, [isInView, value, duration, prefersReducedMotion]);
 
   return (
     <span ref={ref} className={className}>
