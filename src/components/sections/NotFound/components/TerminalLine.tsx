@@ -17,7 +17,7 @@ const LINE_COLORS: Record<TTerminalLineType, string> = {
 
 export function TerminalLine({ type, text }: TProps) {
   return (
-    <div className={cn(LINE_COLORS[type], "leading-relaxed whitespace-pre")}>
+    <div className={cn(LINE_COLORS[type], "leading-relaxed whitespace-pre-wrap break-words")}>
       {text || "\u00A0"}
     </div>
   );
