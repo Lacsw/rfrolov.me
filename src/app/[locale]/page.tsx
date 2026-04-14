@@ -47,16 +47,18 @@ export default async function Home({ params }: TProps) {
             href="https://webinale.com/generative-ai/human-centered-ai-frontend-development/"
             {...EXTERNAL_LINK_PROPS}
             className={cn(
-              "flex items-center gap-2 rounded-lg bg-muted px-4 py-3 text-xs",
+              "group flex items-start gap-2 rounded-lg bg-muted px-4 py-3 text-xs sm:items-center",
               HOVER_OPACITY
             )}
           >
-            <MapPin className={cn(ICON_SIZE.sm, "shrink-0 text-muted-foreground")} />
-            <span className="font-medium">{t("label")}</span>
-            <span className="text-muted-foreground">·</span>
-            <span className="text-muted-foreground truncate">{t("title")}</span>
-            <span className="ml-auto shrink-0 text-muted-foreground">{t("meta")}</span>
-            <ArrowUpRight className={cn(ICON_SIZE.sm, "shrink-0 text-muted-foreground")} />
+            <MapPin className={cn(ICON_SIZE.sm, "mt-0.5 shrink-0 text-muted-foreground sm:mt-0")} />
+            <div className="flex min-w-0 flex-1 flex-col gap-0.5 sm:flex-row sm:items-center sm:gap-2">
+              <span className="font-medium">{t("label")}</span>
+              <span className="hidden text-muted-foreground sm:inline">·</span>
+              <span className="text-muted-foreground sm:truncate">{t("title")}</span>
+              <span className="shrink-0 text-muted-foreground sm:ml-auto">{t("meta")}</span>
+            </div>
+            <ArrowUpRight className={cn(ICON_SIZE.sm, "mt-0.5 shrink-0 text-muted-foreground sm:mt-0")} />
           </a>
         </Container>
       </section>
