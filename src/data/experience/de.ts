@@ -21,7 +21,7 @@ export const experiences: TExperience[] = [
   },
   {
     id: "happy-numbers",
-    logo: "/companies/happy-numbers.png",
+    logo: "/companies/happy-numbers.webp",
     company: "Happy Numbers",
     position: "Software Engineer",
     startDate: "Nov 2023",
@@ -72,7 +72,7 @@ export const experiences: TExperience[] = [
   },
   {
     id: "er-telecom",
-    logo: "/companies/er-telecom.png",
+    logo: "/companies/er-telecom.webp",
     company: "ER-Telecom",
     position: "Senior Technical Support Engineer",
     startDate: "Dez 2018",
