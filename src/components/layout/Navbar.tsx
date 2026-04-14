@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { Command } from "lucide-react";
@@ -28,6 +28,25 @@ export function Navbar() {
   const { scrollY } = useScroll();
   const padding = useTransform(scrollY, [0, 120], [12, 0]);
   const smoothPadding = useSpring(padding, { stiffness: 200, damping: 30 });
+  const headerRef = useRef<HTMLElement>(null);
+
+  // Expose the live header height as --nav-height so MobileMenu can sit flush
+  // against the navbar's bottom even while the top-of-page padding animates.
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+
+    const update = () => {
+      document.documentElement.style.setProperty("--nav-height", `${header.offsetHeight}px`);
+    };
+
+    update();
+
+    const ro = new ResizeObserver(update);
+    ro.observe(header);
+
+    return () => ro.disconnect();
+  }, []);
 
   // Close menu on route change
   useEffect(() => {
@@ -51,6 +70,7 @@ export function Navbar() {
   return (
     <>
       <motion.header
+        ref={headerRef}
         style={headerStyle}
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-colors duration-300",
