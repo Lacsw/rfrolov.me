@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { AnimatePresence, m } from "framer-motion";
 import { useTranslations } from "next-intl";
@@ -9,7 +9,12 @@ import { ANIMATION_DURATION } from "@/constants";
 import { useCommandPalette, useHydrated, useReducedMotion } from "@/hooks";
 
 import { CommandFooter, CommandGroup, CommandSearchInput, CommandShortcutHints } from "./components";
-import { useCommandFilter, useCommands, useKeyboardNavigation } from "./hooks";
+import {
+  useCommandFilter,
+  useCommands,
+  useKeyboardNavigation,
+  useRecentCommands,
+} from "./hooks";
 import { TCommandPaletteProps } from "./types";
 
 export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
@@ -23,8 +28,10 @@ export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
 
+  const { recentIds, recordCommand } = useRecentCommands();
   const shortcutCommands = commands.filter((cmd) => cmd.shortcut);
-  const { groupedCommands, flatCommands } = useCommandFilter(commands, query);
+  const { groupedCommands, flatCommands } = useCommandFilter(commands, query, { recentIds });
+
   const { selectedIndex, setSelectedIndex, executeCommand } = useKeyboardNavigation({
     isOpen,
     flatCommands,
@@ -34,6 +41,18 @@ export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
     close,
   });
 
+  // Wrap executeCommand so that running a command also bumps it in the
+  // recent-commands list. Shortcut-triggered commands from the input flow
+  // still run through the palette's executeCommand here.
+  const executeAndRecord = useCallback(
+    (index: number) => {
+      const command = flatCommands[index];
+      if (command) recordCommand(command.id);
+      executeCommand(index);
+    },
+    [flatCommands, executeCommand, recordCommand]
+  );
+
   useEffect(() => {
     if (isOpen) {
       setQuery("");
@@ -42,6 +61,30 @@ export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
       });
     }
   }, [isOpen]);
+
+  const groupConfig = useMemo(() => {
+    const order: Array<{ key: keyof typeof groupedCommands; label: string }> = [
+      { key: "recent", label: t("commandPalette.recent") },
+      { key: "navigation", label: t("commandPalette.navigation") },
+      { key: "actions", label: t("commandPalette.actions") },
+      { key: "blog", label: t("commandPalette.blog") },
+    ];
+
+    let offset = 0;
+    let firstRenderedKey: string | null = null;
+
+    return order.map(({ key, label }) => {
+      const group = groupedCommands[key];
+      const baseIndex = offset;
+      offset += group.length;
+
+      if (group.length > 0 && firstRenderedKey === null) {
+        firstRenderedKey = key;
+      }
+
+      return { key, label, group, baseIndex, isFirst: firstRenderedKey === key };
+    });
+  }, [groupedCommands, t]);
 
   if (!hydrated) return null;
 
@@ -88,16 +131,16 @@ export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
                     {t("commandPalette.noResults")}
                   </li>
                 ) : (
-                  (["navigation", "actions", "blog"] as const).map((group, i) => (
+                  groupConfig.map(({ key, label, group, baseIndex, isFirst }) => (
                     <CommandGroup
-                      key={group}
-                      label={t(`commandPalette.${group}`)}
-                      commands={groupedCommands[group]}
-                      flatCommands={flatCommands}
+                      key={key}
+                      label={label}
+                      commands={group}
+                      baseIndex={baseIndex}
                       selectedIndex={selectedIndex}
-                      onSelect={executeCommand}
+                      onSelect={executeAndRecord}
                       onHover={setSelectedIndex}
-                      isFirst={i === 0}
+                      isFirst={isFirst}
                     />
                   ))
                 )}

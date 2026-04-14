@@ -215,6 +215,7 @@
   "commandPalette": {
     "placeholder": "Befehle suchen...",
     "noResults": "Keine Befehle gefunden",
+    "recent": "Zuletzt verwendet",
     "navigation": "Navigation",
     "actions": "Aktionen",
     "blog": "Blog-Beiträge",

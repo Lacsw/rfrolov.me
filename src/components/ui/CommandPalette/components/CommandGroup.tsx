@@ -6,7 +6,13 @@ import { CommandItem } from "./CommandItem";
 type TCommandGroupProps = {
   label: string;
   commands: TCommand[];
-  flatCommands: TCommand[];
+  /**
+   * Absolute offset of this group's first item in the flat command list, so
+   * keyboard navigation selection aligns even when the same command exists
+   * in multiple groups (e.g. a recently used entry that also appears in
+   * Navigation).
+   */
+  baseIndex: number;
   selectedIndex: number;
   onSelect: (index: number) => void;
   onHover: (index: number) => void;
@@ -16,7 +22,7 @@ type TCommandGroupProps = {
 export function CommandGroup({
   label,
   commands,
-  flatCommands,
+  baseIndex,
   selectedIndex,
   onSelect,
   onHover,
@@ -34,12 +40,12 @@ export function CommandGroup({
       >
         {label}
       </li>
-      {commands.map((cmd) => {
-        const globalIndex = flatCommands.indexOf(cmd);
+      {commands.map((cmd, localIndex) => {
+        const globalIndex = baseIndex + localIndex;
 
         return (
           <CommandItem
-            key={cmd.id}
+            key={`${cmd.id}-${globalIndex}`}
             command={cmd}
             isSelected={selectedIndex === globalIndex}
             onSelect={() => onSelect(globalIndex)}
