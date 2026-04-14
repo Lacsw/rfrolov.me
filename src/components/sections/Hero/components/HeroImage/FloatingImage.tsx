@@ -30,10 +30,11 @@ export function FloatingImage() {
     >
       <div className="relative w-full h-full rounded-full overflow-hidden shadow-2xl ring-4 ring-background">
         <Image
-          src={getImagePath("/images/hero.png")}
+          src={getImagePath("/images/hero.webp")}
           alt="Roman Frolov"
           fill
           priority
+          sizes="(min-width: 1024px) 256px, (min-width: 640px) 224px, 192px"
           className="object-cover"
         />
       </div>
