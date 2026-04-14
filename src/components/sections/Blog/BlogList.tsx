@@ -25,7 +25,7 @@ export function BlogList({ posts }: TProps) {
     <section className={SPACING.section}>
       <Container>
         <AnimatedSection className="space-y-6">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
             <h2 className={cn(TEXT_SIZE.heading, "font-semibold tracking-tight")}>{t("latestPosts")}</h2>
             <Link href="/blog" className={cn("text-sm text-muted-foreground", HOVER_OPACITY)}>
               {t("viewAll")}

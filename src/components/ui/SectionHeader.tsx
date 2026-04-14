@@ -21,7 +21,7 @@ export function SectionHeader({ title, description, link, as: Tag = "h2" }: TSec
   );
 
   return (
-    <div className={link ? "flex items-center justify-between" : undefined}>
+    <div className={link ? "flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1" : undefined}>
       <div>
         <RevealText as={Tag} text={title} className={titleClasses} />
         {description && (
