@@ -67,55 +67,66 @@ export function BlogPageClient({ posts, tags }: TProps) {
             />
 
             {tags.length > 0 && (
-              <div className="flex flex-wrap items-center gap-2">
-                {isTactile ? (
-                  <button
-                    onClick={() => setSelectedTag(null)}
-                    aria-pressed={selectedTag === null}
-                    className="tactile-surface tactile-surface--ghost tactile-surface--sm"
-                  >
-                    <span>{t("filters.all")}</span>
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => setSelectedTag(null)}
-                    className={cn(
-                      "text-xs px-3 py-1.5 rounded-full cursor-pointer transition-all",
-                      selectedTag === null
-                        ? "bg-foreground text-background"
-                        : "bg-muted text-muted-foreground hover:opacity-70"
-                    )}
-                  >
-                    {t("filters.all")}
-                  </button>
-                )}
-                {tags.map((tag) =>
-                  isTactile ? (
+              <div className="space-y-2">
+                <div
+                  className={cn(
+                    // Horizontal scroll on mobile so 17 chips stay on a single
+                    // row; wrap as usual on sm+. Hide the scrollbar and
+                    // negative-margin the container to bleed to the edge.
+                    "-mx-6 flex items-center gap-2 overflow-x-auto px-6",
+                    "sm:mx-0 sm:flex-wrap sm:overflow-x-visible sm:px-0",
+                    "[&::-webkit-scrollbar]:hidden [scrollbar-width:none]"
+                  )}
+                >
+                  {isTactile ? (
                     <button
-                      key={tag}
-                      onClick={() => setSelectedTag(tag)}
-                      aria-pressed={selectedTag === tag}
-                      className="tactile-surface tactile-surface--ghost tactile-surface--sm"
+                      onClick={() => setSelectedTag(null)}
+                      aria-pressed={selectedTag === null}
+                      className="tactile-surface tactile-surface--ghost tactile-surface--sm shrink-0"
                     >
-                      <span>{tag}</span>
+                      <span>{t("filters.all")}</span>
                     </button>
                   ) : (
                     <button
-                      key={tag}
-                      onClick={() => setSelectedTag(tag)}
+                      onClick={() => setSelectedTag(null)}
                       className={cn(
-                        "text-xs px-3 py-1.5 rounded-full cursor-pointer transition-all",
-                        selectedTag === tag
+                        "shrink-0 whitespace-nowrap text-xs px-3 py-1.5 rounded-full cursor-pointer transition-all",
+                        selectedTag === null
                           ? "bg-foreground text-background"
                           : "bg-muted text-muted-foreground hover:opacity-70"
                       )}
                     >
-                      {tag}
+                      {t("filters.all")}
                     </button>
-                  )
-                )}
+                  )}
+                  {tags.map((tag) =>
+                    isTactile ? (
+                      <button
+                        key={tag}
+                        onClick={() => setSelectedTag(tag)}
+                        aria-pressed={selectedTag === tag}
+                        className="tactile-surface tactile-surface--ghost tactile-surface--sm shrink-0"
+                      >
+                        <span>{tag}</span>
+                      </button>
+                    ) : (
+                      <button
+                        key={tag}
+                        onClick={() => setSelectedTag(tag)}
+                        className={cn(
+                          "shrink-0 whitespace-nowrap text-xs px-3 py-1.5 rounded-full cursor-pointer transition-all",
+                          selectedTag === tag
+                            ? "bg-foreground text-background"
+                            : "bg-muted text-muted-foreground hover:opacity-70"
+                        )}
+                      >
+                        {tag}
+                      </button>
+                    )
+                  )}
+                </div>
                 {showFilterCount && (
-                  <span className="text-xs text-muted-foreground ml-2">
+                  <span className="block text-xs text-muted-foreground">
                     {t("showingCount", { count: filteredPosts.length, total: posts.length })}
                   </span>
                 )}
