@@ -36,7 +36,7 @@ export const mdxComponents = {
   a: ({ href, className, ...props }: TLinkProps) => {
     const isExternal = href?.startsWith("http");
     const linkClassName = cn(
-      "text-foreground underline underline-offset-4",
+      "text-accent-foreground underline underline-offset-4 decoration-accent-foreground/40 hover:decoration-accent-foreground",
       HOVER_OPACITY,
       className
     );
@@ -102,7 +102,10 @@ export const mdxComponents = {
   ),
   mark: ({ className, ...props }: ComponentPropsWithoutRef<"mark">) => (
     <mark
-      className={cn("bg-yellow-200/70 text-foreground px-1 rounded-sm", className)}
+      className={cn(
+        "bg-yellow-200/70 text-neutral-900 dark:bg-yellow-300/30 dark:text-yellow-100 px-1 rounded-sm",
+        className
+      )}
       {...props}
     />
   ),
