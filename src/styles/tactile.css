@@ -236,7 +236,8 @@
 }
 
 [data-tactile="on"] .tactile-surface:focus-visible::after {
-  box-shadow: 0 0 0 2px hsl(var(--foreground));
+  /* Outer halo so focus remains visible through the elevation gap. */
+  box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 4px hsl(var(--foreground));
 }
 
 /* ----- Reduced motion ----- */
