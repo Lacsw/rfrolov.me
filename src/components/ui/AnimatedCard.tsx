@@ -11,7 +11,7 @@ import {
   EXTERNAL_LINK_PROPS,
   getStaggeredAnimation,
 } from "@/constants";
-import { useReducedMotion, useTactileSurface } from "@/hooks";
+import { useHydrated, useReducedMotion, useTactileSurface } from "@/hooks";
 import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
@@ -40,6 +40,7 @@ export function AnimatedCard({
   internal = false,
 }: TAnimatedCardProps) {
   const prefersReducedMotion = useReducedMotion();
+  const hydrated = useHydrated();
   const isTactile = useTactileSurface("animated-card");
 
   const baseClasses = cn(
@@ -51,7 +52,10 @@ export function AnimatedCard({
     className
   );
 
-  const animation = prefersReducedMotion ? {} : getStaggeredAnimation(index);
+  // Defer the entrance animation until after hydration. The server renders
+  // motion.div without initial/animate props, the first client render matches,
+  // then the effect flips `hydrated` and Framer Motion plays the stagger.
+  const animation = prefersReducedMotion || !hydrated ? {} : getStaggeredAnimation(index);
   const outerClasses = cn("h-full", large && "md:col-span-2");
 
   if (isTactile) {
