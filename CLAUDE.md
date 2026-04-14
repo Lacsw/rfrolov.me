@@ -40,7 +40,7 @@ src/
 - **Class merging**: Use `cn()` from `@/lib/utils` for conditional Tailwind classes
 - **Types**: Prefix type names with `T` (e.g., `TProject`, `TSkill`)
 - **Components**: One component per file, use named exports with barrel files (`index.ts`)
-- **Styling**: Tailwind CSS with CSS variables for theming (light theme only)
+- **Styling**: Tailwind CSS with CSS variables for theming (light + dark, driven by `next-themes`)
 - **Font**: JetBrains Mono (monospace throughout)
 - **Comments**: Only for complex logic, not obvious code
 - **Clickable elements**: Always include `cursor-pointer` and `hover:opacity-*` transitions
