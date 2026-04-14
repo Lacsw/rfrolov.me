@@ -21,7 +21,7 @@ import {
   getSeriesInfo,
   TSeriesInfo,
 } from "@/lib/blog";
-import { generateBlogPostSchema } from "@/lib/jsonld";
+import { generateBlogPostSchema, generateBreadcrumbSchema } from "@/lib/jsonld";
 import { rehypePrettyCodeOptions } from "@/lib/mdx";
 
 import { BlogPostLayout } from "./BlogPostLayout";
@@ -100,10 +100,17 @@ export default async function BlogPostPage({ params }: TProps) {
   const seriesInfo: TSeriesInfo | null = post.series
     ? getSeriesInfo(slug, post.series.name, locale)
     : null;
+  const nav = await getTranslations({ locale, namespace: "nav" });
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: nav("home"), url: `${SITE_URL}/${locale}` },
+    { name: nav("blog"), url: `${SITE_URL}/${locale}/blog` },
+    { name: post.title, url: `${SITE_URL}/${locale}/blog/${slug}` },
+  ]);
 
   return (
     <main className="pt-16">
       <JsonLd data={generateBlogPostSchema(postMeta, locale)} />
+      <JsonLd data={breadcrumbSchema} />
       <BlogPostLayout
         post={postMeta}
         headings={headings}

@@ -101,6 +101,28 @@ export function generateProjectJsonLd(project: TProjectDetailMeta, locale: strin
   };
 }
 
+type TBreadcrumbItem = {
+  name: string;
+  url: string;
+};
+
+/**
+ * Emit a BreadcrumbList so search engines can render rich breadcrumb
+ * trails in SERPs instead of the raw URL path.
+ */
+export function generateBreadcrumbSchema(items: TBreadcrumbItem[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  };
+}
+
 export function generateBookReviewSchema(book: TBook, locale: string) {
   return {
     "@context": "https://schema.org",
