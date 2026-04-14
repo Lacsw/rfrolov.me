@@ -32,6 +32,7 @@ export { TextScramble } from "./TextScramble";
 export { ThemeToggle } from "./ThemeToggle";
 export { TiltCard } from "./TiltCard";
 export { ToastProvider, useToast, type TToast, type TToastContext } from "./Toast";
+export { Tooltip } from "./Tooltip";
 export { ViewToggle } from "./ViewToggle";
 
 export { CategoryWithYear, ProjectHighlight, ProjectLinks, TechTags } from "./project";

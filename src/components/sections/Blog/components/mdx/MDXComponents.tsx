@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef } from "react";
 
 import Link from "next/link";
 
-import { ScrollReveal } from "@/components/ui";
+import { ScrollReveal, Tooltip } from "@/components/ui";
 import { EXTERNAL_LINK_PROPS, HOVER_OPACITY } from "@/constants";
 import { cn } from "@/lib/utils";
 
@@ -129,4 +129,5 @@ export const mdxComponents = {
   Callout,
   Collapsible,
   CollapsibleCode,
+  Tooltip,
 };
