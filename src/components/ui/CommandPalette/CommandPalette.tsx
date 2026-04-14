@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 import { ANIMATION_DURATION } from "@/constants";
@@ -51,7 +51,7 @@ export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
     <AnimatePresence>
       {isOpen && (
         <>
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -60,7 +60,7 @@ export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
             onClick={close}
           />
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.92, y: -12 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: -8 }}
@@ -104,7 +104,7 @@ export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
             </div>
 
             <CommandShortcutHints shortcuts={shortcutCommands} />
-          </motion.div>
+          </m.div>
         </>
       )}
     </AnimatePresence>

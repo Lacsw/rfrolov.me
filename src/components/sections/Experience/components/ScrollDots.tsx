@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 
 import { cn } from "@/lib/utils";
 
@@ -33,7 +33,7 @@ export function ScrollDots({ items }: TProps) {
   return (
     <AnimatePresence>
       {hasScrolled && (
-        <motion.nav
+        <m.nav
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -57,7 +57,7 @@ export function ScrollDots({ items }: TProps) {
                   <span className="pointer-events-none absolute right-full mr-3 whitespace-nowrap rounded bg-foreground px-2 py-1 text-xs text-background opacity-0 transition-opacity group-hover:opacity-100">
                     {item.label}
                   </span>
-                  <motion.span
+                  <m.span
                     className={cn(
                       "block w-[3px] rounded-full transition-colors duration-200",
                       isActive
@@ -73,7 +73,7 @@ export function ScrollDots({ items }: TProps) {
               );
             })}
           </div>
-        </motion.nav>
+        </m.nav>
       )}
     </AnimatePresence>
   );

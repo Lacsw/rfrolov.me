@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 import { TechIcon } from "@/components/ui";
 import { TSkill } from "@/types";
@@ -13,7 +13,7 @@ type TSkillCardProps = {
 
 export function SkillCard({ skill }: TSkillCardProps) {
   return (
-    <motion.div
+    <m.div
       variants={SKILLS_ANIMATION.item}
       className="flex flex-col items-center gap-1.5 p-2 rounded-md
                  hover:bg-muted/50 transition-all duration-300
@@ -26,6 +26,6 @@ export function SkillCard({ skill }: TSkillCardProps) {
       <span className="text-[10px] text-muted-foreground group-hover:text-foreground transition-colors text-center leading-tight">
         {skill.name}
       </span>
-    </motion.div>
+    </m.div>
   );
 }

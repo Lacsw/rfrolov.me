@@ -2,7 +2,7 @@
 
 import { ReactNode } from "react";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 import { useReducedMotion } from "@/hooks";
 
@@ -18,7 +18,7 @@ export function PageTransition({ children }: TProps) {
   }
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
       animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       transition={{
@@ -27,6 +27,6 @@ export function PageTransition({ children }: TProps) {
       }}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }

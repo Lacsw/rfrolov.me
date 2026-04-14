@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 import { ANIMATION_DURATION } from "@/constants";
 
@@ -19,7 +19,7 @@ export function HamburgerIcon({ isOpen }: THamburgerIconProps) {
       className="text-foreground"
     >
       {/* Top line - moves down and rotates to form \ */}
-      <motion.line
+      <m.line
         x1="4"
         x2="20"
         strokeWidth={2}
@@ -33,7 +33,7 @@ export function HamburgerIcon({ isOpen }: THamburgerIconProps) {
         style={{ transformOrigin: "center" }}
       />
       {/* Middle line - fades out */}
-      <motion.line
+      <m.line
         x1="4"
         y1="12"
         x2="20"
@@ -44,7 +44,7 @@ export function HamburgerIcon({ isOpen }: THamburgerIconProps) {
         transition={{ duration: ANIMATION_DURATION.fast }}
       />
       {/* Bottom line - moves up and rotates to form / */}
-      <motion.line
+      <m.line
         x1="4"
         x2="20"
         strokeWidth={2}

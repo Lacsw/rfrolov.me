@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 import { KBD_BASE } from "@/constants";
@@ -73,7 +73,7 @@ export function KeyboardShortcuts() {
     <AnimatePresence>
       {isOpen && (
         <>
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -82,7 +82,7 @@ export function KeyboardShortcuts() {
             onClick={() => setIsOpen(false)}
           />
 
-          <motion.div
+          <m.div
             role="dialog"
             aria-modal="true"
             aria-label={t("title")}
@@ -140,7 +140,7 @@ export function KeyboardShortcuts() {
                 ))}
               </div>
             </div>
-          </motion.div>
+          </m.div>
         </>
       )}
     </AnimatePresence>

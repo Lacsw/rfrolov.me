@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 import { useReducedMotion } from "@/hooks";
 import { getImagePath } from "@/lib/utils";
@@ -14,7 +14,7 @@ export function FloatingImage() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <motion.div
+    <m.div
       initial={false}
       animate={prefersReducedMotion ? {} : { y: floatingImage.y }}
       transition={
@@ -38,6 +38,6 @@ export function FloatingImage() {
           className="object-cover"
         />
       </div>
-    </motion.div>
+    </m.div>
   );
 }

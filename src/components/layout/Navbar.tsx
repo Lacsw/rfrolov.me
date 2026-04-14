@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { m, useScroll, useSpring, useTransform } from "framer-motion";
 import { Command } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -69,7 +69,7 @@ export function Navbar() {
 
   return (
     <>
-      <motion.header
+      <m.header
         ref={headerRef}
         style={headerStyle}
         className={cn(
@@ -127,7 +127,7 @@ export function Navbar() {
                           {t(link.key)}
                         </Link>
                         {isActive && !prefersReducedMotion && (
-                          <motion.span
+                          <m.span
                             layoutId="navbar-active-pill"
                             className="absolute inset-0 rounded-md bg-muted"
                             transition={{ type: "spring", stiffness: 400, damping: 35 }}
@@ -148,7 +148,7 @@ export function Navbar() {
               <LanguageSwitcher />
               <ThemeToggle />
               <MagneticLink strength={0.3} range={60}>
-                <motion.button
+                <m.button
                   onClick={openCommandPalette}
                   aria-label={t("openCommandPalette")}
                   animate={
@@ -171,7 +171,7 @@ export function Navbar() {
                 >
                   <Command className="h-3 w-3" />
                   <span>K</span>
-                </motion.button>
+                </m.button>
               </MagneticLink>
             </div>
 
@@ -202,7 +202,7 @@ export function Navbar() {
             </div>
           </nav>
         </Container>
-      </motion.header>
+      </m.header>
 
       {/* Mobile menu - outside header to avoid fixed positioning issues */}
       <MobileMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />

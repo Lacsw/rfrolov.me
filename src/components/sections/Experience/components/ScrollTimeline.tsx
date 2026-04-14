@@ -2,7 +2,7 @@
 
 import { ReactNode, useRef } from "react";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { m, useScroll, useTransform } from "framer-motion";
 
 type TProps = {
   children: ReactNode;
@@ -23,7 +23,7 @@ export function ScrollTimeline({ children }: TProps) {
       {/* Background track */}
       <div className="absolute left-[3px] top-0 bottom-0 w-px bg-muted" />
       {/* Animated fill */}
-      <motion.div
+      <m.div
         className="absolute left-[3px] top-0 w-px bg-foreground/40 origin-top"
         style={{ height }}
       />

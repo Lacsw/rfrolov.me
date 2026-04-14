@@ -2,7 +2,7 @@
 
 import { ComponentProps, ReactNode } from "react";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 import {
   CARD_BASE,
@@ -55,10 +55,10 @@ export function AnimatedCard({
   const outerClasses = cn("h-full", large && "md:col-span-2");
 
   // Until the client has hydrated, render plain HTML that matches the SSR
-  // output byte-for-byte — motion.* components emit an inline `style={}`
+  // output byte-for-byte — m.* components emit an inline `style={}`
   // on the client that server omits, which React treats as a hydration
   // mismatch and tears the tree down. Once `useHydrated()` flips true we
-  // re-render with motion.* and Framer Motion plays the entrance animation.
+  // re-render with m.* and Framer Motion plays the entrance animation.
   const animation = prefersReducedMotion ? {} : getStaggeredAnimation(index);
 
   if (isTactile) {
@@ -76,9 +76,9 @@ export function AnimatedCard({
         <div className={outerClasses}>
           <Link href={href as TLinkHref}>
             {hydrated && !prefersReducedMotion ? (
-              <motion.div {...animation} className={cn(tactileBaseClasses, "cursor-pointer")}>
+              <m.div {...animation} className={cn(tactileBaseClasses, "cursor-pointer")}>
                 {children}
-              </motion.div>
+              </m.div>
             ) : (
               <div className={cn(tactileBaseClasses, "cursor-pointer")}>{children}</div>
             )}
@@ -91,14 +91,14 @@ export function AnimatedCard({
       return (
         <div className={outerClasses}>
           {hydrated && !prefersReducedMotion ? (
-            <motion.a
+            <m.a
               href={href}
               {...EXTERNAL_LINK_PROPS}
               {...animation}
               className={cn(tactileBaseClasses, "cursor-pointer")}
             >
               {children}
-            </motion.a>
+            </m.a>
           ) : (
             <a
               href={href}
@@ -115,9 +115,9 @@ export function AnimatedCard({
     return (
       <div className={outerClasses}>
         {hydrated && !prefersReducedMotion ? (
-          <motion.div {...animation} className={tactileBaseClasses}>
+          <m.div {...animation} className={tactileBaseClasses}>
             {children}
-          </motion.div>
+          </m.div>
         ) : (
           <div className={tactileBaseClasses}>{children}</div>
         )}
@@ -130,9 +130,9 @@ export function AnimatedCard({
       return (
         <Link href={href as TLinkHref}>
           {hydrated && !prefersReducedMotion ? (
-            <motion.div {...animation} className={cn(baseClasses, "cursor-pointer")}>
+            <m.div {...animation} className={cn(baseClasses, "cursor-pointer")}>
               {children}
-            </motion.div>
+            </m.div>
           ) : (
             <div className={cn(baseClasses, "cursor-pointer")}>{children}</div>
           )}
@@ -142,14 +142,14 @@ export function AnimatedCard({
 
     if (href) {
       return hydrated && !prefersReducedMotion ? (
-        <motion.a
+        <m.a
           href={href}
           {...EXTERNAL_LINK_PROPS}
           {...animation}
           className={cn(baseClasses, "cursor-pointer")}
         >
           {children}
-        </motion.a>
+        </m.a>
       ) : (
         <a href={href} {...EXTERNAL_LINK_PROPS} className={cn(baseClasses, "cursor-pointer")}>
           {children}
@@ -158,9 +158,9 @@ export function AnimatedCard({
     }
 
     return hydrated && !prefersReducedMotion ? (
-      <motion.div {...animation} className={baseClasses}>
+      <m.div {...animation} className={baseClasses}>
         {children}
-      </motion.div>
+      </m.div>
     ) : (
       <div className={baseClasses}>{children}</div>
     );

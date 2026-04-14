@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 import { ThemeToggle } from "@/components/ui";
@@ -103,7 +103,7 @@ export function MobileMenu({ isOpen, onClose }: TMobileMenuProps) {
           style={{ top: "var(--nav-height, 4rem)" }}
         >
           {/* Backdrop overlay for click-outside */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -113,7 +113,7 @@ export function MobileMenu({ isOpen, onClose }: TMobileMenuProps) {
           />
 
           {/* Menu content */}
-          <motion.nav
+          <m.nav
             ref={menuRef}
             role="dialog"
             aria-modal="true"
@@ -130,7 +130,7 @@ export function MobileMenu({ isOpen, onClose }: TMobileMenuProps) {
                   link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
 
                 return (
-                  <motion.li key={link.href} variants={linkVariants}>
+                  <m.li key={link.href} variants={linkVariants}>
                     {isTactileMenu ? (
                       <Link
                         href={link.href}
@@ -153,20 +153,20 @@ export function MobileMenu({ isOpen, onClose }: TMobileMenuProps) {
                         {t(link.key)}
                       </Link>
                     )}
-                  </motion.li>
+                  </m.li>
                 );
               })}
 
               {/* Divider */}
-              <motion.li variants={linkVariants} className="border-t border-muted my-2 mx-6" />
+              <m.li variants={linkVariants} className="border-t border-muted my-2 mx-6" />
 
               {/* Controls */}
-              <motion.li variants={linkVariants} className="flex items-center gap-4 px-6 py-2">
+              <m.li variants={linkVariants} className="flex items-center gap-4 px-6 py-2">
                 <LanguageSwitcher />
                 <ThemeToggle />
-              </motion.li>
+              </m.li>
             </ul>
-          </motion.nav>
+          </m.nav>
         </div>
       )}
     </AnimatePresence>

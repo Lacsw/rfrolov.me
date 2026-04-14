@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 import { AnimatedSection, Container, SectionHeader } from "@/components/ui";
@@ -24,7 +24,7 @@ export function Education({ education, id }: TProps) {
         <AnimatedSection className="space-y-6">
           <SectionHeader title={t("education.title")} />
 
-          <motion.div variants={EDUCATION_ANIMATION.container} initial="hidden" animate="show">
+          <m.div variants={EDUCATION_ANIMATION.container} initial="hidden" animate="show">
             {education.map((edu, index) => (
               <EducationCard
                 key={edu.id}
@@ -32,7 +32,7 @@ export function Education({ education, id }: TProps) {
                 isLast={index === education.length - 1}
               />
             ))}
-          </motion.div>
+          </m.div>
         </AnimatedSection>
       </Container>
     </section>

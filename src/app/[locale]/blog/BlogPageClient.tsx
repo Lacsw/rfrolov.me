@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 import { BlogPostCard, BlogPostListItem } from "@/components/sections/Blog";
@@ -52,7 +52,7 @@ export function BlogPageClient({ posts, tags }: TProps) {
   return (
     <section className="min-h-[calc(100vh-4rem)] py-12 lg:py-16">
       <Container>
-        <motion.div {...FADE_IN} transition={FADE_IN_TRANSITION} className="space-y-12">
+        <m.div {...FADE_IN} transition={FADE_IN_TRANSITION} className="space-y-12">
           <div className="space-y-6">
             <div className="flex items-start justify-between gap-4">
               <SectionHeader as="h1" description={t("description")} title={t("title")} />
@@ -155,7 +155,7 @@ export function BlogPageClient({ posts, tags }: TProps) {
               variant={searchQuery ? "search" : "filter"}
             />
           )}
-        </motion.div>
+        </m.div>
       </Container>
     </section>
   );

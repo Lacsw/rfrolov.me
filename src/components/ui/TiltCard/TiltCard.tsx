@@ -2,7 +2,7 @@
 
 import { ReactNode, useRef } from "react";
 
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { m, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 import { useHydrated, useReducedMotion } from "@/hooks";
 
@@ -52,14 +52,14 @@ export function TiltCard({ children, maxTilt = 8, className }: TTiltCardProps) {
     mouseY.set(0.5);
   }
 
-  // Pre-hydration + reduced-motion both bypass the motion.div wrapper so
+  // Pre-hydration + reduced-motion both bypass the m.div wrapper so
   // the initial HTML exactly matches SSR (no empty inline style).
   if (prefersReducedMotion || !hydrated) {
     return <div className={className}>{children}</div>;
   }
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -74,6 +74,6 @@ export function TiltCard({ children, maxTilt = 8, className }: TTiltCardProps) {
       className={className}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }

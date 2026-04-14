@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 import { useRouter } from "@/i18n/routing";
@@ -79,7 +79,7 @@ export function NotFoundTerminal() {
           )}
 
           {isTypingComplete && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
@@ -100,7 +100,7 @@ export function NotFoundTerminal() {
               {commandResult && (
                 <TerminalLine type={commandResult.type} text={commandResult.text} />
               )}
-            </motion.div>
+            </m.div>
           )}
         </div>
       </TerminalWindow>

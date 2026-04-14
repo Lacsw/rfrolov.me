@@ -2,7 +2,7 @@
 
 import { ReactNode } from "react";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 import { BackLink, BlurImage, Container, Tag } from "@/components/ui";
@@ -27,7 +27,7 @@ export function BookDetail({ book, children }: TProps) {
   return (
     <section className="py-12 lg:py-16">
       <Container>
-        <motion.article
+        <m.article
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: ANIMATION_DURATION.slower }}
@@ -66,7 +66,7 @@ export function BookDetail({ book, children }: TProps) {
             </p>
             <div className="prose-custom">{children}</div>
           </div>
-        </motion.article>
+        </m.article>
       </Container>
     </section>
   );

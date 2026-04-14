@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 import { useReducedMotion } from "@/hooks";
 
@@ -20,7 +20,7 @@ export function MorphingBlob() {
   }
 
   return (
-    <motion.div
+    <m.div
       animate={{
         borderRadius: morphingBlob.borderRadius,
         rotate: morphingBlob.rotate,

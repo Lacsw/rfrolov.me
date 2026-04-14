@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { Moon, Sun } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
@@ -77,7 +77,7 @@ export function ThemeToggle() {
       aria-label={isDark ? t("switchToLight") : t("switchToDark")}
     >
       <AnimatePresence mode="wait" initial={false}>
-        <motion.div
+        <m.div
           key={isDark ? "dark" : "light"}
           initial={{ opacity: 0, rotate: -180, scale: 0.5 }}
           animate={{ opacity: 1, rotate: 0, scale: 1 }}
@@ -85,7 +85,7 @@ export function ThemeToggle() {
           transition={{ duration: ANIMATION_DURATION.normal }}
         >
           {isDark ? <Sun className={ICON_SIZE.sm} /> : <Moon className={ICON_SIZE.sm} />}
-        </motion.div>
+        </m.div>
       </AnimatePresence>
     </IconButton>
   );

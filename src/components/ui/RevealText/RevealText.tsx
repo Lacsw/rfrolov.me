@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 import { useReducedMotion } from "@/hooks";
 
@@ -29,7 +29,7 @@ export function RevealText({
     return <Tag className={className}>{text}</Tag>;
   }
 
-  const MotionTag = motion[as];
+  const MotionTag = m[as];
 
   return (
     <MotionTag
@@ -48,7 +48,7 @@ export function RevealText({
       }}
     >
       {words.map((word, index) => (
-        <motion.span
+        <m.span
           key={`${word}-${index}`}
           className="inline-block"
           variants={{
@@ -58,7 +58,7 @@ export function RevealText({
         >
           {word}
           {index < words.length - 1 && "\u00A0"}
-        </motion.span>
+        </m.span>
       ))}
     </MotionTag>
   );

@@ -2,7 +2,7 @@
 
 import { ReactNode } from "react";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 import { TableOfContents } from "@/components/sections/Blog";
@@ -35,7 +35,7 @@ export function ProjectDetailLayout({ project, relatedProjects, headings, childr
       <Container>
         <Breadcrumbs items={breadcrumbs} />
         <div className="lg:grid lg:grid-cols-[1fr_200px] lg:gap-10 xl:grid-cols-[1fr_250px]">
-          <motion.article
+          <m.article
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: ANIMATION_DURATION.slower }}
@@ -48,10 +48,10 @@ export function ProjectDetailLayout({ project, relatedProjects, headings, childr
             {children}
 
             <RelatedProjects projects={relatedProjects} />
-          </motion.article>
+          </m.article>
 
           <aside className="hidden lg:block">
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: ANIMATION_DURATION.slower, delay: 0.2 }}
@@ -59,7 +59,7 @@ export function ProjectDetailLayout({ project, relatedProjects, headings, childr
             >
               <ProjectMeta project={project} />
               {headings.length > 0 && <TableOfContents headings={headings} />}
-            </motion.div>
+            </m.div>
           </aside>
         </div>
       </Container>

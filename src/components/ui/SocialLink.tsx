@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 import { EXTERNAL_LINK_PROPS, HOVER_TEXT_COLOR, ICON_SIZE } from "@/constants";
 import { useReducedMotion, useTactileSurface } from "@/hooks";
@@ -31,7 +31,7 @@ export function SocialLink({ name, href, icon: Icon, className }: TSocialLinkPro
   }
 
   return (
-    <motion.a
+    <m.a
       href={href}
       {...EXTERNAL_LINK_PROPS}
       className={cn(HOVER_TEXT_COLOR, "inline-block transition-colors duration-300", className)}
@@ -43,6 +43,6 @@ export function SocialLink({ name, href, icon: Icon, className }: TSocialLinkPro
       }
     >
       <Icon className={ICON_SIZE.md} />
-    </motion.a>
+    </m.a>
   );
 }

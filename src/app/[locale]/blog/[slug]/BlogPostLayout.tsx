@@ -2,7 +2,7 @@
 
 import { ReactNode } from "react";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Clock } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 
@@ -52,7 +52,7 @@ export function BlogPostLayout({
       <section className="py-12 lg:py-16">
         <Container>
           <div className="relative lg:grid lg:grid-cols-[1fr_200px] lg:gap-10 xl:grid-cols-[1fr_250px]">
-            <motion.article
+            <m.article
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: ANIMATION_DURATION.slower }}
@@ -95,7 +95,7 @@ export function BlogPostLayout({
               <PostNavigation previous={adjacentPosts.previous} next={adjacentPosts.next} />
 
               <RelatedPosts posts={relatedPosts} />
-            </motion.article>
+            </m.article>
 
             {headings.length > 0 && (
               <aside className="hidden lg:block">

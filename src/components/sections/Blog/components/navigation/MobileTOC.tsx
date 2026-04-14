@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { List, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -71,7 +71,7 @@ export function MobileTOC({ headings }: TMobileTOCProps) {
     <>
       <AnimatePresence>
         {isVisible && (
-          <motion.button
+          <m.button
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
@@ -87,14 +87,14 @@ export function MobileTOC({ headings }: TMobileTOCProps) {
             aria-label={t("openTableOfContents")}
           >
             <List className="h-5 w-5" />
-          </motion.button>
+          </m.button>
         )}
       </AnimatePresence>
 
       <AnimatePresence>
         {isOpen && (
           <>
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -103,7 +103,7 @@ export function MobileTOC({ headings }: TMobileTOCProps) {
               onClick={() => setIsOpen(false)}
             />
 
-            <motion.nav
+            <m.nav
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
               exit={{ y: "100%" }}
@@ -150,7 +150,7 @@ export function MobileTOC({ headings }: TMobileTOCProps) {
                   );
                 })}
               </ul>
-            </motion.nav>
+            </m.nav>
           </>
         )}
       </AnimatePresence>

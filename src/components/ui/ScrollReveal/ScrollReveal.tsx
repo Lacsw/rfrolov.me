@@ -2,7 +2,7 @@
 
 import { ReactNode, useRef } from "react";
 
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 
 import { useReducedMotion } from "@/hooks";
 
@@ -30,7 +30,7 @@ export function ScrollReveal({
   }
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       initial={{ opacity: 0, y, filter: "blur(4px)" }}
       animate={
@@ -42,6 +42,6 @@ export function ScrollReveal({
       className={className}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }

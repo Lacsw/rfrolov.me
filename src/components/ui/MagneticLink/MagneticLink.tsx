@@ -2,7 +2,7 @@
 
 import { ReactNode, useRef } from "react";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 import { useMagnetic, useReducedMotion, useTactile } from "@/hooks";
 
@@ -29,12 +29,12 @@ export function MagneticLink({
   }
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       style={{ x, y }}
       className={className}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }

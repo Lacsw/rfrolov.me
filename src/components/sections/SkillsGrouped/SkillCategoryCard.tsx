@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 import { TechIcon } from "@/components/ui";
 import { TSkillCategory } from "@/types";
@@ -18,14 +18,14 @@ export function SkillCategoryCard({ category, label }: TProps) {
       <h3 className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-3">
         {label}
       </h3>
-      <motion.div
+      <m.div
         variants={SKILLS_GROUPED_ANIMATION.container}
         initial="hidden"
         animate="show"
         className="flex flex-wrap gap-3"
       >
         {category.skills.map((skill) => (
-          <motion.div
+          <m.div
             key={skill.name}
             variants={SKILLS_GROUPED_ANIMATION.item}
             className="group flex items-center gap-1.5 text-muted-foreground transition-colors duration-200 cursor-default"
@@ -38,9 +38,9 @@ export function SkillCategoryCard({ category, label }: TProps) {
             <span className="text-xs transition-colors duration-200 group-hover:[color:var(--skill-color)]">
               {skill.name}
             </span>
-          </motion.div>
+          </m.div>
         ))}
-      </motion.div>
+      </m.div>
     </div>
   );
 }

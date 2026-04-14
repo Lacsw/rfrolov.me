@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 import { cn } from "@/lib/utils";
 import { TEducation } from "@/types";
@@ -14,7 +14,7 @@ type TProps = {
 
 export function EducationCard({ education, isLast }: TProps) {
   return (
-    <motion.div
+    <m.div
       variants={EDUCATION_ANIMATION.item}
       className={cn("relative pl-6", isLast ? "pb-0" : "pb-8")}
     >
@@ -39,6 +39,6 @@ export function EducationCard({ education, isLast }: TProps) {
           <p className="text-xs text-muted-foreground pt-1">{education.description}</p>
         )}
       </div>
-    </motion.div>
+    </m.div>
   );
 }

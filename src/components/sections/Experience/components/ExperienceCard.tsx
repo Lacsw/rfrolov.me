@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import Image from "next/image";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
 import { TechTags } from "@/components/ui";
@@ -27,7 +27,7 @@ export function ExperienceCard({ experience, isLast }: TExperienceCardProps) {
   const isTactile = useTactileSurface("experience-toggle");
 
   return (
-    <motion.div
+    <m.div
       variants={EXPERIENCE_ANIMATION.item}
       data-experience-card
       className={cn("relative pl-6", isLast ? "pb-0" : "pb-8")}
@@ -108,7 +108,7 @@ export function ExperienceCard({ experience, isLast }: TExperienceCardProps) {
 
             <AnimatePresence>
               {isExpanded && (
-                <motion.ul
+                <m.ul
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
@@ -121,12 +121,12 @@ export function ExperienceCard({ experience, isLast }: TExperienceCardProps) {
                       {highlight}
                     </li>
                   ))}
-                </motion.ul>
+                </m.ul>
               )}
             </AnimatePresence>
           </>
         )}
       </div>
-    </motion.div>
+    </m.div>
   );
 }

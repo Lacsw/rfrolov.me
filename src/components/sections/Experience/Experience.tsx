@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 import { AnimatedSection, Container, CountUp, SectionHeader } from "@/components/ui";
@@ -43,7 +43,7 @@ export function Experience({ experiences, id }: TProps) {
           </div>
 
           <ScrollTimeline>
-            <motion.div variants={EXPERIENCE_ANIMATION.container} initial="hidden" animate="show">
+            <m.div variants={EXPERIENCE_ANIMATION.container} initial="hidden" animate="show">
               {experiences.map((exp, index) => (
                 <div key={exp.id}>
                   {exp.transition && (
@@ -59,7 +59,7 @@ export function Experience({ experiences, id }: TProps) {
                   />
                 </div>
               ))}
-            </motion.div>
+            </m.div>
           </ScrollTimeline>
         </AnimatedSection>
       </Container>

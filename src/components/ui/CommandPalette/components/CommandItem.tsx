@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 import { TRANSITION } from "@/constants";
 import { useTactileSurface } from "@/hooks";
@@ -27,7 +27,7 @@ export function CommandItem({
   const isTactile = useTactileSurface("command-palette");
 
   return (
-    <motion.li
+    <m.li
       role="menuitem"
       tabIndex={-1}
       data-selected={isSelected}
@@ -61,6 +61,6 @@ export function CommandItem({
           <span className="text-sm">{label}</span>
         </>
       )}
-    </motion.li>
+    </m.li>
   );
 }

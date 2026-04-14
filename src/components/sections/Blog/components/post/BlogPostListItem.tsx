@@ -2,7 +2,7 @@
 
 import { memo } from "react";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 import { ANIMATION_DURATION, ARROW_HOVER, getStaggeredAnimation, ICON_SIZE } from "@/constants";
@@ -25,7 +25,7 @@ export const BlogPostListItem = memo(function BlogPostListItem({ post, index }: 
   const formattedDate = formatDate(post.date, { locale });
 
   return (
-    <motion.div
+    <m.div
       {...getStaggeredAnimation(index, { y: 10, delayMultiplier: 0.05, duration: ANIMATION_DURATION.normal })}
     >
       <Link
@@ -53,6 +53,6 @@ export const BlogPostListItem = memo(function BlogPostListItem({ post, index }: 
           <ArrowRight className={cn(ICON_SIZE.sm, "text-muted-foreground", ARROW_HOVER.right)} />
         </div>
       </Link>
-    </motion.div>
+    </m.div>
   );
 });

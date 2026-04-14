@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { m, useMotionValue, useSpring } from "framer-motion";
 
 import { useReducedMotion } from "@/hooks";
 
@@ -38,13 +38,13 @@ export function HeroImage() {
 
   return (
     <div ref={containerRef} className="relative shrink-0 mx-auto lg:mx-0">
-      <motion.div
+      <m.div
         style={prefersReducedMotion ? undefined : { x: smoothX, y: smoothY }}
         className="relative w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64"
       >
         <MorphingBlob />
         <FloatingImage />
-      </motion.div>
+      </m.div>
     </div>
   );
 }

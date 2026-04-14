@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { AnimatePresence, m, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -51,7 +51,7 @@ export function ScrollToTop() {
   return (
     <AnimatePresence>
       {isVisible && (
-        <motion.button
+        <m.button
           initial={{ opacity: 0, scale: 0.6, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.6, y: 20 }}
@@ -81,7 +81,7 @@ export function ScrollToTop() {
               stroke="hsl(var(--muted))"
               strokeWidth="1.5"
             />
-            <motion.circle
+            <m.circle
               cx="22"
               cy="22"
               r="18"
@@ -94,7 +94,7 @@ export function ScrollToTop() {
             />
           </svg>
           <ArrowUp className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" />
-        </motion.button>
+        </m.button>
       )}
     </AnimatePresence>
   );

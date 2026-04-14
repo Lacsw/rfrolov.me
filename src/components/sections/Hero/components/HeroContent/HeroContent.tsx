@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 import { MagneticLink, SocialLink, TextScramble } from "@/components/ui";
@@ -43,41 +43,41 @@ export function HeroContent() {
   }
 
   return (
-    <motion.div
+    <m.div
       className="space-y-3 lg:max-w-lg"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
     >
-      <motion.p variants={itemVariants} className="text-sm text-muted-foreground">
+      <m.p variants={itemVariants} className="text-sm text-muted-foreground">
         {t("greeting")}
-      </motion.p>
+      </m.p>
 
-      <motion.h1
+      <m.h1
         variants={itemVariants}
         className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight"
       >
         <TextScramble text={t("name")} />
-      </motion.h1>
+      </m.h1>
 
-      <motion.p variants={itemVariants} className="text-lg sm:text-xl text-muted-foreground">
+      <m.p variants={itemVariants} className="text-lg sm:text-xl text-muted-foreground">
         {t("role")}
-      </motion.p>
+      </m.p>
 
-      <motion.p
+      <m.p
         variants={itemVariants}
         className="text-sm text-muted-foreground leading-relaxed"
       >
         {t("description")}
-      </motion.p>
+      </m.p>
 
-      <motion.div variants={itemVariants} className="flex gap-4 pt-2">
+      <m.div variants={itemVariants} className="flex gap-4 pt-2">
         {socialLinks.map((link) => (
           <MagneticLink key={link.name}>
             <SocialLink {...link} />
           </MagneticLink>
         ))}
-      </motion.div>
-    </motion.div>
+      </m.div>
+    </m.div>
   );
 }
