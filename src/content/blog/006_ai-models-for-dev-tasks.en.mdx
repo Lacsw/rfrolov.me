@@ -1,0 +1,99 @@
+---
+title: "How I Use Different AI Models for Different Development Tasks"
+description: "Why picking one AI model for everything is like using a chef's knife to open cans. A practical breakdown of when I reach for Opus, Sonnet, Haiku, and other tools."
+date: "2026-04-14"
+tags: ["ai", "claude-code", "productivity", "developer-tools"]
+featured: true
+draft: false
+---
+
+<Callout variant="note" title="TL;DR">
+  Treat model selection like an engineering decision, not a brand preference. Opus for ambiguous or
+  high-stakes thinking. Sonnet for day-to-day implementation. Haiku for repetitive, well-specified
+  work. Switching mid-session is normal, not a sign you picked wrong.
+</Callout>
+
+Most developers I know pick one AI tool and use it for everything. Same model, same interface, same approach — whether they're debugging a flaky test or designing a system from scratch. That's like using a chef's knife to open cans. It works, but you're missing the point.
+
+I'm a frontend developer working primarily with React and TypeScript, expanding into Go on the backend. Over the past year, I've tried most of the popular AI coding tools — Copilot, GPT Codex, Cursor, and Claude in various forms. I've settled on a workflow built around Claude's model family, not out of loyalty, but because it lets me intentionally match the model to the task. This post is about how I think about that matching.
+
+## The mental model
+
+Think of AI models as a team, not a single assistant. You wouldn't ask a senior architect to rename variables, and you wouldn't ask a junior to design your database schema. Models work the same way:
+
+- **Opus** — the senior engineer. Slow, expensive, thinks deeply. Use it when the problem is ambiguous or the stakes are high.
+- **Sonnet** — the reliable mid-level. Fast enough, smart enough, good default for most implementation work.
+- **Haiku** — the intern with lightning reflexes. Near-instant, dirt-cheap, perfect for mechanical tasks where you just need correct output fast.
+
+The skill isn't choosing the "best" model. It's knowing when to reach for which one.
+
+## Planning and architecture — Opus in chat
+
+When I start something new — a feature, a system design, a refactor plan — I open Claude chat with Opus and just... think out loud. No code yet. I describe the problem, the constraints, the existing codebase patterns. Opus is genuinely good at pushing back on half-baked ideas before they become half-baked code.
+
+I used this heavily when designing a layered Go backend for a side project. I knew I wanted handlers, services, and stores separated cleanly, but I wasn't sure how to wire dependencies without a DI framework. Two conversations with Opus saved me from three wrong architectures.
+
+The key: **don't ask Opus to write code in chat.** Ask it to think. The code comes later.
+
+## Implementation — Claude Code with opusplan
+
+This is where I spend most of my time. Claude Code with `opusplan` is the sweet spot: Opus handles the planning phase (reading the codebase, understanding the task, deciding what to change), then Sonnet takes over for the actual code generation.
+
+My typical flow:
+
+1. Hand Claude a task with context — a ticket description, relevant file paths, maybe a Figma reference.
+2. Let it plan the approach. If the plan touches more files than I expect, I stop it and narrow the scope.
+3. Implementation, type-checking, tests, commit — one session.
+
+One thing I learned the hard way: **always review the plan before letting it execute.** Claude has a tendency to over-scope. You ask it to update a form component and it decides to refactor the entire hook system while it's there. Catching this at the plan stage saves real time.
+
+## Quick fixes and small tasks — Sonnet
+
+Not everything needs Opus-level reasoning. Renaming props, adding a missing type, fixing a lint error, writing a simple utility function — Sonnet handles these in seconds, and the cost difference adds up fast.
+
+In Claude Code, I'll drop to Sonnet (or use fast mode) when I'm in "grind mode" — the plan is set, the architecture is clear, and I just need to crank through implementation details.
+
+## Mechanical work — Haiku
+
+This is the model most developers overlook, and it's a mistake. Haiku is almost instant and practically free, which makes it perfect for tasks that are repetitive and well-defined:
+
+- **Translations.** I maintain my portfolio in English and German. Haiku translates UI strings accurately and fast — I just review and commit.
+- **Generating test boilerplate.** Once I've written one test for a pattern, Haiku can replicate the structure for similar cases without burning Opus tokens.
+- **Formatting and transformations.** Converting data shapes, generating TypeScript types from JSON examples, creating mock data.
+- **Pre-commit sanity checks.** Run your diff through Haiku as a quick "does anything obviously wrong jump out?" pass before you push.
+
+The mental shift: stop thinking of Haiku as "the dumb model" and start thinking of it as "the fast model." For well-specified tasks, speed matters more than reasoning depth.
+
+## Learning new concepts — Opus in chat, again
+
+When I dove into LLM internals — tokenization, embeddings, attention mechanisms — I used Opus in long chat sessions. Same when I studied Bitcoin's proof-of-work and the Lightning Network. Same when learning Go fundamentals.
+
+The pattern: I ask Opus to explain something, then immediately ask follow-up questions that connect it to what I already know. "How does this compare to how React handles X?" or "What's the Go equivalent of this TypeScript pattern?" Opus handles these cross-domain connections well. Sonnet tends to give more textbook answers.
+
+For learning, the investment in Opus pays off because misunderstanding a foundational concept costs you far more time downstream.
+
+## Where other tools fell short — for me
+
+I want to be fair here. These tools are good, and they might work better for your workflow.
+
+**GitHub Copilot** was my first AI coding tool. The inline autocomplete is still best-in-class for small completions — finishing a function signature, suggesting a variable name. But it doesn't handle multi-file changes well, and it can't reason about architecture. I think of it as a very smart tab-completion, not a coding partner.
+
+**GPT Codex** was impressive when it launched, but I found Claude's code quality consistently higher for TypeScript and React — fewer hallucinated APIs, better understanding of modern patterns (hooks, server components, etc.). That gap may have closed since I last tried it.
+
+**Cursor** is the closest competitor to Claude Code in my experience. The IDE integration is nice, and the context management is good. I moved away from it mainly because Claude Code's terminal-based workflow fits better with how I already work — I live in the terminal. If you're an IDE person, Cursor might click better for you.
+
+## The real takeaway
+
+The point of this post isn't "use Claude." It's this: **treating AI model selection as an engineering decision — not a brand preference — makes you meaningfully more productive.**
+
+Every time you send a trivial task to Opus, you're wasting time and money. Every time you ask Haiku to architect a system, you're getting mediocre results and blaming "AI." The model is rarely the problem. The mismatch between model and task usually is.
+
+Pick your tools intentionally. Match the model to the job. And don't be afraid to switch mid-session when the nature of the work changes.
+
+---
+
+*I'm giving a talk at [webinale 2026](https://webinale.com/generative-ai/human-centered-ai-frontend-development/) on Human-Centered AI in frontend development — how to build workflows where AI supports your decisions rather than replacing them. If you're interested in this topic, come say hi.*
+
+## Further reading
+
+If the "match the tool to the task" framing resonates, <Tooltip label="Jose Maria Valera Reales">Chema</Tooltip> makes a complementary case in his four-part AI series. Part 1 — [AI Gives You Speed, Not Quality](https://chemaclass.com/blog/ai-gives-you-speed-not-quality/) — argues that velocity without ownership ends in unmaintainable code, no matter which model you pick. Good companion read: I'm writing about *which* model to use, he's writing about *how to stay accountable* once you pick one.
