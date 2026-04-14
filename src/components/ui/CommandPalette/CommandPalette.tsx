@@ -61,6 +61,9 @@ export function CommandPalette({ blogPosts = [] }: TCommandPaletteProps) {
           />
 
           <m.div
+            role="dialog"
+            aria-modal="true"
+            aria-label={t("commandPalette.title")}
             initial={{ opacity: 0, scale: 0.92, y: -12 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: -8 }}

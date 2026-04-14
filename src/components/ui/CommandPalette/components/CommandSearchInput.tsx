@@ -34,6 +34,7 @@ export function CommandSearchInput({
         value={query}
         onChange={(e) => onQueryChange(e.target.value)}
         placeholder={t("commandPalette.placeholder")}
+        aria-label={t("commandPalette.placeholder")}
         style={{ outline: "none", boxShadow: "none" }}
         className={cn(
           "flex-1 bg-transparent py-4 text-sm",
@@ -44,13 +45,15 @@ export function CommandSearchInput({
       {isTactile ? (
         <button
           onClick={onClose}
+          aria-label={t("commandPalette.close")}
           className="hidden sm:inline-flex tactile-surface tactile-surface--ghost tactile-surface--xs"
         >
           <span>ESC</span>
         </button>
       ) : (
-        <kbd
+        <button
           onClick={onClose}
+          aria-label={t("commandPalette.close")}
           className={cn(
             KBD_BASE,
             "hidden sm:inline-flex items-center gap-1 px-2 py-1",
@@ -59,7 +62,7 @@ export function CommandSearchInput({
           )}
         >
           ESC
-        </kbd>
+        </button>
       )}
     </div>
   );

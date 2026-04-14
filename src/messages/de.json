@@ -221,6 +221,8 @@
     "toNavigate": "navigieren",
     "toSelect": "auswählen",
     "shortcutTheme": "Thema",
-    "shortcutLanguage": "Sprache"
+    "shortcutLanguage": "Sprache",
+    "title": "Befehlspalette",
+    "close": "Befehlspalette schließen"
   }
 }

@@ -221,6 +221,8 @@
     "toNavigate": "to navigate",
     "toSelect": "to select",
     "shortcutTheme": "theme",
-    "shortcutLanguage": "language"
+    "shortcutLanguage": "language",
+    "title": "Command palette",
+    "close": "Close command palette"
   }
 }
