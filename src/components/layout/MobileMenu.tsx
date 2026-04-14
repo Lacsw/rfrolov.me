@@ -122,7 +122,7 @@ export function MobileMenu({ isOpen, onClose }: TMobileMenuProps) {
             animate="visible"
             exit="exit"
             variants={menuContainerVariants}
-            className="relative overflow-hidden bg-background/95 backdrop-blur-sm border-b border-muted"
+            className="relative overflow-hidden bg-background border-b border-muted"
           >
             <ul className="flex flex-col py-2">
               {NAV_LINKS.map((link) => {
