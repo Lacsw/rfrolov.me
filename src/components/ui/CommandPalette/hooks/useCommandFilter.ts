@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 
 import { TCommand } from "../types";
+import { fuzzyScore } from "./fuzzyScore";
 
 type TGroupedCommands = {
   recent: TCommand[];
@@ -21,7 +22,14 @@ export function useCommandFilter(
   const filteredCommands = useMemo(() => {
     if (!query) return commands;
 
-    return commands.filter((cmd) => cmd.label.toLowerCase().includes(query.toLowerCase()));
+    // Score every command, keep the ones that actually contain the query
+    // chars in order, sort descending so stronger matches float to the top
+    // regardless of original group order.
+    return commands
+      .map((cmd) => ({ cmd, score: fuzzyScore(cmd.label, query) }))
+      .filter(({ score }) => score > 0)
+      .sort((a, b) => b.score - a.score)
+      .map(({ cmd }) => cmd);
   }, [commands, query]);
 
   const groupedCommands = useMemo<TGroupedCommands>(() => {
