@@ -78,7 +78,7 @@ export function useKeyboardNavigation({
     if (isOpen) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      if (e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return;
       if (e.key.length !== 1) return;
 
       const isTypingInInput =
