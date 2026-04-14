@@ -7,6 +7,7 @@ import {
   FolderKanban,
   Home,
   Languages,
+  Library,
   Moon,
   Sun,
 } from "lucide-react";
@@ -59,6 +60,13 @@ export function useCommands(blogPosts: TBlogPostMeta[]) {
         label: t("nav.blog"),
         icon: <BookOpen className={ICON_SIZE.sm} />,
         action: () => router.push("/blog"),
+        group: "navigation",
+      },
+      {
+        id: "readings",
+        label: t("nav.readings"),
+        icon: <Library className={ICON_SIZE.sm} />,
+        action: () => router.push("/readings"),
         group: "navigation",
       },
     ];
