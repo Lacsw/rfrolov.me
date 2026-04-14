@@ -146,8 +146,13 @@ export function MobileMenu({ isOpen, onClose }: TMobileMenuProps) {
                         onClick={onClose}
                         aria-current={isActive ? "page" : undefined}
                         className={cn(
-                          "block px-6 py-3 text-base transition-colors duration-300",
-                          isActive ? "text-accent-foreground" : HOVER_TEXT_COLOR
+                          "relative block px-6 py-3 text-base transition-colors duration-300",
+                          // Left accent bar + filled background for the current
+                          // route — a single color change was too subtle on
+                          // dark backgrounds where muted text is already dim.
+                          isActive
+                            ? "bg-muted font-medium text-foreground before:absolute before:inset-y-1 before:left-0 before:w-1 before:rounded-r-full before:bg-accent-foreground"
+                            : HOVER_TEXT_COLOR
                         )}
                       >
                         {t(link.key)}
