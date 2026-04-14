@@ -6,7 +6,7 @@ export const books: TBook[] = [
     title: "The Internet of Money Volume Two",
     author: "Andreas M. Antonopoulos",
     isbn: "194791006X",
-    cover: "/books/the-internet-of-money-two.jpg",
+    cover: "/books/the-internet-of-money-two.webp",
     description:
       "A collection of talks exploring the why of Bitcoin and open blockchains, covering their philosophical, social, and historical implications.",
     dateRead: "2026-04",
@@ -19,7 +19,7 @@ export const books: TBook[] = [
     title: "Atomic Habits",
     author: "James Clear",
     isbn: "0735211299",
-    cover: "/books/atomic-habits.jpg",
+    cover: "/books/atomic-habits.webp",
     description:
       "An easy and proven way to build good habits and break bad ones. Tiny changes, remarkable results.",
     dateRead: "2025-01",
