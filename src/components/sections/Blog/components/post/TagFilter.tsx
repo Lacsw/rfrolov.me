@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useMemo, useState } from "react";
+import { ReactNode, useState } from "react";
 
 import { useMediaQuery, useRowOverflow } from "@/hooks";
 import { cn } from "@/lib/utils";
@@ -14,8 +14,9 @@ type TLabels = {
 
 type TProps = {
   tags: string[];
-  selectedTag: string | null;
-  onSelect: (tag: string | null) => void;
+  selectedTags: string[];
+  onToggle: (tag: string) => void;
+  onClear: () => void;
   isTactile: boolean;
   labels: TLabels;
 };
@@ -27,9 +28,15 @@ const tagChipClass = (active: boolean) =>
   );
 
 // "+N" / "Show less" read as actions, so they get an outlined treatment that's
-// visually distinct from the filled/muted tag chips.
-const actionChipClass =
-  "shrink-0 whitespace-nowrap text-xs px-3 py-1.5 rounded-full cursor-pointer transition-all border border-muted-foreground/30 text-muted-foreground hover:border-muted-foreground/60 hover:text-foreground";
+// visually distinct from the filled/muted tag chips. When `active`, the outline
+// strengthens to signal a selected tag is hidden in the collapsed overflow.
+const actionChipClass = (active: boolean) =>
+  cn(
+    "shrink-0 whitespace-nowrap text-xs px-3 py-1.5 rounded-full cursor-pointer transition-all border",
+    active
+      ? "border-foreground/50 text-foreground"
+      : "border-muted-foreground/30 text-muted-foreground hover:border-muted-foreground/60 hover:text-foreground"
+  );
 
 type TChipProps = {
   children: ReactNode;
@@ -71,60 +78,60 @@ function Chip({
   }
 
   return (
-    <button {...shared} className={action ? actionChipClass : tagChipClass(active)}>
+    <button {...shared} className={action ? actionChipClass(active) : tagChipClass(active)}>
       {children}
     </button>
   );
 }
 
-export function TagFilter({ tags, selectedTag, onSelect, isTactile, labels }: TProps) {
+export function TagFilter({ tags, selectedTags, onToggle, onClear, isTactile, labels }: TProps) {
   const isDesktop = useMediaQuery("(min-width: 640px)");
   const [expanded, setExpanded] = useState(false);
 
-  // Pin the selected tag right after "All" so the active filter stays visible
-  // even when the rest of the row is collapsed behind "+N".
-  const orderedTags = useMemo(() => {
-    if (!selectedTag) return tags;
-
-    return [selectedTag, ...tags.filter((tag) => tag !== selectedTag)];
-  }, [tags, selectedTag]);
-
   const collapsible = isDesktop && !expanded;
 
-  // Chips measured = "All" + every tag.
+  // Chips measured = "All" + every tag (stable order — no reshuffle on select).
   const { containerRef, measureRef, visibleCount } = useRowOverflow({
-    itemCount: orderedTags.length + 1,
+    itemCount: tags.length + 1,
     enabled: collapsible,
   });
 
-  const visibleTagCount = collapsible ? Math.max(visibleCount - 1, 0) : orderedTags.length;
-  const hiddenCount = orderedTags.length - visibleTagCount;
+  const visibleTagCount = collapsible ? Math.max(visibleCount - 1, 0) : tags.length;
+  const hiddenCount = tags.length - visibleTagCount;
   const showOverflow = collapsible && hiddenCount > 0;
+  // When collapsed, flag the "+N" chip if a selected tag is hidden in the overflow.
+  const hasHiddenSelection =
+    showOverflow && tags.slice(visibleTagCount).some((tag) => selectedTags.includes(tag));
+  const isAllActive = selectedTags.length === 0;
 
   const allChip = (interactive: boolean) => (
     <Chip
       tactile={isTactile}
-      active={selectedTag === null}
-      ariaPressed={interactive ? selectedTag === null : undefined}
-      onClick={interactive ? () => onSelect(null) : undefined}
+      active={isAllActive}
+      ariaPressed={interactive ? isAllActive : undefined}
+      onClick={interactive ? onClear : undefined}
       tabIndex={interactive ? undefined : -1}
     >
       {labels.all}
     </Chip>
   );
 
-  const tagChip = (tag: string, interactive: boolean) => (
-    <Chip
-      key={tag}
-      tactile={isTactile}
-      active={selectedTag === tag}
-      ariaPressed={interactive ? selectedTag === tag : undefined}
-      onClick={interactive ? () => onSelect(tag) : undefined}
-      tabIndex={interactive ? undefined : -1}
-    >
-      {tag}
-    </Chip>
-  );
+  const tagChip = (tag: string, interactive: boolean) => {
+    const active = selectedTags.includes(tag);
+
+    return (
+      <Chip
+        key={tag}
+        tactile={isTactile}
+        active={active}
+        ariaPressed={interactive ? active : undefined}
+        onClick={interactive ? () => onToggle(tag) : undefined}
+        tabIndex={interactive ? undefined : -1}
+      >
+        {tag}
+      </Chip>
+    );
+  };
 
   // Mobile: keep the edge-to-edge horizontal-scroll row, no overflow chip.
   if (!isDesktop) {
@@ -142,7 +149,7 @@ export function TagFilter({ tags, selectedTag, onSelect, isTactile, labels }: TP
   }
 
   // Desktop: single-line collapse with inline expand.
-  const displayedTags = expanded ? orderedTags : orderedTags.slice(0, visibleTagCount);
+  const displayedTags = expanded ? tags : tags.slice(0, visibleTagCount);
 
   return (
     <div className="relative">
@@ -153,9 +160,9 @@ export function TagFilter({ tags, selectedTag, onSelect, isTactile, labels }: TP
         className="pointer-events-none absolute -z-10 flex h-0 flex-nowrap items-center gap-2 overflow-hidden opacity-0"
       >
         {allChip(false)}
-        {orderedTags.map((tag) => tagChip(tag, false))}
+        {tags.map((tag) => tagChip(tag, false))}
         <Chip tactile={isTactile} action tabIndex={-1}>
-          +{orderedTags.length}
+          +{tags.length}
         </Chip>
       </div>
 
@@ -167,6 +174,7 @@ export function TagFilter({ tags, selectedTag, onSelect, isTactile, labels }: TP
           <Chip
             tactile={isTactile}
             action
+            active={hasHiddenSelection}
             ariaExpanded={false}
             ariaLabel={labels.showMoreAria(hiddenCount)}
             onClick={() => setExpanded(true)}

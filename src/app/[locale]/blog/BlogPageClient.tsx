@@ -19,17 +19,24 @@ type TProps = {
 
 export function BlogPageClient({ posts, tags }: TProps) {
   const t = useTranslations("blog");
-  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [view, setView] = usePersistedState<TViewMode>("blog-view-mode", "grid");
   const [searchQuery, setSearchQuery] = useState("");
   const isTactile = useTactileSurface("blog-filters");
 
+  const toggleTag = (tag: string) =>
+    setSelectedTags((prev) =>
+      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
+    );
+
   const filteredPosts = useMemo(() => {
     let result = posts;
 
-    if (selectedTag) {
+    // OR matching: keep posts that carry at least one of the selected tags.
+    if (selectedTags.length > 0) {
+      const selected = selectedTags.map((tag) => tag.toLowerCase());
       result = result.filter((post) =>
-        post.tags.map((t) => t.toLowerCase()).includes(selectedTag.toLowerCase())
+        post.tags.some((tag) => selected.includes(tag.toLowerCase()))
       );
     }
 
@@ -43,9 +50,9 @@ export function BlogPageClient({ posts, tags }: TProps) {
     }
 
     return result;
-  }, [posts, selectedTag, searchQuery]);
+  }, [posts, selectedTags, searchQuery]);
 
-  const isFiltering = selectedTag !== null || searchQuery.trim() !== "";
+  const isFiltering = selectedTags.length > 0 || searchQuery.trim() !== "";
   const showFilterCount = isFiltering && filteredPosts.length !== posts.length;
 
   return (
@@ -69,8 +76,9 @@ export function BlogPageClient({ posts, tags }: TProps) {
               <div className="space-y-2">
                 <TagFilter
                   tags={tags}
-                  selectedTag={selectedTag}
-                  onSelect={setSelectedTag}
+                  selectedTags={selectedTags}
+                  onToggle={toggleTag}
+                  onClear={() => setSelectedTags([])}
                   isTactile={isTactile}
                   labels={{
                     all: t("filters.all"),
