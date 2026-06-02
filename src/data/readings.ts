@@ -9,10 +9,10 @@ export const books: TBook[] = [
     cover: "/books/the-internet-of-money-two.webp",
     description:
       "A collection of talks exploring the why of Bitcoin and open blockchains, covering their philosophical, social, and historical implications.",
-    dateRead: "2026-04",
+    dateRead: "2026-05",
     tags: ["crypto", "technology"],
     rating: 0,
-    status: "reading",
+    status: "finished",
   },
   {
     slug: "atomic-habits",
