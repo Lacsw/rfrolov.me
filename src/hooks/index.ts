@@ -1,7 +1,9 @@
 export { useCommandPalette } from "./useCommandPalette";
 export { useHydrated } from "./useHydrated";
 export { useMagnetic } from "./useMagnetic";
+export { useMediaQuery } from "./useMediaQuery";
 export { useMousePosition } from "./useMousePosition";
+export { useRowOverflow } from "./useRowOverflow";
 export { usePersistedState } from "./usePersistedState";
 export { useReadingProgress } from "./useReadingProgress";
 export { useReducedMotion } from "./useReducedMotion";

@@ -6,4 +6,4 @@ export {
   SeriesNavigation,
   TableOfContents,
 } from "./navigation";
-export { BlogPostCard, BlogPostListItem, BlogTag, BlogTags, ReadingTime } from "./post";
+export { BlogPostCard, BlogPostListItem, BlogTag, BlogTags, ReadingTime, TagFilter } from "./post";

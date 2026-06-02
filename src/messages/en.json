@@ -103,7 +103,10 @@
     "postsFound": "{count} {count, plural, one {post} other {posts}} found",
     "showingCount": "Showing {count} of {total}",
     "filters": {
-      "all": "All"
+      "all": "All",
+      "showLess": "Show less",
+      "showMoreAria": "Show {count} more tags",
+      "showLessAria": "Show fewer tags"
     },
     "navigation": {
       "previous": "Previous",
