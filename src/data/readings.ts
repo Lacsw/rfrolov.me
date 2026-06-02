@@ -2,6 +2,19 @@ import { TBook } from "@/types";
 
 export const books: TBook[] = [
   {
+    slug: "philosophy-of-bitcoin",
+    title: "The Philosophy of Bitcoin",
+    author: "Álvaro D. María",
+    isbn: "9798987636428",
+    cover: "/books/philosophy-of-bitcoin.webp",
+    description:
+      "A philosophical exploration of Bitcoin — what money is, the crisis of state-backed currencies, and why digital scarcity independent of any third party matters.",
+    dateRead: "2026-06",
+    tags: ["bitcoin", "crypto", "philosophy"],
+    rating: 0,
+    status: "reading",
+  },
+  {
     slug: "clean-code",
     title: "Clean Code",
     author: "Robert C. Martin",
@@ -23,7 +36,7 @@ export const books: TBook[] = [
     description:
       "A collection of talks exploring the why of Bitcoin and open blockchains, covering their philosophical, social, and historical implications.",
     dateRead: "2026-05",
-    tags: ["crypto", "technology"],
+    tags: ["bitcoin", "crypto", "technology"],
     rating: 0,
     status: "finished",
   },
