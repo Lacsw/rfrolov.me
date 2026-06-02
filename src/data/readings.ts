@@ -2,6 +2,19 @@ import { TBook } from "@/types";
 
 export const books: TBook[] = [
   {
+    slug: "clean-code",
+    title: "Clean Code",
+    author: "Robert C. Martin",
+    isbn: "0132350882",
+    cover: "/books/clean-code.webp",
+    description:
+      "A handbook of agile software craftsmanship — principles, patterns, and practices for writing code that humans can read and maintain.",
+    dateRead: "2025-11",
+    tags: ["programming", "engineering"],
+    rating: 0,
+    status: "finished",
+  },
+  {
     slug: "the-internet-of-money-two",
     title: "The Internet of Money Volume Two",
     author: "Andreas M. Antonopoulos",
