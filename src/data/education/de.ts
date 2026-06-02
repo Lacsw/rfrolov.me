@@ -2,15 +2,6 @@ import { TEducation } from "@/types";
 
 export const education: TEducation[] = [
   {
-    id: "yandex-practicum",
-    institution: "Yandex Practicum",
-    degree: "Berufszertifikat",
-    field: "Frontend-Entwickler",
-    startDate: "2022",
-    endDate: "2022",
-    location: "Online",
-  },
-  {
     id: "itmo-master",
     institution: "ITMO Universität",
     degree: "Master-Abschluss",
@@ -27,5 +18,14 @@ export const education: TEducation[] = [
     startDate: "2012",
     endDate: "2016",
     location: "St. Petersburg, Russland",
+  },
+  {
+    id: "yandex-practicum",
+    institution: "Yandex Practicum",
+    degree: "Berufszertifikat",
+    field: "Frontend-Entwickler",
+    startDate: "2022",
+    endDate: "2022",
+    location: "Online",
   },
 ];
