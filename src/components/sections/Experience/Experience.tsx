@@ -4,7 +4,6 @@ import { m } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 import { AnimatedSection, Container, CountUp, SectionHeader } from "@/components/ui";
-import { SPACING } from "@/constants";
 import { TExperience } from "@/types";
 
 import { ExperienceCard, ScrollTimeline } from "./components";
@@ -16,6 +15,11 @@ type TProps = {
   id?: string;
 };
 
+// Computed once at module load — render functions must stay pure (react-hooks/purity)
+const careerYears = Math.floor(
+  (Date.now() - new Date("2018-12-01").getTime()) / (365.25 * 24 * 60 * 60 * 1000)
+);
+
 export function Experience({ experiences, id }: TProps) {
   const t = useTranslations("experience");
 
@@ -23,10 +27,6 @@ export function Experience({ experiences, id }: TProps) {
     itemCount: experiences.length,
     sectionId: "experience",
   });
-
-  const careerYears = Math.floor(
-    (Date.now() - new Date("2018-12-01").getTime()) / (365.25 * 24 * 60 * 60 * 1000)
-  );
 
   return (
     <section id={id} className="py-8 lg:py-10">
