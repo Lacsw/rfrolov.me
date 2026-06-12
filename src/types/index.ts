@@ -100,6 +100,16 @@ export type TOpenSourceProject = {
   tech: string;
 };
 
+export type TTalk = {
+  id: string;
+  title: string;
+  event: string;
+  date: string;
+  location: string;
+  url: string;
+  description: string;
+};
+
 export type TLanguage = {
   name: string;
   level: string;

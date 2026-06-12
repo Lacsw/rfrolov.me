@@ -6,7 +6,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Education } from "@/components/sections/Education";
 import { Experience } from "@/components/sections/Experience";
-import { CVAbout, CVHeader, CVLanguages, CVOpenSource, ScrollDots } from "@/components/sections/Experience/components";
+import { CVAbout, CVHeader, CVLanguages, CVOpenSource, CVTalks, ScrollDots } from "@/components/sections/Experience/components";
 import { SkillsGrouped } from "@/components/sections/SkillsGrouped";
 import { JsonLd } from "@/components/seo";
 import { SITE_URL } from "@/constants";
@@ -59,6 +59,7 @@ export default async function ExperiencePage({ params }: TProps) {
     { id: "experience", label: t("experience.title") },
     { id: "education", label: t("education.title") },
     { id: "open-source", label: t("openSource.title") },
+    { id: "talks", label: t("talks.title") },
     { id: "languages", label: t("languages.title") },
   ];
 
@@ -72,6 +73,7 @@ export default async function ExperiencePage({ params }: TProps) {
       <Experience experiences={experiences} id="experience" />
       <Education education={education} id="education" />
       <CVOpenSource id="open-source" />
+      <CVTalks id="talks" />
       <CVLanguages id="languages" />
       <div className="pb-12 lg:pb-16" />
     </main>
