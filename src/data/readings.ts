@@ -11,8 +11,8 @@ export const books: TBook[] = [
       "A philosophical exploration of Bitcoin — what money is, the crisis of state-backed currencies, and why digital scarcity independent of any third party matters.",
     dateRead: "2026-06",
     tags: ["bitcoin", "crypto", "philosophy"],
-    rating: 0,
-    status: "reading",
+    rating: 3,
+    status: "finished",
   },
   {
     slug: "clean-code",
