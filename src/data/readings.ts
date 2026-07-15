@@ -2,6 +2,19 @@ import { TBook } from "@/types";
 
 export const books: TBook[] = [
   {
+    slug: "start-with-why",
+    title: "Start with Why",
+    author: "Simon Sinek",
+    isbn: "9781591846444",
+    cover: "/books/start-with-why.webp",
+    description:
+      "An exploration of why some leaders and organizations inspire action where others don't. The case that lasting influence starts with a clear sense of purpose, the why, before the what or the how.",
+    dateRead: "2026-07",
+    tags: ["leadership", "business"],
+    rating: 0,
+    status: "reading",
+  },
+  {
     slug: "philosophy-of-bitcoin",
     title: "The Philosophy of Bitcoin",
     author: "Álvaro D. María",
